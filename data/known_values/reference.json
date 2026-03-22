@@ -1,0 +1,22 @@
+{
+  "_comment": "Known Rado numbers for verification. Sources: Golomb & Baumert 1965, Malo (SD State thesis), Chang et al. ISSAC 2022",
+  "schur_numbers": {
+    "S(1)": 2,
+    "S(2)": 5,
+    "S(3)": 14,
+    "S(4)": 45,
+    "S(5)": 161,
+    "_note": "S(k) = R_k(x+y=z). S(5)=161 proved by Heule (2017) via SAT."
+  },
+  "malo_4color": {
+    "R4_x1+x2+1=x3": 83,
+    "R4_x1+x2+2=x3": 121,
+    "R4_x1+x2+3=x3": 161,
+    "_note": "From Malo's SD State thesis. Equation x1+x2+c=x3."
+  },
+  "verification_targets": [
+    {"equation": "x+y=z", "k": 2, "expected": 5},
+    {"equation": "x+y=z", "k": 3, "expected": 14},
+    {"equation": "x+y=z", "k": 4, "expected": 45}
+  ]
+}

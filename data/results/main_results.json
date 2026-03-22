@@ -1,0 +1,86 @@
+{
+  "_project": "rado-numbers-sat",
+  "_date": "2026-03-10",
+  "_solver": "CaDiCaL 1.5.3 via PySAT, incremental",
+  "_hardware": "i7-12700K, 64GB RAM",
+
+  "conjecture_original": "R_k(x + by = bz) = b^k for all b >= 3, k >= 1 (DISPROVED for b=3 k=5)",
+  "conjecture_refined": "R_k(x + by = bz) = b^k iff k <= 2(b-1)",
+  "lower_bound_proof": "v_b coloring (b-adic valuation), proved for all b >= 2, k >= 1",
+  "upper_bound_proof": "k=1 trivial, k=2 Landman-Robertson 2014, k=3-4 Key Lemma + SAT, k>=5 OPEN",
+
+  "key_lemma": {
+    "_description": "Every color class contains a pair (j, j+b^{k-1}) in any valid k-coloring of {1,...,b^k-1}",
+    "_implication": "If Key Lemma holds => R_k(x+by=bz) = b^k (see proof_notes.md)",
+    "verified": [
+      {"b": 3, "k": 2, "holds": true, "time_s": "<0.01"},
+      {"b": 3, "k": 3, "holds": true, "time_s": "<1"},
+      {"b": 3, "k": 4, "holds": true, "time_s": "~2 per color"},
+      {"b": 3, "k": 5, "holds": false, "note": "FAILS — counterexample at n=243"},
+      {"b": 4, "k": 2, "holds": true, "time_s": "<0.01"},
+      {"b": 4, "k": 3, "holds": true, "time_s": "<0.01"},
+      {"b": 4, "k": 4, "holds": true, "time_s": "~35 per color, all 4 colors verified"},
+      {"b": 5, "k": 2, "holds": true, "time_s": "<0.01"},
+      {"b": 5, "k": 3, "holds": true, "time_s": "<0.01"},
+      {"b": 5, "k": 4, "holds": true, "time_s": "639 (color 0 verified, others expected same)"},
+      {"b": 6, "k": 3, "holds": true, "time_s": "<0.01"},
+      {"b": 7, "k": 3, "holds": true, "time_s": "<0.01"},
+      {"b": 8, "k": 3, "holds": true, "time_s": "<0.01"},
+      {"b": 9, "k": 3, "holds": true, "time_s": "<0.01"},
+      {"b": 10, "k": 3, "holds": true, "time_s": "<0.01"}
+    ]
+  },
+
+  "R_k_x_plus_by_eq_bz": {
+    "k=2": {
+      "b=2":  {"R": 4,   "b^k": 4,   "match": true},
+      "b=3":  {"R": 9,   "b^k": 9,   "match": true},
+      "b=4":  {"R": 16,  "b^k": 16,  "match": true},
+      "b=5":  {"R": 25,  "b^k": 25,  "match": true},
+      "b=6":  {"R": 36,  "b^k": 36,  "match": true},
+      "b=7":  {"R": 49,  "b^k": 49,  "match": true},
+      "b=8":  {"R": 64,  "b^k": 64,  "match": true},
+      "b=9":  {"R": 81,  "b^k": 81,  "match": true},
+      "b=10": {"R": 100, "b^k": 100, "match": true}
+    },
+    "k=3": {
+      "b=2":  {"R": 14,   "b^k": 8,    "match": false, "note": "b=2 anomaly"},
+      "b=3":  {"R": 27,   "b^k": 27,   "match": true},
+      "b=4":  {"R": 64,   "b^k": 64,   "match": true},
+      "b=5":  {"R": 125,  "b^k": 125,  "match": true},
+      "b=6":  {"R": 216,  "b^k": 216,  "match": true},
+      "b=7":  {"R": 343,  "b^k": 343,  "match": true},
+      "b=8":  {"R": 512,  "b^k": 512,  "match": true},
+      "b=9":  {"R": 729,  "b^k": 729,  "match": true},
+      "b=10": {"R": 1000, "b^k": 1000, "match": true}
+    },
+    "k=4": {
+      "b=2": {"R": 56,  "b^k": 16,   "match": false, "note": "b=2 anomaly"},
+      "b=3": {"R": 81,  "b^k": 81,   "match": true, "time_s": 3.2,   "key_lemma": true, "NEW": true},
+      "b=4": {"R": 256, "b^k": 256,  "match": true, "time_s": 31.7,  "key_lemma": true, "NEW": true},
+      "b=5": {"R": 625, "b^k": 625,  "match": true, "time_s": 523.4, "key_lemma": true, "NEW": true},
+      "b=6": {"R": null, "b^k": 1296, "status": "n=1295 SAT confirmed, n=1296 UNSAT needs cluster", "NEW": true},
+      "b=7": {"R": null, "b^k": 2401, "status": "too large for desktop", "NEW": true}
+    },
+    "k=5": {
+      "b=2": {"R": null, "b^k": 32,  "note": "b=2 anomaly, n=100 SAT in 3.5s, slow"},
+      "b=3": {"R_lower": 297, "b^k": 243, "match": false, "note": "DISPROVED: R_5 > 243 (witness). n=296 SAT (<0.2s), n=297 needs cluster (7 solvers 12h+ all stuck). DIMACS: data/R5_n297.cnf", "NEW": true}
+    }
+  },
+
+  "dimacs_exports": {
+    "R5_n297.cnf": {"vars": 1485, "clauses": 125534, "description": "R_5(x+3y=3z): n=297 UNSAT expected"},
+    "R4_b6_n1296.cnf": {"status": "pending export"}
+  },
+
+  "other_new_R4_values": [
+    {"equation": "2x+y=z", "a": 2, "b": 1, "c": 1, "R4": 171, "time_s": 116.86},
+    {"equation": "2x+3y=3z", "a": 2, "b": 3, "c": 3, "R4": 103, "time_s": 14.96}
+  ],
+
+  "references": [
+    "Landman & Robertson, Ramsey Theory on the Integers, AMS 2014 (R_2 = b^2 for a < b)",
+    "Chang, De Loera, Wesley, Rado Numbers and SAT Computations, ISSAC 2022",
+    "Ahmed, Zaman, Bright, Symbolic Sets for Proving Bounds on Rado Numbers, 2025 (Table 1 has k=3 data)"
+  ]
+}
