@@ -856,7 +856,6 @@ document.querySelector('.lang-sw').addEventListener('click', e => {
     'The Coloring Game: A Math Challenge You\'re Destined to Lose');
   document.querySelectorAll('.lang-sw button').forEach(b =>
     b.classList.toggle('active', b.dataset.lang === lang));
-  // Re-render dynamic content
   resetRuleDemo();
   showForbidden();
   resetGame();
@@ -907,7 +906,7 @@ const RD_N = 18;
 
 function resetRuleDemo() {
   rdStep = 0;
-  _rdDebounce = false;
+  _rdBusy = false;
   const btn = document.getElementById('rule-next-btn');
   if (btn) btn.disabled = false;
   const line = document.getElementById('rule-line');
@@ -936,7 +935,10 @@ function rdResetAll() {
   document.querySelectorAll('#rule-line .nl-cell').forEach(c => c.className = 'nl-cell ghost');
 }
 
+let _rdBusy = false;
 function stepRuleDemo() {
+  if (_rdBusy) return;
+  _rdBusy = true; setTimeout(() => { _rdBusy = false; }, 350);
   const b = +document.getElementById('rule-b').value;
   const ex = document.getElementById('rule-explain');
   const counter = document.getElementById('rule-step-count');
@@ -1051,14 +1053,6 @@ function stepRuleDemo() {
     if (btn) btn.disabled = true;
   }
 }
-let _rdDebounce = false;
-const _stepRuleDemo = stepRuleDemo;
-stepRuleDemo = function() {
-  if (_rdDebounce) return;
-  _rdDebounce = true;
-  _stepRuleDemo();
-  setTimeout(() => { _rdDebounce = false; }, 350);
-};
 
 // ===== 1. FORBIDDEN LIST =====
 function showForbidden() {
