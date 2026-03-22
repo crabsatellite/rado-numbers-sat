@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="zh" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>染色游戏：一场你注定会输的数学挑战</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;
+  --accent:#6366f1;--accent2:#818cf8;--border:#e2e8f0;
+  --c0:#22c55e;--c1:#3b82f6;--c2:#f59e0b;--c3:#a855f7;--c4:#ef4444;
+  --radius:12px;
+}
+html[lang="en"] .zh{display:none}
+html[lang="zh"] .en{display:none}
+body{font-family:"Inter","Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.8;overflow-x:hidden}
+
+/* Header */
+header{background:#1a1a2e;color:#fff;padding:14px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header h1{font-size:17px;font-weight:600;flex:1}
+.lang-sw{display:flex;gap:2px;background:rgba(255,255,255,.1);border-radius:6px;overflow:hidden}
+.lang-sw button{padding:5px 14px;background:transparent;border:none;color:rgba(255,255,255,.5);font-size:13px;cursor:pointer;font-weight:600;transition:.2s}
+.lang-sw button.active{background:rgba(255,255,255,.15);color:#ffd700}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 24px}
+nav .inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:4px;
+  overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+nav .inner::-webkit-scrollbar{display:none}
+nav a{display:inline-block;padding:14px 10px;font-size:13px;color:var(--muted);
+  text-decoration:none;border-bottom:2px solid transparent;transition:.2s;font-weight:500}
+nav a:hover,nav a.active{color:var(--accent);border-bottom-color:var(--accent)}
+nav .logo{font-weight:800;color:var(--text);font-size:15px;margin-right:8px;
+  padding:14px 0;flex-shrink:0}
+main{max-width:960px;margin:0 auto;padding:24px}
+section{margin-bottom:48px}
+.card{background:var(--card);border-radius:var(--radius);padding:28px 32px;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:20px;border:1px solid var(--border)}
+h1{font-size:28px;font-weight:800;margin-bottom:6px}
+h2{font-size:21px;font-weight:700;margin-bottom:16px;color:var(--accent);
+  display:flex;align-items:center;gap:10px}
+h2 .tag{background:var(--accent);color:#fff;padding:2px 12px;border-radius:20px;
+  font-size:12px;flex-shrink:0;font-weight:700}
+h3{font-size:17px;font-weight:600;margin:18px 0 8px}
+p{margin-bottom:10px}
+.subtitle{color:var(--muted);font-size:15px;margin-bottom:28px}
+.eq{background:#f1f5f9;border-radius:8px;padding:14px 20px;font-family:"Courier New",monospace;
+  font-size:16px;text-align:center;margin:12px 0;font-weight:700;letter-spacing:.5px}
+.highlight{background:linear-gradient(120deg,#818cf830,#818cf815);border-left:3px solid var(--accent);
+  padding:14px 18px;border-radius:0 8px 8px 0;margin:14px 0;line-height:1.8}
+.analogy{background:linear-gradient(120deg,#fef3c720,#fef3c740);border-left:3px solid #f59e0b;
+  padding:14px 18px;border-radius:0 8px 8px 0;margin:14px 0;line-height:1.8}
+html[lang="zh"] .analogy::before{content:"生活类比";display:block;font-weight:700;font-size:12px;
+  color:#92400e;margin-bottom:4px;letter-spacing:1px}
+html[lang="en"] .analogy::before{content:"Real-life Analogy";display:block;font-weight:700;font-size:12px;
+  color:#92400e;margin-bottom:4px;letter-spacing:1px}
+.key-idea{background:linear-gradient(120deg,#dcfce720,#dcfce740);border-left:3px solid #22c55e;
+  padding:14px 18px;border-radius:0 8px 8px 0;margin:14px 0;line-height:1.8}
+html[lang="zh"] .key-idea::before{content:"核心直觉";display:block;font-weight:700;font-size:12px;
+  color:#166534;margin-bottom:4px;letter-spacing:1px}
+html[lang="en"] .key-idea::before{content:"Key Insight";display:block;font-weight:700;font-size:12px;
+  color:#166534;margin-bottom:4px;letter-spacing:1px}
+.bridge{background:linear-gradient(120deg,#f0f4ff20,#f0f4ff60);border-left:3px solid var(--accent2);
+  padding:14px 18px;border-radius:0 8px 8px 0;margin:14px 0;line-height:1.8;font-style:italic;color:#4338ca}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
+.controls label{font-size:14px;font-weight:600;color:var(--muted)}
+.controls select,.controls input[type=number]{border:1px solid var(--border);border-radius:6px;
+  padding:6px 10px;font-size:14px;background:#fff;min-width:60px}
+.controls select:focus,.controls input:focus{outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+button{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 18px;
+  font-size:14px;font-weight:600;cursor:pointer;transition:.15s}
+button:hover{background:#4f46e5}
+button:active{transform:scale(.97)}
+button:disabled{opacity:.5;cursor:default;pointer-events:none}
+button.secondary{background:#f1f5f9;color:var(--text)}
+button.secondary:hover{background:#e2e8f0}
+.grid{display:grid;gap:3px;margin:14px 0}
+.grid .cell{display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:600;border-radius:5px;cursor:pointer;
+  transition:.12s;user-select:none;aspect-ratio:1;min-width:0;color:#fff;
+  text-shadow:0 1px 2px rgba(0,0,0,.3)}
+.grid .cell:hover{transform:scale(1.12);z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.grid .cell.uncolored{background:#e2e8f0;color:var(--muted);text-shadow:none}
+.grid .cell.flash{animation:flash .6s ease}
+@keyframes flash{0%,100%{box-shadow:0 0 0 3px #ef4444}50%{box-shadow:0 0 0 7px #ef444466}}
+.color-0{background:var(--c0)}.color-1{background:var(--c1)}
+.color-2{background:var(--c2)}.color-3{background:var(--c3)}.color-4{background:var(--c4)}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.legend span{display:inline-flex;align-items:center;gap:4px;font-size:13px;padding:3px 10px;
+  border-radius:20px;font-weight:600;color:#fff;text-shadow:0 1px 1px rgba(0,0,0,.2)}
+.status{padding:12px 16px;border-radius:8px;margin:12px 0;font-weight:600;font-size:14px}
+.status.ok{background:#dcfce7;color:#166534}
+.status.bad{background:#fee2e2;color:#991b1b}
+.status.info{background:#dbeafe;color:#1e40af}
+.stat-row{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0}
+.stat{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:10px 14px;
+  text-align:center;flex:1;min-width:80px}
+.stat .val{font-size:22px;font-weight:800;color:var(--accent)}
+.stat .lbl{font-size:12px;color:var(--muted);font-weight:500}
+.heatmap{display:grid;gap:2px;margin:14px 0}
+.heatmap .hcell{display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;border-radius:4px;padding:6px 2px;min-height:36px;
+  transition:.15s;cursor:default}
+.heatmap .hcell.confirmed{background:#dcfce7;color:#166534}
+.heatmap .hcell.broken{background:#fee2e2;color:#991b1b}
+.heatmap .hcell.predicted-ok{background:#e0e7ff;color:#3730a3}
+.heatmap .hcell.predicted-break{background:#fef3c7;color:#92400e}
+.heatmap .hcell.header{background:#f1f5f5;color:var(--muted);font-weight:700}
+.heatmap .hcell.boundary{box-shadow:inset 0 0 0 2px var(--accent)}
+.number-line{display:flex;gap:3px;flex-wrap:wrap;margin:12px 0}
+.number-line .nl-cell{width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  border-radius:6px;font-size:13px;font-weight:700;transition:.2s;color:#fff;
+  text-shadow:0 1px 1px rgba(0,0,0,.2);position:relative}
+.number-line .nl-cell.highlighted{box-shadow:0 0 0 3px #1e293b;z-index:2;transform:scale(1.12)}
+.number-line .nl-cell.ghost{background:#e2e8f0 !important;color:#94a3b8 !important;text-shadow:none}
+.triple-box{display:inline-flex;align-items:center;gap:5px;font-size:15px;font-weight:600;
+  padding:6px 12px;background:#f8fafc;border-radius:8px;margin:4px;border:1px solid var(--border)}
+.triple-box .tn{padding:3px 8px;border-radius:5px;color:#fff;font-weight:700;font-size:14px;
+  text-shadow:0 1px 1px rgba(0,0,0,.2)}
+.progress-bar{height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden;margin:10px 0}
+.progress-bar .fill{height:100%;background:var(--accent);border-radius:3px;transition:width .3s}
+.step-explain{background:#f8fafc;border:1px solid var(--border);border-radius:10px;
+  padding:16px 20px;margin:12px 0;min-height:70px;transition:.3s;line-height:1.8}
+.step-counter{font-size:12px;color:var(--muted);margin-top:4px}
+.nl-cell.boss{border:2px solid #ffd700 !important;background:#fef3c7 !important;color:#92400e !important;
+  text-shadow:none !important;box-shadow:0 0 10px #ffd70044;position:relative}
+.nl-cell.boss::after{content:"★";position:absolute;top:-9px;right:-5px;font-size:10px;color:#f59e0b}
+.nl-cell.colored-red{background:var(--c4) !important;color:#fff !important;text-shadow:0 1px 1px rgba(0,0,0,.2) !important}
+.nl-cell.foul-triple{box-shadow:0 0 0 3px var(--c4);animation:flash .6s ease}
+.nl-cell.dimmed{opacity:.3}
+.rule-tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;min-height:30px}
+.rule-tag{padding:4px 12px;border-radius:16px;font-size:12px;font-weight:700;
+  background:#fef3c7;color:#92400e;border:1px solid #fde68a;transition:.3s}
+.rule-tag.active{background:#fecaca;color:#991b1b;border-color:#fca5a5;transform:scale(1.05)}
+.example-block{background:#fafafa;border:1px dashed var(--border);border-radius:10px;
+  padding:16px 20px;margin:14px 0}
+html[lang="zh"] .example-block::before{content:"具体例子";display:block;font-weight:700;font-size:12px;
+  color:var(--accent);margin-bottom:6px;letter-spacing:1px}
+html[lang="en"] .example-block::before{content:"Concrete Example";display:block;font-weight:700;font-size:12px;
+  color:var(--accent);margin-bottom:6px;letter-spacing:1px}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;
+  vertical-align:middle;margin-left:4px}
+.badge.new{background:#fee2e2;color:#991b1b}
+.badge.known{background:#dbeafe;color:#1e40af}
+@media(max-width:700px){
+  .card{padding:18px 16px}main{padding:16px}
+  .grid .cell{font-size:10px}
+  .number-line .nl-cell{width:32px;height:32px;font-size:11px}
+  header{padding:10px 16px}header h1{font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>
+    <span class="zh">染色游戏：一场你注定会输的数学挑战</span>
+    <span class="en">The Coloring Game: A Math Challenge You're Destined to Lose</span>
+  </h1>
+  <div class="lang-sw">
+    <button class="active" data-lang="zh">中文</button>
+    <button data-lang="en">EN</button>
+  </div>
+</header>
+
+<nav><div class="inner">
+  <span class="logo"><span class="zh">染色游戏</span><span class="en">Coloring Game</span></span>
+  <a href="#sec-rules"><span class="zh">游戏规则</span><span class="en">Rules</span></a>
+  <a href="#sec-play"><span class="zh">亲手试试</span><span class="en">Try It</span></a>
+  <a href="#sec-trick"><span class="zh">聪明染色法</span><span class="en">Strategy</span></a>
+  <a href="#sec-domino"><span class="zh">多米诺效应</span><span class="en">Domino</span></a>
+  <a href="#sec-trap"><span class="zh">陷阱原理</span><span class="en">Trap</span></a>
+  <a href="#sec-crack"><span class="zh">规律崩塌</span><span class="en">Breakdown</span></a>
+  <a href="#sec-map"><span class="zh">分界线地图</span><span class="en">Boundary</span></a>
+</div></nav>
+
+<main>
+
+<!-- ======== HERO ======== -->
+<section>
+<h1>
+  <span class="zh">一场你注定会输的染色游戏</span>
+  <span class="en">A Coloring Game You're Destined to Lose</span>
+</h1>
+<p class="subtitle">
+  <span class="zh">一篇数学论文发现：在这个游戏里存在一条隐藏的分界线。分界线以内，有一个漂亮的公式；分界线以外——公式崩了。</span>
+  <span class="en">A math paper discovered a hidden boundary in this game. Inside it, a beautiful formula holds perfectly. Beyond it — the formula breaks down.</span>
+</p>
+</section>
+
+<!-- ======== 1. RULES ======== -->
+<section id="sec-rules">
+<div class="card">
+<h2><span class="tag"><span class="zh">第1关</span><span class="en">Level 1</span></span> <span class="zh">游戏规则</span><span class="en">The Rules</span></h2>
+
+<p>
+  <span class="zh">规则很简单。给你一排数字 1, 2, 3, ..., n，你要给每个数字涂上颜色。</span>
+  <span class="en">The rules are simple. You're given a row of numbers 1, 2, 3, ..., n, and you need to color each one.</span>
+</p>
+
+<p>
+  <span class="zh">但有一个<strong>禁忌</strong>：某些"三个一组"的数字<strong>不能涂成同一个颜色</strong>。</span>
+  <span class="en">But there's a <strong>catch</strong>: certain groups of three numbers are <strong>forbidden from sharing the same color</strong>.</span>
+</p>
+
+<h3>
+  <span class="zh">哪些三个一组是禁忌？一步一步看：</span>
+  <span class="en">Which triples are forbidden? Let's build up step by step:</span>
+</h3>
+
+<p>
+  <span class="zh">不用记公式。点击"下一步"，看规则是怎样<strong>一条一条</strong>产生的：</span>
+  <span class="en">No formulas needed. Click "Next Step" to watch the rules appear <strong>one by one</strong>:</span>
+</p>
+
+<div class="controls">
+  <label>b =</label>
+  <select id="rule-b" onchange="syncB('rule-b'); resetRuleDemo()">
+    <option value="2">2</option><option value="3" selected>3</option>
+    <option value="4">4</option><option value="5">5</option>
+  </select>
+  <button id="rule-next-btn" onclick="stepRuleDemo()"><span class="zh">下一步</span><span class="en">Next Step</span></button>
+  <button class="secondary" onclick="resetRuleDemo()"><span class="zh">重置</span><span class="en">Reset</span></button>
+</div>
+
+<div class="rule-tags" id="rule-tags"></div>
+<div class="number-line" id="rule-line"></div>
+<div class="step-explain" id="rule-explain"></div>
+<div class="step-counter" id="rule-step-count"></div>
+
+<div class="analogy" style="margin-top:16px">
+  <span class="zh">打个比方：b 的每个倍数就像一个"老大"。第一个老大管间距 1，第二个管间距 2，第三个管间距 3... <strong>只要老大和另外两个同色的数触犯了间距规则，这三个人就犯规。</strong>老大越多，管的间距种类越多，涂色越难！</span>
+  <span class="en">Think of it this way: each multiple of b is a "boss." The first boss controls gap 1, the second gap 2, the third gap 3... <strong>If the boss and two other same-color numbers violate the gap rule, those three form a foul.</strong> More bosses, more gaps controlled, harder to color!</span>
+</div>
+
+<h3>
+  <span class="zh">完整列表：所有禁忌组一览</span>
+  <span class="en">Full List: All Forbidden Triples</span>
+</h3>
+<p>
+  <span class="zh">上面你看到了前几个老大怎么发布禁令。实际上，每一个 b 的倍数都是一个老大。下面列出了所有禁忌组：</span>
+  <span class="en">Above you saw how the first few bosses create rules. In fact, every multiple of b is a boss. Here's the full list of forbidden triples:</span>
+</p>
+<div class="controls">
+  <label>b =</label>
+  <select id="basics-b" onchange="syncB('basics-b'); showForbidden()">
+    <option value="2">2</option><option value="3" selected>3</option>
+    <option value="4">4</option><option value="5">5</option>
+  </select>
+  <label><span class="zh">范围到 n =</span><span class="en">range up to n =</span></label>
+  <input type="number" id="basics-n" value="15" min="4" max="60" style="width:60px" onchange="showForbidden()">
+</div>
+<div id="forbidden-list"></div>
+
+<h3 style="margin-top:18px">
+  <span class="zh">关键问题</span>
+  <span class="en">The Key Question</span>
+</h3>
+<div class="highlight">
+  <span class="zh">
+    <strong>数字一多，你就涂不下去了。</strong><br>
+    有一个临界点 n，到了这个 n，不管你怎么涂，都必然会触犯某条禁忌。<br>
+    这个临界点就叫 <strong>Rado Number</strong>（拉多数），记作 <strong>R<sub>k</sub>(b)</strong>。<br>
+    其中 k 是你有几种颜色，b 是那个倍数参数。
+  </span>
+  <span class="en">
+    <strong>As the numbers grow, you'll inevitably get stuck.</strong><br>
+    There's a tipping point n where, no matter how you color, you <em>must</em> violate some rule.<br>
+    This tipping point is called the <strong>Rado Number</strong>, written as <strong>R<sub>k</sub>(b)</strong>.<br>
+    Here k = number of colors, b = the multiplier parameter.
+  </span>
+</div>
+
+<div class="key-idea">
+  <span class="zh">
+    颜色越多（k越大），你就越容易躲避禁忌，临界点 n 就越大。<br>
+    参数 b 越大，禁忌越松，临界点也越大。
+  </span>
+  <span class="en">
+    More colors (larger k) = easier to dodge the rules, so the tipping point is bigger.<br>
+    Larger b = looser restrictions, so the tipping point is also bigger.
+  </span>
+</div>
+</div>
+</section>
+
+<!-- ======== 2. PLAY ======== -->
+<section id="sec-play">
+<div class="card">
+<h2><span class="tag"><span class="zh">第2关</span><span class="en">Level 2</span></span> <span class="zh">亲手试试！</span><span class="en">Try It Yourself!</span></h2>
+
+<p>
+  <span class="zh"><strong>点击数字</strong>给它换颜色（再点变下一种颜色，点完一轮变回灰色）。<br>你的目标：给所有数字涂上颜色，<strong>不触发任何禁忌</strong>。</span>
+  <span class="en"><strong>Click a number</strong> to cycle its color (click again for next color; after the last color it resets to gray).<br>Your goal: color every number <strong>without triggering any forbidden triple</strong>.</span>
+</p>
+
+<div class="controls">
+  <label>b =</label>
+  <select id="game-b" onchange="resetGame()">
+    <option value="2">2</option><option value="3" selected>3</option>
+    <option value="4">4</option><option value="5">5</option>
+  </select>
+  <label><span class="zh">颜色数 k =</span><span class="en">colors k =</span></label>
+  <select id="game-k" onchange="resetGame()">
+    <option value="2" selected>2</option><option value="3">3</option>
+    <option value="4">4</option><option value="5">5</option>
+  </select>
+  <label>n =</label>
+  <input type="number" id="game-n" value="8" min="2" max="150" style="width:60px" onchange="resetGame()">
+  <button onclick="resetGame()"><span class="zh">重置</span><span class="en">Reset</span></button>
+  <button class="secondary" onclick="autoColorValuation()"><span class="zh">让电脑涂</span><span class="en">Auto-color</span></button>
+</div>
+<div style="margin:4px 0">
+  <button class="secondary" onclick="setGameEasy()" style="font-size:12px;padding:4px 10px">
+    <span class="zh">简单挑战 (b<sup>k</sup>&minus;1)</span><span class="en">Easy (b<sup>k</sup>&minus;1)</span></button>
+  <button class="secondary" onclick="setGameHard()" style="font-size:12px;padding:4px 10px">
+    <span class="zh">不可能挑战 (b<sup>k</sup>)</span><span class="en">Impossible (b<sup>k</sup>)</span></button>
+</div>
+
+<div class="legend" id="game-legend"></div>
+<div class="grid" id="game-grid" style="grid-template-columns:repeat(auto-fill,minmax(36px,1fr))"></div>
+<div id="game-status"></div>
+<div id="game-solutions"></div>
+
+<div class="analogy" style="margin-top:16px">
+  <span class="zh">"简单挑战"你一定能赢（临界点之前），"不可能挑战"你一定会输（临界点恰好到了）。试试切换感受一下这个"差一个就输"的神奇边界！</span>
+  <span class="en">In the "Easy" challenge you can always win (before the tipping point). In the "Impossible" challenge you always lose (the tipping point has arrived). Try both to feel the magic boundary where "one more number = game over"!</span>
+</div>
+</div>
+</section>
+
+<!-- ======== BRIDGE 2→3 ======== -->
+<section>
+<div class="bridge">
+  <span class="zh">你可能发现了：随便涂很容易犯规。那有没有一种<strong>聪明的策略</strong>？数学家确实找到了一种——而且它和"整除"有关。</span>
+  <span class="en">You probably noticed: random coloring fails quickly. Is there a <strong>clever strategy</strong>? Mathematicians did find one — and it's related to "divisibility".</span>
+</div>
+</section>
+
+<!-- ======== 3. TRICK ======== -->
+<section id="sec-trick">
+<div class="card">
+<h2><span class="tag"><span class="zh">背景</span><span class="en">Background</span></span> <span class="zh">聪明的染色法：数"能除几次"</span><span class="en">The Smart Strategy: Count "How Many Times You Can Divide"</span></h2>
+
+<p>
+  <span class="zh">有一个非常巧妙的染色策略，能在临界点之前赢得游戏。方法就是：</span>
+  <span class="en">There's a clever coloring strategy that always wins before the tipping point. Here's how:</span>
+</p>
+
+<div class="highlight">
+  <span class="zh">给每个数字一个"等级"：看它<strong>能被 b 整除几次</strong>，等级就是它的颜色。</span>
+  <span class="en">Give each number a "level": count <strong>how many times it can be evenly divided by b</strong>. That level = its color.</span>
+</div>
+
+<p>
+  <span class="zh">什么叫"能被 b 整除几次"？就是反复除以 b，直到除不尽为止。比如：</span>
+  <span class="en">What does "how many times can you divide by b" mean? Just keep dividing by b until you can't anymore. For example:</span>
+</p>
+
+<div class="example-block">
+  <span class="zh">
+    <strong>b = 3 时</strong>，数数每个数能被 3 除几次：
+    <br><br>
+    <table style="margin:8px 0;border-collapse:collapse">
+    <tr><td style="padding:2px 10px;color:var(--muted)">数字</td>
+    <td style="padding:2px 8px">1</td><td style="padding:2px 8px">2</td>
+    <td style="padding:2px 8px"><strong>3</strong></td><td style="padding:2px 8px">4</td>
+    <td style="padding:2px 8px">5</td><td style="padding:2px 8px"><strong>6</strong></td>
+    <td style="padding:2px 8px">7</td><td style="padding:2px 8px">8</td>
+    <td style="padding:2px 8px"><strong>9</strong></td></tr>
+    <tr><td style="padding:2px 10px;color:var(--muted)">能除几次</td>
+    <td style="padding:2px 8px">0</td><td style="padding:2px 8px">0</td>
+    <td style="padding:2px 8px">1</td><td style="padding:2px 8px">0</td>
+    <td style="padding:2px 8px">0</td><td style="padding:2px 8px">1</td>
+    <td style="padding:2px 8px">0</td><td style="padding:2px 8px">0</td>
+    <td style="padding:2px 8px">2</td></tr>
+    </table>
+    1 不能被 3 整除 → 0 次 → 颜色 0 (绿色)<br>
+    3 &divide; 3 = 1，能除 1 次 → 颜色 1 (蓝色)<br>
+    9 &divide; 3 &divide; 3 = 1，能除 2 次 → 颜色 2 (橙色)
+  </span>
+  <span class="en">
+    <strong>When b = 3</strong>, count how many times each number divides by 3:
+    <br><br>
+    <table style="margin:8px 0;border-collapse:collapse">
+    <tr><td style="padding:2px 10px;color:var(--muted)">Number</td>
+    <td style="padding:2px 8px">1</td><td style="padding:2px 8px">2</td>
+    <td style="padding:2px 8px"><strong>3</strong></td><td style="padding:2px 8px">4</td>
+    <td style="padding:2px 8px">5</td><td style="padding:2px 8px"><strong>6</strong></td>
+    <td style="padding:2px 8px">7</td><td style="padding:2px 8px">8</td>
+    <td style="padding:2px 8px"><strong>9</strong></td></tr>
+    <tr><td style="padding:2px 10px;color:var(--muted)">Times divisible</td>
+    <td style="padding:2px 8px">0</td><td style="padding:2px 8px">0</td>
+    <td style="padding:2px 8px">1</td><td style="padding:2px 8px">0</td>
+    <td style="padding:2px 8px">0</td><td style="padding:2px 8px">1</td>
+    <td style="padding:2px 8px">0</td><td style="padding:2px 8px">0</td>
+    <td style="padding:2px 8px">2</td></tr>
+    </table>
+    1 can't be divided by 3 → 0 times → color 0 (green)<br>
+    3 &divide; 3 = 1, divisible once → color 1 (blue)<br>
+    9 &divide; 3 &divide; 3 = 1, divisible twice → color 2 (orange)
+  </span>
+</div>
+
+<h3>
+  <span class="zh">可视化：看看这种染色法</span>
+  <span class="en">Visualization: See this coloring in action</span>
+</h3>
+<div class="controls">
+  <label>b =</label>
+  <select id="lb-b" onchange="updateLowerBound()">
+    <option value="2">2</option><option value="3" selected>3</option>
+    <option value="4">4</option><option value="5">5</option>
+  </select>
+  <label><span class="zh">颜色数 k =</span><span class="en">colors k =</span></label>
+  <select id="lb-k" onchange="updateLowerBound()">
+    <option value="2">2</option><option value="3" selected>3</option>
+    <option value="4">4</option>
+  </select>
+</div>
+
+<div class="stat-row" id="lb-stats"></div>
+<div class="grid" id="lb-grid" style="grid-template-columns:repeat(auto-fill,minmax(36px,1fr))"></div>
+<div class="legend" id="lb-legend"></div>
+
+<h3>
+  <span class="zh">为什么这种方法能避开所有禁忌？</span>
+  <span class="en">Why does this strategy dodge every forbidden triple?</span>
+</h3>
+
+<p>
+  <span class="zh">关键在于一个巧妙的数学矛盾。我们来一步一步看。假设有一组禁忌 (b&times;d, y, y+d) 全涂了同一个颜色 c：</span>
+  <span class="en">The key is a clever mathematical contradiction. Let's walk through it step by step. Suppose a forbidden triple (b&times;d, y, y+d) are all colored the same color c:</span>
+</p>
+
+<div class="example-block">
+  <span class="zh">
+    <strong>以 b=3 为例</strong>，假设 (3d, y, y+d) 三个数都是颜色 c：<br>
+    <br>
+    <strong>第一步 — 看 3d</strong>：3d = 3 &times; d，所以 3d 比 d 多"被3整除一次"。如果 3d 的颜色（即"等级"）是 c，那么 d 的等级就是 c&minus;1。<br>
+    <strong>第二步 — 看 y</strong>：y 的颜色是 c，意味着 y 能被 3 整除 c 次。<br>
+    <strong>第三步 — 看 y+d</strong>：y 能除 c 次（"高等级"），d 只能除 c&minus;1 次（"低等级"）。把一个高等级的数和一个低等级的数加在一起，结果的等级 = 较低的那个 = c&minus;1。<br>
+    <br>
+    但 y+d 的颜色应该也是 c，也就是说它应该能除 c 次。<strong>矛盾！</strong>c &ne; c&minus;1。
+  </span>
+  <span class="en">
+    <strong>Take b=3</strong>. Suppose (3d, y, y+d) are all color c:<br>
+    <br>
+    <strong>Step 1 — Look at 3d</strong>: 3d = 3 &times; d, so 3d is divisible by 3 one more time than d is. If 3d has level c, then d has level c&minus;1.<br>
+    <strong>Step 2 — Look at y</strong>: y has color c, meaning y is divisible by 3 exactly c times.<br>
+    <strong>Step 3 — Look at y+d</strong>: y is divisible c times (high level), d only c&minus;1 times (lower level). When you add a high-level number and a lower-level number, the result's level equals the lower one = c&minus;1.<br>
+    <br>
+    But y+d should also be color c, meaning divisible c times. <strong>Contradiction!</strong> c &ne; c&minus;1.
+  </span>
+</div>
+
+<div class="analogy">
+  <span class="zh">就像混合两杯浓度不同的盐水：一杯很咸（等级 c），一杯没那么咸（等级 c&minus;1），混合后的浓度一定达不到"很咸"的水平。所以 y+d 不可能和 y 是同等级的——它们不可能同色。</span>
+  <span class="en">Like mixing two cups of salt water with different concentrations: one very salty (level c) and one less salty (level c&minus;1). The mix can never reach the "very salty" level. So y+d can't be the same level as y — they can't share the same color.</span>
+</div>
+
+<p>
+  <span class="zh">这个方法对 {1, ..., b<sup>k</sup>&minus;1} 总是有效的。所以临界点<strong>至少</strong>是 b<sup>k</sup>：</span>
+  <span class="en">This strategy always works for {1, ..., b<sup>k</sup>&minus;1}. So the tipping point is <strong>at least</strong> b<sup>k</sup>:</span>
+</p>
+<div class="eq">R<sub>k</sub>(b) &ge; b<sup>k</sup></div>
+
+<div class="controls">
+  <button onclick="verifyLowerBound()"><span class="zh">验证一下：逐个检查所有禁忌组</span><span class="en">Verify: check every forbidden triple one by one</span></button>
+  <button class="secondary" onclick="stopLBVerify()"><span class="zh">停止</span><span class="en">Stop</span></button>
+</div>
+<div id="lb-verify-result"></div>
+</div>
+</section>
+
+<!-- ======== BRIDGE 3→4 ======== -->
+<section>
+<div class="bridge">
+  <span class="zh">我们刚刚证明了 R<sub>k</sub>(b) &ge; b<sup>k</sup>——临界点至少是 b 的 k 次方。但是，R<sub>k</sub>(b) 到底<strong>等不等于</strong> b<sup>k</sup> 呢？如果等于，就说明"能除几次"这个方法已经是最优的了。让我们从最简单的情况开始：<strong>只有 2 种颜色</strong>。</span>
+  <span class="en">We just proved R<sub>k</sub>(b) &ge; b<sup>k</sup> — the tipping point is at least b<sup>k</sup>. But does R<sub>k</sub>(b) actually <strong>equal</strong> b<sup>k</sup>? If so, the "count divisions" strategy is already optimal. Let's start with the simplest case: <strong>only 2 colors</strong>.</span>
+</div>
+</section>
+
+<!-- ======== 4. DOMINO ======== -->
+<section id="sec-domino">
+<div class="card">
+<h2><span class="tag"><span class="zh">发现 1</span><span class="en">Finding 1</span></span> <span class="zh">多米诺效应：b 的倍数被迫同色</span><span class="en">Domino Effect: Multiples of b Are Forced Into One Color</span></h2>
+
+<p>
+  <span class="zh">论文的第一个新发现是：当你只有<strong>2种颜色</strong>时，<strong>b 的所有倍数会被"连锁反应"逼成同一个颜色</strong>。</span>
+  <span class="en">The paper's first discovery: with <strong>only 2 colors</strong>, <strong>all multiples of b get forced into the same color</strong> by a chain reaction.</span>
+</p>
+
+<p>
+  <span class="zh">这就像多米诺骨牌：第一个倍数一旦选定颜色，其他倍数就全被推倒了。</span>
+  <span class="en">It's like dominoes: once the first multiple picks a color, every other multiple gets knocked into that same color.</span>
+</p>
+
+<div class="analogy">
+  <span class="zh">想象你在教室排座位，只有红蓝两种校服。一旦第一个"大个子"穿了红色，其他大个子就不得不也穿红色——因为每穿一件蓝色校服，都会立刻触发新的禁令，最终产生矛盾。</span>
+  <span class="en">Imagine assigning uniforms with only two choices: red or blue. Once the first "big kid" wears red, every other big kid is forced to wear red too — because choosing blue immediately triggers a chain of contradictions.</span>
+</div>
+
+<h3>
+  <span class="zh">一步一步看这个连锁反应</span>
+  <span class="en">Watch the chain reaction step by step</span>
+</h3>
+<div class="controls">
+  <label>b =</label>
+  <select id="cc-b" onchange="resetCompression()">
+    <option value="3" selected>3</option><option value="4">4</option>
+    <option value="5">5</option><option value="6">6</option>
+  </select>
+  <button onclick="stepCompression()"><span class="zh">下一步</span><span class="en">Next Step</span></button>
+  <button class="secondary" onclick="resetCompression()"><span class="zh">重置</span><span class="en">Reset</span></button>
+</div>
+
+<div class="number-line" id="cc-line"></div>
+<div class="step-explain" id="cc-explain"></div>
+<div class="step-counter" id="cc-step-count"></div>
+
+<div class="key-idea" style="margin-top:16px">
+  <span class="zh">
+    一旦所有 b 的倍数被迫同色，你只剩一种颜色给非倍数用，但空间不够——必然出现禁忌组。<br>
+    所以 2 种颜色时，临界点<strong>恰好</strong>是 b<sup>2</sup>：<br>
+    <strong>R<sub>2</sub>(b) = b<sup>2</sup></strong>
+  </span>
+  <span class="en">
+    Once all multiples of b are forced into one color, only one color remains for non-multiples — but there's not enough room, so a forbidden triple is guaranteed.<br>
+    Therefore, with 2 colors, the tipping point is <strong>exactly</strong> b<sup>2</sup>:<br>
+    <strong>R<sub>2</sub>(b) = b<sup>2</sup></strong>
+  </span>
+</div>
+</div>
+</section>
+
+<!-- ======== BRIDGE 4→5 ======== -->
+<section>
+<div class="bridge">
+  <span class="zh">好，2 种颜色的情况搞定了：R<sub>2</sub>(b) = b<sup>2</sup>，公式 b<sup>k</sup> 完美吻合。那<strong>3种、4种颜色</strong>呢？我们需要一个新的思路——不能再只靠 2 种颜色的多米诺效应了。</span>
+  <span class="en">Great, the 2-color case is settled: R<sub>2</sub>(b) = b<sup>2</sup>, matching the formula b<sup>k</sup> perfectly. But what about <strong>3 or 4 colors</strong>? We need a new approach — the 2-color domino argument no longer applies directly.</span>
+</div>
+</section>
+
+<!-- ======== 5. TRAP ======== -->
+<section id="sec-trap">
+<div class="card">
+<h2><span class="tag"><span class="zh">发现 2</span><span class="en">Finding 2</span></span> <span class="zh">陷阱原理：每种颜色都有"定时炸弹"</span><span class="en">The Trap: Every Color Has a "Time Bomb"</span></h2>
+
+<p>
+  <span class="zh">论文的第二个发现解释了：<strong>为什么 3-4 种颜色时，临界点也恰好等于 b<sup>k</sup>？</strong></span>
+  <span class="en">The paper's second finding explains: <strong>why is the tipping point exactly b<sup>k</sup> for 3-4 colors too?</strong></span>
+</p>
+
+<p>
+  <span class="zh">答案是：在临界点之前（{1, ..., b<sup>k</sup>&minus;1}），用"能除几次"的方法染色后，<strong>每种颜色里都藏着一个"定时炸弹"</strong>——一对间距恰好为 b<sup>k&minus;1</sup> 的同色数字。</span>
+  <span class="en">The answer: before the tipping point ({1, ..., b<sup>k</sup>&minus;1}), using the "count divisions" coloring, <strong>every color secretly contains a "time bomb"</strong> — a pair of same-color numbers whose gap is exactly b<sup>k&minus;1</sup>.</span>
+</p>
+
+<div class="analogy">
+  <span class="zh">想象一场选秀节目有 k 个导师，每个导师的队伍里都有两个选手站在相距恰好 100 米的位置。<br>
+  现在来了一个新选手（第 b<sup>k</sup> 号），他必须选一个导师。<strong>不管他选谁</strong>，他加入后，那个导师的队伍就会有三个人形成禁忌组。<br>
+  所以——新选手无处可去，游戏结束！</span>
+  <span class="en">Imagine a talent show with k coaches, each with two members standing exactly 100 meters apart.<br>
+  Now a new contestant (number b<sup>k</sup>) arrives and must pick a coach. <strong>No matter who they pick</strong>, their team will form a forbidden triple.<br>
+  The new contestant has nowhere to go — game over!</span>
+</div>
+
+<h3>
+  <span class="zh">看看"炸弹"长什么样</span>
+  <span class="en">See what these "bombs" look like</span>
+</h3>
+<div class="controls">
+  <label>b =</label>
+  <select id="dp-b" onchange="updateDistancePair()">
+    <option value="3" selected>3</option><option value="4">4</option><option value="5">5</option>
+  </select>
+  <label><span class="zh">颜色数 k =</span><span class="en">colors k =</span></label>
+  <select id="dp-k" onchange="updateDistancePair()">
+    <option value="2" selected>2</option><option value="3">3</option><option value="4">4</option>
+  </select>
+  <button onclick="animateDistancePair()"><span class="zh">演示：新数字为什么无处可去</span><span class="en">Animate: why the new number has nowhere to go</span></button>
+</div>
+
+<div class="grid" id="dp-grid" style="grid-template-columns:repeat(auto-fill,minmax(36px,1fr))"></div>
+<div class="legend" id="dp-legend"></div>
+<div id="dp-explain" class="step-explain" style="display:none"></div>
+
+<div class="key-idea" style="margin-top:14px">
+  <span class="zh">
+    有了"多米诺效应"（发现1）和"陷阱原理"（发现2），就能解释为什么 k &le; 4 时：<br>
+    <strong>R<sub>k</sub>(b) = b<sup>k</sup></strong> &mdash; 下界和上界恰好碰上，答案就是 b 的 k 次方。
+  </span>
+  <span class="en">
+    With the "Domino Effect" (Finding 1) and the "Trap Principle" (Finding 2), we can explain why for k &le; 4:<br>
+    <strong>R<sub>k</sub>(b) = b<sup>k</sup></strong> — the lower bound and upper bound match perfectly, so the answer is exactly b to the k-th power.
+  </span>
+</div>
+</div>
+</section>
+
+<!-- ======== BRIDGE 5→6 ======== -->
+<section>
+<div class="bridge">
+  <span class="zh">到目前为止，所有验证过的情况都符合 R<sub>k</sub>(b) = b<sup>k</sup>。规律这么漂亮，会不会<strong>永远成立</strong>？答案是——<strong>不是</strong>。接下来的发现令人震惊。</span>
+  <span class="en">So far, every case we've checked satisfies R<sub>k</sub>(b) = b<sup>k</sup>. Such a beautiful pattern — could it hold <strong>forever</strong>? The answer is — <strong>no</strong>. The next finding is a shock.</span>
+</div>
+</section>
+
+<!-- ======== 6. CRACK ======== -->
+<section id="sec-crack">
+<div class="card">
+<h2><span class="tag"><span class="zh">发现 3</span><span class="en">Finding 3</span></span> <span class="zh">规律崩塌！电脑找到了漏洞</span><span class="en">The Pattern Breaks! A Computer Found the Crack</span></h2>
+
+<p>
+  <span class="zh">大家以前以为临界点<strong>永远</strong>等于 b<sup>k</sup>。但论文证明了一个震惊的事实：</span>
+  <span class="en">People used to think the tipping point was <strong>always</strong> b<sup>k</sup>. But the paper proved a shocking fact:</span>
+</p>
+
+<div class="eq" style="font-size:18px;padding:18px 24px">
+  <span class="zh">当 b=3、k=5 时：R<sub>5</sub>(3) &gt; 243 = 3<sup>5</sup></span>
+  <span class="en">When b=3, k=5: R<sub>5</sub>(3) &gt; 243 = 3<sup>5</sup></span>
+</div>
+
+<p>
+  <span class="zh">也就是说，<strong>存在一种 5 色染色方案</strong>，能让 1 到 243 这 243 个数<strong>完全没有禁忌组</strong>！公式 b<sup>k</sup> 在这里<strong>失效了</strong>。</span>
+  <span class="en">In other words, <strong>there exists a 5-color scheme</strong> that colors all 243 numbers from 1 to 243 <strong>with zero forbidden triples</strong>! The formula b<sup>k</sup> <strong>breaks down here</strong>.</span>
+</p>
+
+<p>
+  <span class="zh">这个方案是怎么找到的？靠的是一种叫 <strong>SAT 求解器</strong>的计算机程序。SAT 求解器的工作方式像这样：你给它一大堆逻辑条件（"数字 1 不能和数字 2、3 同时为红色"之类的），它会自动搜索满足所有条件的方案，或者证明不存在这样的方案。</span>
+  <span class="en">How was this scheme found? Using a program called a <strong>SAT solver</strong>. A SAT solver works like this: you give it a huge list of logical constraints ("number 1, 2, and 3 can't all be red" etc.), and it automatically searches for an assignment satisfying all constraints, or proves no such assignment exists.</span>
+</p>
+
+<div class="analogy">
+  <span class="zh">就像一个密码锁，大家以为密码公式是 b<sup>k</sup>，前面试了无数次都对。但到了第五层（k=5），密码突然不对了——锁还没开，说明真正的密码比 b<sup>k</sup> 更大。</span>
+  <span class="en">Like a combination lock: everyone thought the formula was b<sup>k</sup>, and it worked perfectly for the first few layers. But at the fifth layer (k=5), the combination was wrong — the lock didn't open, meaning the real combination is larger than b<sup>k</sup>.</span>
+</div>
+
+<h3>
+  <span class="zh">证据：电脑找到的完美染色方案</span>
+  <span class="en">Evidence: the perfect coloring found by the computer</span>
+</h3>
+<p>
+  <span class="zh">下面是 SAT 求解器找到的 243 个数的 5 色染色。每行 27 个数。<strong>你可以验证：16,362 个禁忌组全部避开了。</strong></span>
+  <span class="en">Below is the SAT solver's 5-color scheme for 243 numbers, displayed in rows of 27. <strong>You can verify: all 16,362 forbidden triples are avoided.</strong></span>
+</p>
+
+<div class="stat-row">
+  <div class="stat"><div class="val" style="color:var(--c0)">46</div><div class="lbl"><span class="zh">绿色</span><span class="en">Green</span></div></div>
+  <div class="stat"><div class="val" style="color:var(--c1)">29</div><div class="lbl"><span class="zh">蓝色</span><span class="en">Blue</span></div></div>
+  <div class="stat"><div class="val" style="color:var(--c2)">54</div><div class="lbl"><span class="zh">橙色</span><span class="en">Orange</span></div></div>
+  <div class="stat"><div class="val" style="color:var(--c3)">53</div><div class="lbl"><span class="zh">紫色</span><span class="en">Purple</span></div></div>
+  <div class="stat"><div class="val" style="color:var(--c4)">61</div><div class="lbl"><span class="zh">红色</span><span class="en">Red</span></div></div>
+</div>
+
+<div class="grid" id="witness-grid" style="grid-template-columns:repeat(27,1fr)"></div>
+
+<div class="controls">
+  <button onclick="verifyWitness()"><span class="zh">一个一个检查全部 16,362 个禁忌组</span><span class="en">Verify all 16,362 forbidden triples one by one</span></button>
+  <button class="secondary" onclick="stopWitnessVerify()"><span class="zh">停止</span><span class="en">Stop</span></button>
+</div>
+<div class="progress-bar" id="witness-progress-bar" style="display:none"><div class="fill" id="witness-progress"></div></div>
+<div id="witness-status"></div>
+
+<h3 style="margin-top:18px">
+  <span class="zh">为什么"能除几次"的老方法不行了？</span>
+  <span class="en">Why does the old "count divisions" method fail here?</span>
+</h3>
+<p>
+  <span class="zh">用"能被 3 除几次"来染色 1-243 这 243 个数，你会发现它会<strong>产生同色禁忌组</strong>：</span>
+  <span class="en">If you use the "count divisions by 3" method to color all 243 numbers, you'll find it <strong>produces forbidden triples</strong>:</span>
+</p>
+<div class="controls">
+  <button class="secondary" onclick="compareValuation()"><span class="zh">看看老方法为什么失败</span><span class="en">See why the old method fails</span></button>
+</div>
+<div id="compare-status"></div>
+
+<div class="key-idea" style="margin-top:14px">
+  <span class="zh">
+    "能除几次"这个方法只保证 b<sup>k</sup>&minus;1 个数以内安全。到了 b<sup>k</sup>（243个数），它力不从心了。<br>
+    但 SAT 求解器用了一种更复杂的、不规则的染色，成功避开了所有禁忌——<strong>说明真正的临界点比 243 更大</strong>（实际 &gt; 296）。
+  </span>
+  <span class="en">
+    The "count divisions" method only guarantees safety up to b<sup>k</sup>&minus;1 numbers. At b<sup>k</sup> (243 numbers), it runs out of room.<br>
+    But the SAT solver used a more complex, irregular coloring and dodged every triple — <strong>proving the real tipping point is bigger than 243</strong> (actually &gt; 296).
+  </span>
+</div>
+</div>
+</section>
+
+<!-- ======== BRIDGE 6→7 ======== -->
+<section>
+<div class="bridge">
+  <span class="zh">公式 b<sup>k</sup> 在 b=3, k=5 崩了。那么，它到底在哪里崩、在哪里还成立？有没有一条<strong>精确的分界线</strong>？</span>
+  <span class="en">The formula b<sup>k</sup> breaks at b=3, k=5. So where exactly does it break, and where does it still hold? Is there a <strong>precise boundary</strong>?</span>
+</div>
+</section>
+
+<!-- ======== 7. MAP ======== -->
+<section id="sec-map">
+<div class="card">
+<h2><span class="tag"><span class="zh">发现 4</span><span class="en">Finding 4</span></span> <span class="zh">分界线在哪？一个精确的猜想</span><span class="en">Where's the Boundary? A Precise Conjecture</span></h2>
+
+<p>
+  <span class="zh">规律在 b=3, k=5 崩了。在 b=2 时，k=3 就崩了（R<sub>3</sub>(2)=14 &ne; 2<sup>3</sup>=8）。论文发现了一个规律：</span>
+  <span class="en">The pattern breaks at b=3, k=5. For b=2, it breaks already at k=3 (R<sub>3</sub>(2)=14 &ne; 2<sup>3</sup>=8). The paper discovered a pattern:</span>
+</p>
+
+<div class="eq" style="font-size:17px">
+  <span class="zh">公式 b<sup>k</sup> 成立 &nbsp; 当且仅当 &nbsp; k &le; 2 &times; (b &minus; 1)</span>
+  <span class="en">formula b<sup>k</sup> holds &nbsp; if and only if &nbsp; k &le; 2 &times; (b &minus; 1)</span>
+</div>
+
+<h3>
+  <span class="zh">这是什么意思？</span>
+  <span class="en">What does this mean?</span>
+</h3>
+
+<div class="example-block">
+  <span class="zh">
+    <strong>b = 2</strong>：分界线 = 2 &times; (2&minus;1) = <strong>2</strong>。k &le; 2 时公式对，k=3 就崩了。（已验证！）<br>
+    <strong>b = 3</strong>：分界线 = 2 &times; (3&minus;1) = <strong>4</strong>。k &le; 4 时公式对，k=5 就崩了。（已验证！）<br>
+    <strong>b = 4</strong>：分界线 = 2 &times; (4&minus;1) = <strong>6</strong>。预测 k &le; 6 时公式对，k=7 崩。（还没验证！）<br>
+    <strong>b = 5</strong>：分界线 = 2 &times; (5&minus;1) = <strong>8</strong>。预测 k &le; 8 时公式对。（还没验证！）
+  </span>
+  <span class="en">
+    <strong>b = 2</strong>: boundary = 2 &times; (2&minus;1) = <strong>2</strong>. Formula holds for k &le; 2, breaks at k=3. (Verified!)<br>
+    <strong>b = 3</strong>: boundary = 2 &times; (3&minus;1) = <strong>4</strong>. Formula holds for k &le; 4, breaks at k=5. (Verified!)<br>
+    <strong>b = 4</strong>: boundary = 2 &times; (4&minus;1) = <strong>6</strong>. Predicted to hold for k &le; 6, break at k=7. (Not yet verified!)<br>
+    <strong>b = 5</strong>: boundary = 2 &times; (5&minus;1) = <strong>8</strong>. Predicted to hold for k &le; 8. (Not yet verified!)
+  </span>
+</div>
+
+<div class="analogy">
+  <span class="zh">
+    想象一个城墙。相邻两个 b 的倍数之间有 <strong>b&minus;1 个"缓冲格子"</strong>（非倍数）。<br>
+    b=2 时只有 1 个缓冲格子，城墙很薄，只能扛住 2 种颜色。<br>
+    b=3 时有 2 个缓冲格子，能扛住 4 种颜色。<br>
+    <strong>b 越大，城墙越厚，能扛住的颜色数就越多。</strong>
+  </span>
+  <span class="en">
+    Imagine a city wall. Between every two consecutive multiples of b, there are <strong>b&minus;1 "buffer slots"</strong> (non-multiples).<br>
+    b=2: only 1 buffer slot — thin wall, holds only 2 colors.<br>
+    b=3: 2 buffer slots — holds 4 colors.<br>
+    <strong>Larger b = thicker wall = more colors it can withstand.</strong>
+  </span>
+</div>
+
+<h3>
+  <span class="zh">分界线地图</span>
+  <span class="en">The Boundary Map</span>
+</h3>
+<p>
+  <span class="zh">下面是一张"地图"。纵轴是参数 b，横轴是颜色数 k。每个格子代表"R<sub>k</sub>(b) 是不是恰好等于 b<sup>k</sup>"。<strong>粗边框</strong>是猜想预测的分界点。</span>
+  <span class="en">Below is a "map". The vertical axis is parameter b; the horizontal axis is the number of colors k. Each cell shows whether R<sub>k</sub>(b) exactly equals b<sup>k</sup>. <strong>Bold borders</strong> mark the conjectured boundary.</span>
+</p>
+
+<div class="heatmap" id="conj-heatmap" style="grid-template-columns:repeat(11,1fr)"></div>
+
+<div class="legend" style="margin-top:12px">
+  <span style="background:#22c55e"><span class="zh">已验证：公式成立</span><span class="en">Verified: holds</span></span>
+  <span style="background:#ef4444"><span class="zh">已验证：公式崩了</span><span class="en">Verified: breaks</span></span>
+  <span style="background:#6366f1"><span class="zh">预测：公式成立（未验证）</span><span class="en">Predicted: holds (unverified)</span></span>
+  <span style="background:#f59e0b;color:#000"><span class="zh">预测：公式崩（未验证）</span><span class="en">Predicted: breaks (unverified)</span></span>
+</div>
+
+<h3 style="margin-top:20px">
+  <span class="zh">下一步：怎么验证这个猜想？</span>
+  <span class="en">Next Steps: How to Verify This Conjecture?</span>
+</h3>
+<p>
+  <span class="zh">目前猜想只有 b=2 和 b=3 两个"边界点"支撑。<strong>最值得做的下一步计算</strong>是：</span>
+  <span class="en">Currently the conjecture rests on just two boundary points (b=2 and b=3). <strong>The most valuable next computation</strong> would be:</span>
+</p>
+<div class="stat-row">
+  <div class="stat">
+    <div class="val">R<sub>6</sub>(4)</div>
+    <div class="lbl"><span class="zh">预测 = 4<sup>6</sup> = 4096</span><span class="en">predicted = 4<sup>6</sup> = 4096</span></div>
+  </div>
+  <div class="stat">
+    <div class="val">R<sub>7</sub>(4)</div>
+    <div class="lbl"><span class="zh">预测 &gt; 4<sup>7</sup> = 16384</span><span class="en">predicted &gt; 4<sup>7</sup> = 16384</span></div>
+  </div>
+</div>
+<p>
+  <span class="zh">如果 R<sub>7</sub>(4) 真的大于 16384，那就是猜想的第三个支撑点——说明公式 2(b&minus;1) 很可能是对的。</span>
+  <span class="en">If R<sub>7</sub>(4) really exceeds 16384, that would be the conjecture's third supporting data point — strong evidence that the formula 2(b&minus;1) is correct.</span>
+</p>
+</div>
+</section>
+
+<!-- ======== SUMMARY ======== -->
+<section>
+<div class="card" style="background:linear-gradient(135deg,#6366f108,#818cf812);border-color:var(--accent)">
+<h2 style="color:var(--text)">
+  <span class="zh">总结：这篇论文做了什么？</span>
+  <span class="en">Summary: What Did This Paper Achieve?</span>
+</h2>
+<table style="width:100%;border-collapse:collapse">
+<tr style="border-bottom:1px solid var(--border)">
+  <td style="padding:10px 8px;font-weight:700;color:var(--accent);white-space:nowrap;vertical-align:top">
+    <span class="zh">发现 1</span><span class="en">Finding 1</span></td>
+  <td style="padding:10px 8px">
+    <span class="zh"><strong>多米诺效应</strong> — 2种颜色时，b的倍数被连锁反应逼成同色，精确证明了 R<sub>2</sub>(b) = b<sup>2</sup></span>
+    <span class="en"><strong>Domino Effect</strong> — With 2 colors, multiples of b are forced into one color by a chain reaction, proving R<sub>2</sub>(b) = b<sup>2</sup> exactly</span>
+  </td>
+</tr>
+<tr style="border-bottom:1px solid var(--border)">
+  <td style="padding:10px 8px;font-weight:700;color:var(--accent);vertical-align:top">
+    <span class="zh">发现 2</span><span class="en">Finding 2</span></td>
+  <td style="padding:10px 8px">
+    <span class="zh"><strong>陷阱原理</strong> — 解释了 k &le; 4 时为什么临界点恰好是 b<sup>k</sup>：每种颜色都有"定时炸弹"</span>
+    <span class="en"><strong>Trap Principle</strong> — Explains why the tipping point is exactly b<sup>k</sup> for k &le; 4: every color contains a "time bomb"</span>
+  </td>
+</tr>
+<tr style="border-bottom:1px solid var(--border)">
+  <td style="padding:10px 8px;font-weight:700;color:var(--accent);vertical-align:top">
+    <span class="zh">发现 3</span><span class="en">Finding 3</span></td>
+  <td style="padding:10px 8px">
+    <span class="zh"><strong>规律崩塌</strong> — 电脑证明 R<sub>5</sub>(3) &gt; 243 = 3<sup>5</sup>，公式不是万能的</span>
+    <span class="en"><strong>Pattern Breaks</strong> — Computer proves R<sub>5</sub>(3) &gt; 243 = 3<sup>5</sup>; the formula isn't universal</span>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 8px;font-weight:700;color:var(--accent);vertical-align:top">
+    <span class="zh">发现 4</span><span class="en">Finding 4</span></td>
+  <td style="padding:10px 8px">
+    <span class="zh"><strong>分界线猜想</strong> — 公式成立当且仅当 k &le; 2(b&minus;1)，画出了精确的"安全区"边界</span>
+    <span class="en"><strong>Boundary Conjecture</strong> — The formula holds iff k &le; 2(b&minus;1), giving a precise "safe zone" boundary</span>
+  </td>
+</tr>
+</table>
+</div>
+</section>
+
+</main>
+
+<script>
+// ===== LANGUAGE =====
+let lang = 'zh';
+function T(zh, en) { return lang === 'zh' ? zh : en; }
+const COLORS = ['#22c55e','#3b82f6','#f59e0b','#a855f7','#ef4444'];
+const CNAMES_ZH = ['绿色','蓝色','橙色','紫色','红色'];
+const CNAMES_EN = ['Green','Blue','Orange','Purple','Red'];
+function CN(i) { return lang === 'zh' ? CNAMES_ZH[i] : CNAMES_EN[i]; }
+
+document.querySelector('.lang-sw').addEventListener('click', e => {
+  if (e.target.tagName !== 'BUTTON') return;
+  lang = e.target.dataset.lang;
+  document.getElementById('htmlRoot').lang = lang;
+  document.title = T('染色游戏：一场你注定会输的数学挑战',
+    'The Coloring Game: A Math Challenge You\'re Destined to Lose');
+  document.querySelectorAll('.lang-sw button').forEach(b =>
+    b.classList.toggle('active', b.dataset.lang === lang));
+  // Re-render dynamic content
+  resetRuleDemo();
+  showForbidden();
+  resetGame();
+  updateLowerBound();
+  resetCompression();
+  updateDistancePair();
+});
+
+// ===== UTILS =====
+function vb(n, b) {
+  if (n === 0) return Infinity;
+  let v = 0;
+  while (n % b === 0) { v++; n /= b; }
+  return v;
+}
+
+function findSolutions(coloring, b, n) {
+  const sols = [];
+  for (let d = 1; b * d <= n; d++) {
+    const x = b * d;
+    for (let y = 1; y + d <= n; y++) {
+      const z = y + d;
+      if (coloring[x] !== undefined && coloring[x] === coloring[y] && coloring[y] === coloring[z])
+        sols.push([x, y, z, d, coloring[x]]);
+    }
+  }
+  return sols;
+}
+
+function allTriples(b, n) {
+  const t = [];
+  for (let d = 1; b * d <= n; d++) {
+    const x = b * d;
+    for (let y = 1; y + d <= n; y++) t.push([x, y, y + d, d]);
+  }
+  return t;
+}
+
+function syncB(srcId) {
+  const v = document.getElementById(srcId).value;
+  if (srcId === 'rule-b') { document.getElementById('basics-b').value = v; showForbidden(); }
+  else { document.getElementById('rule-b').value = v; resetRuleDemo(); }
+}
+
+// ===== RULE DEMO =====
+let rdStep = 0;
+const RD_N = 18;
+
+function resetRuleDemo() {
+  rdStep = 0;
+  _rdDebounce = false;
+  const btn = document.getElementById('rule-next-btn');
+  if (btn) btn.disabled = false;
+  const line = document.getElementById('rule-line');
+  line.innerHTML = '';
+  for (let j = 1; j <= RD_N; j++) {
+    const cell = document.createElement('div');
+    cell.className = 'nl-cell ghost';
+    cell.textContent = j;
+    cell.dataset.j = j;
+    line.appendChild(cell);
+  }
+  document.getElementById('rule-explain').innerHTML = T(
+    '点击"下一步"，看看禁忌规则是怎么一步一步产生的。',
+    'Click "Next Step" to see how forbidden rules are built, one at a time.'
+  );
+  document.getElementById('rule-step-count').textContent = '';
+  document.getElementById('rule-tags').innerHTML = '';
+}
+
+function rdSetCell(j, cls) {
+  const cell = document.querySelector(`#rule-line .nl-cell[data-j="${j}"]`);
+  if (cell) cell.className = 'nl-cell ' + cls;
+}
+
+function rdResetAll() {
+  document.querySelectorAll('#rule-line .nl-cell').forEach(c => c.className = 'nl-cell ghost');
+}
+
+function stepRuleDemo() {
+  const b = +document.getElementById('rule-b').value;
+  const ex = document.getElementById('rule-explain');
+  const counter = document.getElementById('rule-step-count');
+  const tags = document.getElementById('rule-tags');
+
+  const bosses = [
+    { d: 1, boss: b*1, triple: [b*1, b+1, b+2] },
+    { d: 2, boss: b*2, triple: [b*2, 1, 3] },
+    { d: 3, boss: b*3, triple: [b*3, 1, 4] },
+  ];
+
+  const steps = [];
+
+  // Step 0: intro
+  steps.push(() => {
+    rdResetAll();
+    for (let j = 1; j <= RD_N; j++) {
+      if (j % b === 0) rdSetCell(j, 'boss');
+    }
+    ex.innerHTML = T(
+      `这是数字 1 到 ${RD_N}。带 ★ 的是 <strong>${b} 的倍数</strong>——我们叫它们"老大"。每个老大都会发布一条禁令。`,
+      `These are numbers 1 to ${RD_N}. The ones with ★ are <strong>multiples of ${b}</strong> — we call them "bosses". Each boss issues a rule.`
+    );
+    tags.innerHTML = '';
+  });
+
+  // For each boss: intro step + foul demo step
+  bosses.forEach((info, i) => {
+    const { d, boss, triple } = info;
+
+    // Intro: show the boss and its rule
+    steps.push(() => {
+      rdResetAll();
+      for (let prev = 0; prev <= i; prev++) rdSetCell(bosses[prev].boss, 'boss');
+      ex.innerHTML = T(
+        `<strong>★ ${boss}号老大登场！</strong>（${boss} = ${b} × ${d}）<br><br>` +
+        `${boss}号的禁令：<strong>"我，加上间距为 ${d} 的任意一对——我们三个不能全是同一颜色！"</strong><br><br>` +
+        `也就是说：只要 ${boss} 是红色，红色里就不能有间距为 ${d} 的一对——否则那一对加上 ${boss}，三个人全红，犯规。<br>` +
+        `为什么是 ${d}？因为 ${boss} ÷ ${b} = ${d}。<br><span style="color:var(--muted);font-size:13px">（不只是红色——换成任何颜色都一样！）</span>`,
+        `<strong>★ Boss #${boss} appears!</strong> (${boss} = ${b} × ${d})<br><br>` +
+        `Boss #${boss}'s rule: <strong>"Me plus any pair that's ${d} apart — all three can't be the same color!"</strong><br><br>` +
+        `In practice: if ${boss} is red, no two reds can be ${d} apart — because that pair + ${boss} = three reds = foul.<br>` +
+        `Why ${d}? Because ${boss} ÷ ${b} = ${d}.<br><span style="color:var(--muted);font-size:13px">(Same rule applies to every color, not just red!)</span>`
+      );
+      let tagHtml = '';
+      for (let ti = 0; ti <= i; ti++) {
+        const cls = ti === i ? ' active' : '';
+        tagHtml += `<span class="rule-tag${cls}">★ ${bosses[ti].boss} → ${T('禁间距','ban gap')} ${bosses[ti].d}</span>`;
+      }
+      tags.innerHTML = tagHtml;
+    });
+
+    // Foul: concrete violation
+    steps.push(() => {
+      rdResetAll();
+      const [a, p1, p2] = triple;
+      rdSetCell(a, 'colored-red foul-triple');
+      rdSetCell(p1, 'colored-red foul-triple');
+      rdSetCell(p2, 'colored-red foul-triple');
+      for (let j = 1; j <= RD_N; j++) {
+        if (j !== a && j !== p1 && j !== p2) rdSetCell(j, 'ghost dimmed');
+      }
+      const pairGap = Math.abs(p2 - p1);
+      ex.innerHTML = T(
+        `<strong>违规示范！</strong> 假设 ${a}、${p1}、${p2} <strong>三个都是</strong><span style="color:var(--c4);font-weight:700">红色</span>：<br><br>` +
+        `• ${a} 是老大（${b} 的倍数），管间距 ${d}<br>` +
+        `• ${p1} 和 ${p2} 也是红色，间距 = ${pairGap}<br>` +
+        `• 老大 ${a} + 间距 ${d} 的一对 (${p1}, ${p2}) = 三个同色 → <strong>犯规！</strong>`,
+        `<strong>Foul!</strong> Suppose ${a}, ${p1}, ${p2} are <strong>all three</strong> <span style="color:var(--c4);font-weight:700">red</span>:<br><br>` +
+        `• ${a} is the boss (multiple of ${b}), controlling gap ${d}<br>` +
+        `• ${p1} and ${p2} are also red, gap = ${pairGap}<br>` +
+        `• Boss ${a} + same-color pair (${p1}, ${p2}) at gap ${d} → <strong>foul!</strong>`
+      );
+      let tagHtml = '';
+      for (let ti = 0; ti <= i; ti++) {
+        tagHtml += `<span class="rule-tag active">★ ${bosses[ti].boss} → ${T('禁间距','ban gap')} ${bosses[ti].d}</span>`;
+      }
+      tags.innerHTML = tagHtml;
+    });
+  });
+
+  // Summary step
+  steps.push(() => {
+    rdResetAll();
+    for (let j = 1; j <= RD_N; j++) {
+      if (j % b === 0) rdSetCell(j, 'boss');
+    }
+    const bossCount = Math.floor(RD_N / b);
+    ex.innerHTML = T(
+      `<strong>看到规律了吗？</strong><br><br>` +
+      `光在 1 到 ${RD_N} 里，就有 <strong>${bossCount} 个老大</strong>（${b} 的倍数），每个管一种间距。<br><br>` +
+      `数字越多 → 老大越多 → 禁令越多 → 涂色越难。<br>` +
+      `到了某个临界点，不管怎么涂都会犯规——这就是整个游戏的核心！`,
+      `<strong>See the pattern?</strong><br><br>` +
+      `Just in 1 to ${RD_N}, there are <strong>${bossCount} bosses</strong> (multiples of ${b}), each controlling a different gap.<br><br>` +
+      `More numbers → more bosses → more rules → harder to color.<br>` +
+      `At some tipping point, every possible coloring must violate some rule — that's the heart of the game!`
+    );
+    let tagHtml = '';
+    for (let dd = 1; dd * b <= RD_N; dd++) {
+      tagHtml += `<span class="rule-tag">★ ${dd*b} → ${T('禁间距','ban gap')} ${dd}</span>`;
+    }
+    tags.innerHTML = tagHtml;
+  });
+
+  if (rdStep < steps.length) {
+    steps[rdStep](); rdStep++;
+    counter.textContent = T(`第 ${rdStep}/${steps.length} 步`, `Step ${rdStep}/${steps.length}`);
+  } else {
+    counter.textContent = T('演示完毕！点击"重置"可以重看。', 'Done! Click "Reset" to replay.');
+    const btn = document.getElementById('rule-next-btn');
+    if (btn) btn.disabled = true;
+  }
+}
+let _rdDebounce = false;
+const _stepRuleDemo = stepRuleDemo;
+stepRuleDemo = function() {
+  if (_rdDebounce) return;
+  _rdDebounce = true;
+  _stepRuleDemo();
+  setTimeout(() => { _rdDebounce = false; }, 350);
+};
+
+// ===== 1. FORBIDDEN LIST =====
+function showForbidden() {
+  const b = +document.getElementById('basics-b').value;
+  const n = Math.max(4, Math.min(60, +document.getElementById('basics-n').value));
+  const div = document.getElementById('forbidden-list');
+  const triples = allTriples(b, n);
+  const byD = {};
+  triples.forEach(t => { if (!byD[t[3]]) byD[t[3]] = []; byD[t[3]].push(t); });
+  const ds = Object.keys(byD).map(Number).sort((a,c)=>a-c).slice(0, 5);
+
+  const totalDistinct = triples.filter(t => t[0] !== t[1] && t[0] !== t[2]).length;
+  let html = `<p style="margin-top:8px">${T(
+    `共有 <strong>${totalDistinct}</strong> 个禁忌组。按间距 d 分组看看：`,
+    `Total: <strong>${totalDistinct}</strong> forbidden triples. Grouped by gap d:`
+  )}</p>`;
+  ds.forEach(d => {
+    const group = byD[d];
+    const distinct = group.filter(t => t[0] !== t[1] && t[0] !== t[2]);
+    html += `<div style="margin:8px 0"><strong>d = ${d}</strong> ${T(`(${b*d} = ${b}×${d} 是老大)`,`(${b*d} = ${b}×${d} is the boss)`)} → ${T(
+      `如果 ${b*d} 涂了某个颜色，该颜色内不能有间距 ${d} 的一对。有 ${distinct.length} 组：`,
+      `if ${b*d} is some color, that color can't have a pair with gap ${d}. ${distinct.length} triples:`
+    )}`;
+    html += distinct.slice(0, 6).map(t =>
+      `<span class="triple-box"><span style="font-weight:800">${t[0]}</span><span style="color:var(--muted)">,</span> ${t[1]}<span style="color:var(--muted)">,</span> ${t[2]}</span>`
+    ).join('');
+    if (distinct.length > 6) html += `<span style="color:var(--muted);font-size:13px"> ...(${distinct.length} ${T('组','triples')})</span>`;
+    html += `</div>`;
+  });
+  if (Object.keys(byD).length > 5) html += `<p style="color:var(--muted);font-size:13px">... ${T('还有 d =','and d =')} ${ds[ds.length-1]+1} ${T('到','to')} ${Math.max(...Object.keys(byD).map(Number))}</p>`;
+  div.innerHTML = html;
+}
+
+// ===== 2. COLORING GAME =====
+let gameColoring = {}, gameB, gameK, gameN;
+
+function resetGame() {
+  gameB = +document.getElementById('game-b').value;
+  gameK = +document.getElementById('game-k').value;
+  gameN = +document.getElementById('game-n').value;
+  gameColoring = {};
+  const legDiv = document.getElementById('game-legend');
+  legDiv.innerHTML = '';
+  for (let i = 0; i < gameK; i++)
+    legDiv.innerHTML += `<span style="background:${COLORS[i]}">${CN(i)}</span>`;
+  renderGameGrid();
+  document.getElementById('game-status').innerHTML = '';
+  document.getElementById('game-solutions').innerHTML = '';
+}
+
+function renderGameGrid() {
+  const grid = document.getElementById('game-grid');
+  grid.innerHTML = '';
+  for (let j = 1; j <= gameN; j++) {
+    const cell = document.createElement('div');
+    cell.className = 'cell' + (gameColoring[j] !== undefined ? ' color-' + gameColoring[j] : ' uncolored');
+    cell.textContent = j;
+    cell.dataset.j = j;
+    cell.onclick = () => { cycleColor(j); };
+    if (j % gameB === 0) cell.style.border = '2px solid rgba(0,0,0,.25)';
+    grid.appendChild(cell);
+  }
+}
+
+function cycleColor(j) {
+  if (gameColoring[j] === undefined) gameColoring[j] = 0;
+  else if (gameColoring[j] >= gameK - 1) delete gameColoring[j];
+  else gameColoring[j]++;
+  renderGameGrid();
+  checkGame();
+}
+
+function checkGame() {
+  const sols = findSolutions(gameColoring, gameB, gameN);
+  const statusDiv = document.getElementById('game-status');
+  const solDiv = document.getElementById('game-solutions');
+  const cnt = Object.keys(gameColoring).length;
+  if (sols.length > 0) {
+    statusDiv.innerHTML = `<div class="status bad">${T(
+      `犯规了！发现 ${sols.length} 个同色禁忌组：`,
+      `Foul! Found ${sols.length} monochromatic forbidden triple(s):`
+    )}</div>`;
+    solDiv.innerHTML = sols.slice(0, 4).map(s =>
+      `<div class="triple-box">
+        ${T('间距','gap')} d=${s[3]}:
+        <span class="tn" style="background:${COLORS[s[4]]}">${s[0]}</span>
+        <span class="tn" style="background:${COLORS[s[4]]}">${s[1]}</span>
+        <span class="tn" style="background:${COLORS[s[4]]}">${s[2]}</span>
+      </div>`
+    ).join('') + (sols.length > 4 ? `<span style="color:var(--muted);font-size:13px"> ...(${sols.length} ${T('组','triples')})</span>` : '');
+    sols.slice(0, 3).forEach(s => {
+      [s[0],s[1],s[2]].forEach(n => {
+        const c = document.querySelector(`#game-grid .cell[data-j="${n}"]`);
+        if(c){c.classList.remove('flash');void c.offsetWidth;c.classList.add('flash');}
+      });
+    });
+  } else if (cnt === gameN) {
+    statusDiv.innerHTML = `<div class="status ok">${T(
+      `太强了！${gameN} 个数全部涂完，零犯规！这说明临界点 R`,
+      `Amazing! All ${gameN} numbers colored, zero fouls! This proves the tipping point R`
+    )}<sub>${gameK}</sub>(${gameB}) > ${gameN}.</div>`;
+    solDiv.innerHTML = '';
+  } else {
+    statusDiv.innerHTML = `<div class="status info">${T(
+      `已涂 ${cnt}/${gameN}，暂时安全。继续！`,
+      `${cnt}/${gameN} colored, safe so far. Keep going!`
+    )}</div>`;
+    solDiv.innerHTML = '';
+  }
+}
+
+function autoColorValuation() {
+  gameColoring = {};
+  for (let j = 1; j <= gameN; j++) gameColoring[j] = Math.min(vb(j, gameB), gameK - 1);
+  renderGameGrid(); checkGame();
+}
+
+function setGameEasy() {
+  document.getElementById('game-n').value = Math.min(Math.pow(gameB, gameK) - 1, 150);
+  resetGame();
+}
+function setGameHard() {
+  document.getElementById('game-n').value = Math.min(Math.pow(gameB, gameK), 150);
+  resetGame();
+}
+
+// ===== 3. LOWER BOUND =====
+function updateLowerBound() {
+  const b = +document.getElementById('lb-b').value;
+  const k = +document.getElementById('lb-k').value;
+  const n = Math.pow(b, k) - 1;
+  if (n > 500) {
+    document.getElementById('lb-grid').innerHTML = `<p style="color:var(--muted)">${T('数字太多啦，换个小一点的参数吧。','Too many numbers — try smaller parameters.')}</p>`;
+    document.getElementById('lb-stats').innerHTML = '';
+    document.getElementById('lb-legend').innerHTML = '';
+    return;
+  }
+  document.getElementById('lb-stats').innerHTML = `
+    <div class="stat"><div class="val">${n}</div><div class="lbl">${T('数字个数','numbers')} (b<sup>k</sup>&minus;1)</div></div>
+    <div class="stat"><div class="val">${k}</div><div class="lbl">${T('颜色数','colors')}</div></div>
+    <div class="stat"><div class="val">${allTriples(b, n).length}</div><div class="lbl">${T('禁忌组数','forbidden triples')}</div></div>
+  `;
+  const grid = document.getElementById('lb-grid');
+  grid.innerHTML = '';
+  const cols = n <= 30 ? n : Math.ceil(Math.sqrt(n));
+  grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+  for (let j = 1; j <= n; j++) {
+    const v = vb(j, b);
+    const cell = document.createElement('div');
+    cell.className = 'cell color-' + v;
+    cell.textContent = j;
+    cell.title = T(
+      `${j} 能被 ${b} 整除 ${v} 次 → 颜色 ${v}`,
+      `${j} divisible by ${b} ${v} time(s) → color ${v}`
+    );
+    grid.appendChild(cell);
+  }
+  const legend = document.getElementById('lb-legend');
+  legend.innerHTML = '';
+  for (let i = 0; i < k; i++) {
+    const cnt = Array.from({length: n}, (_, j) => j + 1).filter(x => vb(x, b) === i).length;
+    legend.innerHTML += `<span style="background:${COLORS[i]}">${T(`能除 ${i} 次`,`÷${b} ${i} times`)} (${cnt})</span>`;
+  }
+}
+
+let lbTimer = null;
+function stopLBVerify() { clearInterval(lbTimer); }
+function verifyLowerBound() {
+  stopLBVerify();
+  const b = +document.getElementById('lb-b').value;
+  const k = +document.getElementById('lb-k').value;
+  const n = Math.pow(b, k) - 1;
+  if (n > 500) return;
+  const coloring = {};
+  for (let j = 1; j <= n; j++) coloring[j] = vb(j, b);
+  const triples = allTriples(b, n);
+  const div = document.getElementById('lb-verify-result');
+  let idx = 0;
+  const batch = Math.max(1, Math.floor(triples.length / 50));
+  lbTimer = setInterval(() => {
+    const end = Math.min(idx + batch, triples.length);
+    for (; idx < end; idx++) {
+      const [x, y, z] = triples[idx];
+      if (coloring[x] === coloring[y] && coloring[y] === coloring[z]) {
+        div.innerHTML = `<div class="status bad">${T(
+          `第 ${idx+1} 组 (${x},${y},${z}) 犯规了！`,
+          `Triple #${idx+1} (${x},${y},${z}) is a foul!`
+        )}</div>`;
+        clearInterval(lbTimer); return;
+      }
+    }
+    const pct = Math.round(idx / triples.length * 100);
+    div.innerHTML = `<div class="status info">${T(
+      `已检查 ${idx}/${triples.length} (${pct}%)...`,
+      `Checked ${idx}/${triples.length} (${pct}%)...`
+    )}</div>`;
+    if (idx >= triples.length) {
+      div.innerHTML = `<div class="status ok">${T(
+        `全部 ${triples.length} 个禁忌组检查完毕——零犯规！"能除几次"染色法完美通过。`,
+        `All ${triples.length} triples checked — zero fouls! The "count divisions" strategy passes perfectly.`
+      )}</div>`;
+      clearInterval(lbTimer);
+    }
+  }, 60);
+}
+
+// ===== 4. COLOR COMPRESSION =====
+let ccStep = 0, ccColors = {};
+
+function resetCompression() {
+  ccStep = 0; ccColors = {};
+  const b = +document.getElementById('cc-b').value;
+  const n = b * b;
+  const line = document.getElementById('cc-line');
+  line.innerHTML = '';
+  for (let j = 1; j <= n; j++) {
+    const cell = document.createElement('div');
+    cell.className = 'nl-cell ghost';
+    cell.textContent = j;
+    cell.dataset.j = j;
+    if (j % b === 0) cell.style.border = '2px solid #475569';
+    line.appendChild(cell);
+  }
+  document.getElementById('cc-explain').innerHTML = T(
+    '点击"下一步"，看多米诺骨牌怎么倒。',
+    'Click "Next Step" to watch the dominoes fall.'
+  );
+  document.getElementById('cc-step-count').textContent = '';
+}
+
+function setCCColor(j, c) {
+  ccColors[j] = c;
+  const cell = document.querySelector(`#cc-line .nl-cell[data-j="${j}"]`);
+  if (cell) { cell.style.background = COLORS[c]; cell.style.color = '#fff'; cell.className = 'nl-cell'; }
+}
+
+function hlCC(nums) {
+  document.querySelectorAll('#cc-line .nl-cell').forEach(c => c.classList.remove('highlighted'));
+  if (nums) nums.forEach(n => {
+    const c = document.querySelector(`#cc-line .nl-cell[data-j="${n}"]`);
+    if (c) c.classList.add('highlighted');
+  });
+}
+
+function stepCompression() {
+  const b = +document.getElementById('cc-b').value;
+  const explain = document.getElementById('cc-explain');
+  const counter = document.getElementById('cc-step-count');
+  const steps = [
+    () => {
+      setCCColor(b, 0);
+      hlCC([b]);
+      explain.innerHTML = T(
+        `<strong>第一块骨牌</strong>：假设 ${b}（第一个 b 的倍数）涂了<span style="color:${COLORS[0]};font-weight:700">绿色</span>。`,
+        `<strong>First domino</strong>: suppose ${b} (the first multiple of b) is colored <span style="color:${COLORS[0]};font-weight:700">green</span>.`
+      );
+    },
+    () => {
+      setCCColor(2 * b, 1);
+      hlCC([b, 2 * b]);
+      explain.innerHTML = T(
+        `<strong>假设反面</strong>：假设 ${2*b}（第二个倍数）涂了<span style="color:${COLORS[1]};font-weight:700">蓝色</span>，和 ${b} 不同。我们来看看会发生什么...`,
+        `<strong>Try the opposite</strong>: suppose ${2*b} (the second multiple) is <span style="color:${COLORS[1]};font-weight:700">blue</span>, different from ${b}. Let's see what happens...`
+      );
+    },
+    () => {
+      hlCC([b]);
+      explain.innerHTML = T(
+        `<strong>禁令生效</strong>：${b} = ${b}&times;1 是绿色，所以<strong>绿色数字之间不能有间距 1 的一对</strong>。`,
+        `<strong>Restriction activates</strong>: ${b} = ${b}&times;1 is green, so <strong>no two green numbers can have a gap of 1</strong>.`
+      );
+    },
+    () => {
+      setCCColor(b + 1, 1);
+      hlCC([b, b + 1]);
+      explain.innerHTML = T(
+        `所以 ${b+1}（和 ${b} 只差 1）不能是绿色。只有两种颜色，它只能是<span style="color:${COLORS[1]};font-weight:700">蓝色</span>。`,
+        `So ${b+1} (gap of 1 from ${b}) can't be green. With only two colors, it must be <span style="color:${COLORS[1]};font-weight:700">blue</span>.`
+      );
+    },
+    () => {
+      setCCColor(b - 1, 1);
+      hlCC([b - 1, b]);
+      explain.innerHTML = T(
+        `同理 ${b-1} 也不能是绿色（和 ${b} 的间距也是 1），所以 ${b-1} 只能是<span style="color:${COLORS[1]};font-weight:700">蓝色</span>。`,
+        `Similarly, ${b-1} can't be green (gap of 1 from ${b}), so it must be <span style="color:${COLORS[1]};font-weight:700">blue</span>.`
+      );
+    },
+    () => {
+      hlCC([b - 1, b + 1, 2 * b]);
+      explain.innerHTML = T(
+        `<strong>矛盾来了！</strong> ${b-1} 和 ${b+1} 都是蓝色，间距 = 2。<br>但 ${2*b} = ${b}&times;2 也是蓝色，这要求蓝色内不能有间距 2 的一对。<br>${b-1} 和 ${b+1} 间距恰好是 2——<strong>犯规！</strong>`,
+        `<strong>Contradiction!</strong> ${b-1} and ${b+1} are both blue, with gap = 2.<br>But ${2*b} = ${b}&times;2 is also blue, which means no two blue numbers can have gap 2.<br>${b-1} and ${b+1} have gap exactly 2 — <strong>foul!</strong>`
+      );
+    },
+    () => {
+      for (let j = 1; j <= b - 1; j++) setCCColor(j * b, 0);
+      hlCC(Array.from({length: b-1}, (_, i) => (i+1)*b));
+      explain.innerHTML = T(
+        `<strong>多米诺倒下</strong>：假设"第二个倍数不同色"导致矛盾。<br>所以所有倍数 ${b}, ${2*b}, ..., ${(b-1)*b} <strong>必须同色</strong>！<br><br>一旦倍数全是同一个颜色，加入 ${b*b} 后不管怎么涂都会犯规。<br>所以 <strong>R<sub>2</sub>(${b}) = ${b*b}</strong>。`,
+        `<strong>Dominoes fall!</strong> Assuming "the second multiple is a different color" leads to contradiction.<br>So all multiples ${b}, ${2*b}, ..., ${(b-1)*b} <strong>must share the same color</strong>!<br><br>Once all multiples share one color, adding ${b*b} creates an unavoidable foul.<br>Therefore <strong>R<sub>2</sub>(${b}) = ${b*b}</strong>.`
+      );
+    },
+  ];
+  if (ccStep < steps.length) {
+    steps[ccStep](); ccStep++;
+    counter.textContent = T(`第 ${ccStep}/${steps.length} 步`, `Step ${ccStep}/${steps.length}`);
+  } else {
+    counter.textContent = T('演示完毕！点击"重置"可以重看。', 'Done! Click "Reset" to replay.');
+  }
+}
+
+// ===== 5. DISTANCE PAIR =====
+function updateDistancePair() {
+  const b = +document.getElementById('dp-b').value;
+  const k = +document.getElementById('dp-k').value;
+  const n = Math.pow(b, k) - 1;
+  if (n > 200) {
+    document.getElementById('dp-grid').innerHTML = `<p style="color:var(--muted)">${T('数字太多，换小一点的参数吧。','Too many numbers — try smaller parameters.')}</p>`;
+    return;
+  }
+  const grid = document.getElementById('dp-grid');
+  grid.innerHTML = '';
+  const cols = Math.min(n, Math.pow(b, k - 1));
+  grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+  for (let j = 1; j <= n; j++) {
+    const v = Math.min(vb(j, b), k - 1);
+    const cell = document.createElement('div');
+    cell.className = 'cell color-' + v;
+    cell.textContent = j;
+    cell.dataset.j = j;
+    grid.appendChild(cell);
+  }
+  const legend = document.getElementById('dp-legend');
+  legend.innerHTML = '';
+  for (let i = 0; i < k; i++) legend.innerHTML += `<span style="background:${COLORS[i]}">${CN(i)}</span>`;
+  document.getElementById('dp-explain').style.display = 'none';
+}
+
+function animateDistancePair() {
+  clearInterval(window._dpT);
+  updateDistancePair();
+  const b = +document.getElementById('dp-b').value;
+  const k = +document.getElementById('dp-k').value;
+  const n = Math.pow(b, k) - 1;
+  const bk1 = Math.pow(b, k - 1);
+  const bk = Math.pow(b, k);
+  const ex = document.getElementById('dp-explain');
+  ex.style.display = 'block';
+
+  const coloring = {};
+  for (let j = 1; j <= n; j++) coloring[j] = Math.min(vb(j, b), k - 1);
+
+  const pairs = [];
+  for (let c = 0; c < k; c++) {
+    for (let j = 1; j <= bk1; j++) {
+      if (coloring[j] === c && coloring[j + bk1] === c) {
+        pairs.push({c, j1: j, j2: j + bk1}); break;
+      }
+    }
+  }
+
+  function hl(nums) {
+    document.querySelectorAll('#dp-grid .cell').forEach(c => {
+      c.style.opacity = nums.length > 0 && !nums.includes(+c.dataset.j) ? '.25' : '1';
+      c.style.boxShadow = nums.includes(+c.dataset.j) ? '0 0 0 3px #1e293b' : 'none';
+    });
+  }
+
+  const steps = [
+    () => {
+      ex.innerHTML = T(
+        `<strong>先看每种颜色</strong>：在 {1, ..., ${n}} 里，每种颜色有没有一对间距恰好 = ${bk1} 的数字？`,
+        `<strong>Check each color</strong>: in {1, ..., ${n}}, does each color contain a pair with gap exactly = ${bk1}?`
+      );
+      hl([]);
+    },
+    ...pairs.map(p => () => {
+      ex.innerHTML = T(
+        `<strong>${CN(p.c)}</strong>里找到了"炸弹"：<strong>${p.j1}</strong> 和 <strong>${p.j2}</strong>，间距 = ${p.j2 - p.j1} = ${bk1}`,
+        `Found a "bomb" in <strong>${CN(p.c)}</strong>: <strong>${p.j1}</strong> and <strong>${p.j2}</strong>, gap = ${p.j2 - p.j1} = ${bk1}`
+      );
+      hl([p.j1, p.j2]);
+    }),
+    () => {
+      const grid = document.getElementById('dp-grid');
+      const cell = document.createElement('div');
+      cell.className = 'cell color-0';
+      cell.textContent = bk;
+      cell.dataset.j = bk;
+      cell.style.boxShadow = '0 0 0 3px #000';
+      cell.style.animation = 'flash .6s ease';
+      grid.appendChild(cell);
+      const p = pairs[0];
+      ex.innerHTML = T(
+        `<strong>新数字 ${bk} 来了！</strong> 假设涂成${CN(0)}。<br>` +
+        `但${CN(0)}里已经有 (${p.j1}, ${p.j2}) 这对"炸弹"。<br>` +
+        `三个数 ${bk}, ${p.j1}, ${p.j2} 构成禁忌组。<br>` +
+        `<strong>换任何颜色都一样——每种颜色都有炸弹。${bk} 无处可去！</strong><br>` +
+        `所以临界点 R<sub>${k}</sub>(${b}) &le; ${bk}，加上下界 &ge; ${bk}，得到 <strong>R<sub>${k}</sub>(${b}) = ${bk}</strong>。`,
+        `<strong>New number ${bk} arrives!</strong> Suppose we color it ${CN(0)}.<br>` +
+        `But ${CN(0)} already has the "bomb" pair (${p.j1}, ${p.j2}).<br>` +
+        `These three form a forbidden triple.<br>` +
+        `<strong>Every color has a bomb — ${bk} has nowhere to go!</strong><br>` +
+        `So R<sub>${k}</sub>(${b}) &le; ${bk}, combined with &ge; ${bk}, gives <strong>R<sub>${k}</sub>(${b}) = ${bk}</strong>.`
+      );
+      hl([p.j1, p.j2, bk]);
+    },
+  ];
+
+  let si = 0;
+  clearInterval(window._dpT);
+  steps[si](); si++;
+  window._dpT = setInterval(() => {
+    if (si < steps.length) { steps[si](); si++; }
+    else clearInterval(window._dpT);
+  }, 2200);
+}
+
+// ===== 6. WITNESS =====
+const WITNESS = [
+  0,0,2,0,0,2,0,3,1,1,1,2,3,4,2,3,4,1,4,4,2,4,4,2,4,4,3,
+  4,4,2,4,3,2,1,3,1,3,3,2,3,1,2,3,0,1,0,0,2,0,1,2,0,3,0,
+  0,3,2,0,3,2,3,4,0,4,4,2,1,4,2,4,4,4,4,4,2,4,4,2,4,3,4,
+  4,3,2,3,0,2,3,0,4,3,0,2,1,0,2,0,0,3,0,3,2,1,3,2,3,1,0,
+  3,4,2,3,4,2,4,4,3,4,4,2,4,4,2,4,3,1,4,3,2,1,3,2,3,1,1,
+  3,0,2,0,0,2,0,1,1,0,3,2,0,3,2,0,3,1,3,4,2,3,4,2,1,4,1,
+  4,4,2,4,4,2,4,1,3,4,3,2,4,3,2,3,0,0,3,0,2,3,0,2,1,0,0,
+  0,0,2,0,3,2,1,3,4,3,1,2,3,4,2,3,4,4,4,4,2,4,4,2,4,4,4,
+  4,4,2,1,3,2,4,3,1,4,1,2,3,0,2,0,0,0,0,0,2,0,3,2,0,3,3
+];
+
+function renderWitness() {
+  const grid = document.getElementById('witness-grid');
+  grid.innerHTML = '';
+  for (let j = 0; j < 243; j++) {
+    const cell = document.createElement('div');
+    cell.className = 'cell color-' + WITNESS[j];
+    cell.textContent = j + 1;
+    cell.dataset.j = j + 1;
+    cell.title = T(
+      `第 ${j+1} 个数 → ${CNAMES_ZH[WITNESS[j]]}`,
+      `Number ${j+1} → ${CNAMES_EN[WITNESS[j]]}`
+    );
+    grid.appendChild(cell);
+  }
+}
+
+let wTimer = null;
+function stopWitnessVerify() { clearInterval(wTimer); }
+
+function verifyWitness() {
+  stopWitnessVerify();
+  const coloring = {};
+  for (let j = 1; j <= 243; j++) coloring[j] = WITNESS[j - 1];
+  const triples = allTriples(3, 243);
+  const statusDiv = document.getElementById('witness-status');
+  const pbar = document.getElementById('witness-progress-bar');
+  const pfill = document.getElementById('witness-progress');
+  pbar.style.display = 'block';
+  let idx = 0;
+  const batch = Math.max(1, Math.floor(triples.length / 80));
+
+  wTimer = setInterval(() => {
+    const end = Math.min(idx + batch, triples.length);
+    for (; idx < end; idx++) {
+      const [x, y, z] = triples[idx];
+      if (coloring[x] === coloring[y] && coloring[y] === coloring[z]) {
+        statusDiv.innerHTML = `<div class="status bad">${T(
+          `第 ${idx+1} 组 (${x},${y},${z}) 犯规了！`,
+          `Triple #${idx+1} (${x},${y},${z}) is a foul!`
+        )}</div>`;
+        pbar.style.display = 'none';
+        clearInterval(wTimer); return;
+      }
+    }
+    pfill.style.width = Math.round(idx / triples.length * 100) + '%';
+    statusDiv.innerHTML = `<div class="status info">${T(
+      `已检查 ${idx.toLocaleString()} / ${triples.length.toLocaleString()}...`,
+      `Checked ${idx.toLocaleString()} / ${triples.length.toLocaleString()}...`
+    )}</div>`;
+    if (idx >= triples.length) {
+      statusDiv.innerHTML = `<div class="status ok">${T(
+        `全部 ${triples.length.toLocaleString()} 个禁忌组检查完毕——<strong>零犯规！</strong><br>243 个数成功用 5 种颜色涂完。这证明了临界点 R<sub>5</sub>(3) > 243 = 3<sup>5</sup>，公式 b<sup>k</sup> 在这里<strong>失效了</strong>！`,
+        `All ${triples.length.toLocaleString()} triples checked — <strong>zero fouls!</strong><br>243 numbers successfully colored with 5 colors. This proves R<sub>5</sub>(3) > 243 = 3<sup>5</sup> — the formula b<sup>k</sup> <strong>breaks here</strong>!`
+      )}</div>`;
+      pbar.style.display = 'none';
+      clearInterval(wTimer);
+    }
+  }, 50);
+}
+
+function compareValuation() {
+  const coloring = {};
+  for (let j = 1; j <= 243; j++) coloring[j] = vb(j, 3) % 5;
+  const sols = findSolutions(coloring, 3, 243);
+  const div = document.getElementById('compare-status');
+  if (sols.length > 0) {
+    const s = sols[0];
+    div.innerHTML = `<div class="status bad">${T(
+      `<strong>老方法失败了！</strong><br>用"能被 3 除几次 (mod 5)"来涂 243 个数，发现了 <strong>${sols.length}</strong> 个犯规！<br>比如：(${s[0]}, ${s[1]}, ${s[2]}) 全是颜色 ${s[4]}（${CNAMES_ZH[s[4]]}）。<br>这就是为什么需要 SAT 求解器找更聪明的方案。`,
+      `<strong>The old method fails!</strong><br>Coloring 243 numbers by "divisions by 3 (mod 5)" produces <strong>${sols.length}</strong> foul(s)!<br>For example: (${s[0]}, ${s[1]}, ${s[2]}) are all color ${s[4]} (${CNAMES_EN[s[4]]}).<br>That's why we need a SAT solver to find a smarter scheme.`
+    )}</div>`;
+  }
+}
+
+// ===== 7. HEATMAP =====
+function renderConjecture() {
+  const known = {
+    '2,1':2,'2,2':4,'2,3':14,'2,4':56,
+    '3,1':3,'3,2':9,'3,3':27,'3,4':81,
+    '4,1':4,'4,2':16,'4,3':64,'4,4':256,
+    '5,1':5,'5,2':25,'5,3':125,'5,4':625,
+    '6,1':6,'6,2':36,'6,3':216,
+    '7,1':7,'7,2':49,'7,3':343,
+    '8,1':8,'8,2':64,'8,3':512,
+    '9,1':9,'9,2':81,'9,3':729,
+    '10,1':10,'10,2':100,'10,3':1000,
+  };
+  const broken = {'2,3':true,'2,4':true,'3,5':true};
+  const grid = document.getElementById('conj-heatmap');
+  grid.innerHTML = '';
+  const maxK = 10, minB = 2, maxB = 8;
+
+  grid.appendChild(mk('b \\ k', 'header'));
+  for (let k = 1; k <= maxK; k++) grid.appendChild(mk('k='+k, 'header'));
+
+  for (let b = minB; b <= maxB; b++) {
+    const thr = 2 * (b - 1);
+    grid.appendChild(mk('b='+b, 'header'));
+    for (let k = 1; k <= maxK; k++) {
+      const key = b+','+k;
+      const bk = Math.pow(b, k);
+      const isBdy = k === thr || k === thr + 1;
+      let cls, text;
+      if (known[key] !== undefined) {
+        cls = known[key] === bk ? 'confirmed' : 'broken';
+        text = known[key] === bk ? bk : known[key];
+      } else if (broken[key]) {
+        cls = 'broken'; text = '>'+bk;
+      } else if (k <= thr) {
+        cls = 'predicted-ok'; text = bk > 9999 ? b+'^'+k : bk;
+      } else {
+        cls = 'predicted-break'; text = '>'+b+'^'+k;
+      }
+      const cell = mk(text, cls + (isBdy ? ' boundary' : ''));
+      cell.title = T(
+        `b=${b}, k=${k}\n分界线预测: k=${thr}\nb^k = ${bk}`,
+        `b=${b}, k=${k}\nBoundary prediction: k=${thr}\nb^k = ${bk}`
+      );
+      grid.appendChild(cell);
+    }
+  }
+}
+
+function mk(text, cls) {
+  const d = document.createElement('div');
+  d.className = 'hcell ' + cls;
+  d.innerHTML = text;
+  return d;
+}
+
+// ===== NAV =====
+window.addEventListener('scroll', () => {
+  const secs = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('nav a');
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+  links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+});
+
+// ===== INIT =====
+resetRuleDemo();
+showForbidden();
+resetGame();
+updateLowerBound();
+resetCompression();
+updateDistancePair();
+renderWitness();
+renderConjecture();
+</script>
+</body>
+</html>
