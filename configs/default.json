@@ -1,0 +1,36 @@
+{
+  "project": "rado-numbers-sat",
+  "version": "0.1.0",
+  "description": "4-color Rado number computation via SAT encoding",
+
+  "equations": {
+    "family_1": {
+      "name": "E(3,0;a,b,b): ax + by = bz",
+      "description": "Three-variable homogeneous, coefficients (a,b,b)"
+    },
+    "family_2": {
+      "name": "E(3,0;a,a,b): a(x+y) = bz",
+      "description": "Three-variable homogeneous, coefficients (a,a,b)"
+    }
+  },
+
+  "solver": {
+    "backend": "cadical153",
+    "incremental": true,
+    "timeout_s": 72000,
+    "symmetry_breaking": true
+  },
+
+  "sweep": {
+    "colors": 4,
+    "a_range": [1, 15],
+    "b_range": [1, 15],
+    "max_n": 100000
+  },
+
+  "paths": {
+    "results_dir": "data/results",
+    "known_dir": "data/known_values",
+    "logs_dir": "logs"
+  }
+}

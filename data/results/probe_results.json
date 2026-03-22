@@ -1,0 +1,22 @@
+{
+  "_note": "First probe results, 2026-03-09",
+  "_solver": "CaDiCaL 1.5.3 via PySAT, incremental, i7-12700K",
+  "results": [
+    {"equation": "x+y=z", "a": 1, "b": 1, "c": 1, "k": 4, "R": 45, "time_s": 13.55, "note": "Known: Schur S(4)"},
+    {"equation": "2x+y=z", "a": 2, "b": 1, "c": 1, "k": 4, "R": 171, "time_s": 116.86, "note": "NEW"},
+    {"equation": "x+2y=2z", "a": 1, "b": 2, "c": 2, "k": 4, "R": 56, "time_s": 0.12, "note": "NEW"},
+    {"equation": "x+3y=3z", "a": 1, "b": 3, "c": 3, "k": 4, "R": 81, "time_s": 3.17, "note": "NEW"},
+    {"equation": "x+4y=4z", "a": 1, "b": 4, "c": 4, "k": 4, "R": 256, "time_s": 31.65, "note": "NEW"},
+    {"equation": "x+5y=5z", "a": 1, "b": 5, "c": 5, "k": 4, "R": 625, "time_s": 523.44, "note": "NEW"},
+    {"equation": "2x+3y=3z", "a": 2, "b": 3, "c": 3, "k": 4, "R": 103, "time_s": 14.96, "note": "NEW"},
+    {"equation": "x+y=2z", "a": 1, "b": 1, "c": 2, "k": 4, "R": 1, "time_s": 0.00, "note": "Trivial"},
+    {"equation": "x+y=3z", "a": 1, "b": 1, "c": 3, "k": 4, "R": null, "time_s": null, "note": "Not yet computed"}
+  ],
+  "timeouts_or_too_large": [
+    {"equation": "3x+y=z", "a": 3, "b": 1, "c": 1, "k": 4, "note": "timeout at 120s, n>5000"},
+    {"equation": "3x+2y=2z", "a": 3, "b": 2, "c": 2, "k": 4, "note": "timeout at 300s"},
+    {"equation": "2x+2y=z", "a": 2, "b": 2, "c": 1, "k": 4, "note": "max_n=10000 reached"},
+    {"equation": "3x+3y=z", "a": 3, "b": 3, "c": 1, "k": 4, "note": "max_n=10000 reached"}
+  ],
+  "pattern_observed": "R4(x+by=bz): b=2->56, b=3->81=3^4, b=4->256=4^4, b=5->625=5^4. Conjecture: R4(x+by=bz) = b^4 for b>=3?"
+}
