@@ -245,7 +245,7 @@ theorem hasMonoSolution_mono
   colors the Rado number N_k satisfies N_k ≤ N_{k+1}.
 
   In particular, the Rado threshold values form a non-decreasing sequence
-  R_1(eq) ≤ R_2(eq) ≤ R_3(eq) ≤ ... whenever they exist.
+  R_1(eq) ≤ R_2(eq) ≤ R_3(eq) ≤... whenever they exist.
 -/
 theorem isRadoNumber_le_succ_colors
     (eq : LinearEquation) (k N_k N_kk : ℕ)
@@ -407,7 +407,7 @@ theorem bAdicEquation_self_loop_chi_diff
       -- Cast to ℤ: (b·m : ℤ) + (b : ℤ)·((b-1)·m : ℤ) - (b : ℤ)·(b·m : ℤ) = 0.
       -- (b·m : ℤ) = b·m, (b-1)·m : ℕ = (b - 1)·m where b - 1 ≥ 1.
       -- LHS = (b : ℤ)·m + (b : ℤ)·(((b : ℤ) - 1)·m) - (b : ℤ)·((b : ℤ)·m)
-      --     = (b : ℤ)·m·(1 + (b - 1) - b) = (b : ℤ)·m·0 = 0. ✓
+      -- = (b : ℤ)·m·(1 + (b - 1) - b) = (b : ℤ)·m·0 = 0. ✓
       have hb1 : ((b - 1 : ℕ) : ℤ) = (b : ℤ) - 1 := by
         push_cast
         have : 1 ≤ b := by omega
@@ -535,7 +535,7 @@ theorem multiples_subcoloring_bundled
 
   By iterating `multiples_subcoloring_mono_free`, mono-free chi at level n
   for bAdicEquation b yields mono-free sub-colorings at all scales
-  n/b, n/b², n/b³, ...
+  n/b, n/b², n/b³,...
 
   This is the FOUNDATIONAL recursion underlying the cascade machinery.
 -/
@@ -727,7 +727,7 @@ theorem bAdicEquation_self_loop_xy_chi_diff
       | 1, _ => show 0 < b * m; exact hbm_pos
       | 2, _ => show 0 < (b + 1) * m; exact hbp1m_pos
     · -- eval = 0: b·m + b·(b·m) - b·((b+1)·m) = b·m + b²·m - b·(b+1)·m
-      --                                       = b·m·(1 + b - (b+1)) = b·m·0 = 0. ✓
+      -- = b·m·(1 + b - (b+1)) = b·m·0 = 0. ✓
       rw [eval_bAdicEquation]
       simp
       push_cast
@@ -1853,9 +1853,9 @@ theorem mono_free_3_coloring_chi_1_zero_sub_cases
     (hχk : IsKColoring n 3 χ)
     (hχ1 : χ 1 = 0)
     (hNoMono : ¬ HasMonoSolution (bAdicEquation 3) n χ) :
-    (χ 2 = 0 ∧ χ 3 ≠ 0) ∨                  -- sub-case A: chi(2) = 0
-    (χ 2 ≠ 0 ∧ χ 3 = 0) ∨                  -- sub-case B1: chi(3) = 0
-    (χ 2 ≠ 0 ∧ χ 3 ≠ 0 ∧ χ 2 ≠ χ 3) := by  -- sub-case B2: both non-zero, distinct
+    (χ 2 = 0 ∧ χ 3 ≠ 0) ∨ -- sub-case A: chi(2) = 0
+    (χ 2 ≠ 0 ∧ χ 3 = 0) ∨ -- sub-case B1: chi(3) = 0
+    (χ 2 ≠ 0 ∧ χ 3 ≠ 0 ∧ χ 2 ≠ χ 3) := by -- sub-case B2: both non-zero, distinct
   -- chi(2) ≠ chi(3) from self-loop.
   have h23 : χ 2 ≠ χ 3 := bAdicEquation_3_base_chi_constraint χ hNoMono hn
   -- chi(2), chi(3) < 3 from k-coloring.
@@ -2039,7 +2039,7 @@ theorem bAdicEquation_3_chi_18_ne_zero_when_chi_1_7_eq_zero
   specialize. Any second "zero-color" point y forces the multiple
   3·(y-1) to be non-zero.
 
-  Use case: ANY hypothesis like "χ(y) = 0 for y = 5, 6, ..., 9" yields
+  Use case: ANY hypothesis like "χ(y) = 0 for y = 5, 6,..., 9" yields
   "χ(12), χ(15), χ(18), χ(21), χ(24) all ≠ 0", which is significant
   progress toward CompressionHyp 3 3 omits-color-0 case.
 
@@ -3419,8 +3419,8 @@ theorem bAdicEquation_3_sub4_caseB_contradiction
     (h10_eq_12 : χ 10 = χ 12) (h15_eq_6 : χ 15 = χ 6) :
     False := by
   -- chi(24) ∈ {chi(6), chi(12)} (from sub-case 4 constraints):
-  --   chi(24) ≠ chi(18) = chi(9) (self-loop xy m=6).
-  --   chi(24) < 3.
+  -- chi(24) ≠ chi(18) = chi(9) (self-loop xy m=6).
+  -- chi(24) < 3.
   have h18_ne_24 := bAdicEquation_3_chi_18_ne_chi_24 χ h24 hNoMono
   have h24_ne_9 : χ 24 ≠ χ 9 := by intro h; apply h18_ne_24; rw [h18_eq_9, ← h]
   have hχ24 : χ 24 < 3 := hχk 24 (by omega) (by omega)
@@ -3444,7 +3444,7 @@ theorem bAdicEquation_3_sub4_caseB_contradiction
 
   In Case A, chi(17) ≠ chi(12) (from (15, 12, 17) Rado triple). So chi(17)
   splits into two sub-sub-cases:
-    A-I:  chi(17) = chi(6)
+    A-I: chi(17) = chi(6)
     A-II: chi(17) = chi(9)
 
   Each sub-sub-case combines with chi(24) ∈ {chi(6), chi(12)} (4a/4b) to
@@ -5873,7 +5873,7 @@ theorem bAdicEquation_3_branch_II_V_contradiction
   Surprisingly SHORT closure compared to II-V:
   - chi(15) = chi(6): chi(17) ∈ {chi(6), chi(18)} (chi(17) ≠ chi(24)). Both sub-cases mono.
     - chi(17) = chi(18): (18, 11, 17) mono with chi(11) = chi(18).
-    - chi(17) = chi(6):  (15, 12, 17) mono with chi(15) = chi(12) = chi(17) = chi(6).
+    - chi(17) = chi(6): (15, 12, 17) mono with chi(15) = chi(12) = chi(17) = chi(6).
   - chi(15) = chi(18): chi(11) = chi(6) forced; chi(13) = chi(18) forced; (15, 13, 18) mono.
 -/
 
@@ -7445,14 +7445,14 @@ theorem bAdicEquation_3_chi_15_eq_chi_6_when_chi_9_eq_chi_18
   equal to the third color.
 
   Cascade chain:
-    χ(14) = χ(9)      via self-loop χ(14) ≠ χ(21) + bundle χ(14) ≠ χ(6).
-    χ(20) = χ(21)     via (18, 14, 20) Rado: forces χ(20) ≠ χ(9).
-    χ(17) = χ(21)     via (9, 14, 17) + §73 χ(17) ≠ χ(6) (from χ(15) = χ(6)).
-    χ(10) = χ(9)      via (21, 10, 17) Rado: forces χ(10) ≠ χ(21).
-    χ(13) = χ(6)      via (9, 10, 13) + (21, 13, 20) Rado.
-    χ(3) = χ(9)       via (3, 12, 13) + (3, 20, 21) Rado.
-    χ(8) = χ(21)      via (3, 8, 9) Rado: forces χ(8) ≠ χ(9); bundle χ(8) ≠ χ(6).
-    χ(27) = χ(21)     via self-loop χ(27) ≠ χ(18) + (27, 6, 15): χ(27) ≠ χ(6).
+    χ(14) = χ(9) via self-loop χ(14) ≠ χ(21) + bundle χ(14) ≠ χ(6).
+    χ(20) = χ(21) via (18, 14, 20) Rado: forces χ(20) ≠ χ(9).
+    χ(17) = χ(21) via (9, 14, 17) + §73 χ(17) ≠ χ(6) (from χ(15) = χ(6)).
+    χ(10) = χ(9) via (21, 10, 17) Rado: forces χ(10) ≠ χ(21).
+    χ(13) = χ(6) via (9, 10, 13) + (21, 13, 20) Rado.
+    χ(3) = χ(9) via (3, 12, 13) + (3, 20, 21) Rado.
+    χ(8) = χ(21) via (3, 8, 9) Rado: forces χ(8) ≠ χ(9); bundle χ(8) ≠ χ(6).
+    χ(27) = χ(21) via self-loop χ(27) ≠ χ(18) + (27, 6, 15): χ(27) ≠ χ(6).
     MONO (27, 8, 17) : χ(27) = χ(8) = χ(17) = χ(21).
 
   Requires n ≥ 27 for χ(27) infrastructure.
@@ -7635,8 +7635,8 @@ theorem bAdicEquation_3_chi_21_eq_chi_6_when_chi_9_eq_chi_18
 
 /-! ### §81. MAJOR Branch I-V structural result: χ(3) = χ(6) FORCED at n ≥ 27.
 
-  Closes 3rd of 3 Branch I-V multiples-of-3 sub-obligations (R238 closed χ(15)=A,
-  R239 closed χ(21)=A, this round closes χ(3)=A). After this round, Branch I-V
+  Closes 3rd of 3 Branch I-V multiples-of-3 sub-obligations ( closed χ(15)=A,
+   closed χ(21)=A, this round closes χ(3)=A). After this round, Branch I-V
   fully discharges `CompressionHyp 3 3`'s requirement that multiples-of-3 ⊆
   {χ(6), χ(9)}.
 
@@ -7881,7 +7881,7 @@ theorem bAdicEquation_3_chi_3_eq_chi_6_when_chi_9_eq_chi_18
 /-! ### §82. **HEADLINE**: Branch I-W closure — χ(9) = χ(18) FORCED at n ≥ 27.
 
   The LAST obligation for kernel-pure `CompressionHyp 3 3`. Together with
-  R238-R240's Branch I-V completion, this discharges `lem_compress3_b3`.
+  -'s Branch I-V completion, this discharges `lem_compress3_b3`.
 
   **Strategy**: by_contra. Trichotomy on χ(15) ∈ {χ(6), χ(9), χ(18)}.
   Each case derives False via a short cascade ending in a mono triple:
@@ -8195,10 +8195,10 @@ theorem bAdicEquation_3_branch_I_W_chi_15_eq_chi_18_contradiction
   Continues §82 (Case χ(15) = χ(18) closed). Case χ(15) = χ(6) remains.
 
   **Cascade**:
-    χ(10) = χ(20) = χ(18)  (self-loop + bundle)
-    χ(14) = χ(16) = χ(9)   (triples (18,14,20), (18,10,16))
-    χ(11) ≠ χ(9)            (triple (9,11,14))
-    χ(21) ≠ χ(9)            (self-loop (21,14,21))
+    χ(10) = χ(20) = χ(18) (self-loop + bundle)
+    χ(14) = χ(16) = χ(9) (triples (18,14,20), (18,10,16))
+    χ(11) ≠ χ(9) (triple (9,11,14))
+    χ(21) ≠ χ(9) (self-loop (21,14,21))
 
   Case split χ(11):
   - χ(11) = χ(18): sub-cases on χ(21).
@@ -8624,11 +8624,11 @@ theorem bAdicEquation_3_branch_I_W_chi_15_eq_chi_6_contradiction
 
 /-! ### §85. **HEADLINE**: Branch I-W master closure — χ(9) = χ(18) FORCED.
 
-  Trichotomy assembly of R241 (§82) + R242 (§83) + R243 (§84).
+  Trichotomy assembly of (§82) + (§83) + (§84).
 
   After this theorem:
   - Branch I-W → False (no mono-free 3-coloring with χ(9) ≠ χ(18) exists).
-  - Combined with Branch I-V cascade (R238-240), multiples-of-3 ⊆ {χ(6), χ(9)}
+  - Combined with Branch I-V cascade (-240), multiples-of-3 ⊆ {χ(6), χ(9)}
     in every mono-free 3-coloring of [1, n] (n ≥ 27) for bAdicEquation 3.
   - This is exactly `CompressionHyp 3 3` content.
   - `lem_compress3_b3` becomes derivable; the axiom can be removed.
@@ -8672,7 +8672,7 @@ theorem bAdicEquation_3_chi_9_eq_chi_18_in_monoFree
 
   The kernel-pure derivation of R_3(3) ≤ 27.
 
-  After R244 (χ(9) = χ(18) forced), Branch I-V cascade (R238/R240) gives
+  After (χ(9) = χ(18) forced), Branch I-V cascade (/) gives
   χ(3) = χ(15) = χ(6) in any mono-free coloring. Together with §72 χ(27)
   self-loop, this forces χ(27) ∉ {χ(6), χ(9)} (so χ(27) = "third color"),
   then a sub-case cascade on χ(17) ends in mono triple either way:
@@ -8697,7 +8697,7 @@ theorem bAdicEquation_3_no_mono_free_at_27
     (hχk : IsKColoring n 3 χ)
     (hNoMono : ¬ HasMonoSolution (bAdicEquation 3) n χ) :
     False := by
-  -- Setup from R244 + R238.
+  -- Setup from +.
   have h6_eq_12 := bAdicEquation_3_chi_6_eq_chi_12_in_monoFree (n := n) χ (by omega) hχk hNoMono
   have h24_eq_6 := bAdicEquation_3_chi_24_eq_chi_6_in_monoFree (n := n) χ (by omega) hχk hNoMono
   have h9_eq_18 := bAdicEquation_3_chi_9_eq_chi_18_in_monoFree (n := n) χ h27 hχk hNoMono
@@ -8719,7 +8719,7 @@ theorem bAdicEquation_3_no_mono_free_at_27
     have h := bAdicEquation_3_self_loop_chain χ hNoMono (m := 4) (by omega) (by omega)
     show χ (2 * 4) ≠ χ (3 * 4); exact h
   have h8_ne_6 : χ 8 ≠ χ 6 := fun h => h8_ne_12 (h.trans h6_eq_12)
-  -- χ(27) ≠ χ(18) self-loop, ≠ χ(9) via R244.
+  -- χ(27) ≠ χ(18) self-loop, ≠ χ(9) via.
   have h27_ne_18 := bAdicEquation_3_chi_27_ne_chi_18_in_monoFree (n := n) χ h27 hNoMono
   have h27_ne_9 : χ 27 ≠ χ 9 := fun h => h27_ne_18 (h.trans h9_eq_18)
   -- χ values < 3.
@@ -8872,9 +8872,9 @@ theorem bAdicEquation_3_compression_at_27_kernel_pure
   exfalso
   exact bAdicEquation_3_no_mono_free_at_27 χ (le_refl 27) hχk hNoMono
 
-/-! ### §88. **(b = 4, k = 3) backbone self-loop exclusions** (R248).
+/-! ### §88. **(b = 4, k = 3) backbone self-loop exclusions** ().
 
-  First concrete migration of the R247 schema to b = 4. Establishes the
+  First concrete migration of the schema to b = 4. Establishes the
   4 backbone self-loop exclusions at n ≥ 64 (= 4^3) using the existing
   parameterized `bAdicEquation_self_loop_chi_diff` (Type C, general b).
 
@@ -8947,8 +8947,8 @@ theorem bAdicEquation_4_chi_48_ne_chi_64_in_monoFree
   χ(3m) ≠ χ(4m). The 4 specific theorems in §88 cover m ∈ {4, 8, 12, 16},
   which are the LAYER inequalities (both 3m and 4m are multiples of 4).
 
-  **Other self-loop family** (b, b+1): χ(4m) ≠ χ(5m). For m ∈ {1, ..., 12}:
-  χ(4) ≠ χ(5), χ(8) ≠ χ(10), χ(12) ≠ χ(15), ..., χ(48) ≠ χ(60). Connects
+  **Other self-loop family** (b, b+1): χ(4m) ≠ χ(5m). For m ∈ {1,..., 12}:
+  χ(4) ≠ χ(5), χ(8) ≠ χ(10), χ(12) ≠ χ(15),..., χ(48) ≠ χ(60). Connects
   multiples-of-4 to non-multiples.
 
   **Candidate first master forcing theorem** (analogue search):
@@ -8991,7 +8991,7 @@ theorem bAdicEquation_4_chi_48_ne_chi_64_in_monoFree
   using triples (12, y, y+4), (9, y, y+3), (6, y, y+2). For b = 4, analogous
   would use (16, y, y+4), (12, y, y+3), (8, y, y+2) — but constraints differ.
 
-  **Next round's concrete target** (R249):
+  **Next round's concrete target** ():
 
   `bAdicEquation_4_chi_12_ne_chi_9_in_monoFree`
     — Self-loop at b = 4, m = 3. ALREADY DERIVABLE from
@@ -9016,7 +9016,7 @@ theorem bAdicEquation_4_chi_9_ne_chi_12_in_monoFree
   show χ ((4 - 1) * 3) ≠ χ (4 * 3)
   exact h
 
-/-! ### §90. (b = 4, k = 3) candidate master forcing — pressure test (R249).
+/-! ### §90. (b = 4, k = 3) candidate master forcing — pressure test ().
 
   **Target**: `bAdicEquation_4_no_chi_9_12_16_all_distinct` — analogue of b=3's
   R+213 `bAdicEquation_3_no_chi_6_9_12_all_distinct`.
@@ -9072,21 +9072,21 @@ theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_9_4_eq_9
 
 /-! ### §91. **NEGATIVE FINDING**: chi(4) = chi(16) subcase does NOT close at n = 16.
 
-  **Pressure-test result (R250)**: the candidate master forcing theorem
+  **Pressure-test result ()**: the candidate master forcing theorem
   `bAdicEquation_4_no_chi_9_12_16_all_distinct_case_chi_8_eq_chi_9` is
   **FALSE at n = 16**.
 
   **Explicit witness coloring** (verified by enumeration of all 54 Rado triples
   in [1, 16]): χ : ℕ → ℕ defined by
   ```
-    1 ↦ 1  (B)    9 ↦ 0  (A)
-    2 ↦ 2  (C)   10 ↦ 1  (B)
-    3 ↦ 0  (A)   11 ↦ 1  (B)
-    4 ↦ 2  (C)   12 ↦ 1  (B)
-    5 ↦ 1  (B)   13 ↦ 2  (C)
-    6 ↦ 1  (B)   14 ↦ 0  (A)
-    7 ↦ 2  (C)   15 ↦ 0  (A)
-    8 ↦ 0  (A)   16 ↦ 2  (C)
+    1 ↦ 1 (B) 9 ↦ 0 (A)
+    2 ↦ 2 (C) 10 ↦ 1 (B)
+    3 ↦ 0 (A) 11 ↦ 1 (B)
+    4 ↦ 2 (C) 12 ↦ 1 (B)
+    5 ↦ 1 (B) 13 ↦ 2 (C)
+    6 ↦ 1 (B) 14 ↦ 0 (A)
+    7 ↦ 2 (C) 15 ↦ 0 (A)
+    8 ↦ 0 (A) 16 ↦ 2 (C)
   ```
   Satisfies: χ(9) = 0, χ(12) = 1, χ(16) = 2 (all distinct), χ(8) = χ(9) = 0,
   χ(4) = χ(16) = 2, AND mono-free for `bAdicEquation 4` on [1, 16] (all 54
@@ -9115,12 +9115,12 @@ theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_9_4_eq_9
     close at smaller n. Candidates: (χ(8), χ(12), χ(16)), (χ(16), χ(32), χ(48)),
     or compression-style "multiples-of-4 use ≤ 2 colors" theorem.
 
-  **R251 target**: lift the theorem to n ≥ 63 OR adopt a different master
+  ** target**: lift the theorem to n ≥ 63 OR adopt a different master
   forcing candidate. The chi(8) = chi(9) case at n = 16 is OPEN (not False).
 
   **Closure status — chi(8) = chi(9) branch**:
-  - chi(4) = chi(9):  CLOSED (trivial mono (4, 8, 9), this round).
-  - chi(4) = chi(12): CLOSED (R249, mono (16, 7, 11)).
+  - chi(4) = chi(9): CLOSED (trivial mono (4, 8, 9), this round).
+  - chi(4) = chi(12): CLOSED (, mono (16, 7, 11)).
   - chi(4) = chi(16): **OPEN at n = 16** (admits mono-free witness).
 -/
 
@@ -9210,20 +9210,20 @@ theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_9_4_eq_12
   · show χ 7 = χ (7 + 4)
     rw [show (7 + 4 : ℕ) = 11 by decide, h7_eq_16, h11_eq_16]
 
-/-! ### §92. R251 — R250 witness branch THRESHOLD COLLAPSE at n ≥ 20.
+/-! ### §92. — witness branch THRESHOLD COLLAPSE at n ≥ 20.
 
-  **Headline finding (R251)**: the R250 witness branch (χ(8) = χ(9) ∧ χ(4) = χ(16),
+  **Headline finding ()**: the witness branch (χ(8) = χ(9) ∧ χ(4) = χ(16),
   with χ(9), χ(12), χ(16) pairwise distinct) DIES at n ≥ 20, not n ≥ 64 as
-  R250 §91 conservatively suggested.
+   §91 conservatively suggested.
 
   Specifically, the §91 explicit witness coloring on [1, 16] CANNOT be extended
   to any coloring of [1, 20]: the positions χ(17) and χ(20) are forced to
   values that contradict hNoMono via Rado triples internal to [1, 20].
 
-  **Implication for R247 schema migration to (b,k)=(4,3)**:
-  - The R250 "negative finding" at n = 16 was a LOCAL OBSTRUCTION (existence
+  **Implication for schema migration to (b,k)=(4,3)**:
+  - The "negative finding" at n = 16 was a LOCAL OBSTRUCTION (existence
     of mono-free witness at small n), not a structural obstruction.
-  - The R250 surviving branch is killed by THRESHOLD TRIPLES at n = 17 (4,16,17),
+  - The surviving branch is killed by THRESHOLD TRIPLES at n = 17 (4,16,17),
     (8,15,17) + at n = 20 (12,17,20), (16,16,20), self-loop m=5.
   - **The threshold lift required is much smaller than expected**: n=20, not n=63.
   - This validates the (χ(9), χ(12), χ(16)) candidate as the b=4 first master
@@ -9233,27 +9233,27 @@ theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_9_4_eq_12
 
   Step 1 (force χ(15) = A):
     - (12, 12, 15): d=3, y=12 → χ(15) ≠ χ(12) = B
-    - (4, 15, 16):  d=1, y=15 → χ(15) ≠ χ(16) = C
+    - (4, 15, 16): d=1, y=15 → χ(15) ≠ χ(16) = C
     - third_color_eq → χ(15) = χ(9) = A
 
   Step 2 (force χ(17) = B):
-    - (8, 15, 17):  d=2, y=15 → χ(17) ≠ χ(15) = A
-    - (4, 16, 17):  d=1, y=16 → χ(17) ≠ χ(16) = C
+    - (8, 15, 17): d=2, y=15 → χ(17) ≠ χ(15) = A
+    - (4, 16, 17): d=1, y=16 → χ(17) ≠ χ(16) = C
     - third_color_eq → χ(17) = χ(12) = B
 
   Step 3 (χ(20) contradiction):
     - (12, 17, 20): d=3, y=17 → χ(20) ≠ χ(12) = B
-    - (16, 16, 20): d=4, y=16 → χ(20) ≠ χ(16) = C  ← key "n=20 closer"
+    - (16, 16, 20): d=4, y=16 → χ(20) ≠ χ(16) = C ← key "n=20 closer"
     - self-loop m=5 b=4: χ(15) ≠ χ(20) → χ(20) ≠ A
     - third_color_eq forces χ(20) = χ(16) = C, contradicting (16, 16, 20).
 
   All Rado triples verified at b=4 (x + 4y = 4z):
   - (12, 12, 15): 12 + 48 = 60 = 4·15 ✓
-  - (4, 15, 16):  4 + 60 = 64 = 4·16 ✓
-  - (8, 15, 17):  8 + 60 = 68 = 4·17 ✓
-  - (4, 16, 17):  4 + 64 = 68 = 4·17 ✓
+  - (4, 15, 16): 4 + 60 = 64 = 4·16 ✓
+  - (8, 15, 17): 8 + 60 = 68 = 4·17 ✓
+  - (4, 16, 17): 4 + 64 = 68 = 4·17 ✓
   - (12, 17, 20): 12 + 68 = 80 = 4·20 ✓
-  - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓  ← TERMINAL "anchor self-rado" at d=b
+  - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓ ← TERMINAL "anchor self-rado" at d=b
   - self-loop m=5 b=4: triple (20, 15, 20)
 
   **The terminal triple (16, 16, 20) is the b=4 analogue of "anchor self-rado"**:
@@ -9264,7 +9264,7 @@ theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_9_4_eq_12
   m = b·m/4. For b=4, m=4: m = b·m/4 = 4·4/4 = 4 ✓. So (16, 16, 20) is at (m=4, b=4).
 -/
 
-/-- **R251 main theorem**: the R250 surviving witness branch (chi(8)=chi(9),
+/-- ** main theorem**: the surviving witness branch (chi(8)=chi(9),
   chi(4)=chi(16), all distinct on (chi(9),chi(12),chi(16))) DIES at n ≥ 20.
 
   This is the b=4 analogue of b=3's R+213-style master forcing closure, but
@@ -9381,7 +9381,7 @@ theorem bAdicEquation_4_R250_witness_branch_no_extend_to_20
   -- Contradicts h20_ne_16.
   exact h20_ne_16 h20_eq_16
 
-/-- **R251 corollary at the n=64 threshold**: at n ≥ 64, the R250 witness
+/-- ** corollary at the n=64 threshold**: at n ≥ 64, the witness
   branch also dies. Immediate from `bAdicEquation_4_R250_witness_branch_no_extend_to_20`
   since 64 ≥ 20. -/
 theorem bAdicEquation_4_R250_witness_branch_no_extend_to_64
@@ -9397,11 +9397,11 @@ theorem bAdicEquation_4_R250_witness_branch_no_extend_to_64
   bAdicEquation_4_R250_witness_branch_no_extend_to_20 χ (by omega) hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h8_eq_9 h4_eq_16
 
-/-! ### §93. R252 — b=4 all-distinct branch χ(8) = χ(12), χ(4) = χ(9) closure.
+/-! ### §93. — b=4 all-distinct branch χ(8) = χ(12), χ(4) = χ(9) closure.
 
-  **Strategic context (R252)**: continuing the case ledger of
+  **Strategic context ()**: continuing the case ledger of
   `bAdicEquation_4_no_chi_9_12_16_all_distinct`. Trichotomy on χ(8):
-  - χ(8) = χ(9): CLOSED (R249/R250/R251) for n ≥ 20.
+  - χ(8) = χ(9): CLOSED (//) for n ≥ 20.
   - **χ(8) = χ(12): this round, only χ(4) = χ(9) subcase CLOSED**.
   - χ(8) = χ(16): OPEN.
 
@@ -9428,18 +9428,18 @@ theorem bAdicEquation_4_R250_witness_branch_no_extend_to_64
   | T | **MONO** | **(16, 6, 10): χ(16) = χ(6) = χ(10) = C** |
 
   All Rado triples verified for b=4 (x + 4y = 4z):
-  - (12, 5, 8): 12 + 20 = 32 = 4·8 ✓     - (4, 9, 10):  4 + 36 = 40 ✓
-  - (4, 4, 5):  4 + 16 = 20 = 4·5 ✓      - (8, 12, 14): 8 + 48 = 56 ✓
-  - (8, 8, 10): 8 + 32 = 40 = 4·10 ✓     - (16, 10, 14): 16 + 40 = 56 ✓
-  - (12, 12, 15): 12 + 48 = 60 ✓         - (4, 14, 15): 4 + 56 = 60 ✓
-  - (12, 8, 11): 12 + 32 = 44 ✓          - (16, 11, 15): 16 + 44 = 60 ✓
-  - (20, 9, 14): 20 + 36 = 56 ✓          - (16, 16, 20): 16 + 64 = 80 ✓
-  - (4, 3, 4):  4 + 12 = 16 = 4·4 ✓      - (20, 3, 8): 20 + 12 = 32 ✓
-  - (20, 7, 12): 20 + 28 = 48 ✓          - (16, 3, 7):  16 + 12 = 28 ✓
-  - (4, 6, 7):  4 + 24 = 28 ✓            - (8, 6, 8):  8 + 24 = 32 ✓
+  - (12, 5, 8): 12 + 20 = 32 = 4·8 ✓ - (4, 9, 10): 4 + 36 = 40 ✓
+  - (4, 4, 5): 4 + 16 = 20 = 4·5 ✓ - (8, 12, 14): 8 + 48 = 56 ✓
+  - (8, 8, 10): 8 + 32 = 40 = 4·10 ✓ - (16, 10, 14): 16 + 40 = 56 ✓
+  - (12, 12, 15): 12 + 48 = 60 ✓ - (4, 14, 15): 4 + 56 = 60 ✓
+  - (12, 8, 11): 12 + 32 = 44 ✓ - (16, 11, 15): 16 + 44 = 60 ✓
+  - (20, 9, 14): 20 + 36 = 56 ✓ - (16, 16, 20): 16 + 64 = 80 ✓
+  - (4, 3, 4): 4 + 12 = 16 = 4·4 ✓ - (20, 3, 8): 20 + 12 = 32 ✓
+  - (20, 7, 12): 20 + 28 = 48 ✓ - (16, 3, 7): 16 + 12 = 28 ✓
+  - (4, 6, 7): 4 + 24 = 28 ✓ - (8, 6, 8): 8 + 24 = 32 ✓
   - **(16, 6, 10) TERMINAL: 16 + 24 = 40 ✓**
 
-  **Terminal pattern**: NEITHER R249 (16, 7, 11) NOR R251 (16, 16, 20).
+  **Terminal pattern**: NEITHER (16, 7, 11) NOR (16, 16, 20).
   Instead (16, 6, 10) — a NEW b=4 terminal triple of "C-anchored color
   matching" form (16, y, y+4) with χ(y) = χ(y+4) = C.
 
@@ -9458,12 +9458,12 @@ theorem bAdicEquation_4_R250_witness_branch_no_extend_to_64
 
   **Killing the remaining subcases** requires either:
   - Lift to n ≥ 64 + use thm_k2 (R(4, 2) = 16) for multiples-of-4 substructure
-    (since at n=64 the multiples {4, 8, ..., 64} form a 2-coloring of [1, 16]
+    (since at n=64 the multiples {4, 8,..., 64} form a 2-coloring of [1, 16]
     in {B, C}, forcing mono via thm_k2).
   - OR a longer in-place cascade not yet found.
 -/
 
-/-- **R252 main subcase theorem** (Deliverable B — strongest complete subcase).
+/-- ** main subcase theorem** (Deliverable B — strongest complete subcase).
   In any mono-free 3-coloring for bAdicEquation 4 on [1, n] (n ≥ 20), if
   (χ(9), χ(12), χ(16)) are pairwise distinct AND χ(8) = χ(12) AND χ(4) = χ(9),
   then False.
@@ -9710,7 +9710,7 @@ theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_12_4_eq_9
   · show χ 6 = χ (6 + 4)
     rw [show (6 + 4 : ℕ) = 10 by decide, h6_eq_16, ← h10_eq_16]
 
-/-- R252 corollary at the n = 64 threshold: immediate from
+/-- corollary at the n = 64 threshold: immediate from
   `bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_12_4_eq_9` since 64 ≥ 20. -/
 theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_12_4_eq_9_at_64
     {n : ℕ} (χ : ℕ → ℕ) (h64 : 64 ≤ n)
@@ -9725,11 +9725,11 @@ theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_12_4_eq_9_at_64
   bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_12_4_eq_9 χ (by omega) hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h8_eq_12 h4_eq_9
 
-/-! ### §94. R253 — b=4 all-distinct branch χ(8) = χ(16), trichotomy on χ(4).
+/-! ### §94. — b=4 all-distinct branch χ(8) = χ(16), trichotomy on χ(4).
 
-  **Strategic context (R253)**: orthogonal third trichotomy branch on χ(8).
-  - χ(8) = χ(9):  CLOSED for n ≥ 20 (R249/R250/R251).
-  - χ(8) = χ(12): PARTIAL — only χ(4) = A subcase CLOSED (R252); χ(4) ∈ {B, C}
+  **Strategic context ()**: orthogonal third trichotomy branch on χ(8).
+  - χ(8) = χ(9): CLOSED for n ≥ 20 (//).
+  - χ(8) = χ(12): PARTIAL — only χ(4) = A subcase CLOSED (); χ(4) ∈ {B, C}
     admit n=20 witnesses (documented in §93).
   - **χ(8) = χ(16): this round.**
 
@@ -9755,24 +9755,24 @@ theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_12_4_eq_9_at_64
   **NEW terminal pattern**: (4, 3, 4) is a "degenerate self-equality" Rado triple,
   where mono iff χ(3) = χ(4). This is the FOURTH distinct terminal pattern in
   the b=4 all-distinct branch closures:
-  - R249 (chi(8)=chi(9), chi(4)=chi(12)): terminal (16, 7, 11)
-  - R251 (chi(8)=chi(9), chi(4)=chi(16)): terminal (16, 16, 20) — anchor self-rado
-  - R252 (chi(8)=chi(12), chi(4)=chi(9)): terminal (16, 6, 10) — C-anchored match
-  - **R253 (chi(8)=chi(16), chi(4)=chi(9)): terminal (4, 3, 4) — anchor self-equality**
+  - (chi(8)=chi(9), chi(4)=chi(12)): terminal (16, 7, 11)
+  - (chi(8)=chi(9), chi(4)=chi(16)): terminal (16, 16, 20) — anchor self-rado
+  - (chi(8)=chi(12), chi(4)=chi(9)): terminal (16, 6, 10) — C-anchored match
+  - ** (chi(8)=chi(16), chi(4)=chi(9)): terminal (4, 3, 4) — anchor self-equality**
 
   All Rado triples verified for b=4 (x + 4y = 4z):
   - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓
-  - (20, 4, 9):   20 + 16 = 36 = 4·9 ✓
-  - (8, 8, 10):   8 + 32 = 40 = 4·10 ✓
-  - (4, 9, 10):   4 + 36 = 40 ✓
-  - (4, 4, 5):    4 + 16 = 20 = 4·5 ✓
-  - (20, 5, 10):  20 + 20 = 40 ✓
-  - (8, 5, 7):    8 + 20 = 28 = 4·7 ✓
-  - (12, 7, 10):  12 + 28 = 40 ✓
-  - (8, 6, 8):    8 + 24 = 32 = 4·8 ✓
-  - (4, 6, 7):    4 + 24 = 28 ✓
-  - (8, 3, 5):    8 + 12 = 20 ✓
-  - (12, 3, 6):   12 + 12 = 24 = 4·6 ✓
+  - (20, 4, 9): 20 + 16 = 36 = 4·9 ✓
+  - (8, 8, 10): 8 + 32 = 40 = 4·10 ✓
+  - (4, 9, 10): 4 + 36 = 40 ✓
+  - (4, 4, 5): 4 + 16 = 20 = 4·5 ✓
+  - (20, 5, 10): 20 + 20 = 40 ✓
+  - (8, 5, 7): 8 + 20 = 28 = 4·7 ✓
+  - (12, 7, 10): 12 + 28 = 40 ✓
+  - (8, 6, 8): 8 + 24 = 32 = 4·8 ✓
+  - (4, 6, 7): 4 + 24 = 28 ✓
+  - (8, 3, 5): 8 + 12 = 20 ✓
+  - (12, 3, 6): 12 + 12 = 24 = 4·6 ✓
   - **(4, 3, 4) TERMINAL: 4 + 12 = 16 = 4·4 ✓**
 
   **Subcase χ(4) = C (trivial)**: (16, 4, 8) Rado triple with χ(16) = χ(4) = χ(8)
@@ -9786,10 +9786,10 @@ theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_12_4_eq_9_at_64
   Killing the χ(4) = B subcase at n ≥ 64 requires thm_k2 (R(4, 2) = 16) +
   scale-by-4 reduction: in this subcase, mults of 4 in [4, 64] are forced into
   {B, C} (by self-loops + anchor self-rados), yielding 16 positions 2-colored,
-  hence a mono triple via thm_k2. Building this infrastructure is deferred to R254.
+  hence a mono triple via thm_k2. Building this infrastructure is deferred to.
 -/
 
-/-- **R253 subcase 1**: χ(8) = χ(16), χ(4) = χ(9). CLOSED at n ≥ 20 via cascade
+/-- ** subcase 1**: χ(8) = χ(16), χ(4) = χ(9). CLOSED at n ≥ 20 via cascade
   ending in terminal (4, 3, 4) — "anchor self-equality" pattern (mono iff χ(3) = χ(4)).
   **Kernel-pure**: only Lean kernel axioms. -/
 theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_16_4_eq_9
@@ -9959,7 +9959,7 @@ theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_16_4_eq_9
   · show χ 3 = χ (3 + 1)
     rw [show (3 + 1 : ℕ) = 4 by decide, h4_eq_9, ← h3_eq_9]
 
-/-- **R253 subcase 3** (trivial): χ(8) = χ(16), χ(4) = χ(16). CLOSED at n ≥ 16
+/-- ** subcase 3** (trivial): χ(8) = χ(16), χ(4) = χ(16). CLOSED at n ≥ 16
   via single Rado triple (16, 4, 8) where χ(16) = χ(4) = χ(8) = C → MONO.
   **Kernel-pure**: only Lean kernel axioms. -/
 theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_16_4_eq_16
@@ -9982,7 +9982,7 @@ theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_16_4_eq_16
   · show χ 4 = χ (4 + 4)
     rw [show (4 + 4 : ℕ) = 8 by decide, h4_eq_16, ← h8_eq_16]
 
-/-- R253 subcase 1 corollary at n = 64 threshold. -/
+/-- subcase 1 corollary at n = 64 threshold. -/
 theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_16_4_eq_9_at_64
     {n : ℕ} (χ : ℕ → ℕ) (h64 : 64 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -9996,15 +9996,15 @@ theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_16_4_eq_9_at_64
   bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_16_4_eq_9 χ (by omega) hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h8_eq_16 h4_eq_9
 
-/-! ### §96. R255 — residual cell (1) layer compression cascade (initial prefix).
+/-! ### §96. — residual cell (1) layer compression cascade (initial prefix).
 
-  **Strategic context (R255)**: with the R254 scale-by-4 bridge in place, the
+  **Strategic context ()**: with the scale-by-4 bridge in place, the
   remaining work is to PROVE layer compression (χ(4d) ∈ {χ(12), χ(16)} for
-  d ∈ [1, 16]) for each of the 3 surviving residual cells. R255 attacks the
+  d ∈ [1, 16]) for each of the 3 surviving residual cells. attacks the
   FIRST nontrivial layer-compression value for cell (1): χ(20) ∈ {χ(12), χ(16)},
   equivalently χ(20) ≠ χ(9).
 
-  **§96 strategy (from R254 §95 documentation)**: assume for contradiction
+  **§96 strategy (from §95 documentation)**: assume for contradiction
   χ(20) = χ(9) = A. Derive a long forced cascade culminating in χ(40) excluded
   from all 3 colors at n ≥ 40.
 
@@ -10016,30 +10016,30 @@ theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_16_4_eq_9_at_64
   | Step | Position forced | Triple(s) used |
   |------|-----------------|----------------|
   | 1 | χ(14) = χ(16) | (8, 12, 14) [d=2,y=12] + (20, 9, 14) [d=5,y=9] |
-  | 2 | χ(10) = χ(9)  | (8, 8, 10) [d=2,y=8] + (16, 10, 14) [d=4,y=10] |
+  | 2 | χ(10) = χ(9) | (8, 8, 10) [d=2,y=8] + (16, 10, 14) [d=4,y=10] |
   | 3 | χ(15) = χ(16) | (12, 12, 15) [d=3,y=12] + self-loop m=5 [(20,15,20)] |
-  | 4 | χ(11) = χ(9)  | (12, 8, 11) [d=3,y=8] + (16, 11, 15) [d=4,y=11] |
+  | 4 | χ(11) = χ(9) | (12, 8, 11) [d=3,y=8] + (16, 11, 15) [d=4,y=11] |
 
   All Rado triples verified for b=4 (x + 4y = 4z):
-  - (8, 12, 14):   8 + 48 = 56 = 4·14 ✓
-  - (20, 9, 14):   20 + 36 = 56 ✓
-  - (8, 8, 10):    8 + 32 = 40 = 4·10 ✓
-  - (16, 10, 14):  16 + 40 = 56 ✓
-  - (12, 12, 15):  12 + 48 = 60 = 4·15 ✓
+  - (8, 12, 14): 8 + 48 = 56 = 4·14 ✓
+  - (20, 9, 14): 20 + 36 = 56 ✓
+  - (8, 8, 10): 8 + 32 = 40 = 4·10 ✓
+  - (16, 10, 14): 16 + 40 = 56 ✓
+  - (12, 12, 15): 12 + 48 = 60 = 4·15 ✓
   - self-loop m=5 b=4: (20, 15, 20)
-  - (12, 8, 11):   12 + 32 = 44 = 4·11 ✓
-  - (16, 11, 15):  16 + 44 = 60 ✓
+  - (12, 8, 11): 12 + 32 = 44 = 4·11 ✓
+  - (16, 11, 15): 16 + 44 = 60 ✓
 
-  **Extended cascade (clean continuation, R256+)**:
+  **Extended cascade (clean continuation, +)**:
   - Step 5 (χ(5) = χ(16)): (4, 4, 5) [d=1] + (20, 5, 10) [d=5,y=5] using
     χ(10) = χ(9) from Step 2.
   - Step 6 (χ(6) = χ(16)): self-loop m=2 [(8, 6, 8)] + (20, 6, 11) [d=5,y=6]
     using χ(11) = χ(9) from Step 4.
-  - Step 7 (χ(2) = χ(9)):  (8, 2, 4) [d=2,y=2] + (16, 2, 6) [d=4,y=2] using
+  - Step 7 (χ(2) = χ(9)): (8, 2, 4) [d=2,y=2] + (16, 2, 6) [d=4,y=2] using
     χ(6) = χ(16) from Step 6.
   - Step 8 (χ(7) = χ(16)): (4, 7, 8) [d=1,y=7] + (20, 2, 7) [d=5,y=2] using
     χ(2) = χ(9) from Step 7.
-  - Step 9 (χ(3) = χ(9)):  (4, 3, 4) [d=1,y=3] + (16, 3, 7) [d=4,y=3] using
+  - Step 9 (χ(3) = χ(9)): (4, 3, 4) [d=1,y=3] + (16, 3, 7) [d=4,y=3] using
     χ(7) = χ(16) from Step 8.
   - Step 10 (χ(1) = χ(9)): (12, 1, 4) [d=3,y=1] + (16, 1, 5) [d=4,y=1] using
     χ(5) = χ(16) from Step 5.
@@ -10053,19 +10053,19 @@ theorem bAdicEquation_4_no_chi_9_12_16_all_distinct_subcase_8_eq_16_4_eq_9_at_64
   requires reaching n ≥ 40 and forcing χ(28), χ(30), χ(32), χ(36) to derive
   the χ(40) ∉ {A, B, C} contradiction.
 
-  **Open obstruction for full d = 5 closure (R256+)**: the chain involves
+  **Open obstruction for full d = 5 closure (+)**: the chain involves
   CASE SPLITS on χ(13) ∈ {A, C} (since (4,12,13) → χ(13) ≠ B but no further
   unconditional constraint). In Case χ(13) = A, χ(18) = B and χ(19) = A are
   forced, then χ(24) = C, χ(28) = B, χ(32) = B, χ(36) = C, then χ(40) ∉ {A, B, C}.
   In Case χ(13) = C, sub-cases on χ(17), χ(18), χ(19) require deeper analysis.
-  R256+ should formalize Case χ(13) = A first (cleaner cascade), then handle
+  + should formalize Case χ(13) = A first (cleaner cascade), then handle
   Case χ(13) = C as a separate theorem.
 
-  **DELIVERABLE B for R255**: the clean Steps 1-4 prefix below. Steps 5-10
+  **DELIVERABLE B for **: the clean Steps 1-4 prefix below. Steps 5-10
   follow the same pattern but are deferred to keep this theorem focused.
 -/
 
-/-- **R255 partial cascade** (Deliverable B): residual cell (1) + χ(20) = χ(9)
+/-- ** partial cascade** (Deliverable B): residual cell (1) + χ(20) = χ(9)
   forces χ(14) = χ(16), χ(10) = χ(9), χ(15) = χ(16), χ(11) = χ(9).
 
   Strongest contiguous prefix of the §96 cascade toward d = 5 layer
@@ -10199,43 +10199,43 @@ theorem residual_cell_1_chi20_eq_chi9_forces_chi14_10_15_11
     third_color_eq hχ11 hχ9 hχ12 hχ16 h12_ne_16 h11_ne_12 h11_ne_16 h9_ne_12 h9_ne_16
   exact ⟨h14_eq_16, h10_eq_9, h15_eq_16, h11_eq_9⟩
 
-/-! ### §97. R256 — residual cell (1) cascade prefix Steps 5-10 (no χ(13) split).
+/-! ### §97. — residual cell (1) cascade prefix Steps 5-10 (no χ(13) split).
 
-  **Strategic context (R256)**: continuing R255 prefix, extend the clean
+  **Strategic context ()**: continuing prefix, extend the clean
   no-case-split cascade to force the remaining LOW positions (1, 2, 3, 5, 6, 7).
-  After R256, the only unforced positions in [1, 20] are {13, 17, 18, 19}.
-  The χ(13) case split (R257+) will reduce these to the χ(40) contradiction
+  After, the only unforced positions in [1, 20] are {13, 17, 18, 19}.
+  The χ(13) case split (+) will reduce these to the χ(40) contradiction
   cascade documented in §95/§96.
 
   **§97 cascade structure** (Steps 5-10, all clean — no case splits):
 
-  Setup unchanged from R255 §96. Given the R255 prefix
+  Setup unchanged from §96. Given the prefix
   (χ(14)=C, χ(10)=A, χ(15)=C, χ(11)=A) under χ(20)=A:
 
   | Step | Position forced | Triple(s) used |
   |------|-----------------|----------------|
-  | 5 | χ(5) = χ(16)  | (4, 4, 5) [d=1,y=4] + (20, 5, 10) [d=5,y=5] |
-  | 6 | χ(6) = χ(16)  | self-loop m=2 [(8, 6, 8)] + (20, 6, 11) [d=5,y=6] |
-  | 7 | χ(2) = χ(9)   | (8, 2, 4) [d=2,y=2] + (16, 2, 6) [d=4,y=2] |
-  | 8 | χ(7) = χ(16)  | (4, 7, 8) [d=1,y=7] + (20, 2, 7) [d=5,y=2] |
-  | 9 | χ(3) = χ(9)   | (4, 3, 4) [d=1,y=3] + (16, 3, 7) [d=4,y=3] |
-  | 10 | χ(1) = χ(9)  | (12, 1, 4) [d=3,y=1] + (16, 1, 5) [d=4,y=1] |
+  | 5 | χ(5) = χ(16) | (4, 4, 5) [d=1,y=4] + (20, 5, 10) [d=5,y=5] |
+  | 6 | χ(6) = χ(16) | self-loop m=2 [(8, 6, 8)] + (20, 6, 11) [d=5,y=6] |
+  | 7 | χ(2) = χ(9) | (8, 2, 4) [d=2,y=2] + (16, 2, 6) [d=4,y=2] |
+  | 8 | χ(7) = χ(16) | (4, 7, 8) [d=1,y=7] + (20, 2, 7) [d=5,y=2] |
+  | 9 | χ(3) = χ(9) | (4, 3, 4) [d=1,y=3] + (16, 3, 7) [d=4,y=3] |
+  | 10 | χ(1) = χ(9) | (12, 1, 4) [d=3,y=1] + (16, 1, 5) [d=4,y=1] |
 
   All Rado triples verified for b=4 (x + 4y = 4z):
-  - (4, 4, 5):    4 + 16 = 20 = 4·5 ✓
-  - (20, 5, 10):  20 + 20 = 40 = 4·10 ✓
+  - (4, 4, 5): 4 + 16 = 20 = 4·5 ✓
+  - (20, 5, 10): 20 + 20 = 40 = 4·10 ✓
   - self-loop m=2: (8, 6, 8)
-  - (20, 6, 11):  20 + 24 = 44 = 4·11 ✓
-  - (8, 2, 4):    8 + 8 = 16 = 4·4 ✓
-  - (16, 2, 6):   16 + 8 = 24 = 4·6 ✓
-  - (4, 7, 8):    4 + 28 = 32 = 4·8 ✓
-  - (20, 2, 7):   20 + 8 = 28 = 4·7 ✓
-  - (4, 3, 4):    4 + 12 = 16 = 4·4 ✓
-  - (16, 3, 7):   16 + 12 = 28 = 4·7 ✓
-  - (12, 1, 4):   12 + 4 = 16 = 4·4 ✓
-  - (16, 1, 5):   16 + 4 = 20 = 4·5 ✓
+  - (20, 6, 11): 20 + 24 = 44 = 4·11 ✓
+  - (8, 2, 4): 8 + 8 = 16 = 4·4 ✓
+  - (16, 2, 6): 16 + 8 = 24 = 4·6 ✓
+  - (4, 7, 8): 4 + 28 = 32 = 4·8 ✓
+  - (20, 2, 7): 20 + 8 = 28 = 4·7 ✓
+  - (4, 3, 4): 4 + 12 = 16 = 4·4 ✓
+  - (16, 3, 7): 16 + 12 = 28 = 4·7 ✓
+  - (12, 1, 4): 12 + 4 = 16 = 4·4 ✓
+  - (16, 1, 5): 16 + 4 = 20 = 4·5 ✓
 
-  **After R256 + R255**: forced positions are
+  **After + **: forced positions are
   - χ(9) (= A): positions 1, 2, 3, 9, 10, 11, 20.
   - χ(12) (= B): positions 4, 8, 12.
   - χ(16) (= C): positions 5, 6, 7, 14, 15, 16.
@@ -10245,21 +10245,21 @@ theorem residual_cell_1_chi20_eq_chi9_forces_chi14_10_15_11
   **Mono-free verification at n = 20**: no Rado triple (x + 4y = 4z, x ∈ {4, 8, 12,
   16, 20}, y, z ∈ [1, 20]) gives mono among forced positions — verified by
   exhaustive enumeration in §95/§96 §93 notes. Hence χ(20) = χ(9) remains
-  CONSISTENT at n = 20 even after Steps 1-10. R257+ must push to higher n.
+  CONSISTENT at n = 20 even after Steps 1-10. + must push to higher n.
 
-  **R257 target** (next round): case split on χ(13). The cleaner sub-case is
+  ** target** (next round): case split on χ(13). The cleaner sub-case is
   χ(13) = χ(9), which forces χ(18) = χ(12) (via (4, 17, 18) + …), χ(19) = χ(9)
   (via (16, 15, 19) + (4, 18, 19)), then χ(24) = χ(16) at n ≥ 24, etc., toward
   the χ(40) ∉ {A, B, C} contradiction at n ≥ 40.
 -/
 
-/-- **R256 cascade extension** (Deliverable B continuation): given R255 prefix
+/-- ** cascade extension** (Deliverable B continuation): given prefix
   (χ(14)=χ(16), χ(10)=χ(9), χ(15)=χ(16), χ(11)=χ(9)) under residual cell (1)
   + χ(20)=χ(9), force the remaining LOW positions:
     χ(5) = χ(16), χ(6) = χ(16), χ(2) = χ(9),
     χ(7) = χ(16), χ(3) = χ(9), χ(1) = χ(9).
 
-  Takes R255 prefix as explicit hypotheses for composability in R257. Each
+  Takes prefix as explicit hypotheses for composability in. Each
   step: 2 Rado-triple obstructions + 1 third_color_eq.
 
   **Kernel-pure**: only Lean kernel axioms. -/
@@ -10437,11 +10437,11 @@ theorem residual_cell_1_chi20_eq_chi9_forces_chi5_6_2_7_3_1
     third_color_eq hχ1 hχ9 hχ12 hχ16 h12_ne_16 h1_ne_12 h1_ne_16 h9_ne_12 h9_ne_16
   exact ⟨h5_eq_16, h6_eq_16, h2_eq_9, h7_eq_16, h3_eq_9, h1_eq_9⟩
 
-/-! ### §98. R257 — residual cell (1), χ(13) = χ(9) branch forces χ(18), χ(19).
+/-! ### §98. — residual cell (1), χ(13) = χ(9) branch forces χ(18), χ(19).
 
-  **Strategic context (R257)**: with R255+R256 forcing 10 positions in [1, 20]
+  **Strategic context ()**: with + forcing 10 positions in [1, 20]
   under residual cell (1) + χ(20) = χ(9), the remaining unforced set was
-  {χ(13), χ(17), χ(18), χ(19)}. R257 begins the χ(13) case split. Under the
+  {χ(13), χ(17), χ(18), χ(19)}. begins the χ(13) case split. Under the
   branch hypothesis χ(13) = χ(9), force χ(18) = χ(12), χ(19) = χ(9) cleanly
   (no χ(17) split required).
 
@@ -10450,33 +10450,33 @@ theorem residual_cell_1_chi20_eq_chi9_forces_chi5_6_2_7_3_1
   | Step | Position forced | Triple(s) used |
   |------|-----------------|----------------|
   | 1 | χ(18) = χ(12) | (20, 13, 18) [d=5,y=13] + (16, 14, 18) [d=4,y=14] |
-  | 2 | χ(19) = χ(9)  | (16, 15, 19) [d=4,y=15] + (4, 18, 19) [d=1,y=18] |
+  | 2 | χ(19) = χ(9) | (16, 15, 19) [d=4,y=15] + (4, 18, 19) [d=1,y=18] |
 
   Arithmetic verification (b=4, x + 4y = 4z):
   - (20, 13, 18): 20 + 52 = 72 = 4·18 ✓
   - (16, 14, 18): 16 + 56 = 72 = 4·18 ✓
   - (16, 15, 19): 16 + 60 = 76 = 4·19 ✓
-  - (4, 18, 19):  4 + 72 = 76 = 4·19 ✓
+  - (4, 18, 19): 4 + 72 = 76 = 4·19 ✓
 
-  **After R255 + R256 + R257**: forced positions in [1, 20] = {1..16, 18, 19, 20}.
+  **After + + **: forced positions in [1, 20] = {1..16, 18, 19, 20}.
   Remaining unknown: {χ(17)} only.
 
   **n ≤ 20 mono-free check** (case χ(13) = A): even with χ(17) free, no
   mono triple in [1, 20]. To close, must push to n ≥ 24 cascade for χ(24),
   χ(28), χ(32), χ(36), χ(40) leading to χ(40) ∉ {A, B, C} contradiction.
 
-  **R258 target**: extend cascade to high positions {24, 28, 32, 36} and
+  ** target**: extend cascade to high positions {24, 28, 32, 36} and
   derive χ(40) contradiction. The χ(17) value remains free in [1, 20] but
   may be forced incidentally at high-position step.
 -/
 
-/-- **R257 χ(13) = χ(9) branch forcing** (residual cell (1)).
-  Given residual cell (1) hypotheses + χ(20) = χ(9) + R255/R256 prefix (10
+/-- ** χ(13) = χ(9) branch forcing** (residual cell (1)).
+  Given residual cell (1) hypotheses + χ(20) = χ(9) + / prefix (10
   forced positions) + the branch hypothesis χ(13) = χ(9), force
     χ(18) = χ(12) ∧ χ(19) = χ(9).
 
   Uses 4 Rado triples + 2 third_color_eq. Closes cleanly with NO dependence
-  on χ(17). After R257, only χ(17) remains unforced in [1, 20] for this case.
+  on χ(17). After, only χ(17) remains unforced in [1, 20] for this case.
 
   **Kernel-pure**: only Lean kernel axioms. -/
 theorem residual_cell_1_chi20_eq_chi9_case_chi13_eq_chi9_forces_chi18_19
@@ -10489,12 +10489,12 @@ theorem residual_cell_1_chi20_eq_chi9_case_chi13_eq_chi9_forces_chi18_19
     (h4_eq_12 : χ 4 = χ 12)
     (_h8_eq_12 : χ 8 = χ 12)
     (h20_eq_9 : χ 20 = χ 9)
-    -- R255 prefix:
+    -- prefix:
     (h14_eq_16 : χ 14 = χ 16)
     (_h10_eq_9 : χ 10 = χ 9)
     (h15_eq_16 : χ 15 = χ 16)
     (_h11_eq_9 : χ 11 = χ 9)
-    -- R256 prefix (unused in this short step; kept for composition with R258):
+    -- prefix (unused in this short step; kept for composition with ):
     (_h5_eq_16 : χ 5 = χ 16)
     (_h6_eq_16 : χ 6 = χ 16)
     (_h2_eq_9 : χ 2 = χ 9)
@@ -10563,33 +10563,33 @@ theorem residual_cell_1_chi20_eq_chi9_case_chi13_eq_chi9_forces_chi18_19
     third_color_eq hχ19 hχ9 hχ12 hχ16 h12_ne_16 h19_ne_12 h19_ne_16 h9_ne_12 h9_ne_16
   exact ⟨h18_eq_12, h19_eq_9⟩
 
-/-! ### §99. R258 — residual cell (1), χ(13)=χ(9) high-position cascade to χ(40) MONO.
+/-! ### §99. — residual cell (1), χ(13)=χ(9) high-position cascade to χ(40) MONO.
 
-  **Strategic context (R258)**: under residual cell (1) + χ(20)=χ(9) + χ(13)=χ(9)
-  (the cleanest branch from R257), extend the cascade past n=20 to derive a MONO
+  **Strategic context ()**: under residual cell (1) + χ(20)=χ(9) + χ(13)=χ(9)
+  (the cleanest branch from ), extend the cascade past n=20 to derive a MONO
   Rado triple at n ≥ 40. **Closes the Case χ(13)=χ(9) layer-compression d=5
   contradiction.**
 
   **§99 cascade structure** (12 forced positions + 1 terminal mono, n ≥ 40):
 
-  Setup: A := χ(9), B := χ(12), C := χ(16), all distinct. R255+R256+R257 prefix
+  Setup: A := χ(9), B := χ(12), C := χ(16), all distinct. ++ prefix
   gives 14 of 16 forced positions in [1, 20] under this branch.
 
   | Step | Position | Forced | Key triple(s) |
   |------|----------|--------|---------------|
-  |  1 | χ(24) | C | self-loop m=6 + (20, 19, 24) |
-  |  2 | χ(21) | A | (12, 18, 21) + (24, 15, 21) |
-  |  3 | χ(28) | B | self-loop m=7 + (16, 24, 28) |
-  |  4 | χ(25) | C | anchor self-rado m=5 (20,20,25) + (28, 18, 25) |
-  |  5 | χ(29) | A | (16, 25, 29) + (4, 28, 29) |
-  |  6 | χ(30) | A | anchor self-rado m=6 (24,24,30) + (8, 28, 30) |
-  |  7 | χ(31) | A | (12, 28, 31) + (24, 25, 31) |
-  |  8 | χ(32) | A | self-loop m=8 + **(32, 4, 12)** ← key triple |
-  |  9 | χ(35) | C | anchor self-rado m=7 (28,28,35) + (20, 30, 35) |
+  | 1 | χ(24) | C | self-loop m=6 + (20, 19, 24) |
+  | 2 | χ(21) | A | (12, 18, 21) + (24, 15, 21) |
+  | 3 | χ(28) | B | self-loop m=7 + (16, 24, 28) |
+  | 4 | χ(25) | C | anchor self-rado m=5 (20,20,25) + (28, 18, 25) |
+  | 5 | χ(29) | A | (16, 25, 29) + (4, 28, 29) |
+  | 6 | χ(30) | A | anchor self-rado m=6 (24,24,30) + (8, 28, 30) |
+  | 7 | χ(31) | A | (12, 28, 31) + (24, 25, 31) |
+  | 8 | χ(32) | A | self-loop m=8 + **(32, 4, 12)** ← key triple |
+  | 9 | χ(35) | C | anchor self-rado m=7 (28,28,35) + (20, 30, 35) |
   | 10 | χ(39) | B | (16, 35, 39) + (32, 31, 39) |
   | 11 | χ(36) | C | (20, 31, 36) + (12, 36, 39) |
   | 12 | χ(40) | B | self-loop m=10 + (16, 36, 40) |
-  |  T | **MONO** | — | **(4, 39, 40): χ(4) = χ(39) = χ(40) = B** |
+  | T | **MONO** | — | **(4, 39, 40): χ(4) = χ(39) = χ(40) = B** |
 
   **KEY INSIGHT**: triple (32, 4, 12) forces χ(32) ≠ B because χ(4) = χ(12) = B
   in residual cell (1). Combined with self-loop m=8 (χ(32) ≠ C), this forces
@@ -10599,36 +10599,36 @@ theorem residual_cell_1_chi20_eq_chi9_case_chi13_eq_chi9_forces_chi18_19
   non-mono as one might guess).
 
   Arithmetic verification (b=4, x + 4y = 4z):
-  - (20, 19, 24):  20 + 76 = 96 = 4·24 ✓
+  - (20, 19, 24): 20 + 76 = 96 = 4·24 ✓
   - self-loop m=6 b=4: χ(18) ≠ χ(24)
-  - (12, 18, 21):  12 + 72 = 84 = 4·21 ✓
-  - (24, 15, 21):  24 + 60 = 84 ✓
-  - (16, 24, 28):  16 + 96 = 112 = 4·28 ✓
+  - (12, 18, 21): 12 + 72 = 84 = 4·21 ✓
+  - (24, 15, 21): 24 + 60 = 84 ✓
+  - (16, 24, 28): 16 + 96 = 112 = 4·28 ✓
   - self-loop m=7: χ(21) ≠ χ(28)
-  - (20, 20, 25):  20 + 80 = 100 = 4·25 ✓ (anchor self-rado m=5)
-  - (28, 18, 25):  28 + 72 = 100 ✓
-  - (16, 25, 29):  16 + 100 = 116 = 4·29 ✓
-  - (4, 28, 29):   4 + 112 = 116 ✓
-  - (24, 24, 30):  24 + 96 = 120 = 4·30 ✓ (anchor self-rado m=6)
-  - (8, 28, 30):   8 + 112 = 120 ✓
-  - (12, 28, 31):  12 + 112 = 124 = 4·31 ✓
-  - (24, 25, 31):  24 + 100 = 124 ✓
+  - (20, 20, 25): 20 + 80 = 100 = 4·25 ✓ (anchor self-rado m=5)
+  - (28, 18, 25): 28 + 72 = 100 ✓
+  - (16, 25, 29): 16 + 100 = 116 = 4·29 ✓
+  - (4, 28, 29): 4 + 112 = 116 ✓
+  - (24, 24, 30): 24 + 96 = 120 = 4·30 ✓ (anchor self-rado m=6)
+  - (8, 28, 30): 8 + 112 = 120 ✓
+  - (12, 28, 31): 12 + 112 = 124 = 4·31 ✓
+  - (24, 25, 31): 24 + 100 = 124 ✓
   - self-loop m=8: χ(24) ≠ χ(32)
   - **(32, 4, 12): 32 + 16 = 48 = 4·12 ✓** (key triple)
-  - (28, 28, 35):  28 + 112 = 140 = 4·35 ✓ (anchor self-rado m=7)
-  - (20, 30, 35):  20 + 120 = 140 ✓
-  - (16, 35, 39):  16 + 140 = 156 = 4·39 ✓
-  - (32, 31, 39):  32 + 124 = 156 ✓
-  - (20, 31, 36):  20 + 124 = 144 = 4·36 ✓
-  - (12, 36, 39):  12 + 144 = 156 ✓
-  - (16, 36, 40):  16 + 144 = 160 = 4·40 ✓
+  - (28, 28, 35): 28 + 112 = 140 = 4·35 ✓ (anchor self-rado m=7)
+  - (20, 30, 35): 20 + 120 = 140 ✓
+  - (16, 35, 39): 16 + 140 = 156 = 4·39 ✓
+  - (32, 31, 39): 32 + 124 = 156 ✓
+  - (20, 31, 36): 20 + 124 = 144 = 4·36 ✓
+  - (12, 36, 39): 12 + 144 = 156 ✓
+  - (16, 36, 40): 16 + 144 = 160 = 4·40 ✓
   - self-loop m=10: χ(30) ≠ χ(40)
-  - **(4, 39, 40):  4 + 156 = 160 ✓** (TERMINAL MONO)
+  - **(4, 39, 40): 4 + 156 = 160 ✓** (TERMINAL MONO)
 -/
 
 set_option maxHeartbeats 800000 in
-/-- **R258 main theorem** (Deliverable A): residual cell (1), χ(20) = χ(9),
-  χ(13) = χ(9), R255/R256/R257 prefix ⟹ False at n ≥ 40.
+/-- ** main theorem** (Deliverable A): residual cell (1), χ(20) = χ(9),
+  χ(13) = χ(9), // prefix ⟹ False at n ≥ 40.
 
   Closes the layer-compression d=5 contradiction for the χ(13) = χ(9) branch
   of residual cell (1) via a 12-step high-position cascade + terminal mono
@@ -10646,19 +10646,19 @@ theorem residual_cell_1_chi20_eq_chi9_case_chi13_eq_chi9_high_positions
     (h4_eq_12 : χ 4 = χ 12)
     (h8_eq_12 : χ 8 = χ 12)
     (h20_eq_9 : χ 20 = χ 9)
-    -- R255 prefix:
+    -- prefix:
     (_h14_eq_16 : χ 14 = χ 16)
     (_h10_eq_9 : χ 10 = χ 9)
     (h15_eq_16 : χ 15 = χ 16)
     (_h11_eq_9 : χ 11 = χ 9)
-    -- R256 prefix (all unused in high-position cascade; kept for composition):
+    -- prefix (all unused in high-position cascade; kept for composition):
     (_h5_eq_16 : χ 5 = χ 16)
     (_h6_eq_16 : χ 6 = χ 16)
     (_h2_eq_9 : χ 2 = χ 9)
     (_h7_eq_16 : χ 7 = χ 16)
     (_h3_eq_9 : χ 3 = χ 9)
     (_h1_eq_9 : χ 1 = χ 9)
-    -- R257 branch:
+    -- branch:
     (h13_eq_9 : χ 13 = χ 9)
     (h18_eq_12 : χ 18 = χ 12)
     (h19_eq_9 : χ 19 = χ 9) :
@@ -10980,38 +10980,38 @@ theorem residual_cell_1_chi20_eq_chi9_case_chi13_eq_chi9_high_positions
   · show χ 39 = χ (39 + 1)
     rw [show (39 + 1 : ℕ) = 40 by decide, h39_eq_12, ← h40_eq_12]
 
-/-! ### §100. R259 — residual cell (1), χ(13) = χ(16) branch closure.
+/-! ### §100. — residual cell (1), χ(13) = χ(16) branch closure.
 
-  **Strategic context (R259)**: complete the hLayer d=5 proof for residual
+  **Strategic context ()**: complete the hLayer d=5 proof for residual
   cell (1) by closing the sibling branch χ(13) = χ(16).
 
-  **MAJOR DISCOVERY**: while R258 used a 12-step high-position cascade for
+  **MAJOR DISCOVERY**: while used a 12-step high-position cascade for
   Case χ(13) = χ(9), the actual proof needs only **4 steps** and closes
-  BOTH branches simultaneously — without any χ(13) hypothesis. R258 was
+  BOTH branches simultaneously — without any χ(13) hypothesis. was
   over-engineered.
 
   **§100 cascade structure** (4 steps + 1 terminal mono):
 
-  Setup: A := χ(9), B := χ(12), C := χ(16). Residual cell (1) + R255/R256
+  Setup: A := χ(9), B := χ(12), C := χ(16). Residual cell (1) + /
   prefix gives the forced positions χ(1) = A, χ(4) = B, χ(7) = C, χ(12) = B,
   χ(15) = C (used as cell hypotheses).
 
   | Step | Position | Forced | Key triple |
   |------|----------|--------|------------|
-  |  1 | χ(32) ≠ B | (32, 4, 12) |
-  |  2 | χ(32) ≠ C | (32, 7, 15) |
-  |  3 | χ(32) = A | third_color_eq |
-  |  T | **MONO** | **(32, 1, 9): χ(32) = χ(1) = χ(9) = A** |
+  | 1 | χ(32) ≠ B | (32, 4, 12) |
+  | 2 | χ(32) ≠ C | (32, 7, 15) |
+  | 3 | χ(32) = A | third_color_eq |
+  | T | **MONO** | **(32, 1, 9): χ(32) = χ(1) = χ(9) = A** |
 
   Arithmetic verification:
-  - (32, 4, 12):  32 + 16 = 48 = 4·12 ✓ (uses χ(4) = χ(12) = B from residual cell)
-  - (32, 7, 15):  32 + 28 = 60 = 4·15 ✓ (uses χ(7) = χ(15) = C from R255/R256)
-  - **(32, 1, 9): 32 + 4 = 36 = 4·9 ✓ TERMINAL MONO** (uses χ(1) = χ(9) = A from R256)
+  - (32, 4, 12): 32 + 16 = 48 = 4·12 ✓ (uses χ(4) = χ(12) = B from residual cell)
+  - (32, 7, 15): 32 + 28 = 60 = 4·15 ✓ (uses χ(7) = χ(15) = C from /)
+  - **(32, 1, 9): 32 + 4 = 36 = 4·9 ✓ TERMINAL MONO** (uses χ(1) = χ(9) = A from )
 
   **Significance**: this discovery means:
   - The χ(13) ∈ {χ(9), χ(16)} case split is UNNECESSARY for hLayer d=5
     closure on residual cell (1).
-  - R258 closure works but used a much longer chain than necessary.
+  - closure works but used a much longer chain than necessary.
   - This shorter chain closes at n ≥ 32 (not n ≥ 40).
   - For consistency with the user-requested theorem name and signature,
     the theorem below accepts h13_eq_16 as a hypothesis but does NOT
@@ -11019,14 +11019,14 @@ theorem residual_cell_1_chi20_eq_chi9_case_chi13_eq_chi9_high_positions
 -/
 
 set_option maxHeartbeats 400000 in
-/-- **R259 χ(13) = χ(16) branch closure**: residual cell (1) + χ(20) = χ(9) +
-  R255/R256 prefix + χ(13) = χ(16) ⟹ False at n ≥ 40.
+/-- ** χ(13) = χ(16) branch closure**: residual cell (1) + χ(20) = χ(9) +
+  / prefix + χ(13) = χ(16) ⟹ False at n ≥ 40.
 
   Surprisingly, the proof does NOT use the χ(13) = χ(16) hypothesis. The
   4-step cascade (32, 4, 12) + (32, 7, 15) + third_color_eq + (32, 1, 9) closes
   the contradiction directly via χ(32) = χ(1) = χ(9) = A mono. This means
   hLayer d=5 for residual cell (1) closes WITHOUT requiring the χ(13) case
-  split that R258 used.
+  split that used.
 
   **Kernel-pure**: only Lean kernel axioms. -/
 theorem residual_cell_1_chi20_eq_chi9_case_chi13_eq_chi16_forces_False
@@ -11039,12 +11039,12 @@ theorem residual_cell_1_chi20_eq_chi9_case_chi13_eq_chi16_forces_False
     (h4_eq_12 : χ 4 = χ 12)
     (_h8_eq_12 : χ 8 = χ 12)
     (_h20_eq_9 : χ 20 = χ 9)
-    -- R255 prefix:
+    -- prefix:
     (_h14_eq_16 : χ 14 = χ 16)
     (_h10_eq_9 : χ 10 = χ 9)
     (h15_eq_16 : χ 15 = χ 16)
     (_h11_eq_9 : χ 11 = χ 9)
-    -- R256 prefix:
+    -- prefix:
     (_h5_eq_16 : χ 5 = χ 16)
     (_h6_eq_16 : χ 6 = χ 16)
     (_h2_eq_9 : χ 2 = χ 9)
@@ -11069,7 +11069,7 @@ theorem residual_cell_1_chi20_eq_chi9_case_chi13_eq_chi16_forces_False
       rw [show (4 * 8 : ℕ) = 32 by decide, h32_eq_12, ← h4_eq_12]
     · show χ 4 = χ (4 + 8)
       rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
-  -- STEP 2: χ(32) ≠ χ(16). (32, 7, 15) uses χ(7) = χ(15) = C from R255/R256.
+  -- STEP 2: χ(32) ≠ χ(16). (32, 7, 15) uses χ(7) = χ(15) = C from /.
   have h32_ne_16 : χ 32 ≠ χ 16 := by
     intro h32_eq_16
     have hRado := bAdicEquation_general_rado_constraint (b := 4) (n := n) (by omega) χ hNoMono
@@ -11093,30 +11093,30 @@ theorem residual_cell_1_chi20_eq_chi9_case_chi13_eq_chi16_forces_False
   · show χ 1 = χ (1 + 8)
     rw [show (1 + 8 : ℕ) = 9 by decide]; exact h1_eq_9
 
-/-! ### §101. R260 — hLayer d=5 extraction for residual cell (1).
+/-! ### §101. — hLayer d=5 extraction for residual cell (1).
 
-  **Strategic context (R260)**: extract the actual hLayer d=5 fact from
-  R255 + R256 + R259's discovery. Three theorems:
+  **Strategic context ()**: extract the actual hLayer d=5 fact from
+   + + 's discovery. Three theorems:
 
-  1. `…_forces_False_short` — composes R255 + R256 internally + inlines
-     R259's 4-step cascade. No χ(13) hypothesis. Closes at n ≥ 32.
+  1. `…_forces_False_short` — composes + internally + inlines
+     's 4-step cascade. No χ(13) hypothesis. Closes at n ≥ 32.
   2. `…_chi20_ne_chi9` — contrapositive: χ(20) ≠ χ(9) under cell (1).
   3. `…_layer_compression_d5` — trichotomy form: χ(20) = χ(12) ∨ χ(20) = χ(16).
 
-  **Feeds R254 bridge directly**: the third theorem above is exactly the
+  **Feeds bridge directly**: the third theorem above is exactly the
   d=5 case of the hLayer hypothesis for residual cell (1).
 
-  **R258 is now subsumed by `…_forces_False_short`**: the 12-step cascade
+  ** is now subsumed by `…_forces_False_short`**: the 12-step cascade
   was unnecessary; the actual minimal cascade is 4 steps via (32, 4, 12),
   (32, 7, 15), and (32, 1, 9) terminal mono.
 -/
 
 set_option maxHeartbeats 400000 in
-/-- **R260 short closure** (Type B latent pattern): residual cell (1) +
+/-- ** short closure** (Type B latent pattern): residual cell (1) +
   χ(20) = χ(9) ⟹ False at n ≥ 32. No χ(13) hypothesis required.
 
-  Composes R255 + R256 internally to derive the forced-color prefix, then
-  applies the 4-step R259 cascade: (32, 4, 12) + (32, 7, 15) + third_color_eq
+  Composes + internally to derive the forced-color prefix, then
+  applies the 4-step cascade: (32, 4, 12) + (32, 7, 15) + third_color_eq
   + (32, 1, 9) terminal mono.
 
   **Kernel-pure**: only Lean kernel axioms. -/
@@ -11131,16 +11131,16 @@ theorem residual_cell_1_chi20_eq_chi9_forces_False_short
     (h8_eq_12 : χ 8 = χ 12)
     (h20_eq_9 : χ 20 = χ 9) :
     False := by
-  -- Compose R255 prefix.
+  -- Compose prefix.
   obtain ⟨h14_eq_16, h10_eq_9, h15_eq_16, h11_eq_9⟩ :=
     residual_cell_1_chi20_eq_chi9_forces_chi14_10_15_11 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12 h20_eq_9
-  -- Compose R256 prefix.
+  -- Compose prefix.
   obtain ⟨_h5_eq_16, _h6_eq_16, _h2_eq_9, h7_eq_16, _h3_eq_9, h1_eq_9⟩ :=
     residual_cell_1_chi20_eq_chi9_forces_chi5_6_2_7_3_1 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12 h20_eq_9
       h14_eq_16 h10_eq_9 h15_eq_16 h11_eq_9
-  -- Inline R259's 4-step cascade.
+  -- Inline 's 4-step cascade.
   have hχ9 : χ 9 < 3 := hχk 9 (by omega) (by omega)
   have hχ12 : χ 12 < 3 := hχk 12 (by omega) (by omega)
   have hχ16 : χ 16 < 3 := hχk 16 (by omega) (by omega)
@@ -11180,7 +11180,7 @@ theorem residual_cell_1_chi20_eq_chi9_forces_False_short
   · show χ 1 = χ (1 + 8)
     rw [show (1 + 8 : ℕ) = 9 by decide]; exact h1_eq_9
 
-/-- **R260 contrapositive hLayer d=5 fact**: under residual cell (1)
+/-- ** contrapositive hLayer d=5 fact**: under residual cell (1)
   hypotheses, χ(20) ≠ χ(9). Immediate from the short closure.
 
   **Kernel-pure**: only Lean kernel axioms. -/
@@ -11198,9 +11198,9 @@ theorem residual_cell_1_chi20_ne_chi9
   exact residual_cell_1_chi20_eq_chi9_forces_False_short χ h32 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12 h20_eq_9
 
-/-- **R260 layer-compression d=5 fact**: under residual cell (1) hypotheses,
+/-- ** layer-compression d=5 fact**: under residual cell (1) hypotheses,
   χ(20) ∈ {χ(12), χ(16)}. This is the d=5 case of the hLayer hypothesis
-  for the R254 scale-by-4 bridge.
+  for the scale-by-4 bridge.
 
   Proof: χ(20) ≠ χ(9) (above) + by_cases on χ(20) = χ(12) + third_color_eq.
 
@@ -11226,10 +11226,10 @@ theorem residual_cell_1_layer_compression_d5
   · right
     exact third_color_eq hχ20 hχ16 hχ9 hχ12 h9_ne_12 h20_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §102. R261 — hLayer d=6 extraction for residual cell (1).
+/-! ### §102. — hLayer d=6 extraction for residual cell (1).
 
-  **Strategic context (R261)**: extend the layer-compression chain from d=5
-  (R260) to d=6. Under cell (1) hypotheses, prove χ(24) = χ(12) ∨ χ(24) = χ(16).
+  **Strategic context ()**: extend the layer-compression chain from d=5
+  () to d=6. Under cell (1) hypotheses, prove χ(24) = χ(12) ∨ χ(24) = χ(16).
 
   **§102 cascade structure** (6-step closure, n ≥ 24):
 
@@ -11240,39 +11240,39 @@ theorem residual_cell_1_layer_compression_d5
   |------|----------|--------|---------------|
   | 1 | χ(15) = C | (24, 9, 15) + (12, 12, 15) |
   | 2 | χ(11) = A | (16, 11, 15) + (12, 8, 11) |
-  | 3 | χ(5) = C  | (24, 5, 11) + (4, 4, 5) |
-  | 4 | χ(1) = A  | (16, 1, 5) + (12, 1, 4) |
-  | 5 | χ(7) = C  | (24, 1, 7) + (4, 7, 8) |
+  | 3 | χ(5) = C | (24, 5, 11) + (4, 4, 5) |
+  | 4 | χ(1) = A | (16, 1, 5) + (12, 1, 4) |
+  | 5 | χ(7) = C | (24, 1, 7) + (4, 7, 8) |
   | 6 | **χ(3) excluded from {A, B, C}** | (24, 3, 9) + (4, 3, 4) + (16, 3, 7) → third_color_eq → χ(3) = χ(16) ≠ χ(3). ⊥ |
 
   All triples in the proof have x + 4y = 4z arithmetic:
-  - (24, 9, 15):   24 + 36 = 60 = 4·15 ✓
-  - (12, 12, 15):  12 + 48 = 60 ✓
-  - (16, 11, 15):  16 + 44 = 60 ✓
-  - (12, 8, 11):   12 + 32 = 44 = 4·11 ✓
-  - (24, 5, 11):   24 + 20 = 44 ✓
-  - (4, 4, 5):     4 + 16 = 20 = 4·5 ✓
-  - (16, 1, 5):    16 + 4 = 20 ✓
-  - (12, 1, 4):    12 + 4 = 16 = 4·4 ✓
-  - (24, 1, 7):    24 + 4 = 28 = 4·7 ✓
-  - (4, 7, 8):     4 + 28 = 32 = 4·8 ✓
-  - (24, 3, 9):    24 + 12 = 36 = 4·9 ✓
-  - (4, 3, 4):     4 + 12 = 16 ✓
-  - (16, 3, 7):    16 + 12 = 28 ✓
+  - (24, 9, 15): 24 + 36 = 60 = 4·15 ✓
+  - (12, 12, 15): 12 + 48 = 60 ✓
+  - (16, 11, 15): 16 + 44 = 60 ✓
+  - (12, 8, 11): 12 + 32 = 44 = 4·11 ✓
+  - (24, 5, 11): 24 + 20 = 44 ✓
+  - (4, 4, 5): 4 + 16 = 20 = 4·5 ✓
+  - (16, 1, 5): 16 + 4 = 20 ✓
+  - (12, 1, 4): 12 + 4 = 16 = 4·4 ✓
+  - (24, 1, 7): 24 + 4 = 28 = 4·7 ✓
+  - (4, 7, 8): 4 + 28 = 32 = 4·8 ✓
+  - (24, 3, 9): 24 + 12 = 36 = 4·9 ✓
+  - (4, 3, 4): 4 + 12 = 16 ✓
+  - (16, 3, 7): 16 + 12 = 28 ✓
 
-  **Type B latent pattern**: this cascade is structurally similar to R255+R256
-  (which derived a prefix of forced colors and then closed). R261 closes at
+  **Type B latent pattern**: this cascade is structurally similar to +
+  (which derived a prefix of forced colors and then closed). closes at
   n ≥ 24 via the χ(3) "no-color-left" contradiction. The cascade does NOT
-  require R260 (chi(20) value) — only cell (1) hypotheses + chi(24) = chi(9).
+  require (chi(20) value) — only cell (1) hypotheses + chi(24) = chi(9).
 
-  Three composed theorems (analogous to R260):
+  Three composed theorems (analogous to ):
   1. `..._chi24_eq_chi9_forces_False_short` — direct contradiction, n ≥ 24.
   2. `..._chi24_ne_chi9` — contrapositive.
-  3. `..._layer_compression_d6` — trichotomy form, feeds R254.
+  3. `..._layer_compression_d6` — trichotomy form, feeds.
 -/
 
 set_option maxHeartbeats 400000 in
-/-- **R261 chi(24) = chi(9) closure**: residual cell (1) + χ(24) = χ(9) ⟹ False
+/-- ** chi(24) = chi(9) closure**: residual cell (1) + χ(24) = χ(9) ⟹ False
   at n ≥ 24. 6-step cascade ending in χ(3) excluded from all 3 colors. -/
 theorem residual_cell_1_chi24_eq_chi9_forces_False_short
     {n : ℕ} (χ : ℕ → ℕ) (h24 : 24 ≤ n)
@@ -11445,7 +11445,7 @@ theorem residual_cell_1_chi24_eq_chi9_forces_False_short
     third_color_eq hχ3 hχ16 hχ9 hχ12 h9_ne_12 h3_ne_9 h3_ne_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
   exact h3_ne_16 h3_eq_16
 
-/-- **R261 contrapositive**: χ(24) ≠ χ(9) under cell (1) hypotheses. -/
+/-- ** contrapositive**: χ(24) ≠ χ(9) under cell (1) hypotheses. -/
 theorem residual_cell_1_chi24_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h24 : 24 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -11460,8 +11460,8 @@ theorem residual_cell_1_chi24_ne_chi9
   exact residual_cell_1_chi24_eq_chi9_forces_False_short χ h24 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12 h24_eq_9
 
-/-- **R261 layer compression d=6**: χ(24) ∈ {χ(12), χ(16)} under cell (1).
-  This is the d=6 case of the hLayer hypothesis for the R254 bridge. -/
+/-- ** layer compression d=6**: χ(24) ∈ {χ(12), χ(16)} under cell (1).
+  This is the d=6 case of the hLayer hypothesis for the bridge. -/
 theorem residual_cell_1_layer_compression_d6
     {n : ℕ} (χ : ℕ → ℕ) (h24 : 24 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -11483,10 +11483,10 @@ theorem residual_cell_1_layer_compression_d6
   · right
     exact third_color_eq hχ24 hχ16 hχ9 hχ12 h9_ne_12 h24_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §103. R262 — hLayer d=7 extraction for residual cell (1).
+/-! ### §103. — hLayer d=7 extraction for residual cell (1).
 
-  **Strategic context (R262)**: extend the layer-compression chain from d=6
-  (R261) to d=7. Under cell (1) hypotheses + R260 (chi(20) = B), prove
+  **Strategic context ()**: extend the layer-compression chain from d=6
+  () to d=7. Under cell (1) hypotheses + (chi(20) = B), prove
   χ(28) = χ(12) ∨ χ(28) = χ(16).
 
   **§103 cascade structure** (7 forced positions + 1 terminal mono, n ≥ 32):
@@ -11495,37 +11495,37 @@ theorem residual_cell_1_layer_compression_d6
 
   | Step | Position | Forced | Key triple(s) |
   |------|----------|--------|---------------|
-  |  0 | χ(20) = B | R260 (chi(20) ≠ A) + (16, 16, 20) (chi(20) ≠ C) |
-  |  1 | χ(2) = C  | (8, 2, 4) + (28, 2, 9) |
-  |  2 | χ(6) = A  | (8, 6, 8) self-loop + (16, 2, 6) |
-  |  3 | χ(13) = C | (4, 12, 13) + (28, 6, 13) |
-  |  4 | χ(17) = A | (16, 13, 17) + (20, 12, 17) |
-  |  5 | χ(10) = C | (8, 8, 10) + (28, 10, 17) |
-  |  6 | χ(32) = A | (32, 4, 12) + (32, 2, 10) |
-  |  T | **MONO** | **(32, 9, 17): χ(32) = χ(9) = χ(17) = A** |
+  | 0 | χ(20) = B | (chi(20) ≠ A) + (16, 16, 20) (chi(20) ≠ C) |
+  | 1 | χ(2) = C | (8, 2, 4) + (28, 2, 9) |
+  | 2 | χ(6) = A | (8, 6, 8) self-loop + (16, 2, 6) |
+  | 3 | χ(13) = C | (4, 12, 13) + (28, 6, 13) |
+  | 4 | χ(17) = A | (16, 13, 17) + (20, 12, 17) |
+  | 5 | χ(10) = C | (8, 8, 10) + (28, 10, 17) |
+  | 6 | χ(32) = A | (32, 4, 12) + (32, 2, 10) |
+  | T | **MONO** | **(32, 9, 17): χ(32) = χ(9) = χ(17) = A** |
 
   All triples verified for b=4 (x + 4y = 4z):
   - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓
-  - (8, 2, 4):    8 + 8 = 16 = 4·4 ✓
-  - (28, 2, 9):   28 + 8 = 36 = 4·9 ✓
+  - (8, 2, 4): 8 + 8 = 16 = 4·4 ✓
+  - (28, 2, 9): 28 + 8 = 36 = 4·9 ✓
   - (8, 6, 8) self-loop b=4 m=2
-  - (16, 2, 6):   16 + 8 = 24 = 4·6 ✓
-  - (4, 12, 13):  4 + 48 = 52 = 4·13 ✓
-  - (28, 6, 13):  28 + 24 = 52 ✓
+  - (16, 2, 6): 16 + 8 = 24 = 4·6 ✓
+  - (4, 12, 13): 4 + 48 = 52 = 4·13 ✓
+  - (28, 6, 13): 28 + 24 = 52 ✓
   - (16, 13, 17): 16 + 52 = 68 = 4·17 ✓
   - (20, 12, 17): 20 + 48 = 68 ✓
-  - (8, 8, 10):   8 + 32 = 40 = 4·10 ✓
+  - (8, 8, 10): 8 + 32 = 40 = 4·10 ✓
   - (28, 10, 17): 28 + 40 = 68 = 4·17 ✓
-  - (32, 4, 12):  32 + 16 = 48 = 4·12 ✓
-  - (32, 2, 10):  32 + 8 = 40 = 4·10 ✓
+  - (32, 4, 12): 32 + 16 = 48 = 4·12 ✓
+  - (32, 2, 10): 32 + 8 = 40 = 4·10 ✓
   - **(32, 9, 17): 32 + 36 = 68 = 4·17 ✓** TERMINAL MONO
 
-  **Closes at n ≥ 32** via terminal mono (32, 9, 17). Calls R260 internally.
+  **Closes at n ≥ 32** via terminal mono (32, 9, 17). Calls internally.
 -/
 
 set_option maxHeartbeats 400000 in
-/-- **R262 chi(28) = chi(9) closure**: residual cell (1) + χ(28) = χ(9) ⟹
-  False at n ≥ 32. 7-step cascade ending in mono (32, 9, 17). Calls R260
+/-- ** chi(28) = chi(9) closure**: residual cell (1) + χ(28) = χ(9) ⟹
+  False at n ≥ 32. 7-step cascade ending in mono (32, 9, 17). Calls 
   to get chi(20) = chi(12). -/
 theorem residual_cell_1_chi28_eq_chi9_forces_False_short
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
@@ -11548,7 +11548,7 @@ theorem residual_cell_1_chi28_eq_chi9_forces_False_short
   have hχ17 : χ 17 < 3 := hχk 17 (by omega) (by omega)
   have hχ20 : χ 20 < 3 := hχk 20 (by omega) (by omega)
   have hχ32 : χ 32 < 3 := hχk 32 (by omega) (by omega)
-  -- STEP 0: χ(20) = χ(12). R260 + (16, 16, 20).
+  -- STEP 0: χ(20) = χ(12). + (16, 16, 20).
   have h20_ne_9 : χ 20 ≠ χ 9 :=
     residual_cell_1_chi20_ne_chi9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -11709,7 +11709,7 @@ theorem residual_cell_1_chi28_eq_chi9_forces_False_short
   · show χ 9 = χ (9 + 8)
     rw [show (9 + 8 : ℕ) = 17 by decide]; exact h17_eq_9.symm
 
-/-- **R262 contrapositive**: χ(28) ≠ χ(9) under cell (1) hypotheses. -/
+/-- ** contrapositive**: χ(28) ≠ χ(9) under cell (1) hypotheses. -/
 theorem residual_cell_1_chi28_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -11724,8 +11724,8 @@ theorem residual_cell_1_chi28_ne_chi9
   exact residual_cell_1_chi28_eq_chi9_forces_False_short χ h32 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12 h28_eq_9
 
-/-- **R262 layer compression d=7**: χ(28) ∈ {χ(12), χ(16)} under cell (1).
-  Feeds R254 bridge as the d=7 hLayer case. -/
+/-- ** layer compression d=7**: χ(28) ∈ {χ(12), χ(16)} under cell (1).
+  Feeds bridge as the d=7 hLayer case. -/
 theorem residual_cell_1_layer_compression_d7
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -11747,10 +11747,10 @@ theorem residual_cell_1_layer_compression_d7
   · right
     exact third_color_eq hχ28 hχ16 hχ9 hχ12 h9_ne_12 h28_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §104. R263 — hLayer d=8 extraction for residual cell (1).
+/-! ### §104. — hLayer d=8 extraction for residual cell (1).
 
-  **Strategic context (R263)**: extend the layer-compression chain to d=8.
-  Under cell (1) hypotheses + R260 (chi(20) = B), prove
+  **Strategic context ()**: extend the layer-compression chain to d=8.
+  Under cell (1) hypotheses + (chi(20) = B), prove
   χ(32) = χ(12) ∨ χ(32) = χ(16).
 
   **§104 cascade structure** (case split on χ(13), each case closes via
@@ -11759,7 +11759,7 @@ theorem residual_cell_1_layer_compression_d7
   Setup: A := χ(9), B := χ(12), C := χ(16). Assume χ(32) = A for contradiction.
 
   Preamble:
-  - Step 0: χ(20) = χ(12) via R260 + (16, 16, 20).
+  - Step 0: χ(20) = χ(12) via + (16, 16, 20).
   - chi(13) ≠ chi(12) from (4, 12, 13) [general].
 
   Case A: χ(13) = χ(16) (= C).
@@ -11783,26 +11783,26 @@ theorem residual_cell_1_layer_compression_d7
   | BT | **MONO** | **(32, 1, 9): chi(32) = chi(1) = chi(9) = A** |
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (16, 16, 20):  16 + 64 = 80 = 4·20 ✓
-  - (4, 12, 13):   4 + 48 = 52 = 4·13 ✓
-  - (20, 12, 17):  20 + 48 = 68 = 4·17 ✓
-  - (16, 13, 17):  16 + 52 = 68 ✓
+  - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓
+  - (4, 12, 13): 4 + 48 = 52 = 4·13 ✓
+  - (20, 12, 17): 20 + 48 = 68 = 4·17 ✓
+  - (16, 13, 17): 16 + 52 = 68 ✓
   - **(32, 9, 17): 32 + 36 = 68 ✓ — Case A TERMINAL**
-  - (32, 5, 13):   32 + 20 = 52 ✓
-  - (4, 4, 5):     4 + 16 = 20 = 4·5 ✓
-  - (16, 1, 5):    16 + 4 = 20 ✓
-  - (12, 1, 4):    12 + 4 = 16 = 4·4 ✓
-  - **(32, 1, 9):  32 + 4 = 36 = 4·9 ✓ — Case B TERMINAL**
+  - (32, 5, 13): 32 + 20 = 52 ✓
+  - (4, 4, 5): 4 + 16 = 20 = 4·5 ✓
+  - (16, 1, 5): 16 + 4 = 20 ✓
+  - (12, 1, 4): 12 + 4 = 16 = 4·4 ✓
+  - **(32, 1, 9): 32 + 4 = 36 = 4·9 ✓ — Case B TERMINAL**
 
   **Closes at n ≥ 32** via two distinct terminal mono triples depending on χ(13).
 -/
 
 set_option maxHeartbeats 400000 in
-/-- **R263 chi(32) = chi(9) closure**: residual cell (1) + χ(32) = χ(9) ⟹
+/-- ** chi(32) = chi(9) closure**: residual cell (1) + χ(32) = χ(9) ⟹
   False at n ≥ 32. Case split on χ(13):
   - Case χ(13) = χ(16): mono via (32, 9, 17).
   - Case χ(13) ≠ χ(16): cascade to mono via (32, 1, 9).
-  Calls R260 internally for chi(20) = chi(12). -/
+  Calls internally for chi(20) = chi(12). -/
 theorem residual_cell_1_chi32_eq_chi9_forces_False_short
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -11822,7 +11822,7 @@ theorem residual_cell_1_chi32_eq_chi9_forces_False_short
   have hχ16 : χ 16 < 3 := hχk 16 (by omega) (by omega)
   have hχ17 : χ 17 < 3 := hχk 17 (by omega) (by omega)
   have hχ20 : χ 20 < 3 := hχk 20 (by omega) (by omega)
-  -- PREAMBLE STEP 0: chi(20) = chi(12). R260 + (16, 16, 20).
+  -- PREAMBLE STEP 0: chi(20) = chi(12). + (16, 16, 20).
   have h20_ne_9 : χ 20 ≠ χ 9 :=
     residual_cell_1_chi20_ne_chi9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -11947,7 +11947,7 @@ theorem residual_cell_1_chi32_eq_chi9_forces_False_short
     · show χ 1 = χ (1 + 8)
       rw [show (1 + 8 : ℕ) = 9 by decide]; exact h1_eq_9
 
-/-- **R263 contrapositive**: χ(32) ≠ χ(9) under cell (1) hypotheses. -/
+/-- ** contrapositive**: χ(32) ≠ χ(9) under cell (1) hypotheses. -/
 theorem residual_cell_1_chi32_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -11962,8 +11962,8 @@ theorem residual_cell_1_chi32_ne_chi9
   exact residual_cell_1_chi32_eq_chi9_forces_False_short χ h32 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12 h32_eq_9
 
-/-- **R263 layer compression d=8**: χ(32) ∈ {χ(12), χ(16)} under cell (1).
-  Feeds R254 bridge as the d=8 hLayer case. -/
+/-- ** layer compression d=8**: χ(32) ∈ {χ(12), χ(16)} under cell (1).
+  Feeds bridge as the d=8 hLayer case. -/
 theorem residual_cell_1_layer_compression_d8
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -11985,15 +11985,15 @@ theorem residual_cell_1_layer_compression_d8
   · right
     exact third_color_eq hχ32 hχ16 hχ9 hχ12 h9_ne_12 h32_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §105. R264 — hLayer d=9 extraction for residual cell (1).
+/-! ### §105. — hLayer d=9 extraction for residual cell (1).
 
-  **Strategic context (R264)**: extend the layer-compression chain to d=9.
+  **Strategic context ()**: extend the layer-compression chain to d=9.
 
-  **Key insight**: under cell (1) hypotheses + R261 (chi(24) ∈ {B, C}) +
-  R263 (chi(32) ∈ {B, C}), both chi(24) and chi(32) are FORCED to specific
+  **Key insight**: under cell (1) hypotheses + (chi(24) ∈ {B, C}) +
+   (chi(32) ∈ {B, C}), both chi(24) and chi(32) are FORCED to specific
   values WITHOUT additional case split:
-    - chi(32) ≠ B from (32, 4, 12) + R263 → chi(32) = C.
-    - chi(24) ≠ C from self-loop m=8 (chi(24) ≠ chi(32) = C) + R261 → chi(24) = B.
+    - chi(32) ≠ B from (32, 4, 12) + → chi(32) = C.
+    - chi(24) ≠ C from self-loop m=8 (chi(24) ≠ chi(32) = C) + → chi(24) = B.
 
   This unlocks a no-case-split 9-step cascade under chi(36) = A, terminating
   in mono (32, 2, 10) with chi(32) = chi(2) = chi(10) = C.
@@ -12001,22 +12001,22 @@ theorem residual_cell_1_layer_compression_d8
   **§105 cascade structure** (3 preamble + 9 main + 1 terminal mono):
 
   Preamble:
-  - P1: chi(20) = chi(12). R260 + (16, 16, 20).
-  - P2: chi(32) = chi(16). R263 + (32, 4, 12).
-  - P3: chi(24) = chi(12). R261 + self-loop m=8.
+  - P1: chi(20) = chi(12). + (16, 16, 20).
+  - P2: chi(32) = chi(16). + (32, 4, 12).
+  - P3: chi(24) = chi(12). + self-loop m=8.
 
   Main cascade (forced under chi(36) = A and preamble):
   | Step | Position | Triple(s) |
   |------|----------|-----------|
   | 1 | chi(18) = C | self-loop m=6 + (36, 9, 18) |
   | 2 | chi(14) = A | (16, 14, 18) + (8, 12, 14) |
-  | 3 | chi(5)  = C | (36, 5, 14) + (4, 4, 5) |
-  | 4 | chi(1)  = A | (16, 1, 5) + (12, 1, 4) |
+  | 3 | chi(5) = C | (36, 5, 14) + (4, 4, 5) |
+  | 4 | chi(1) = A | (16, 1, 5) + (12, 1, 4) |
   | 5 | chi(10) = C | (36, 1, 10) + (8, 8, 10) |
-  | 6 | chi(6)  = A | (16, 6, 10) + (8, 6, 8) self-loop |
+  | 6 | chi(6) = A | (16, 6, 10) + (8, 6, 8) self-loop |
   | 7 | chi(15) = C | (36, 6, 15) + (12, 12, 15) |
   | 8 | chi(11) = A | (16, 11, 15) + (12, 8, 11) |
-  | 9 | chi(2)  = C | (36, 2, 11) + (8, 2, 4) |
+  | 9 | chi(2) = C | (36, 2, 11) + (8, 2, 4) |
   | T | **MONO** | **(32, 2, 10): chi(32) = chi(2) = chi(10) = C** |
 
   All triples verified for b=4 (x + 4y = 4z):
@@ -12045,9 +12045,9 @@ theorem residual_cell_1_layer_compression_d8
 -/
 
 set_option maxHeartbeats 800000 in
-/-- **R264 chi(36) = chi(9) closure**: residual cell (1) + χ(36) = χ(9) ⟹
-  False at n ≥ 36. 9-step cascade ending in mono (32, 2, 10). Calls R260,
-  R261, R263 internally for preamble. NO case split needed. -/
+/-- ** chi(36) = chi(9) closure**: residual cell (1) + χ(36) = χ(9) ⟹
+  False at n ≥ 36. 9-step cascade ending in mono (32, 2, 10). Calls,
+, internally for preamble. NO case split needed. -/
 theorem residual_cell_1_chi36_eq_chi9_forces_False_short
     {n : ℕ} (χ : ℕ → ℕ) (h36 : 36 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -12072,7 +12072,7 @@ theorem residual_cell_1_chi36_eq_chi9_forces_False_short
   have hχ16 : χ 16 < 3 := hχk 16 (by omega) (by omega)
   have hχ18 : χ 18 < 3 := hχk 18 (by omega) (by omega)
   have hχ20 : χ 20 < 3 := hχk 20 (by omega) (by omega)
-  -- PREAMBLE P1: chi(20) = chi(12). R260 + (16, 16, 20).
+  -- PREAMBLE P1: chi(20) = chi(12). + (16, 16, 20).
   have h20_ne_9 : χ 20 ≠ χ 9 :=
     residual_cell_1_chi20_ne_chi9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -12088,7 +12088,7 @@ theorem residual_cell_1_chi36_eq_chi9_forces_False_short
       rw [show (16 + 4 : ℕ) = 20 by decide, h20_eq_16]
   have h20_eq_12 : χ 20 = χ 12 :=
     third_color_eq hχ20 hχ12 hχ9 hχ16 h9_ne_16 h20_ne_9 h20_ne_16 (Ne.symm h9_ne_12) h12_ne_16
-  -- PREAMBLE P2: chi(32) = chi(16). R263 + (32, 4, 12).
+  -- PREAMBLE P2: chi(32) = chi(16). + (32, 4, 12).
   have h32_disj : χ 32 = χ 12 ∨ χ 32 = χ 16 :=
     residual_cell_1_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -12103,7 +12103,7 @@ theorem residual_cell_1_chi36_eq_chi9_forces_False_short
     · show χ 4 = χ (4 + 8)
       rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
   have h32_eq_16 : χ 32 = χ 16 := h32_disj.resolve_left h32_ne_12
-  -- PREAMBLE P3: chi(24) = chi(12). R261 + self-loop m=8.
+  -- PREAMBLE P3: chi(24) = chi(12). + self-loop m=8.
   have h24_disj : χ 24 = χ 12 ∨ χ 24 = χ 16 :=
     residual_cell_1_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -12327,7 +12327,7 @@ theorem residual_cell_1_chi36_eq_chi9_forces_False_short
   · show χ 2 = χ (2 + 8)
     rw [show (2 + 8 : ℕ) = 10 by decide, h2_eq_16, ← h10_eq_16]
 
-/-- **R264 contrapositive**: χ(36) ≠ χ(9) under cell (1) hypotheses. -/
+/-- ** contrapositive**: χ(36) ≠ χ(9) under cell (1) hypotheses. -/
 theorem residual_cell_1_chi36_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h36 : 36 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -12342,8 +12342,8 @@ theorem residual_cell_1_chi36_ne_chi9
   exact residual_cell_1_chi36_eq_chi9_forces_False_short χ h36 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12 h36_eq_9
 
-/-- **R264 layer compression d=9**: χ(36) ∈ {χ(12), χ(16)} under cell (1).
-  Feeds R254 bridge as the d=9 hLayer case. -/
+/-- ** layer compression d=9**: χ(36) ∈ {χ(12), χ(16)} under cell (1).
+  Feeds bridge as the d=9 hLayer case. -/
 theorem residual_cell_1_layer_compression_d9
     {n : ℕ} (χ : ℕ → ℕ) (h36 : 36 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -12365,14 +12365,14 @@ theorem residual_cell_1_layer_compression_d9
   · right
     exact third_color_eq hχ36 hχ16 hχ9 hχ12 h9_ne_12 h36_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §106. R265 — hLayer d=10 extraction for residual cell (1).
+/-! ### §106. — hLayer d=10 extraction for residual cell (1).
 
-  **Strategic context (R265)**: extend chain to d=10 (anchor χ(40)).
+  **Strategic context ()**: extend chain to d=10 (anchor χ(40)).
 
-  **Sharpened preamble**: under cell (1) + R260/R262/R263:
-  - χ(20) = χ(12) (B) via R260 + (16, 16, 20).
-  - χ(32) = χ(16) (C) via R263 + (32, 4, 12).
-  - χ(28) = χ(12) (B) via R262 + (16, 28, 32) — uses sharpened χ(32).
+  **Sharpened preamble**: under cell (1) + //:
+  - χ(20) = χ(12) (B) via + (16, 16, 20).
+  - χ(32) = χ(16) (C) via + (32, 4, 12).
+  - χ(28) = χ(12) (B) via + (16, 28, 32) — uses sharpened χ(32).
 
   **§106 cascade structure** (8 forced + 1 no-color-left terminal, n ≥ 40):
 
@@ -12382,10 +12382,10 @@ theorem residual_cell_1_layer_compression_d9
   |------|----------|-----------|
   | 1 | χ(19) = C | (28, 12, 19) + (40, 9, 19) |
   | 2 | χ(15) = A | (16, 15, 19) + (12, 12, 15) |
-  | 3 | χ(5)  = C | (40, 5, 15) + (4, 4, 5) |
-  | 4 | χ(1)  = A | (16, 1, 5) + (12, 1, 4) |
+  | 3 | χ(5) = C | (40, 5, 15) + (4, 4, 5) |
+  | 4 | χ(1) = A | (16, 1, 5) + (12, 1, 4) |
   | 5 | χ(11) = C | (40, 1, 11) + (12, 8, 11) |
-  | 6 | χ(7)  = A | (16, 7, 11) + (4, 7, 8) |
+  | 6 | χ(7) = A | (16, 7, 11) + (4, 7, 8) |
   | 7 | χ(17) = C | (40, 7, 17) + (20, 12, 17) |
   | 8 | χ(13) = A | (16, 13, 17) + (4, 12, 13) |
   | T | **χ(23) ∉ {A, B, C}** | (40, 13, 23) + (12, 20, 23) + (16, 19, 23) |
@@ -12394,34 +12394,34 @@ theorem residual_cell_1_layer_compression_d9
   forces χ(23) = χ(16), but χ(23) ≠ χ(16). ⊥
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (16, 16, 20):  80 = 4·20 ✓
-  - (32, 4, 12):   48 = 4·12 ✓
-  - (16, 28, 32):  128 = 4·32 ✓
-  - (28, 12, 19):  76 = 4·19 ✓
-  - (40, 9, 19):   76 ✓
-  - (16, 15, 19):  76 ✓
-  - (12, 12, 15):  60 = 4·15 ✓
-  - (40, 5, 15):   60 ✓
-  - (4, 4, 5):     20 = 4·5 ✓
-  - (16, 1, 5):    20 ✓
-  - (12, 1, 4):    16 = 4·4 ✓
-  - (40, 1, 11):   44 = 4·11 ✓
-  - (12, 8, 11):   44 ✓
-  - (16, 7, 11):   44 ✓
-  - (4, 7, 8):     32 = 4·8 ✓
-  - (40, 7, 17):   68 = 4·17 ✓
-  - (20, 12, 17):  68 ✓
-  - (16, 13, 17):  68 ✓
-  - (4, 12, 13):   52 = 4·13 ✓
-  - (40, 13, 23):  92 = 4·23 ✓
-  - (12, 20, 23):  92 ✓
-  - (16, 19, 23):  92 ✓
+  - (16, 16, 20): 80 = 4·20 ✓
+  - (32, 4, 12): 48 = 4·12 ✓
+  - (16, 28, 32): 128 = 4·32 ✓
+  - (28, 12, 19): 76 = 4·19 ✓
+  - (40, 9, 19): 76 ✓
+  - (16, 15, 19): 76 ✓
+  - (12, 12, 15): 60 = 4·15 ✓
+  - (40, 5, 15): 60 ✓
+  - (4, 4, 5): 20 = 4·5 ✓
+  - (16, 1, 5): 20 ✓
+  - (12, 1, 4): 16 = 4·4 ✓
+  - (40, 1, 11): 44 = 4·11 ✓
+  - (12, 8, 11): 44 ✓
+  - (16, 7, 11): 44 ✓
+  - (4, 7, 8): 32 = 4·8 ✓
+  - (40, 7, 17): 68 = 4·17 ✓
+  - (20, 12, 17): 68 ✓
+  - (16, 13, 17): 68 ✓
+  - (4, 12, 13): 52 = 4·13 ✓
+  - (40, 13, 23): 92 = 4·23 ✓
+  - (12, 20, 23): 92 ✓
+  - (16, 19, 23): 92 ✓
 -/
 
 set_option maxHeartbeats 800000 in
-/-- **R265 chi(40) = chi(9) closure**: residual cell (1) + χ(40) = χ(9) ⟹
+/-- ** chi(40) = chi(9) closure**: residual cell (1) + χ(40) = χ(9) ⟹
   False at n ≥ 40. 8-step cascade ending in no-color-left contradiction on
-  χ(23). Calls R260, R262, R263 internally for sharpened preamble. -/
+  χ(23). Calls,, internally for sharpened preamble. -/
 theorem residual_cell_1_chi40_eq_chi9_forces_False_short
     {n : ℕ} (χ : ℕ → ℕ) (h40 : 40 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -12446,7 +12446,7 @@ theorem residual_cell_1_chi40_eq_chi9_forces_False_short
   have hχ19 : χ 19 < 3 := hχk 19 (by omega) (by omega)
   have hχ20 : χ 20 < 3 := hχk 20 (by omega) (by omega)
   have hχ23 : χ 23 < 3 := hχk 23 (by omega) (by omega)
-  -- PREAMBLE P1: χ(20) = χ(12). R260 + (16, 16, 20).
+  -- PREAMBLE P1: χ(20) = χ(12). + (16, 16, 20).
   have h20_ne_9 : χ 20 ≠ χ 9 :=
     residual_cell_1_chi20_ne_chi9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -12462,7 +12462,7 @@ theorem residual_cell_1_chi40_eq_chi9_forces_False_short
       rw [show (16 + 4 : ℕ) = 20 by decide, h20_eq_16]
   have h20_eq_12 : χ 20 = χ 12 :=
     third_color_eq hχ20 hχ12 hχ9 hχ16 h9_ne_16 h20_ne_9 h20_ne_16 (Ne.symm h9_ne_12) h12_ne_16
-  -- PREAMBLE P2: χ(32) = χ(16). R263 + (32, 4, 12).
+  -- PREAMBLE P2: χ(32) = χ(16). + (32, 4, 12).
   have h32_disj : χ 32 = χ 12 ∨ χ 32 = χ 16 :=
     residual_cell_1_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -12477,7 +12477,7 @@ theorem residual_cell_1_chi40_eq_chi9_forces_False_short
     · show χ 4 = χ (4 + 8)
       rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
   have h32_eq_16 : χ 32 = χ 16 := h32_disj.resolve_left h32_ne_12
-  -- PREAMBLE P3: χ(28) = χ(12). R262 + (16, 28, 32).
+  -- PREAMBLE P3: χ(28) = χ(12). + (16, 28, 32).
   have h28_disj : χ 28 = χ 12 ∨ χ 28 = χ 16 :=
     residual_cell_1_layer_compression_d7 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -12712,7 +12712,7 @@ theorem residual_cell_1_chi40_eq_chi9_forces_False_short
     third_color_eq hχ23 hχ16 hχ9 hχ12 h9_ne_12 h23_ne_9 h23_ne_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
   exact h23_ne_16 h23_eq_16
 
-/-- **R265 contrapositive**: χ(40) ≠ χ(9) under cell (1) hypotheses. -/
+/-- ** contrapositive**: χ(40) ≠ χ(9) under cell (1) hypotheses. -/
 theorem residual_cell_1_chi40_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h40 : 40 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -12727,8 +12727,8 @@ theorem residual_cell_1_chi40_ne_chi9
   exact residual_cell_1_chi40_eq_chi9_forces_False_short χ h40 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12 h40_eq_9
 
-/-- **R265 layer compression d=10**: χ(40) ∈ {χ(12), χ(16)} under cell (1).
-  Feeds R254 bridge as the d=10 hLayer case. -/
+/-- ** layer compression d=10**: χ(40) ∈ {χ(12), χ(16)} under cell (1).
+  Feeds bridge as the d=10 hLayer case. -/
 theorem residual_cell_1_layer_compression_d10
     {n : ℕ} (χ : ℕ → ℕ) (h40 : 40 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -12750,32 +12750,32 @@ theorem residual_cell_1_layer_compression_d10
   · right
     exact third_color_eq hχ40 hχ16 hχ9 hχ12 h9_ne_12 h40_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §107. R266 — d = 11 closure for residual cell (1).
+/-! ### §107. — d = 11 closure for residual cell (1).
 
   **Target.** Under residual cell (1) hypotheses (χ(4) = χ(8) = χ(12) and
   χ(9)/χ(12)/χ(16) pairwise distinct in a 3-coloring), and mono-free
   `bAdicEquation 4` at n ≥ 44, prove χ(44) ∈ {χ(12), χ(16)}. Equivalently,
   rule out χ(44) = χ(9).
 
-  **Type B latent pattern (R260 / R262 / R263 / R265 reuse).**
+  **Type B latent pattern ( / / / reuse).**
   Sharpened preamble + alternating cascade + concrete mono terminal.
 
   | Step | Position | Triple(s) |
   |------|----------|-----------|
-  | P1 | χ(20) = χ(12) | R260 + (16, 16, 20) |
-  | P2 | χ(32) = χ(16) | R263 + (32, 4, 12) |
-  | P3 | χ(28) = χ(12) | R262 + (16, 28, 32) |
-  | P4 | χ(24) = χ(12) | R261 + self-loop m=8 |
+  | P1 | χ(20) = χ(12) | + (16, 16, 20) |
+  | P2 | χ(32) = χ(16) | + (32, 4, 12) |
+  | P3 | χ(28) = χ(12) | + (16, 28, 32) |
+  | P4 | χ(24) = χ(12) | + self-loop m=8 |
   | 1 | χ(33) = χ(16) | self-loop m=11 + (20, 28, 33) |
-  | 2 | χ(29) = χ(9)  | (16, 29, 33) + (4, 28, 29) |
+  | 2 | χ(29) = χ(9) | (16, 29, 33) + (4, 28, 29) |
   | 3 | χ(18) = χ(16) | (44, 18, 29) + (24, 12, 18) |
-  | 4 | χ(14) = χ(9)  | (16, 14, 18) + (8, 12, 14) |
-  | 5 | χ(3)  = χ(16) | (44, 3, 14) + (4, 3, 4) |
-  | 6 | χ(7)  = χ(9)  | (16, 3, 7) + (4, 7, 8) |
+  | 4 | χ(14) = χ(9) | (16, 14, 18) + (8, 12, 14) |
+  | 5 | χ(3) = χ(16) | (44, 3, 14) + (4, 3, 4) |
+  | 6 | χ(7) = χ(9) | (16, 3, 7) + (4, 7, 8) |
   | 7 | χ(25) = χ(16) | (44, 14, 25) + (4, 24, 25) |
-  | 8 | χ(21) = χ(9)  | (16, 21, 25) + (4, 20, 21) |
+  | 8 | χ(21) = χ(9) | (16, 21, 25) + (4, 20, 21) |
   | 9 | χ(10) = χ(16) | (44, 10, 21) + (8, 8, 10) |
-  | 10 | χ(6) = χ(9)  | (16, 6, 10) + self-loop m=2 |
+  | 10 | χ(6) = χ(9) | (16, 6, 10) + self-loop m=2 |
   | 11 | χ(17) = χ(16) | (44, 6, 17) + (20, 12, 17) |
   | 12 | χ(13) = χ(9) | (16, 13, 17) + (4, 12, 13) |
   | 13 | χ(2) = χ(16) | (44, 2, 13) + (8, 2, 4) |
@@ -12784,43 +12784,43 @@ theorem residual_cell_1_layer_compression_d10
   Terminal contradiction: mono triple (32, 2, 10) — 32 + 4·2 = 4·10 = 40. ✓
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (16, 16, 20):  16 + 64 = 80 = 4·20 ✓
-  - (32, 4, 12):   32 + 16 = 48 = 4·12 ✓
-  - (16, 28, 32):  16 + 112 = 128 = 4·32 ✓
+  - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓
+  - (32, 4, 12): 32 + 16 = 48 = 4·12 ✓
+  - (16, 28, 32): 16 + 112 = 128 = 4·32 ✓
   - self-loop m=8: χ(24) ≠ χ(32) ✓
   - self-loop m=11: χ(33) ≠ χ(44) ✓
-  - (20, 28, 33):  20 + 112 = 132 = 4·33 ✓
-  - (16, 29, 33):  16 + 116 = 132 ✓
-  - (4, 28, 29):   4 + 112 = 116 = 4·29 ✓
-  - (44, 18, 29):  44 + 72 = 116 ✓
-  - (24, 12, 18):  24 + 48 = 72 = 4·18 ✓
-  - (16, 14, 18):  16 + 56 = 72 ✓
-  - (8, 12, 14):   8 + 48 = 56 = 4·14 ✓
-  - (44, 3, 14):   44 + 12 = 56 ✓
-  - (4, 3, 4):     4 + 12 = 16 = 4·4 ✓
-  - (16, 3, 7):    16 + 12 = 28 = 4·7 ✓
-  - (4, 7, 8):     4 + 28 = 32 = 4·8 ✓
-  - (44, 14, 25):  44 + 56 = 100 = 4·25 ✓
-  - (4, 24, 25):   4 + 96 = 100 ✓
-  - (16, 21, 25):  16 + 84 = 100 ✓
-  - (4, 20, 21):   4 + 80 = 84 = 4·21 ✓
-  - (44, 10, 21):  44 + 40 = 84 ✓
-  - (8, 8, 10):    8 + 32 = 40 = 4·10 ✓
-  - (16, 6, 10):   16 + 24 = 40 ✓
+  - (20, 28, 33): 20 + 112 = 132 = 4·33 ✓
+  - (16, 29, 33): 16 + 116 = 132 ✓
+  - (4, 28, 29): 4 + 112 = 116 = 4·29 ✓
+  - (44, 18, 29): 44 + 72 = 116 ✓
+  - (24, 12, 18): 24 + 48 = 72 = 4·18 ✓
+  - (16, 14, 18): 16 + 56 = 72 ✓
+  - (8, 12, 14): 8 + 48 = 56 = 4·14 ✓
+  - (44, 3, 14): 44 + 12 = 56 ✓
+  - (4, 3, 4): 4 + 12 = 16 = 4·4 ✓
+  - (16, 3, 7): 16 + 12 = 28 = 4·7 ✓
+  - (4, 7, 8): 4 + 28 = 32 = 4·8 ✓
+  - (44, 14, 25): 44 + 56 = 100 = 4·25 ✓
+  - (4, 24, 25): 4 + 96 = 100 ✓
+  - (16, 21, 25): 16 + 84 = 100 ✓
+  - (4, 20, 21): 4 + 80 = 84 = 4·21 ✓
+  - (44, 10, 21): 44 + 40 = 84 ✓
+  - (8, 8, 10): 8 + 32 = 40 = 4·10 ✓
+  - (16, 6, 10): 16 + 24 = 40 ✓
   - self-loop m=2: χ(6) ≠ χ(8) ✓
-  - (44, 6, 17):   44 + 24 = 68 = 4·17 ✓
-  - (20, 12, 17):  20 + 48 = 68 ✓
-  - (16, 13, 17):  16 + 52 = 68 ✓
-  - (4, 12, 13):   4 + 48 = 52 = 4·13 ✓
-  - (44, 2, 13):   44 + 8 = 52 ✓
-  - (8, 2, 4):     8 + 8 = 16 = 4·4 ✓
-  - (32, 2, 10):   32 + 8 = 40 = 4·10 ✓ (TERMINAL MONO)
+  - (44, 6, 17): 44 + 24 = 68 = 4·17 ✓
+  - (20, 12, 17): 20 + 48 = 68 ✓
+  - (16, 13, 17): 16 + 52 = 68 ✓
+  - (4, 12, 13): 4 + 48 = 52 = 4·13 ✓
+  - (44, 2, 13): 44 + 8 = 52 ✓
+  - (8, 2, 4): 8 + 8 = 16 = 4·4 ✓
+  - (32, 2, 10): 32 + 8 = 40 = 4·10 ✓ (TERMINAL MONO)
 -/
 
 set_option maxHeartbeats 800000 in
-/-- **R266 chi(44) = chi(9) closure**: residual cell (1) + χ(44) = χ(9) ⟹
+/-- ** chi(44) = chi(9) closure**: residual cell (1) + χ(44) = χ(9) ⟹
   False at n ≥ 44. 13-step cascade ending in concrete mono triple
-  (32, 2, 10) under common color χ(16). Calls R260 / R261 / R262 / R263
+  (32, 2, 10) under common color χ(16). Calls / / / 
   internally for sharpened preamble. -/
 theorem residual_cell_1_chi44_eq_chi9_forces_False_short
     {n : ℕ} (χ : ℕ → ℕ) (h44 : 44 ≤ n)
@@ -12851,7 +12851,7 @@ theorem residual_cell_1_chi44_eq_chi9_forces_False_short
   have hχ25 : χ 25 < 3 := hχk 25 (by omega) (by omega)
   have hχ29 : χ 29 < 3 := hχk 29 (by omega) (by omega)
   have hχ33 : χ 33 < 3 := hχk 33 (by omega) (by omega)
-  -- PREAMBLE P1: χ(20) = χ(12). R260 + (16, 16, 20).
+  -- PREAMBLE P1: χ(20) = χ(12). + (16, 16, 20).
   have h20_ne_9 : χ 20 ≠ χ 9 :=
     residual_cell_1_chi20_ne_chi9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -12867,7 +12867,7 @@ theorem residual_cell_1_chi44_eq_chi9_forces_False_short
       rw [show (16 + 4 : ℕ) = 20 by decide, h20_eq_16]
   have h20_eq_12 : χ 20 = χ 12 :=
     third_color_eq hχ20 hχ12 hχ9 hχ16 h9_ne_16 h20_ne_9 h20_ne_16 (Ne.symm h9_ne_12) h12_ne_16
-  -- PREAMBLE P2: χ(32) = χ(16). R263 + (32, 4, 12).
+  -- PREAMBLE P2: χ(32) = χ(16). + (32, 4, 12).
   have h32_disj : χ 32 = χ 12 ∨ χ 32 = χ 16 :=
     residual_cell_1_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -12882,7 +12882,7 @@ theorem residual_cell_1_chi44_eq_chi9_forces_False_short
     · show χ 4 = χ (4 + 8)
       rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
   have h32_eq_16 : χ 32 = χ 16 := h32_disj.resolve_left h32_ne_12
-  -- PREAMBLE P3: χ(28) = χ(12). R262 + (16, 28, 32).
+  -- PREAMBLE P3: χ(28) = χ(12). + (16, 28, 32).
   have h28_disj : χ 28 = χ 12 ∨ χ 28 = χ 16 :=
     residual_cell_1_layer_compression_d7 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -12897,7 +12897,7 @@ theorem residual_cell_1_chi44_eq_chi9_forces_False_short
     · show χ 28 = χ (28 + 4)
       rw [show (28 + 4 : ℕ) = 32 by decide, h28_eq_16, ← h32_eq_16]
   have h28_eq_12 : χ 28 = χ 12 := h28_disj.resolve_right h28_ne_16
-  -- PREAMBLE P4: χ(24) = χ(12). R261 + self-loop m=8.
+  -- PREAMBLE P4: χ(24) = χ(12). + self-loop m=8.
   have h24_disj : χ 24 = χ 12 ∨ χ 24 = χ 16 :=
     residual_cell_1_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -13219,7 +13219,7 @@ theorem residual_cell_1_chi44_eq_chi9_forces_False_short
   · show χ 2 = χ (2 + 8)
     rw [show (2 + 8 : ℕ) = 10 by decide, h2_eq_16, ← h10_eq_16]
 
-/-- **R266 contrapositive**: χ(44) ≠ χ(9) under cell (1) hypotheses. -/
+/-- ** contrapositive**: χ(44) ≠ χ(9) under cell (1) hypotheses. -/
 theorem residual_cell_1_chi44_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h44 : 44 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -13234,8 +13234,8 @@ theorem residual_cell_1_chi44_ne_chi9
   exact residual_cell_1_chi44_eq_chi9_forces_False_short χ h44 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12 h44_eq_9
 
-/-- **R266 layer compression d=11**: χ(44) ∈ {χ(12), χ(16)} under cell (1).
-  Feeds R254 bridge as the d=11 hLayer case. -/
+/-- ** layer compression d=11**: χ(44) ∈ {χ(12), χ(16)} under cell (1).
+  Feeds bridge as the d=11 hLayer case. -/
 theorem residual_cell_1_layer_compression_d11
     {n : ℕ} (χ : ℕ → ℕ) (h44 : 44 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -13257,7 +13257,7 @@ theorem residual_cell_1_layer_compression_d11
   · right
     exact third_color_eq hχ44 hχ16 hχ9 hχ12 h9_ne_12 h44_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §108. R267 — d = 12 closure for residual cell (1).
+/-! ### §108. — d = 12 closure for residual cell (1).
 
   **Target.** Under residual cell (1) hypotheses (χ(4) = χ(8) = χ(12) and
   χ(9)/χ(12)/χ(16) pairwise distinct in a 3-coloring), and mono-free
@@ -13265,48 +13265,48 @@ theorem residual_cell_1_layer_compression_d11
   rule out χ(48) = χ(9).
 
   **Surprise compression.** The d = 12 case is *strictly shorter* than
-  R266 because (48, 9, 21) directly couples the two A anchors χ(48), χ(9)
+   because (48, 9, 21) directly couples the two A anchors χ(48), χ(9)
   via a single d-step jump (jump = 12 = (b − 1) · 4 = 21 − 9), eliminating
   most of the propagation chain. The full proof needs only a 5-step
   cascade plus the standard preamble.
 
   | Step | Position | Triple(s) |
   |------|----------|-----------|
-  | P1 | χ(20) = χ(12) | R260 + (16, 16, 20) |
-  | P2 | χ(32) = χ(16) | R263 + (32, 4, 12) |
-  | P3 | χ(24) = χ(12) | R261 + self-loop m=8 |
+  | P1 | χ(20) = χ(12) | + (16, 16, 20) |
+  | P2 | χ(32) = χ(16) | + (32, 4, 12) |
+  | P3 | χ(24) = χ(12) | + self-loop m=8 |
   | 1 | χ(21) = χ(16) | (48, 9, 21) + (4, 20, 21) |
-  | 2 | χ(25) = χ(9)  | (16, 21, 25) + (4, 24, 25) |
+  | 2 | χ(25) = χ(9) | (16, 21, 25) + (4, 24, 25) |
   | 3 | χ(13) = χ(16) | (48, 13, 25) + (4, 12, 13) |
-  | 4 | χ(17) = χ(9)  | (16, 13, 17) + (20, 12, 17) |
-  | 5 | χ(5)  = χ(16) | (48, 5, 17) + (4, 4, 5) |
+  | 4 | χ(17) = χ(9) | (16, 13, 17) + (20, 12, 17) |
+  | 5 | χ(5) = χ(16) | (48, 5, 17) + (4, 4, 5) |
   | T | **(32, 5, 13) mono** | χ(32) = χ(5) = χ(13) = χ(16) |
 
   Terminal contradiction: mono triple (32, 5, 13) — 32 + 4·5 = 4·13 = 52. ✓
   All three colours collapse to χ(16) via P2 + S3 + S5.
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (16, 16, 20):  16 + 64 = 80 = 4·20 ✓
-  - (32, 4, 12):   32 + 16 = 48 = 4·12 ✓
+  - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓
+  - (32, 4, 12): 32 + 16 = 48 = 4·12 ✓
   - self-loop m=8: χ(24) ≠ χ(32) ✓
-  - (48, 9, 21):   48 + 36 = 84 = 4·21 ✓
-  - (4, 20, 21):   4 + 80 = 84 ✓
-  - (16, 21, 25):  16 + 84 = 100 = 4·25 ✓
-  - (4, 24, 25):   4 + 96 = 100 ✓
-  - (48, 13, 25):  48 + 52 = 100 ✓
-  - (4, 12, 13):   4 + 48 = 52 = 4·13 ✓
-  - (16, 13, 17):  16 + 52 = 68 = 4·17 ✓
-  - (20, 12, 17):  20 + 48 = 68 ✓
-  - (48, 5, 17):   48 + 20 = 68 ✓
-  - (4, 4, 5):     4 + 16 = 20 = 4·5 ✓
-  - (32, 5, 13):   32 + 20 = 52 = 4·13 ✓ (TERMINAL MONO)
+  - (48, 9, 21): 48 + 36 = 84 = 4·21 ✓
+  - (4, 20, 21): 4 + 80 = 84 ✓
+  - (16, 21, 25): 16 + 84 = 100 = 4·25 ✓
+  - (4, 24, 25): 4 + 96 = 100 ✓
+  - (48, 13, 25): 48 + 52 = 100 ✓
+  - (4, 12, 13): 4 + 48 = 52 = 4·13 ✓
+  - (16, 13, 17): 16 + 52 = 68 = 4·17 ✓
+  - (20, 12, 17): 20 + 48 = 68 ✓
+  - (48, 5, 17): 48 + 20 = 68 ✓
+  - (4, 4, 5): 4 + 16 = 20 = 4·5 ✓
+  - (32, 5, 13): 32 + 20 = 52 = 4·13 ✓ (TERMINAL MONO)
 -/
 
 set_option maxHeartbeats 800000 in
-/-- **R267 chi(48) = chi(9) closure**: residual cell (1) + χ(48) = χ(9) ⟹
+/-- ** chi(48) = chi(9) closure**: residual cell (1) + χ(48) = χ(9) ⟹
   False at n ≥ 48. 5-step cascade ending in concrete mono triple
   (32, 5, 13) under common color χ(16). Significantly shorter than
-  R266 because (48, 9, 21) couples both A anchors in one step. -/
+   because (48, 9, 21) couples both A anchors in one step. -/
 theorem residual_cell_1_chi48_eq_chi9_forces_False_short
     {n : ℕ} (χ : ℕ → ℕ) (h48 : 48 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -13328,7 +13328,7 @@ theorem residual_cell_1_chi48_eq_chi9_forces_False_short
   have hχ21 : χ 21 < 3 := hχk 21 (by omega) (by omega)
   have hχ24 : χ 24 < 3 := hχk 24 (by omega) (by omega)
   have hχ25 : χ 25 < 3 := hχk 25 (by omega) (by omega)
-  -- PREAMBLE P1: χ(20) = χ(12). R260 + (16, 16, 20).
+  -- PREAMBLE P1: χ(20) = χ(12). + (16, 16, 20).
   have h20_ne_9 : χ 20 ≠ χ 9 :=
     residual_cell_1_chi20_ne_chi9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -13344,7 +13344,7 @@ theorem residual_cell_1_chi48_eq_chi9_forces_False_short
       rw [show (16 + 4 : ℕ) = 20 by decide, h20_eq_16]
   have h20_eq_12 : χ 20 = χ 12 :=
     third_color_eq hχ20 hχ12 hχ9 hχ16 h9_ne_16 h20_ne_9 h20_ne_16 (Ne.symm h9_ne_12) h12_ne_16
-  -- PREAMBLE P2: χ(32) = χ(16). R263 + (32, 4, 12).
+  -- PREAMBLE P2: χ(32) = χ(16). + (32, 4, 12).
   have h32_disj : χ 32 = χ 12 ∨ χ 32 = χ 16 :=
     residual_cell_1_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -13359,7 +13359,7 @@ theorem residual_cell_1_chi48_eq_chi9_forces_False_short
     · show χ 4 = χ (4 + 8)
       rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
   have h32_eq_16 : χ 32 = χ 16 := h32_disj.resolve_left h32_ne_12
-  -- PREAMBLE P3: χ(24) = χ(12). R261 + self-loop m=8.
+  -- PREAMBLE P3: χ(24) = χ(12). + self-loop m=8.
   have h24_disj : χ 24 = χ 12 ∨ χ 24 = χ 16 :=
     residual_cell_1_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -13498,7 +13498,7 @@ theorem residual_cell_1_chi48_eq_chi9_forces_False_short
   · show χ 5 = χ (5 + 8)
     rw [show (5 + 8 : ℕ) = 13 by decide, h5_eq_16, ← h13_eq_16]
 
-/-- **R267 contrapositive**: χ(48) ≠ χ(9) under cell (1) hypotheses. -/
+/-- ** contrapositive**: χ(48) ≠ χ(9) under cell (1) hypotheses. -/
 theorem residual_cell_1_chi48_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h48 : 48 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -13513,8 +13513,8 @@ theorem residual_cell_1_chi48_ne_chi9
   exact residual_cell_1_chi48_eq_chi9_forces_False_short χ h48 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12 h48_eq_9
 
-/-- **R267 layer compression d=12**: χ(48) ∈ {χ(12), χ(16)} under cell (1).
-  Feeds R254 bridge as the d=12 hLayer case. -/
+/-- ** layer compression d=12**: χ(48) ∈ {χ(12), χ(16)} under cell (1).
+  Feeds bridge as the d=12 hLayer case. -/
 theorem residual_cell_1_layer_compression_d12
     {n : ℕ} (χ : ℕ → ℕ) (h48 : 48 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -13536,7 +13536,7 @@ theorem residual_cell_1_layer_compression_d12
   · right
     exact third_color_eq hχ48 hχ16 hχ9 hχ12 h9_ne_12 h48_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §109. R268 — d = 13 closure for residual cell (1).
+/-! ### §109. — d = 13 closure for residual cell (1).
 
   **Target.** Under residual cell (1) hypotheses (χ(4) = χ(8) = χ(12) and
   χ(9)/χ(12)/χ(16) pairwise distinct in a 3-coloring), and mono-free
@@ -13550,37 +13550,37 @@ theorem residual_cell_1_layer_compression_d12
 
   | Step | Position | Triple(s) |
   |------|----------|-----------|
-  | P1 | χ(20) = χ(12) | R260 + (16, 16, 20) |
-  | P2 | χ(32) = χ(16) | R263 + (32, 4, 12) |
-  | P3 | χ(28) = χ(12) | R262 + (16, 28, 32) |
-  | P4 | χ(24) = χ(12) | R261 + self-loop m=8 |
+  | P1 | χ(20) = χ(12) | + (16, 16, 20) |
+  | P2 | χ(32) = χ(16) | + (32, 4, 12) |
+  | P3 | χ(28) = χ(12) | + (16, 28, 32) |
+  | P4 | χ(24) = χ(12) | + self-loop m=8 |
   | 1 | χ(22) = χ(16) | (52, 9, 22) + (8, 20, 22) |
-  | 2 | χ(30) = χ(9)  | (32, 22, 30) + (8, 28, 30) |
+  | 2 | χ(30) = χ(9) | (32, 22, 30) + (8, 28, 30) |
   | 3 | χ(17) = χ(16) | (52, 17, 30) + (20, 12, 17) |
-  | 4 | χ(26) = χ(9)  | (16, 22, 26) + (8, 24, 26) |
+  | 4 | χ(26) = χ(9) | (16, 22, 26) + (8, 24, 26) |
   | 5 | χ(13) = χ(16) | (52, 13, 26) + (4, 12, 13) |
   | T | **(16, 13, 17) mono** | χ(16) = χ(13) = χ(17) = χ(16) |
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (16, 16, 20):  16 + 64 = 80 = 4·20 ✓
-  - (32, 4, 12):   32 + 16 = 48 = 4·12 ✓
-  - (16, 28, 32):  16 + 112 = 128 = 4·32 ✓
+  - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓
+  - (32, 4, 12): 32 + 16 = 48 = 4·12 ✓
+  - (16, 28, 32): 16 + 112 = 128 = 4·32 ✓
   - self-loop m=8: χ(24) ≠ χ(32) ✓
-  - (52, 9, 22):   52 + 36 = 88 = 4·22 ✓
-  - (8, 20, 22):   8 + 80 = 88 ✓
-  - (32, 22, 30):  32 + 88 = 120 = 4·30 ✓
-  - (8, 28, 30):   8 + 112 = 120 ✓
-  - (52, 17, 30):  52 + 68 = 120 ✓
-  - (20, 12, 17):  20 + 48 = 68 = 4·17 ✓
-  - (16, 22, 26):  16 + 88 = 104 = 4·26 ✓
-  - (8, 24, 26):   8 + 96 = 104 ✓
-  - (52, 13, 26):  52 + 52 = 104 ✓
-  - (4, 12, 13):   4 + 48 = 52 = 4·13 ✓
-  - (16, 13, 17):  16 + 52 = 68 = 4·17 ✓ (TERMINAL MONO with all C)
+  - (52, 9, 22): 52 + 36 = 88 = 4·22 ✓
+  - (8, 20, 22): 8 + 80 = 88 ✓
+  - (32, 22, 30): 32 + 88 = 120 = 4·30 ✓
+  - (8, 28, 30): 8 + 112 = 120 ✓
+  - (52, 17, 30): 52 + 68 = 120 ✓
+  - (20, 12, 17): 20 + 48 = 68 = 4·17 ✓
+  - (16, 22, 26): 16 + 88 = 104 = 4·26 ✓
+  - (8, 24, 26): 8 + 96 = 104 ✓
+  - (52, 13, 26): 52 + 52 = 104 ✓
+  - (4, 12, 13): 4 + 48 = 52 = 4·13 ✓
+  - (16, 13, 17): 16 + 52 = 68 = 4·17 ✓ (TERMINAL MONO with all C)
 -/
 
 set_option maxHeartbeats 800000 in
-/-- **R268 chi(52) = chi(9) closure**: residual cell (1) + χ(52) = χ(9) ⟹
+/-- ** chi(52) = chi(9) closure**: residual cell (1) + χ(52) = χ(9) ⟹
   False at n ≥ 52. 5-step cascade ending in terminal mono triple
   (16, 13, 17) under common colour χ(16). -/
 theorem residual_cell_1_chi52_eq_chi9_forces_False_short
@@ -13604,7 +13604,7 @@ theorem residual_cell_1_chi52_eq_chi9_forces_False_short
   have hχ24 : χ 24 < 3 := hχk 24 (by omega) (by omega)
   have hχ26 : χ 26 < 3 := hχk 26 (by omega) (by omega)
   have hχ30 : χ 30 < 3 := hχk 30 (by omega) (by omega)
-  -- PREAMBLE P1: χ(20) = χ(12). R260 + (16, 16, 20).
+  -- PREAMBLE P1: χ(20) = χ(12). + (16, 16, 20).
   have h20_ne_9 : χ 20 ≠ χ 9 :=
     residual_cell_1_chi20_ne_chi9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -13620,7 +13620,7 @@ theorem residual_cell_1_chi52_eq_chi9_forces_False_short
       rw [show (16 + 4 : ℕ) = 20 by decide, h20_eq_16]
   have h20_eq_12 : χ 20 = χ 12 :=
     third_color_eq hχ20 hχ12 hχ9 hχ16 h9_ne_16 h20_ne_9 h20_ne_16 (Ne.symm h9_ne_12) h12_ne_16
-  -- PREAMBLE P2: χ(32) = χ(16). R263 + (32, 4, 12).
+  -- PREAMBLE P2: χ(32) = χ(16). + (32, 4, 12).
   have h32_disj : χ 32 = χ 12 ∨ χ 32 = χ 16 :=
     residual_cell_1_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -13635,7 +13635,7 @@ theorem residual_cell_1_chi52_eq_chi9_forces_False_short
     · show χ 4 = χ (4 + 8)
       rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
   have h32_eq_16 : χ 32 = χ 16 := h32_disj.resolve_left h32_ne_12
-  -- PREAMBLE P3: χ(28) = χ(12). R262 + (16, 28, 32).
+  -- PREAMBLE P3: χ(28) = χ(12). + (16, 28, 32).
   have h28_disj : χ 28 = χ 12 ∨ χ 28 = χ 16 :=
     residual_cell_1_layer_compression_d7 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -13650,7 +13650,7 @@ theorem residual_cell_1_chi52_eq_chi9_forces_False_short
     · show χ 28 = χ (28 + 4)
       rw [show (28 + 4 : ℕ) = 32 by decide, h28_eq_16, ← h32_eq_16]
   have h28_eq_12 : χ 28 = χ 12 := h28_disj.resolve_right h28_ne_16
-  -- PREAMBLE P4: χ(24) = χ(12). R261 + self-loop m=8.
+  -- PREAMBLE P4: χ(24) = χ(12). + self-loop m=8.
   have h24_disj : χ 24 = χ 12 ∨ χ 24 = χ 16 :=
     residual_cell_1_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -13789,7 +13789,7 @@ theorem residual_cell_1_chi52_eq_chi9_forces_False_short
   · show χ 13 = χ (13 + 4)
     rw [show (13 + 4 : ℕ) = 17 by decide, h13_eq_16, ← h17_eq_16]
 
-/-- **R268 contrapositive**: χ(52) ≠ χ(9) under cell (1) hypotheses. -/
+/-- ** contrapositive**: χ(52) ≠ χ(9) under cell (1) hypotheses. -/
 theorem residual_cell_1_chi52_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h52 : 52 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -13804,8 +13804,8 @@ theorem residual_cell_1_chi52_ne_chi9
   exact residual_cell_1_chi52_eq_chi9_forces_False_short χ h52 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12 h52_eq_9
 
-/-- **R268 layer compression d=13**: χ(52) ∈ {χ(12), χ(16)} under cell (1).
-  Feeds R254 bridge as the d=13 hLayer case. -/
+/-- ** layer compression d=13**: χ(52) ∈ {χ(12), χ(16)} under cell (1).
+  Feeds bridge as the d=13 hLayer case. -/
 theorem residual_cell_1_layer_compression_d13
     {n : ℕ} (χ : ℕ → ℕ) (h52 : 52 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -13827,51 +13827,51 @@ theorem residual_cell_1_layer_compression_d13
   · right
     exact third_color_eq hχ52 hχ16 hχ9 hχ12 h9_ne_12 h52_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §110. R269 — d = 14 closure for residual cell (1).
+/-! ### §110. — d = 14 closure for residual cell (1).
 
   **Target.** Under residual cell (1) hypotheses (χ(4) = χ(8) = χ(12) and
   χ(9)/χ(12)/χ(16) pairwise distinct in a 3-coloring), and mono-free
   `bAdicEquation 4` at n ≥ 56, prove χ(56) ∈ {χ(12), χ(16)}.
 
   **Geometry.** d = 14 couples χ(56) = A with χ(9) via (56, 9, 23), and
-  switches B-exclusions from d = 2 jumps (R268 style) to d = 3 jumps
+  switches B-exclusions from d = 2 jumps ( style) to d = 3 jumps
   ((12, 20, 23), (12, 28, 31)) plus d = 7 ((28, 20, 27)). This avoids
   needing χ(24), so only a **3-anchor preamble** suffices.
 
   | Step | Position | Triple(s) |
   |------|----------|-----------|
-  | P1 | χ(20) = χ(12) | R260 + (16, 16, 20) |
-  | P2 | χ(32) = χ(16) | R263 + (32, 4, 12) |
-  | P3 | χ(28) = χ(12) | R262 + (16, 28, 32) |
+  | P1 | χ(20) = χ(12) | + (16, 16, 20) |
+  | P2 | χ(32) = χ(16) | + (32, 4, 12) |
+  | P3 | χ(28) = χ(12) | + (16, 28, 32) |
   | 1 | χ(23) = χ(16) | (56, 9, 23) + (12, 20, 23) |
-  | 2 | χ(31) = χ(9)  | (32, 23, 31) + (12, 28, 31) |
+  | 2 | χ(31) = χ(9) | (32, 23, 31) + (12, 28, 31) |
   | 3 | χ(17) = χ(16) | (56, 17, 31) + (20, 12, 17) |
-  | 4 | χ(27) = χ(9)  | (16, 23, 27) + (28, 20, 27) |
+  | 4 | χ(27) = χ(9) | (16, 23, 27) + (28, 20, 27) |
   | 5 | χ(13) = χ(16) | (56, 13, 27) + (4, 12, 13) |
   | T | **(16, 13, 17) mono** | χ(16) = χ(13) = χ(17) = χ(16) |
 
-  Same terminal as R268; only intermediate positions and B-exclusion
+  Same terminal as; only intermediate positions and B-exclusion
   triples differ. Cascade structurally identical: A-anchor → C → A → C → A → C.
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (16, 16, 20):  16 + 64 = 80 = 4·20 ✓
-  - (32, 4, 12):   32 + 16 = 48 = 4·12 ✓
-  - (16, 28, 32):  16 + 112 = 128 = 4·32 ✓
-  - (56, 9, 23):   56 + 36 = 92 = 4·23 ✓
-  - (12, 20, 23):  12 + 80 = 92 ✓
-  - (32, 23, 31):  32 + 92 = 124 = 4·31 ✓
-  - (12, 28, 31):  12 + 112 = 124 ✓
-  - (56, 17, 31):  56 + 68 = 124 ✓
-  - (20, 12, 17):  20 + 48 = 68 = 4·17 ✓
-  - (16, 23, 27):  16 + 92 = 108 = 4·27 ✓
-  - (28, 20, 27):  28 + 80 = 108 ✓
-  - (56, 13, 27):  56 + 52 = 108 ✓
-  - (4, 12, 13):   4 + 48 = 52 = 4·13 ✓
-  - (16, 13, 17):  16 + 52 = 68 = 4·17 ✓ (TERMINAL MONO with all C)
+  - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓
+  - (32, 4, 12): 32 + 16 = 48 = 4·12 ✓
+  - (16, 28, 32): 16 + 112 = 128 = 4·32 ✓
+  - (56, 9, 23): 56 + 36 = 92 = 4·23 ✓
+  - (12, 20, 23): 12 + 80 = 92 ✓
+  - (32, 23, 31): 32 + 92 = 124 = 4·31 ✓
+  - (12, 28, 31): 12 + 112 = 124 ✓
+  - (56, 17, 31): 56 + 68 = 124 ✓
+  - (20, 12, 17): 20 + 48 = 68 = 4·17 ✓
+  - (16, 23, 27): 16 + 92 = 108 = 4·27 ✓
+  - (28, 20, 27): 28 + 80 = 108 ✓
+  - (56, 13, 27): 56 + 52 = 108 ✓
+  - (4, 12, 13): 4 + 48 = 52 = 4·13 ✓
+  - (16, 13, 17): 16 + 52 = 68 = 4·17 ✓ (TERMINAL MONO with all C)
 -/
 
 set_option maxHeartbeats 800000 in
-/-- **R269 chi(56) = chi(9) closure**: residual cell (1) + χ(56) = χ(9) ⟹
+/-- ** chi(56) = chi(9) closure**: residual cell (1) + χ(56) = χ(9) ⟹
   False at n ≥ 56. 5-step cascade with 3-anchor preamble (avoiding χ(24)),
   ending in terminal mono triple (16, 13, 17) under colour χ(16). -/
 theorem residual_cell_1_chi56_eq_chi9_forces_False_short
@@ -13894,7 +13894,7 @@ theorem residual_cell_1_chi56_eq_chi9_forces_False_short
   have hχ23 : χ 23 < 3 := hχk 23 (by omega) (by omega)
   have hχ27 : χ 27 < 3 := hχk 27 (by omega) (by omega)
   have hχ31 : χ 31 < 3 := hχk 31 (by omega) (by omega)
-  -- PREAMBLE P1: χ(20) = χ(12). R260 + (16, 16, 20).
+  -- PREAMBLE P1: χ(20) = χ(12). + (16, 16, 20).
   have h20_ne_9 : χ 20 ≠ χ 9 :=
     residual_cell_1_chi20_ne_chi9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -13910,7 +13910,7 @@ theorem residual_cell_1_chi56_eq_chi9_forces_False_short
       rw [show (16 + 4 : ℕ) = 20 by decide, h20_eq_16]
   have h20_eq_12 : χ 20 = χ 12 :=
     third_color_eq hχ20 hχ12 hχ9 hχ16 h9_ne_16 h20_ne_9 h20_ne_16 (Ne.symm h9_ne_12) h12_ne_16
-  -- PREAMBLE P2: χ(32) = χ(16). R263 + (32, 4, 12).
+  -- PREAMBLE P2: χ(32) = χ(16). + (32, 4, 12).
   have h32_disj : χ 32 = χ 12 ∨ χ 32 = χ 16 :=
     residual_cell_1_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -13925,7 +13925,7 @@ theorem residual_cell_1_chi56_eq_chi9_forces_False_short
     · show χ 4 = χ (4 + 8)
       rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
   have h32_eq_16 : χ 32 = χ 16 := h32_disj.resolve_left h32_ne_12
-  -- PREAMBLE P3: χ(28) = χ(12). R262 + (16, 28, 32).
+  -- PREAMBLE P3: χ(28) = χ(12). + (16, 28, 32).
   have h28_disj : χ 28 = χ 12 ∨ χ 28 = χ 16 :=
     residual_cell_1_layer_compression_d7 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -14066,7 +14066,7 @@ theorem residual_cell_1_chi56_eq_chi9_forces_False_short
   · show χ 13 = χ (13 + 4)
     rw [show (13 + 4 : ℕ) = 17 by decide, h13_eq_16, ← h17_eq_16]
 
-/-- **R269 contrapositive**: χ(56) ≠ χ(9) under cell (1) hypotheses. -/
+/-- ** contrapositive**: χ(56) ≠ χ(9) under cell (1) hypotheses. -/
 theorem residual_cell_1_chi56_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h56 : 56 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -14081,8 +14081,8 @@ theorem residual_cell_1_chi56_ne_chi9
   exact residual_cell_1_chi56_eq_chi9_forces_False_short χ h56 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12 h56_eq_9
 
-/-- **R269 layer compression d=14**: χ(56) ∈ {χ(12), χ(16)} under cell (1).
-  Feeds R254 bridge as the d=14 hLayer case. -/
+/-- ** layer compression d=14**: χ(56) ∈ {χ(12), χ(16)} under cell (1).
+  Feeds bridge as the d=14 hLayer case. -/
 theorem residual_cell_1_layer_compression_d14
     {n : ℕ} (χ : ℕ → ℕ) (h56 : 56 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -14104,7 +14104,7 @@ theorem residual_cell_1_layer_compression_d14
   · right
     exact third_color_eq hχ56 hχ16 hχ9 hχ12 h9_ne_12 h56_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §111. R270 — d = 15 closure for residual cell (1).
+/-! ### §111. — d = 15 closure for residual cell (1).
 
   **Target.** Under residual cell (1) hypotheses, mono-free `bAdicEquation 4`
   at n ≥ 60, prove χ(60) ∈ {χ(12), χ(16)}.
@@ -14114,8 +14114,8 @@ theorem residual_cell_1_layer_compression_d14
   χ(24) = B. We must instead derive new high anchors first.
 
   **Sharpened anchors discovered (unconditional under preamble).**
-  - χ(36) = B via R264 + (16, 32, 36) [χ(16) = χ(32) = C anchor pair].
-  - χ(40) = B via R265 + (32, 32, 40) [d = 8 self-anchor at C].
+  - χ(36) = B via + (16, 32, 36) [χ(16) = χ(32) = C anchor pair].
+  - χ(40) = B via + (32, 32, 40) [d = 8 self-anchor at C].
 
   **Conditional anchor (under χ(60) = χ(9)).**
   - χ(45) = C via (36, 36, 45) [χ(45) ≠ B] + self-loop m = 15 [χ(45) ≠ A].
@@ -14124,42 +14124,42 @@ theorem residual_cell_1_layer_compression_d14
 
   | Step | Position | Triple(s) |
   |------|----------|-----------|
-  | P1 | χ(32) = χ(16) | R263 + (32, 4, 12) |
-  | P2 | χ(28) = χ(12) | R262 + (16, 28, 32) |
-  | P3 | χ(24) = χ(12) | R261 + self-loop m = 8 |
-  | P4 | χ(36) = χ(12) | R264 + (16, 32, 36) |
-  | P5 | χ(40) = χ(12) | R265 + (32, 32, 40) |
+  | P1 | χ(32) = χ(16) | + (32, 4, 12) |
+  | P2 | χ(28) = χ(12) | + (16, 28, 32) |
+  | P3 | χ(24) = χ(12) | + self-loop m = 8 |
+  | P4 | χ(36) = χ(12) | + (16, 32, 36) |
+  | P5 | χ(40) = χ(12) | + (32, 32, 40) |
   | P6 | χ(45) = χ(16) | self-loop m = 15 + (36, 36, 45) |
-  | 1 | χ(41) = χ(9)  | (16, 41, 45) + (4, 40, 41) |
+  | 1 | χ(41) = χ(9) | (16, 41, 45) + (4, 40, 41) |
   | 2 | χ(26) = χ(16) | (60, 26, 41) + (8, 24, 26) |
-  | 3 | χ(34) = χ(9)  | (32, 26, 34) + (24, 28, 34) |
-  | 4 | χ(49) = χ(9)  | (16, 45, 49) + (36, 40, 49) |
+  | 3 | χ(34) = χ(9) | (32, 26, 34) + (24, 28, 34) |
+  | 4 | χ(49) = χ(9) | (16, 45, 49) + (36, 40, 49) |
   | T | **(60, 34, 49) mono** | χ(60) = χ(34) = χ(49) = χ(9) (all A) |
 
   Terminal uses the d = 15 anchor directly: 60 + 4·34 = 196 = 4·49.
   All three positions = A.
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (32, 4, 12):    32 + 16 = 48 = 4·12 ✓
-  - (16, 28, 32):   16 + 112 = 128 = 4·32 ✓
-  - self-loop m=8:  χ(24) ≠ χ(32) ✓
-  - (16, 32, 36):   16 + 128 = 144 = 4·36 ✓
-  - (32, 32, 40):   32 + 128 = 160 = 4·40 ✓
+  - (32, 4, 12): 32 + 16 = 48 = 4·12 ✓
+  - (16, 28, 32): 16 + 112 = 128 = 4·32 ✓
+  - self-loop m=8: χ(24) ≠ χ(32) ✓
+  - (16, 32, 36): 16 + 128 = 144 = 4·36 ✓
+  - (32, 32, 40): 32 + 128 = 160 = 4·40 ✓
   - self-loop m=15: χ(45) ≠ χ(60) ✓
-  - (36, 36, 45):   36 + 144 = 180 = 4·45 ✓
-  - (16, 41, 45):   16 + 164 = 180 = 4·45 ✓
-  - (4, 40, 41):    4 + 160 = 164 = 4·41 ✓
-  - (60, 26, 41):   60 + 104 = 164 = 4·41 ✓
-  - (8, 24, 26):    8 + 96 = 104 = 4·26 ✓
-  - (32, 26, 34):   32 + 104 = 136 = 4·34 ✓
-  - (24, 28, 34):   24 + 112 = 136 = 4·34 ✓
-  - (16, 45, 49):   16 + 180 = 196 = 4·49 ✓
-  - (36, 40, 49):   36 + 160 = 196 = 4·49 ✓
-  - (60, 34, 49):   60 + 136 = 196 = 4·49 ✓ (TERMINAL MONO with all A)
+  - (36, 36, 45): 36 + 144 = 180 = 4·45 ✓
+  - (16, 41, 45): 16 + 164 = 180 = 4·45 ✓
+  - (4, 40, 41): 4 + 160 = 164 = 4·41 ✓
+  - (60, 26, 41): 60 + 104 = 164 = 4·41 ✓
+  - (8, 24, 26): 8 + 96 = 104 = 4·26 ✓
+  - (32, 26, 34): 32 + 104 = 136 = 4·34 ✓
+  - (24, 28, 34): 24 + 112 = 136 = 4·34 ✓
+  - (16, 45, 49): 16 + 180 = 196 = 4·49 ✓
+  - (36, 40, 49): 36 + 160 = 196 = 4·49 ✓
+  - (60, 34, 49): 60 + 136 = 196 = 4·49 ✓ (TERMINAL MONO with all A)
 -/
 
 set_option maxHeartbeats 1600000 in
-/-- **R270 chi(60) = chi(9) closure**: residual cell (1) + χ(60) = χ(9) ⟹
+/-- ** chi(60) = chi(9) closure**: residual cell (1) + χ(60) = χ(9) ⟹
   False at n ≥ 60. Extended preamble (sharpening χ(36) = B, χ(40) = B,
   χ(45) = C), 4-step cascade ending in terminal mono triple (60, 34, 49)
   with all three positions = A. -/
@@ -14185,7 +14185,7 @@ theorem residual_cell_1_chi60_eq_chi9_forces_False_short
   have hχ41 : χ 41 < 3 := hχk 41 (by omega) (by omega)
   have hχ45 : χ 45 < 3 := hχk 45 (by omega) (by omega)
   have hχ49 : χ 49 < 3 := hχk 49 (by omega) (by omega)
-  -- PREAMBLE P1: χ(32) = χ(16). R263 + (32, 4, 12).
+  -- PREAMBLE P1: χ(32) = χ(16). + (32, 4, 12).
   have h32_disj : χ 32 = χ 12 ∨ χ 32 = χ 16 :=
     residual_cell_1_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -14200,7 +14200,7 @@ theorem residual_cell_1_chi60_eq_chi9_forces_False_short
     · show χ 4 = χ (4 + 8)
       rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
   have h32_eq_16 : χ 32 = χ 16 := h32_disj.resolve_left h32_ne_12
-  -- PREAMBLE P2: χ(28) = χ(12). R262 + (16, 28, 32).
+  -- PREAMBLE P2: χ(28) = χ(12). + (16, 28, 32).
   have h28_disj : χ 28 = χ 12 ∨ χ 28 = χ 16 :=
     residual_cell_1_layer_compression_d7 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -14215,7 +14215,7 @@ theorem residual_cell_1_chi60_eq_chi9_forces_False_short
     · show χ 28 = χ (28 + 4)
       rw [show (28 + 4 : ℕ) = 32 by decide, h28_eq_16, ← h32_eq_16]
   have h28_eq_12 : χ 28 = χ 12 := h28_disj.resolve_right h28_ne_16
-  -- PREAMBLE P3: χ(24) = χ(12). R261 + self-loop m=8.
+  -- PREAMBLE P3: χ(24) = χ(12). + self-loop m=8.
   have h24_disj : χ 24 = χ 12 ∨ χ 24 = χ 16 :=
     residual_cell_1_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -14228,7 +14228,7 @@ theorem residual_cell_1_chi60_eq_chi9_forces_False_short
     rw [show ((4 - 1) * 8 : ℕ) = 24 by decide,
         show ((4 : ℕ) * 8) = 32 by decide, h24_eq_16, ← h32_eq_16]
   have h24_eq_12 : χ 24 = χ 12 := h24_disj.resolve_right h24_ne_16
-  -- PREAMBLE P4: χ(36) = χ(12). R264 + (16, 32, 36).
+  -- PREAMBLE P4: χ(36) = χ(12). + (16, 32, 36).
   have h36_disj : χ 36 = χ 12 ∨ χ 36 = χ 16 :=
     residual_cell_1_layer_compression_d9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -14243,7 +14243,7 @@ theorem residual_cell_1_chi60_eq_chi9_forces_False_short
     · show χ 32 = χ (32 + 4)
       rw [show (32 + 4 : ℕ) = 36 by decide, h32_eq_16, ← h36_eq_16]
   have h36_eq_12 : χ 36 = χ 12 := h36_disj.resolve_right h36_ne_16
-  -- PREAMBLE P5: χ(40) = χ(12). R265 + (32, 32, 40).
+  -- PREAMBLE P5: χ(40) = χ(12). + (32, 32, 40).
   have h40_disj : χ 40 = χ 12 ∨ χ 40 = χ 16 :=
     residual_cell_1_layer_compression_d10 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -14382,7 +14382,7 @@ theorem residual_cell_1_chi60_eq_chi9_forces_False_short
   · show χ 34 = χ (34 + 15)
     rw [show (34 + 15 : ℕ) = 49 by decide, h34_eq_9, ← h49_eq_9]
 
-/-- **R270 contrapositive**: χ(60) ≠ χ(9) under cell (1) hypotheses. -/
+/-- ** contrapositive**: χ(60) ≠ χ(9) under cell (1) hypotheses. -/
 theorem residual_cell_1_chi60_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h60 : 60 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -14397,8 +14397,8 @@ theorem residual_cell_1_chi60_ne_chi9
   exact residual_cell_1_chi60_eq_chi9_forces_False_short χ h60 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12 h60_eq_9
 
-/-- **R270 layer compression d=15**: χ(60) ∈ {χ(12), χ(16)} under cell (1).
-  Feeds R254 bridge as the d=15 hLayer case. -/
+/-- ** layer compression d=15**: χ(60) ∈ {χ(12), χ(16)} under cell (1).
+  Feeds bridge as the d=15 hLayer case. -/
 theorem residual_cell_1_layer_compression_d15
     {n : ℕ} (χ : ℕ → ℕ) (h60 : 60 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -14420,7 +14420,7 @@ theorem residual_cell_1_layer_compression_d15
   · right
     exact third_color_eq hχ60 hχ16 hχ9 hχ12 h9_ne_12 h60_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §112. R271 — d = 16 closure for residual cell (1).
+/-! ### §112. — d = 16 closure for residual cell (1).
 
   **Target.** Under residual cell (1) hypotheses, mono-free `bAdicEquation 4`
   at n ≥ 64, prove χ(64) ∈ {χ(12), χ(16)}. Closes the final piece of the
@@ -14435,39 +14435,39 @@ theorem residual_cell_1_layer_compression_d15
 
   | Step | Position | Triple(s) |
   |------|----------|-----------|
-  | P1 | χ(20) = χ(12) | R260 + (16, 16, 20) |
-  | P2 | χ(32) = χ(16) | R263 + (32, 4, 12) |
-  | P3 | χ(24) = χ(12) | R261 + self-loop m = 8 |
-  | P4 | χ(36) = χ(12) | R264 + (16, 32, 36) |
+  | P1 | χ(20) = χ(12) | + (16, 16, 20) |
+  | P2 | χ(32) = χ(16) | + (32, 4, 12) |
+  | P3 | χ(24) = χ(12) | + self-loop m = 8 |
+  | P4 | χ(36) = χ(12) | + (16, 32, 36) |
   | 1 | χ(25) = χ(16) | (64, 9, 25) + (4, 24, 25) |
-  | 2 | χ(17) = χ(9)  | (32, 17, 25) + (20, 12, 17) |
+  | 2 | χ(17) = χ(9) | (32, 17, 25) + (20, 12, 17) |
   | 3 | χ(33) = χ(16) | (64, 17, 33) + (36, 24, 33) |
-  | 4 | χ(21) = χ(9)  | (16, 21, 25) + (4, 20, 21) |
+  | 4 | χ(21) = χ(9) | (16, 21, 25) + (4, 20, 21) |
   | T | **χ(37) ∉ {A, B, C}** | (64, 21, 37) + (4, 36, 37) + (16, 33, 37) |
 
   Terminal: χ(37) ≠ χ(9), χ(37) ≠ χ(12), χ(37) ≠ χ(16) but χ(37) < 3 and
   the three known colours are pairwise distinct — contradiction.
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (16, 16, 20):  16 + 64 = 80 = 4·20 ✓
-  - (32, 4, 12):   32 + 16 = 48 = 4·12 ✓
+  - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓
+  - (32, 4, 12): 32 + 16 = 48 = 4·12 ✓
   - self-loop m=8: χ(24) ≠ χ(32) ✓
-  - (16, 32, 36):  16 + 128 = 144 = 4·36 ✓
-  - (64, 9, 25):   64 + 36 = 100 = 4·25 ✓
-  - (4, 24, 25):   4 + 96 = 100 ✓
-  - (32, 17, 25):  32 + 68 = 100 ✓
-  - (20, 12, 17):  20 + 48 = 68 = 4·17 ✓
-  - (64, 17, 33):  64 + 68 = 132 = 4·33 ✓
-  - (36, 24, 33):  36 + 96 = 132 ✓
-  - (16, 21, 25):  16 + 84 = 100 ✓
-  - (4, 20, 21):   4 + 80 = 84 = 4·21 ✓
-  - (64, 21, 37):  64 + 84 = 148 = 4·37 ✓
-  - (4, 36, 37):   4 + 144 = 148 ✓
-  - (16, 33, 37):  16 + 132 = 148 ✓ (TERMINAL — combined with prior two: χ(37) ∉ {A,B,C})
+  - (16, 32, 36): 16 + 128 = 144 = 4·36 ✓
+  - (64, 9, 25): 64 + 36 = 100 = 4·25 ✓
+  - (4, 24, 25): 4 + 96 = 100 ✓
+  - (32, 17, 25): 32 + 68 = 100 ✓
+  - (20, 12, 17): 20 + 48 = 68 = 4·17 ✓
+  - (64, 17, 33): 64 + 68 = 132 = 4·33 ✓
+  - (36, 24, 33): 36 + 96 = 132 ✓
+  - (16, 21, 25): 16 + 84 = 100 ✓
+  - (4, 20, 21): 4 + 80 = 84 = 4·21 ✓
+  - (64, 21, 37): 64 + 84 = 148 = 4·37 ✓
+  - (4, 36, 37): 4 + 144 = 148 ✓
+  - (16, 33, 37): 16 + 132 = 148 ✓ (TERMINAL — combined with prior two: χ(37) ∉ {A,B,C})
 -/
 
 set_option maxHeartbeats 1600000 in
-/-- **R271 chi(64) = chi(9) closure**: residual cell (1) + χ(64) = χ(9) ⟹
+/-- ** chi(64) = chi(9) closure**: residual cell (1) + χ(64) = χ(9) ⟹
   False at n ≥ 64. 4-step cascade ending in no-colour-left terminal on
   χ(37). Closes the final piece of cell (1) hLayer (d = 16). -/
 theorem residual_cell_1_chi64_eq_chi9_forces_False_short
@@ -14490,7 +14490,7 @@ theorem residual_cell_1_chi64_eq_chi9_forces_False_short
   have hχ25 : χ 25 < 3 := hχk 25 (by omega) (by omega)
   have hχ33 : χ 33 < 3 := hχk 33 (by omega) (by omega)
   have hχ37 : χ 37 < 3 := hχk 37 (by omega) (by omega)
-  -- PREAMBLE P1: χ(20) = χ(12). R260 + (16, 16, 20).
+  -- PREAMBLE P1: χ(20) = χ(12). + (16, 16, 20).
   have h20_ne_9 : χ 20 ≠ χ 9 :=
     residual_cell_1_chi20_ne_chi9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -14506,7 +14506,7 @@ theorem residual_cell_1_chi64_eq_chi9_forces_False_short
       rw [show (16 + 4 : ℕ) = 20 by decide, h20_eq_16]
   have h20_eq_12 : χ 20 = χ 12 :=
     third_color_eq hχ20 hχ12 hχ9 hχ16 h9_ne_16 h20_ne_9 h20_ne_16 (Ne.symm h9_ne_12) h12_ne_16
-  -- PREAMBLE P2: χ(32) = χ(16). R263 + (32, 4, 12).
+  -- PREAMBLE P2: χ(32) = χ(16). + (32, 4, 12).
   have h32_disj : χ 32 = χ 12 ∨ χ 32 = χ 16 :=
     residual_cell_1_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -14521,7 +14521,7 @@ theorem residual_cell_1_chi64_eq_chi9_forces_False_short
     · show χ 4 = χ (4 + 8)
       rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
   have h32_eq_16 : χ 32 = χ 16 := h32_disj.resolve_left h32_ne_12
-  -- PREAMBLE P3: χ(24) = χ(12). R261 + self-loop m=8.
+  -- PREAMBLE P3: χ(24) = χ(12). + self-loop m=8.
   have h24_disj : χ 24 = χ 12 ∨ χ 24 = χ 16 :=
     residual_cell_1_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -14534,7 +14534,7 @@ theorem residual_cell_1_chi64_eq_chi9_forces_False_short
     rw [show ((4 - 1) * 8 : ℕ) = 24 by decide,
         show ((4 : ℕ) * 8) = 32 by decide, h24_eq_16, ← h32_eq_16]
   have h24_eq_12 : χ 24 = χ 12 := h24_disj.resolve_right h24_ne_16
-  -- PREAMBLE P4: χ(36) = χ(12). R264 + (16, 32, 36).
+  -- PREAMBLE P4: χ(36) = χ(12). + (16, 32, 36).
   have h36_disj : χ 36 = χ 12 ∨ χ 36 = χ 16 :=
     residual_cell_1_layer_compression_d9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -14677,7 +14677,7 @@ theorem residual_cell_1_chi64_eq_chi9_forces_False_short
     third_color_eq hχ37 hχ16 hχ9 hχ12 h9_ne_12 h37_ne_9 h37_ne_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
   exact h37_ne_16 h37_eq_16
 
-/-- **R271 contrapositive**: χ(64) ≠ χ(9) under cell (1) hypotheses. -/
+/-- ** contrapositive**: χ(64) ≠ χ(9) under cell (1) hypotheses. -/
 theorem residual_cell_1_chi64_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h64 : 64 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -14692,9 +14692,9 @@ theorem residual_cell_1_chi64_ne_chi9
   exact residual_cell_1_chi64_eq_chi9_forces_False_short χ h64 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12 h64_eq_9
 
-/-- **R271 layer compression d=16**: χ(64) ∈ {χ(12), χ(16)} under cell (1).
+/-- ** layer compression d=16**: χ(64) ∈ {χ(12), χ(16)} under cell (1).
   **Completes the cell (1) hLayer table** — all 16 layers (d = 1..16) closed.
-  Feeds R254 bridge as the final d = 16 hLayer case. -/
+  Feeds bridge as the final d = 16 hLayer case. -/
 theorem residual_cell_1_layer_compression_d16
     {n : ℕ} (χ : ℕ → ℕ) (h64 : 64 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -14716,7 +14716,7 @@ theorem residual_cell_1_layer_compression_d16
   · right
     exact third_color_eq hχ64 hχ16 hχ9 hχ12 h9_ne_12 h64_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-- **R271 bonus sharpening**: χ(64) = χ(12) under cell (1).
+/-- ** bonus sharpening**: χ(64) = χ(12) under cell (1).
   After hLayer d=16 closure, the disjunction collapses to a single colour:
   self-loop m=12 + χ(36) = χ(12) ⟹ χ(48) = χ(16) (unconditional under preamble);
   then self-loop m=16 + χ(48) = χ(16) ⟹ χ(64) ≠ χ(16);
@@ -14733,7 +14733,7 @@ theorem residual_cell_1_chi64_eq_chi12
     χ 64 = χ 12 := by
   have hd16 : χ 64 = χ 12 ∨ χ 64 = χ 16 :=
     residual_cell_1_layer_compression_d16 χ h64 hχk hNoMono h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
-  -- Sharpen χ(48) = χ(16): R267 + self-loop m=12 + χ(36)=χ(12).
+  -- Sharpen χ(48) = χ(16): + self-loop m=12 + χ(36)=χ(12).
   have h32_disj : χ 32 = χ 12 ∨ χ 32 = χ 16 :=
     residual_cell_1_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
@@ -14786,15 +14786,15 @@ theorem residual_cell_1_chi64_eq_chi12
         show ((4 : ℕ) * 16) = 64 by decide, h48_eq_16, h64_eq_16]
   exact hd16.resolve_right h64_ne_16
 
-/-! ### §113. R272 — full hLayer assembly for residual cell (1).
+/-! ### §113. — full hLayer assembly for residual cell (1).
 
-  **Target.** Integrate all 16 d-layer compression theorems (R260-R271 +
-  base cases) into the exact hLayer shape required by R254:
+  **Target.** Integrate all 16 d-layer compression theorems (- +
+  base cases) into the exact hLayer shape required by :
   ```
   ∀ d, 1 ≤ d → d ≤ 16 → χ (4 * d) = χ 12 ∨ χ (4 * d) = χ 16
   ```
 
-  Then apply `scale4_two_color_subcoloring_lifts_mono_solution` (R254
+  Then apply `scale4_two_color_subcoloring_lifts_mono_solution` (
   bridge) to derive False directly from residual cell (1) hypotheses,
   completing the cell (1) closure.
 
@@ -14802,9 +14802,9 @@ theorem residual_cell_1_chi64_eq_chi12
   to the corresponding R26X/R27X helper or base case.
 -/
 
-/-- **R272 full layer compression for cell (1)**: under residual cell (1)
+/-- ** full layer compression for cell (1)**: under residual cell (1)
   hypotheses, all 16 multiples-of-4 positions χ(4d) for d ∈ [1, 16] lie
-  in {χ(12), χ(16)}. This is the exact hLayer hypothesis required by R254. -/
+  in {χ(12), χ(16)}. This is the exact hLayer hypothesis required by. -/
 theorem residual_cell_1_full_layer_compression
     {n : ℕ} (χ : ℕ → ℕ) (h64 : 64 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -14825,88 +14825,88 @@ theorem residual_cell_1_full_layer_compression
     exact Or.inl (show χ (4 * 3) = χ 12 by rw [show (4 * 3 : ℕ) = 12 by decide])
   · -- d = 4: χ(16) = χ(16) by rfl.
     exact Or.inr (show χ (4 * 4) = χ 16 by rw [show (4 * 4 : ℕ) = 16 by decide])
-  · -- d = 5: R260.
+  · -- d = 5:.
     have h := residual_cell_1_layer_compression_d5 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
     rw [show (4 * 5 : ℕ) = 20 by decide]; exact h
-  · -- d = 6: R261.
+  · -- d = 6:.
     have h := residual_cell_1_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
     rw [show (4 * 6 : ℕ) = 24 by decide]; exact h
-  · -- d = 7: R262.
+  · -- d = 7:.
     have h := residual_cell_1_layer_compression_d7 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
     rw [show (4 * 7 : ℕ) = 28 by decide]; exact h
-  · -- d = 8: R263.
+  · -- d = 8:.
     have h := residual_cell_1_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
     rw [show (4 * 8 : ℕ) = 32 by decide]; exact h
-  · -- d = 9: R264.
+  · -- d = 9:.
     have h := residual_cell_1_layer_compression_d9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
     rw [show (4 * 9 : ℕ) = 36 by decide]; exact h
-  · -- d = 10: R265.
+  · -- d = 10:.
     have h := residual_cell_1_layer_compression_d10 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
     rw [show (4 * 10 : ℕ) = 40 by decide]; exact h
-  · -- d = 11: R266.
+  · -- d = 11:.
     have h := residual_cell_1_layer_compression_d11 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
     rw [show (4 * 11 : ℕ) = 44 by decide]; exact h
-  · -- d = 12: R267.
+  · -- d = 12:.
     have h := residual_cell_1_layer_compression_d12 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
     rw [show (4 * 12 : ℕ) = 48 by decide]; exact h
-  · -- d = 13: R268.
+  · -- d = 13:.
     have h := residual_cell_1_layer_compression_d13 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
     rw [show (4 * 13 : ℕ) = 52 by decide]; exact h
-  · -- d = 14: R269.
+  · -- d = 14:.
     have h := residual_cell_1_layer_compression_d14 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
     rw [show (4 * 14 : ℕ) = 56 by decide]; exact h
-  · -- d = 15: R270.
+  · -- d = 15:.
     have h := residual_cell_1_layer_compression_d15 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
     rw [show (4 * 15 : ℕ) = 60 by decide]; exact h
-  · -- d = 16: R271.
+  · -- d = 16:.
     have h := residual_cell_1_layer_compression_d16 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_12
     rw [show (4 * 16 : ℕ) = 64 by decide]; exact h
 
-/-! ### §114. R273 — residual cell (2) hLayer d = 5.
+/-! ### §114. — residual cell (2) hLayer d = 5.
 
-  **Cell (2) hypotheses** (from R254 §95 docstring):
-  - χ(8) = χ(12) = B  (left anchor: B-pair at 8 and 12)
-  - χ(4) = χ(16) = C  (right anchor: C-pair at 4 and 16)
+  **Cell (2) hypotheses** (from §95 docstring):
+  - χ(8) = χ(12) = B (left anchor: B-pair at 8 and 12)
+  - χ(4) = χ(16) = C (right anchor: C-pair at 4 and 16)
 
-  **R254 hLayer target** {χ(12), χ(16)} still applies:
+  ** hLayer target** {χ(12), χ(16)} still applies:
   - d=1: χ(4) = χ(16) ✓ (right branch)
   - d=2: χ(8) = χ(12) ✓ (left branch)
   - d=3: χ(12) = χ(12) ✓
   - d=4: χ(16) = χ(16) ✓
 
-  **3-step cascade** (much shorter than cell (1)'s R260 4-step):
+  **3-step cascade** (much shorter than cell (1)'s 4-step):
 
   | Step | Position | Triple(s) |
   |------|----------|-----------|
-  | 1 | χ(5)  = χ(9)  (A) | (12, 5, 8) [≠B] + (4, 4, 5) [≠C] |
+  | 1 | χ(5) = χ(9) (A) | (12, 5, 8) [≠B] + (4, 4, 5) [≠C] |
   | 2 | χ(10) = χ(16) (C) | (8, 8, 10) [≠B] + (20, 5, 10) [≠A] |
-  | 3 | χ(14) = χ(9)  (A) | (8, 12, 14) [≠B] + (16, 10, 14) [≠C] |
+  | 3 | χ(14) = χ(9) (A) | (8, 12, 14) [≠B] + (16, 10, 14) [≠C] |
   | T | **(20, 9, 14) mono** | χ(20) = χ(9) = χ(14) = A |
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (12, 5, 8):    12 + 20 = 32 = 4·8 ✓
-  - (4, 4, 5):     4 + 16 = 20 = 4·5 ✓
-  - (8, 8, 10):    8 + 32 = 40 = 4·10 ✓
-  - (20, 5, 10):   20 + 20 = 40 ✓
-  - (8, 12, 14):   8 + 48 = 56 = 4·14 ✓
-  - (16, 10, 14):  16 + 40 = 56 ✓
-  - (20, 9, 14):   20 + 36 = 56 ✓ (TERMINAL MONO with all A)
+  - (12, 5, 8): 12 + 20 = 32 = 4·8 ✓
+  - (4, 4, 5): 4 + 16 = 20 = 4·5 ✓
+  - (8, 8, 10): 8 + 32 = 40 = 4·10 ✓
+  - (20, 5, 10): 20 + 20 = 40 ✓
+  - (8, 12, 14): 8 + 48 = 56 = 4·14 ✓
+  - (16, 10, 14): 16 + 40 = 56 ✓
+  - (20, 9, 14): 20 + 36 = 56 ✓ (TERMINAL MONO with all A)
 -/
 
 set_option maxHeartbeats 400000 in
-/-- **R273 chi(20) = chi(9) closure (cell 2)**: residual cell (2) +
+/-- ** chi(20) = chi(9) closure (cell 2)**: residual cell (2) +
   χ(20) = χ(9) ⟹ False at n ≥ 20. 3-step cascade ending in terminal
   mono triple (20, 9, 14). Cell (2) hypotheses: χ(8)=χ(12) (B-pair) and
   χ(4)=χ(16) (C-pair). -/
@@ -15006,7 +15006,7 @@ theorem residual_cell_2_chi20_eq_chi9_forces_False_short
   · show χ 9 = χ (9 + 5)
     rw [show (9 + 5 : ℕ) = 14 by decide, ← h14_eq_9]
 
-/-- **R273 contrapositive** (cell 2): χ(20) ≠ χ(9) under cell (2) hypotheses. -/
+/-- ** contrapositive** (cell 2): χ(20) ≠ χ(9) under cell (2) hypotheses. -/
 theorem residual_cell_2_chi20_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h20 : 20 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -15021,8 +15021,8 @@ theorem residual_cell_2_chi20_ne_chi9
   exact residual_cell_2_chi20_eq_chi9_forces_False_short χ h20 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12 h20_eq_9
 
-/-- **R273 layer compression d=5 (cell 2)**: χ(20) ∈ {χ(12), χ(16)} under
-  residual cell (2). Feeds R254 bridge as the d=5 hLayer case for cell (2). -/
+/-- ** layer compression d=5 (cell 2)**: χ(20) ∈ {χ(12), χ(16)} under
+  residual cell (2). Feeds bridge as the d=5 hLayer case for cell (2). -/
 theorem residual_cell_2_layer_compression_d5
     {n : ℕ} (χ : ℕ → ℕ) (h20 : 20 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -15044,7 +15044,7 @@ theorem residual_cell_2_layer_compression_d5
   · right
     exact third_color_eq hχ20 hχ16 hχ9 hχ12 h9_ne_12 h20_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §115. R274 — residual cell (2) hLayer d = 6.
+/-! ### §115. — residual cell (2) hLayer d = 6.
 
   **Target.** Under cell (2) hypotheses (χ(4) = χ(16) = C, χ(8) = χ(12) = B),
   mono-free `bAdicEquation 4` at n ≥ 24, prove χ(24) ∈ {χ(12), χ(16)}.
@@ -15053,22 +15053,22 @@ theorem residual_cell_2_layer_compression_d5
 
   | Step | Position | Triple(s) |
   |------|----------|-----------|
-  | 1 | χ(5)  = χ(9) (A) | (12, 5, 8) [≠B] + (4, 4, 5) [≠C] (UNCONDITIONAL) |
+  | 1 | χ(5) = χ(9) (A) | (12, 5, 8) [≠B] + (4, 4, 5) [≠C] (UNCONDITIONAL) |
   | 2 | χ(11) = χ(16) (C) | (24, 5, 11) [≠A] + (12, 8, 11) [≠B] |
   | T | **χ(15) ∉ {A, B, C}** | (24, 9, 15) [≠A] + (12, 12, 15) [≠B] + (16, 11, 15) [≠C] |
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (12, 5, 8):    12 + 20 = 32 = 4·8  ✓
-  - (4, 4, 5):     4 + 16 = 20 = 4·5   ✓
-  - (24, 5, 11):   24 + 20 = 44 = 4·11 ✓
-  - (12, 8, 11):   12 + 32 = 44        ✓
-  - (24, 9, 15):   24 + 36 = 60 = 4·15 ✓
-  - (12, 12, 15):  12 + 48 = 60        ✓
-  - (16, 11, 15):  16 + 44 = 60        ✓ (TERMINAL — combined with prior two: χ(15) ∉ {A,B,C})
+  - (12, 5, 8): 12 + 20 = 32 = 4·8 ✓
+  - (4, 4, 5): 4 + 16 = 20 = 4·5 ✓
+  - (24, 5, 11): 24 + 20 = 44 = 4·11 ✓
+  - (12, 8, 11): 12 + 32 = 44 ✓
+  - (24, 9, 15): 24 + 36 = 60 = 4·15 ✓
+  - (12, 12, 15): 12 + 48 = 60 ✓
+  - (16, 11, 15): 16 + 44 = 60 ✓ (TERMINAL — combined with prior two: χ(15) ∉ {A,B,C})
 -/
 
 set_option maxHeartbeats 400000 in
-/-- **R274 chi(24) = chi(9) closure (cell 2)**: residual cell (2) +
+/-- ** chi(24) = chi(9) closure (cell 2)**: residual cell (2) +
   χ(24) = χ(9) ⟹ False at n ≥ 24. 2-step cascade ending in no-colour-left
   terminal on χ(15). -/
 theorem residual_cell_2_chi24_eq_chi9_forces_False_short
@@ -15169,7 +15169,7 @@ theorem residual_cell_2_chi24_eq_chi9_forces_False_short
     third_color_eq hχ15 hχ16 hχ9 hχ12 h9_ne_12 h15_ne_9 h15_ne_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
   exact h15_ne_16 h15_eq_16
 
-/-- **R274 contrapositive** (cell 2): χ(24) ≠ χ(9) under cell (2) hypotheses. -/
+/-- ** contrapositive** (cell 2): χ(24) ≠ χ(9) under cell (2) hypotheses. -/
 theorem residual_cell_2_chi24_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h24 : 24 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -15184,8 +15184,8 @@ theorem residual_cell_2_chi24_ne_chi9
   exact residual_cell_2_chi24_eq_chi9_forces_False_short χ h24 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12 h24_eq_9
 
-/-- **R274 layer compression d=6 (cell 2)**: χ(24) ∈ {χ(12), χ(16)} under
-  residual cell (2). Feeds R254 bridge as the d=6 hLayer case for cell (2). -/
+/-- ** layer compression d=6 (cell 2)**: χ(24) ∈ {χ(12), χ(16)} under
+  residual cell (2). Feeds bridge as the d=6 hLayer case for cell (2). -/
 theorem residual_cell_2_layer_compression_d6
     {n : ℕ} (χ : ℕ → ℕ) (h24 : 24 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -15207,14 +15207,14 @@ theorem residual_cell_2_layer_compression_d6
   · right
     exact third_color_eq hχ24 hχ16 hχ9 hχ12 h9_ne_12 h24_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §116. R275 — residual cell (2) hLayer d = 7.
+/-! ### §116. — residual cell (2) hLayer d = 7.
 
   **Target.** Under cell (2) hypotheses, prove χ(28) ∈ {χ(12), χ(16)}.
 
   **Unconditional preamble under cell (2)** (3 anchors):
-  - P1: χ(20) = B via R273 + (16, 16, 20)  [(16,16,20) gives χ(20) ≠ C]
-  - P2: χ(17) = A via (4, 16, 17) + (20, 12, 17)  [(4,16,17) gives χ(17) ≠ C using χ(4)=χ(16)=C]
-  - P3: χ(15) = A via (4, 15, 16) + (12, 12, 15)  [(4,15,16) gives χ(15) ≠ C]
+  - P1: χ(20) = B via + (16, 16, 20) [(16,16,20) gives χ(20) ≠ C]
+  - P2: χ(17) = A via (4, 16, 17) + (20, 12, 17) [(4,16,17) gives χ(17) ≠ C using χ(4)=χ(16)=C]
+  - P3: χ(15) = A via (4, 15, 16) + (12, 12, 15) [(4,15,16) gives χ(15) ≠ C]
 
   **4-step cascade under χ(28) = A:**
 
@@ -15227,24 +15227,24 @@ theorem residual_cell_2_layer_compression_d6
   | T | **(28, 15, 22) mono** | χ(28) = χ(15) = χ(22) = A |
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (16, 16, 20):  16 + 64 = 80 = 4·20 ✓
-  - (4, 16, 17):   4 + 64 = 68 = 4·17 ✓
-  - (20, 12, 17):  20 + 48 = 68 ✓
-  - (4, 15, 16):   4 + 60 = 64 = 4·16 ✓
-  - (12, 12, 15):  12 + 48 = 60 = 4·15 ✓
-  - (8, 8, 10):    8 + 32 = 40 = 4·10 ✓
-  - (28, 10, 17):  28 + 40 = 68 = 4·17 ✓
-  - (12, 8, 11):   12 + 32 = 44 = 4·11 ✓
-  - (4, 10, 11):   4 + 40 = 44 ✓
-  - (8, 18, 20):   8 + 72 = 80 ✓
-  - (28, 11, 18):  28 + 44 = 72 = 4·18 ✓
-  - (8, 20, 22):   8 + 80 = 88 = 4·22 ✓
-  - (16, 18, 22):  16 + 72 = 88 ✓
-  - (28, 15, 22):  28 + 60 = 88 ✓ (TERMINAL MONO with all A)
+  - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓
+  - (4, 16, 17): 4 + 64 = 68 = 4·17 ✓
+  - (20, 12, 17): 20 + 48 = 68 ✓
+  - (4, 15, 16): 4 + 60 = 64 = 4·16 ✓
+  - (12, 12, 15): 12 + 48 = 60 = 4·15 ✓
+  - (8, 8, 10): 8 + 32 = 40 = 4·10 ✓
+  - (28, 10, 17): 28 + 40 = 68 = 4·17 ✓
+  - (12, 8, 11): 12 + 32 = 44 = 4·11 ✓
+  - (4, 10, 11): 4 + 40 = 44 ✓
+  - (8, 18, 20): 8 + 72 = 80 ✓
+  - (28, 11, 18): 28 + 44 = 72 = 4·18 ✓
+  - (8, 20, 22): 8 + 80 = 88 = 4·22 ✓
+  - (16, 18, 22): 16 + 72 = 88 ✓
+  - (28, 15, 22): 28 + 60 = 88 ✓ (TERMINAL MONO with all A)
 -/
 
 set_option maxHeartbeats 800000 in
-/-- **R275 chi(28) = chi(9) closure (cell 2)**: residual cell (2) +
+/-- ** chi(28) = chi(9) closure (cell 2)**: residual cell (2) +
   χ(28) = χ(9) ⟹ False at n ≥ 28. 3-anchor unconditional preamble + 4-step
   cascade ending in terminal mono triple (28, 15, 22) under colour A. -/
 theorem residual_cell_2_chi28_eq_chi9_forces_False_short
@@ -15268,7 +15268,7 @@ theorem residual_cell_2_chi28_eq_chi9_forces_False_short
   have hχ18 : χ 18 < 3 := hχk 18 (by omega) (by omega)
   have hχ20 : χ 20 < 3 := hχk 20 (by omega) (by omega)
   have hχ22 : χ 22 < 3 := hχk 22 (by omega) (by omega)
-  -- PREAMBLE P1: χ(20) = χ(12) (B). R273 + (16, 16, 20).
+  -- PREAMBLE P1: χ(20) = χ(12) (B). + (16, 16, 20).
   have h20_disj : χ 20 = χ 12 ∨ χ 20 = χ 16 :=
     residual_cell_2_layer_compression_d5 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
@@ -15431,7 +15431,7 @@ theorem residual_cell_2_chi28_eq_chi9_forces_False_short
   · show χ 15 = χ (15 + 7)
     rw [show (15 + 7 : ℕ) = 22 by decide, h15_eq_9, ← h22_eq_9]
 
-/-- **R275 contrapositive** (cell 2): χ(28) ≠ χ(9) under cell (2) hypotheses. -/
+/-- ** contrapositive** (cell 2): χ(28) ≠ χ(9) under cell (2) hypotheses. -/
 theorem residual_cell_2_chi28_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h28 : 28 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -15446,8 +15446,8 @@ theorem residual_cell_2_chi28_ne_chi9
   exact residual_cell_2_chi28_eq_chi9_forces_False_short χ h28 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12 h28_eq_9
 
-/-- **R275 layer compression d=7 (cell 2)**: χ(28) ∈ {χ(12), χ(16)} under
-  residual cell (2). Feeds R254 bridge as the d=7 hLayer case for cell (2). -/
+/-- ** layer compression d=7 (cell 2)**: χ(28) ∈ {χ(12), χ(16)} under
+  residual cell (2). Feeds bridge as the d=7 hLayer case for cell (2). -/
 theorem residual_cell_2_layer_compression_d7
     {n : ℕ} (χ : ℕ → ℕ) (h28 : 28 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -15469,7 +15469,7 @@ theorem residual_cell_2_layer_compression_d7
   · right
     exact third_color_eq hχ28 hχ16 hχ9 hχ12 h9_ne_12 h28_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §117. R276 — residual cell (2) hLayer d = 8 + reusable anchor helpers.
+/-! ### §117. — residual cell (2) hLayer d = 8 + reusable anchor helpers.
 
   **Target.** Under cell (2) hypotheses, prove χ(32) ∈ {χ(12), χ(16)}.
 
@@ -15479,17 +15479,17 @@ theorem residual_cell_2_layer_compression_d7
 
   Two reusable helpers are extracted for future cell (2) rounds:
   - `residual_cell_2_chi20_eq_chi12`: χ(20) = B, unconditional under cell (2).
-  - `residual_cell_2_chi17_eq_chi9`:  χ(17) = A, unconditional under cell (2).
+  - `residual_cell_2_chi17_eq_chi9`: χ(17) = A, unconditional under cell (2).
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (16, 16, 20):  16 + 64 = 80 = 4·20 ✓
-  - (4, 16, 17):   4 + 64 = 68 = 4·17 ✓
-  - (20, 12, 17):  20 + 48 = 68 ✓
-  - (32, 9, 17):   32 + 36 = 68 ✓ (TERMINAL MONO with all A)
+  - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓
+  - (4, 16, 17): 4 + 64 = 68 = 4·17 ✓
+  - (20, 12, 17): 20 + 48 = 68 ✓
+  - (32, 9, 17): 32 + 36 = 68 ✓ (TERMINAL MONO with all A)
 -/
 
-/-- **R276 helper: χ(20) = χ(12) unconditional under cell (2)**.
-  R273 (`residual_cell_2_layer_compression_d5`) gives χ(20) ∈ {χ(12), χ(16)}.
+/-- ** helper: χ(20) = χ(12) unconditional under cell (2)**.
+   (`residual_cell_2_layer_compression_d5`) gives χ(20) ∈ {χ(12), χ(16)}.
   Self-anchor triple (16, 16, 20) forces χ(20) ≠ χ(16), so χ(20) = χ(12). -/
 theorem residual_cell_2_chi20_eq_chi12
     {n : ℕ} (χ : ℕ → ℕ) (h20 : 20 ≤ n)
@@ -15516,9 +15516,9 @@ theorem residual_cell_2_chi20_eq_chi12
       rw [show (16 + 4 : ℕ) = 20 by decide, h20_eq_16]
   exact h20_disj.resolve_right h20_ne_16
 
-/-- **R276 helper: χ(17) = χ(9) unconditional under cell (2)**.
+/-- ** helper: χ(17) = χ(9) unconditional under cell (2)**.
   (4, 16, 17) forces χ(17) ≠ C (via χ(4) = χ(16) = C anchor pair).
-  (20, 12, 17) forces χ(17) ≠ B (uses χ(20) = B from R276 helper).
+  (20, 12, 17) forces χ(17) ≠ B (uses χ(20) = B from helper).
   third_color_eq gives χ(17) = χ(9). -/
 theorem residual_cell_2_chi17_eq_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h20 : 20 ≤ n)
@@ -15559,7 +15559,7 @@ theorem residual_cell_2_chi17_eq_chi9
       rw [show (12 + 5 : ℕ) = 17 by decide, h17_eq_12]
   exact third_color_eq hχ17 hχ9 hχ12 hχ16 h12_ne_16 h17_ne_12 h17_ne_16 h9_ne_12 h9_ne_16
 
-/-- **R276 chi(32) = chi(9) closure (cell 2)**: residual cell (2) +
+/-- ** chi(32) = chi(9) closure (cell 2)**: residual cell (2) +
   χ(32) = χ(9) ⟹ False at n ≥ 32. ONE-STEP via terminal mono (32, 9, 17)
   using unconditional χ(17) = A helper. -/
 theorem residual_cell_2_chi32_eq_chi9_forces_False_short
@@ -15586,7 +15586,7 @@ theorem residual_cell_2_chi32_eq_chi9_forces_False_short
   · show χ 9 = χ (9 + 8)
     rw [show (9 + 8 : ℕ) = 17 by decide, ← h17_eq_9]
 
-/-- **R276 contrapositive** (cell 2): χ(32) ≠ χ(9) under cell (2) hypotheses. -/
+/-- ** contrapositive** (cell 2): χ(32) ≠ χ(9) under cell (2) hypotheses. -/
 theorem residual_cell_2_chi32_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -15601,8 +15601,8 @@ theorem residual_cell_2_chi32_ne_chi9
   exact residual_cell_2_chi32_eq_chi9_forces_False_short χ h32 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12 h32_eq_9
 
-/-- **R276 layer compression d=8 (cell 2)**: χ(32) ∈ {χ(12), χ(16)} under
-  residual cell (2). Feeds R254 bridge as the d=8 hLayer case for cell (2). -/
+/-- ** layer compression d=8 (cell 2)**: χ(32) ∈ {χ(12), χ(16)} under
+  residual cell (2). Feeds bridge as the d=8 hLayer case for cell (2). -/
 theorem residual_cell_2_layer_compression_d8
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -15624,7 +15624,7 @@ theorem residual_cell_2_layer_compression_d8
   · right
     exact third_color_eq hχ32 hχ16 hχ9 hχ12 h9_ne_12 h32_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §118. R277 — residual cell (2) hLayer d = 9 + chi(5)=chi(9) helper.
+/-! ### §118. — residual cell (2) hLayer d = 9 + chi(5)=chi(9) helper.
 
   **Target.** Under cell (2) hypotheses, prove χ(36) ∈ {χ(12), χ(16)}.
 
@@ -15632,24 +15632,24 @@ theorem residual_cell_2_layer_compression_d8
 
   | Step | Position | Triple(s) |
   |------|----------|-----------|
-  | H | χ(5)  = χ(9)  (A) | (12, 5, 8) [≠B] + (4, 4, 5) [≠C] (HELPER, UNCONDITIONAL) |
+  | H | χ(5) = χ(9) (A) | (12, 5, 8) [≠B] + (4, 4, 5) [≠C] (HELPER, UNCONDITIONAL) |
   | 1 | χ(14) = χ(16) (C) | (36, 5, 14) [≠A] + (8, 12, 14) [≠B] |
   | 2 | χ(18) = χ(16) (C) | (36, 9, 18) [≠A] + (8, 18, 20) [≠B] |
   | T | **(16, 14, 18) mono** | χ(16) = χ(14) = χ(18) = C |
 
-  Uses R276 helper `residual_cell_2_chi20_eq_chi12` for χ(20) = B in S2.
+  Uses helper `residual_cell_2_chi20_eq_chi12` for χ(20) = B in S2.
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (12, 5, 8):    12 + 20 = 32 = 4·8  ✓
-  - (4, 4, 5):     4 + 16 = 20 = 4·5   ✓
-  - (36, 5, 14):   36 + 20 = 56 = 4·14 ✓
-  - (8, 12, 14):   8 + 48 = 56         ✓
-  - (36, 9, 18):   36 + 36 = 72 = 4·18 ✓
-  - (8, 18, 20):   8 + 72 = 80 = 4·20  ✓
-  - (16, 14, 18):  16 + 56 = 72        ✓ (TERMINAL MONO with all C)
+  - (12, 5, 8): 12 + 20 = 32 = 4·8 ✓
+  - (4, 4, 5): 4 + 16 = 20 = 4·5 ✓
+  - (36, 5, 14): 36 + 20 = 56 = 4·14 ✓
+  - (8, 12, 14): 8 + 48 = 56 ✓
+  - (36, 9, 18): 36 + 36 = 72 = 4·18 ✓
+  - (8, 18, 20): 8 + 72 = 80 = 4·20 ✓
+  - (16, 14, 18): 16 + 56 = 72 ✓ (TERMINAL MONO with all C)
 -/
 
-/-- **R277 helper: χ(5) = χ(9) unconditional under cell (2)**.
+/-- ** helper: χ(5) = χ(9) unconditional under cell (2)**.
   (12, 5, 8) forces χ(5) ≠ B (via χ(12) = χ(8) = B anchor pair).
   (4, 4, 5) forces χ(5) ≠ C (via χ(4) = C self-mono).
   third_color_eq gives χ(5) = χ(9). Reusable in future cell (2) cascades. -/
@@ -15690,7 +15690,7 @@ theorem residual_cell_2_chi5_eq_chi9
   exact third_color_eq hχ5 hχ9 hχ12 hχ16 h12_ne_16 h5_ne_12 h5_ne_16 h9_ne_12 h9_ne_16
 
 set_option maxHeartbeats 400000 in
-/-- **R277 chi(36) = chi(9) closure (cell 2)**: residual cell (2) +
+/-- ** chi(36) = chi(9) closure (cell 2)**: residual cell (2) +
   χ(36) = χ(9) ⟹ False at n ≥ 36. 2-step cascade ending in terminal
   mono (16, 14, 18) under colour C. -/
 theorem residual_cell_2_chi36_eq_chi9_forces_False_short
@@ -15709,7 +15709,7 @@ theorem residual_cell_2_chi36_eq_chi9_forces_False_short
   have hχ14 : χ 14 < 3 := hχk 14 (by omega) (by omega)
   have hχ16 : χ 16 < 3 := hχk 16 (by omega) (by omega)
   have hχ18 : χ 18 < 3 := hχk 18 (by omega) (by omega)
-  -- Helpers from R276 + R277.
+  -- Helpers from +.
   have h20_eq_12 : χ 20 = χ 12 :=
     residual_cell_2_chi20_eq_chi12 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
@@ -15772,7 +15772,7 @@ theorem residual_cell_2_chi36_eq_chi9_forces_False_short
   · show χ 14 = χ (14 + 4)
     rw [show (14 + 4 : ℕ) = 18 by decide, h14_eq_16, ← h18_eq_16]
 
-/-- **R277 contrapositive** (cell 2): χ(36) ≠ χ(9) under cell (2) hypotheses. -/
+/-- ** contrapositive** (cell 2): χ(36) ≠ χ(9) under cell (2) hypotheses. -/
 theorem residual_cell_2_chi36_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h36 : 36 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -15787,8 +15787,8 @@ theorem residual_cell_2_chi36_ne_chi9
   exact residual_cell_2_chi36_eq_chi9_forces_False_short χ h36 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12 h36_eq_9
 
-/-- **R277 layer compression d=9 (cell 2)**: χ(36) ∈ {χ(12), χ(16)} under
-  residual cell (2). Feeds R254 bridge as the d=9 hLayer case for cell (2). -/
+/-- ** layer compression d=9 (cell 2)**: χ(36) ∈ {χ(12), χ(16)} under
+  residual cell (2). Feeds bridge as the d=9 hLayer case for cell (2). -/
 theorem residual_cell_2_layer_compression_d9
     {n : ℕ} (χ : ℕ → ℕ) (h36 : 36 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -15810,20 +15810,20 @@ theorem residual_cell_2_layer_compression_d9
   · right
     exact third_color_eq hχ36 hχ16 hχ9 hχ12 h9_ne_12 h36_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §119. R278 — residual cell (2) hLayer d = 10 + chi(15)=chi(9) helper.
+/-! ### §119. — residual cell (2) hLayer d = 10 + chi(15)=chi(9) helper.
 
   **Target.** Under cell (2) hypotheses, prove χ(40) ∈ {χ(12), χ(16)}.
 
   **Closure**: ONE-STEP via terminal mono (40, 5, 15), using two unconditional
-  cell (2) helpers: χ(5) = A (R277) and χ(15) = A (NEW R278).
+  cell (2) helpers: χ(5) = A () and χ(15) = A (NEW ).
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (4, 15, 16):   4 + 60 = 64 = 4·16 ✓
-  - (12, 12, 15):  12 + 48 = 60 = 4·15 ✓
-  - (40, 5, 15):   40 + 20 = 60 ✓ (TERMINAL MONO with all A)
+  - (4, 15, 16): 4 + 60 = 64 = 4·16 ✓
+  - (12, 12, 15): 12 + 48 = 60 = 4·15 ✓
+  - (40, 5, 15): 40 + 20 = 60 ✓ (TERMINAL MONO with all A)
 -/
 
-/-- **R278 helper: χ(15) = χ(9) unconditional under cell (2)**.
+/-- ** helper: χ(15) = χ(9) unconditional under cell (2)**.
   (4, 15, 16) forces χ(15) ≠ C (via χ(4) = χ(16) = C anchor pair).
   (12, 12, 15) forces χ(15) ≠ B (via χ(12) = B self-mono).
   third_color_eq gives χ(15) = χ(9). Reusable in future cell (2) cascades. -/
@@ -15863,7 +15863,7 @@ theorem residual_cell_2_chi15_eq_chi9
       rw [show (12 + 3 : ℕ) = 15 by decide, h15_eq_12]
   exact third_color_eq hχ15 hχ9 hχ12 hχ16 h12_ne_16 h15_ne_12 h15_ne_16 h9_ne_12 h9_ne_16
 
-/-- **R278 chi(40) = chi(9) closure (cell 2)**: residual cell (2) +
+/-- ** chi(40) = chi(9) closure (cell 2)**: residual cell (2) +
   χ(40) = χ(9) ⟹ False at n ≥ 40. ONE-STEP via terminal mono (40, 5, 15)
   using unconditional χ(5) = A and χ(15) = A helpers. -/
 theorem residual_cell_2_chi40_eq_chi9_forces_False_short
@@ -15893,7 +15893,7 @@ theorem residual_cell_2_chi40_eq_chi9_forces_False_short
   · show χ 5 = χ (5 + 10)
     rw [show (5 + 10 : ℕ) = 15 by decide, h5_eq_9, ← h15_eq_9]
 
-/-- **R278 contrapositive** (cell 2): χ(40) ≠ χ(9) under cell (2) hypotheses. -/
+/-- ** contrapositive** (cell 2): χ(40) ≠ χ(9) under cell (2) hypotheses. -/
 theorem residual_cell_2_chi40_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h40 : 40 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -15908,8 +15908,8 @@ theorem residual_cell_2_chi40_ne_chi9
   exact residual_cell_2_chi40_eq_chi9_forces_False_short χ h40 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12 h40_eq_9
 
-/-- **R278 layer compression d=10 (cell 2)**: χ(40) ∈ {χ(12), χ(16)} under
-  residual cell (2). Feeds R254 bridge as the d=10 hLayer case for cell (2). -/
+/-- ** layer compression d=10 (cell 2)**: χ(40) ∈ {χ(12), χ(16)} under
+  residual cell (2). Feeds bridge as the d=10 hLayer case for cell (2). -/
 theorem residual_cell_2_layer_compression_d10
     {n : ℕ} (χ : ℕ → ℕ) (h40 : 40 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -15931,7 +15931,7 @@ theorem residual_cell_2_layer_compression_d10
   · right
     exact third_color_eq hχ40 hχ16 hχ9 hχ12 h9_ne_12 h40_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §120. R279 — residual cell (2) hLayer d = 11 + chi(3)=chi(9) helper.
+/-! ### §120. — residual cell (2) hLayer d = 11 + chi(3)=chi(9) helper.
 
   **Target.** Under cell (2) hypotheses, prove χ(44) ∈ {χ(12), χ(16)}.
 
@@ -15939,25 +15939,25 @@ theorem residual_cell_2_layer_compression_d10
 
   The first-strike pattern (44, 9, 20) fails because χ(20) = B fixed. Cell (2)
   needs an indirect chain through alternating positions, eventually forcing
-  χ(26) = B and χ(28) = B (via R274/R275 sharpening), giving B-mono (8, 26, 28).
+  χ(26) = B and χ(28) = B (via / sharpening), giving B-mono (8, 26, 28).
 
   | Step | Position | Triple(s) |
   |------|----------|-----------|
-  | H | χ(3)  = A (UNCOND) | (4, 3, 4) [≠C] + (20, 3, 8) [≠B] (NEW HELPER) |
+  | H | χ(3) = A (UNCOND) | (4, 3, 4) [≠C] + (20, 3, 8) [≠B] (NEW HELPER) |
   | 1 | χ(14) = C | (44, 3, 14) [≠A] + (8, 12, 14) [≠B] |
   | 2 | χ(18) = A | (16, 14, 18) [≠C] + (8, 18, 20) [≠B] |
-  | 3 | χ(7)  = C | (44, 7, 18) [≠A] + (20, 7, 12) [≠B] |
+  | 3 | χ(7) = C | (44, 7, 18) [≠A] + (20, 7, 12) [≠B] |
   | 4 | χ(11) = A | (16, 7, 11) [≠C] + (12, 8, 11) [≠B] |
   | 5 | χ(22) = C | (44, 11, 22) [≠A] + (8, 20, 22) [≠B] |
   | 6 | χ(26) = B | (44, 15, 26) [≠A] + (16, 22, 26) [≠C] |
-  | 7 | χ(24) = C | (8, 24, 26) [≠B] + R274 |
-  | 8 | χ(28) = B | (16, 24, 28) [≠C] + R275 |
+  | 7 | χ(24) = C | (8, 24, 26) [≠B] + |
+  | 8 | χ(28) = B | (16, 24, 28) [≠C] + |
   | T | **(8, 26, 28) mono** | χ(8) = χ(26) = χ(28) = B |
 -/
 
-/-- **R279 helper: χ(3) = χ(9) unconditional under cell (2)**.
+/-- ** helper: χ(3) = χ(9) unconditional under cell (2)**.
   (4, 3, 4) forces χ(3) ≠ C (via χ(4) = C self-mono).
-  (20, 3, 8) forces χ(3) ≠ B (via χ(20) = χ(8) = B; uses R276 helper).
+  (20, 3, 8) forces χ(3) ≠ B (via χ(20) = χ(8) = B; uses helper).
   Reusable in future cell (2) cascades. -/
 theorem residual_cell_2_chi3_eq_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h20 : 20 ≤ n)
@@ -15999,7 +15999,7 @@ theorem residual_cell_2_chi3_eq_chi9
   exact third_color_eq hχ3 hχ9 hχ12 hχ16 h12_ne_16 h3_ne_12 h3_ne_16 h9_ne_12 h9_ne_16
 
 set_option maxHeartbeats 1600000 in
-/-- **R279 chi(44) = chi(9) closure (cell 2)**: residual cell (2) +
+/-- ** chi(44) = chi(9) closure (cell 2)**: residual cell (2) +
   χ(44) = χ(9) ⟹ False at n ≥ 44. 8-step cascade ending in terminal
   mono triple (8, 26, 28) under colour B. -/
 theorem residual_cell_2_chi44_eq_chi9_forces_False_short
@@ -16172,7 +16172,7 @@ theorem residual_cell_2_chi44_eq_chi9_forces_False_short
       rw [show (22 + 4 : ℕ) = 26 by decide, h22_eq_16, h26_eq_16]
   have h26_eq_12 : χ 26 = χ 12 :=
     third_color_eq hχ26 hχ12 hχ9 hχ16 h9_ne_16 h26_ne_9 h26_ne_16 (Ne.symm h9_ne_12) h12_ne_16
-  -- S7: χ(24) = χ(16) (C). Uses R274 disjunction + (8, 24, 26) ≠ B.
+  -- S7: χ(24) = χ(16) (C). Uses disjunction + (8, 24, 26) ≠ B.
   have h24_disj : χ 24 = χ 12 ∨ χ 24 = χ 16 :=
     residual_cell_2_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
@@ -16187,7 +16187,7 @@ theorem residual_cell_2_chi44_eq_chi9_forces_False_short
     · show χ 24 = χ (24 + 2)
       rw [show (24 + 2 : ℕ) = 26 by decide, h24_eq_12, h26_eq_12]
   have h24_eq_16 : χ 24 = χ 16 := h24_disj.resolve_left h24_ne_12
-  -- S8: χ(28) = χ(12) (B). Uses R275 disjunction + (16, 24, 28) ≠ C.
+  -- S8: χ(28) = χ(12) (B). Uses disjunction + (16, 24, 28) ≠ C.
   have h28_disj : χ 28 = χ 12 ∨ χ 28 = χ 16 :=
     residual_cell_2_layer_compression_d7 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
@@ -16212,7 +16212,7 @@ theorem residual_cell_2_chi44_eq_chi9_forces_False_short
   · show χ 26 = χ (26 + 2)
     rw [show (26 + 2 : ℕ) = 28 by decide, h26_eq_12, h28_eq_12]
 
-/-- **R279 contrapositive** (cell 2): χ(44) ≠ χ(9) under cell (2) hypotheses. -/
+/-- ** contrapositive** (cell 2): χ(44) ≠ χ(9) under cell (2) hypotheses. -/
 theorem residual_cell_2_chi44_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h44 : 44 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -16227,8 +16227,8 @@ theorem residual_cell_2_chi44_ne_chi9
   exact residual_cell_2_chi44_eq_chi9_forces_False_short χ h44 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12 h44_eq_9
 
-/-- **R279 layer compression d=11 (cell 2)**: χ(44) ∈ {χ(12), χ(16)} under
-  residual cell (2). Feeds R254 bridge as the d=11 hLayer case for cell (2). -/
+/-- ** layer compression d=11 (cell 2)**: χ(44) ∈ {χ(12), χ(16)} under
+  residual cell (2). Feeds bridge as the d=11 hLayer case for cell (2). -/
 theorem residual_cell_2_layer_compression_d11
     {n : ℕ} (χ : ℕ → ℕ) (h44 : 44 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -16250,19 +16250,19 @@ theorem residual_cell_2_layer_compression_d11
   · right
     exact third_color_eq hχ44 hχ16 hχ9 hχ12 h9_ne_12 h44_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §121. R280 — residual cell (2) hLayer d = 12.
+/-! ### §121. — residual cell (2) hLayer d = 12.
 
   **Target.** Under cell (2) hypotheses, prove χ(48) ∈ {χ(12), χ(16)}.
 
   **Closure**: ONE-STEP via direct terminal mono (48, 3, 15) using
-  existing helpers χ(3) = A (R279) and χ(15) = A (R278). No new helper needed.
+  existing helpers χ(3) = A () and χ(15) = A (). No new helper needed.
 
   Triple verified: (48, 3, 15): 48 + 12 = 60 = 4·15 ✓ (TERMINAL MONO with all A)
 -/
 
-/-- **R280 chi(48) = chi(9) closure (cell 2)**: residual cell (2) +
+/-- ** chi(48) = chi(9) closure (cell 2)**: residual cell (2) +
   χ(48) = χ(9) ⟹ False at n ≥ 48. ONE-STEP via terminal mono (48, 3, 15)
-  using existing helpers χ(3) = A (R279) and χ(15) = A (R278). -/
+  using existing helpers χ(3) = A () and χ(15) = A (). -/
 theorem residual_cell_2_chi48_eq_chi9_forces_False_short
     {n : ℕ} (χ : ℕ → ℕ) (h48 : 48 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -16290,7 +16290,7 @@ theorem residual_cell_2_chi48_eq_chi9_forces_False_short
   · show χ 3 = χ (3 + 12)
     rw [show (3 + 12 : ℕ) = 15 by decide, h3_eq_9, ← h15_eq_9]
 
-/-- **R280 contrapositive** (cell 2): χ(48) ≠ χ(9) under cell (2) hypotheses. -/
+/-- ** contrapositive** (cell 2): χ(48) ≠ χ(9) under cell (2) hypotheses. -/
 theorem residual_cell_2_chi48_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h48 : 48 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -16305,8 +16305,8 @@ theorem residual_cell_2_chi48_ne_chi9
   exact residual_cell_2_chi48_eq_chi9_forces_False_short χ h48 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12 h48_eq_9
 
-/-- **R280 layer compression d=12 (cell 2)**: χ(48) ∈ {χ(12), χ(16)} under
-  residual cell (2). Feeds R254 bridge as the d=12 hLayer case for cell (2). -/
+/-- ** layer compression d=12 (cell 2)**: χ(48) ∈ {χ(12), χ(16)} under
+  residual cell (2). Feeds bridge as the d=12 hLayer case for cell (2). -/
 theorem residual_cell_2_layer_compression_d12
     {n : ℕ} (χ : ℕ → ℕ) (h48 : 48 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -16328,7 +16328,7 @@ theorem residual_cell_2_layer_compression_d12
   · right
     exact third_color_eq hχ48 hχ16 hχ9 hχ12 h9_ne_12 h48_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §122. R281 — residual cell (2) hLayer d = 13.
+/-! ### §122. — residual cell (2) hLayer d = 13.
 
   **Target.** Under cell (2) hypotheses, prove χ(52) ∈ {χ(12), χ(16)}.
 
@@ -16340,15 +16340,15 @@ theorem residual_cell_2_layer_compression_d12
   | T | **χ(22) ∉ {A, B, C}** | (52, 9, 22) [≠A] + (8, 20, 22) [≠B] + (16, 18, 22) [≠C; uses S1] |
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (52, 5, 18):   52 + 20 = 72 = 4·18 ✓
-  - (8, 18, 20):   8 + 72 = 80 = 4·20 ✓
-  - (52, 9, 22):   52 + 36 = 88 = 4·22 ✓
-  - (8, 20, 22):   8 + 80 = 88 ✓
-  - (16, 18, 22):  16 + 72 = 88 ✓ (TERMINAL — combined with prior two: χ(22) ∉ {A,B,C})
+  - (52, 5, 18): 52 + 20 = 72 = 4·18 ✓
+  - (8, 18, 20): 8 + 72 = 80 = 4·20 ✓
+  - (52, 9, 22): 52 + 36 = 88 = 4·22 ✓
+  - (8, 20, 22): 8 + 80 = 88 ✓
+  - (16, 18, 22): 16 + 72 = 88 ✓ (TERMINAL — combined with prior two: χ(22) ∉ {A,B,C})
 -/
 
 set_option maxHeartbeats 400000 in
-/-- **R281 chi(52) = chi(9) closure (cell 2)**: residual cell (2) +
+/-- ** chi(52) = chi(9) closure (cell 2)**: residual cell (2) +
   χ(52) = χ(9) ⟹ False at n ≥ 52. 1-step cascade (χ(18) = C) + no-colour-left
   terminal on χ(22) via three triples excluding A, B, C. -/
 theorem residual_cell_2_chi52_eq_chi9_forces_False_short
@@ -16432,7 +16432,7 @@ theorem residual_cell_2_chi52_eq_chi9_forces_False_short
     third_color_eq hχ22 hχ16 hχ9 hχ12 h9_ne_12 h22_ne_9 h22_ne_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
   exact h22_ne_16 h22_eq_16
 
-/-- **R281 contrapositive** (cell 2): χ(52) ≠ χ(9) under cell (2) hypotheses. -/
+/-- ** contrapositive** (cell 2): χ(52) ≠ χ(9) under cell (2) hypotheses. -/
 theorem residual_cell_2_chi52_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h52 : 52 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -16447,8 +16447,8 @@ theorem residual_cell_2_chi52_ne_chi9
   exact residual_cell_2_chi52_eq_chi9_forces_False_short χ h52 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12 h52_eq_9
 
-/-- **R281 layer compression d=13 (cell 2)**: χ(52) ∈ {χ(12), χ(16)} under
-  residual cell (2). Feeds R254 bridge as the d=13 hLayer case for cell (2). -/
+/-- ** layer compression d=13 (cell 2)**: χ(52) ∈ {χ(12), χ(16)} under
+  residual cell (2). Feeds bridge as the d=13 hLayer case for cell (2). -/
 theorem residual_cell_2_layer_compression_d13
     {n : ℕ} (χ : ℕ → ℕ) (h52 : 52 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -16470,19 +16470,19 @@ theorem residual_cell_2_layer_compression_d13
   · right
     exact third_color_eq hχ52 hχ16 hχ9 hχ12 h9_ne_12 h52_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §123. R282 — residual cell (2) hLayer d = 14.
+/-! ### §123. — residual cell (2) hLayer d = 14.
 
   **Target.** Under cell (2) hypotheses, prove χ(56) ∈ {χ(12), χ(16)}.
 
   **Closure**: ONE-STEP via direct terminal mono (56, 3, 17) using existing
-  helpers χ(3) = A (R279) and χ(17) = A (R276). No new helper needed.
+  helpers χ(3) = A () and χ(17) = A (). No new helper needed.
 
   Triple verified: (56, 3, 17): 56 + 12 = 68 = 4·17 ✓ (TERMINAL MONO with all A)
 -/
 
-/-- **R282 chi(56) = chi(9) closure (cell 2)**: residual cell (2) +
+/-- ** chi(56) = chi(9) closure (cell 2)**: residual cell (2) +
   χ(56) = χ(9) ⟹ False at n ≥ 56. ONE-STEP via terminal mono (56, 3, 17)
-  using existing helpers χ(3) = A (R279) and χ(17) = A (R276). -/
+  using existing helpers χ(3) = A () and χ(17) = A (). -/
 theorem residual_cell_2_chi56_eq_chi9_forces_False_short
     {n : ℕ} (χ : ℕ → ℕ) (h56 : 56 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -16510,7 +16510,7 @@ theorem residual_cell_2_chi56_eq_chi9_forces_False_short
   · show χ 3 = χ (3 + 14)
     rw [show (3 + 14 : ℕ) = 17 by decide, h3_eq_9, ← h17_eq_9]
 
-/-- **R282 contrapositive** (cell 2): χ(56) ≠ χ(9) under cell (2) hypotheses. -/
+/-- ** contrapositive** (cell 2): χ(56) ≠ χ(9) under cell (2) hypotheses. -/
 theorem residual_cell_2_chi56_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h56 : 56 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -16525,8 +16525,8 @@ theorem residual_cell_2_chi56_ne_chi9
   exact residual_cell_2_chi56_eq_chi9_forces_False_short χ h56 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12 h56_eq_9
 
-/-- **R282 layer compression d=14 (cell 2)**: χ(56) ∈ {χ(12), χ(16)} under
-  residual cell (2). Feeds R254 bridge as the d=14 hLayer case for cell (2). -/
+/-- ** layer compression d=14 (cell 2)**: χ(56) ∈ {χ(12), χ(16)} under
+  residual cell (2). Feeds bridge as the d=14 hLayer case for cell (2). -/
 theorem residual_cell_2_layer_compression_d14
     {n : ℕ} (χ : ℕ → ℕ) (h56 : 56 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -16548,44 +16548,44 @@ theorem residual_cell_2_layer_compression_d14
   · right
     exact third_color_eq hχ56 hχ16 hχ9 hχ12 h9_ne_12 h56_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §124. R283 — residual cell (2) hLayer d = 15.
+/-! ### §124. — residual cell (2) hLayer d = 15.
 
   **Target.** Under cell (2) hypotheses, prove χ(60) ∈ {χ(12), χ(16)}.
 
   **7-step cascade + no-colour-left terminal on χ(30)**:
 
-  | Step | Position  | Triple(s) |
+  | Step | Position | Triple(s) |
   |------|-----------|-----------|
-  | 1 | χ(18) = C  | (60, 3, 18) [≠A; χ(3)=A via R279] + (8, 18, 20) [≠B; χ(20)=B via R276] |
-  | 2 | χ(14) = A  | (8, 12, 14) [≠B] + (16, 14, 18) [≠C; uses S1] |
-  | 3 | χ(22) = A  | (8, 20, 22) [≠B] + (16, 18, 22) [≠C; uses S1] |
-  | 4 | χ(7)  = C  | (20, 7, 12) [≠B] + (60, 7, 22) [≠A; uses S3] |
-  | 5 | χ(11) = A  | (12, 8, 11) [≠B] + (16, 7, 11) [≠C; uses S4] |
-  | 6 | χ(24) = B  | (24, 18, 24) [≠C; uses S1] + R274 [χ(24) ∈ {B,C}] |
-  | 7 | χ(26) = C  | (60, 11, 26) [≠A; uses S5] + (8, 24, 26) [≠B; uses S6] |
-  | T | **χ(30) no colour** | (60, 15, 30) [≠A; χ(15)=A via R278] + (24, 24, 30) [≠B; uses S6] + (16, 26, 30) [≠C; uses S7] |
+  | 1 | χ(18) = C | (60, 3, 18) [≠A; χ(3)=A via ] + (8, 18, 20) [≠B; χ(20)=B via ] |
+  | 2 | χ(14) = A | (8, 12, 14) [≠B] + (16, 14, 18) [≠C; uses S1] |
+  | 3 | χ(22) = A | (8, 20, 22) [≠B] + (16, 18, 22) [≠C; uses S1] |
+  | 4 | χ(7) = C | (20, 7, 12) [≠B] + (60, 7, 22) [≠A; uses S3] |
+  | 5 | χ(11) = A | (12, 8, 11) [≠B] + (16, 7, 11) [≠C; uses S4] |
+  | 6 | χ(24) = B | (24, 18, 24) [≠C; uses S1] + [χ(24) ∈ {B,C}] |
+  | 7 | χ(26) = C | (60, 11, 26) [≠A; uses S5] + (8, 24, 26) [≠B; uses S6] |
+  | T | **χ(30) no colour** | (60, 15, 30) [≠A; χ(15)=A via ] + (24, 24, 30) [≠B; uses S6] + (16, 26, 30) [≠C; uses S7] |
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (60, 3, 18):   60 + 12 = 72 = 4·18 ✓
-  - (8, 18, 20):   8 + 72 = 80 = 4·20 ✓
-  - (8, 12, 14):   8 + 48 = 56 = 4·14 ✓
-  - (16, 14, 18):  16 + 56 = 72 = 4·18 ✓
-  - (8, 20, 22):   8 + 80 = 88 = 4·22 ✓
-  - (16, 18, 22):  16 + 72 = 88 = 4·22 ✓
-  - (20, 7, 12):   20 + 28 = 48 = 4·12 ✓
-  - (60, 7, 22):   60 + 28 = 88 = 4·22 ✓
-  - (12, 8, 11):   12 + 32 = 44 = 4·11 ✓
-  - (16, 7, 11):   16 + 28 = 44 = 4·11 ✓
-  - (24, 18, 24):  24 + 72 = 96 = 4·24 ✓ (degenerate: x = z)
-  - (60, 11, 26):  60 + 44 = 104 = 4·26 ✓
-  - (8, 24, 26):   8 + 96 = 104 = 4·26 ✓
-  - (60, 15, 30):  60 + 60 = 120 = 4·30 ✓
-  - (24, 24, 30):  24 + 96 = 120 = 4·30 ✓
-  - (16, 26, 30):  16 + 104 = 120 = 4·30 ✓
+  - (60, 3, 18): 60 + 12 = 72 = 4·18 ✓
+  - (8, 18, 20): 8 + 72 = 80 = 4·20 ✓
+  - (8, 12, 14): 8 + 48 = 56 = 4·14 ✓
+  - (16, 14, 18): 16 + 56 = 72 = 4·18 ✓
+  - (8, 20, 22): 8 + 80 = 88 = 4·22 ✓
+  - (16, 18, 22): 16 + 72 = 88 = 4·22 ✓
+  - (20, 7, 12): 20 + 28 = 48 = 4·12 ✓
+  - (60, 7, 22): 60 + 28 = 88 = 4·22 ✓
+  - (12, 8, 11): 12 + 32 = 44 = 4·11 ✓
+  - (16, 7, 11): 16 + 28 = 44 = 4·11 ✓
+  - (24, 18, 24): 24 + 72 = 96 = 4·24 ✓ (degenerate: x = z)
+  - (60, 11, 26): 60 + 44 = 104 = 4·26 ✓
+  - (8, 24, 26): 8 + 96 = 104 = 4·26 ✓
+  - (60, 15, 30): 60 + 60 = 120 = 4·30 ✓
+  - (24, 24, 30): 24 + 96 = 120 = 4·30 ✓
+  - (16, 26, 30): 16 + 104 = 120 = 4·30 ✓
 -/
 
 set_option maxHeartbeats 1600000 in
-/-- **R283 chi(60) = chi(9) closure (cell 2)**: residual cell (2) +
+/-- ** chi(60) = chi(9) closure (cell 2)**: residual cell (2) +
   χ(60) = χ(9) ⟹ False at n ≥ 60. 7-step cascade ending in no-colour-left
   terminal on χ(30). -/
 theorem residual_cell_2_chi60_eq_chi9_forces_False_short
@@ -16735,7 +16735,7 @@ theorem residual_cell_2_chi60_eq_chi9_forces_False_short
       rw [show (7 + 4 : ℕ) = 11 by decide, h7_eq_16, h11_eq_16]
   have h11_eq_9 : χ 11 = χ 9 :=
     third_color_eq hχ11 hχ9 hχ12 hχ16 h12_ne_16 h11_ne_12 h11_ne_16 h9_ne_12 h9_ne_16
-  -- S6: χ(24) = χ(12) (B). R274 [χ(24) ∈ {B,C}] + (24, 18, 24) [≠C].
+  -- S6: χ(24) = χ(12) (B). [χ(24) ∈ {B,C}] + (24, 18, 24) [≠C].
   have h24_disj : χ 24 = χ 12 ∨ χ 24 = χ 16 :=
     residual_cell_2_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
@@ -16809,7 +16809,7 @@ theorem residual_cell_2_chi60_eq_chi9_forces_False_short
     third_color_eq hχ30 hχ16 hχ9 hχ12 h9_ne_12 h30_ne_9 h30_ne_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
   exact h30_ne_16 h30_eq_16
 
-/-- **R283 contrapositive** (cell 2): χ(60) ≠ χ(9) under cell (2) hypotheses. -/
+/-- ** contrapositive** (cell 2): χ(60) ≠ χ(9) under cell (2) hypotheses. -/
 theorem residual_cell_2_chi60_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h60 : 60 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -16824,8 +16824,8 @@ theorem residual_cell_2_chi60_ne_chi9
   exact residual_cell_2_chi60_eq_chi9_forces_False_short χ h60 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12 h60_eq_9
 
-/-- **R283 layer compression d=15 (cell 2)**: χ(60) ∈ {χ(12), χ(16)} under
-  residual cell (2). Feeds R254 bridge as the d=15 hLayer case for cell (2). -/
+/-- ** layer compression d=15 (cell 2)**: χ(60) ∈ {χ(12), χ(16)} under
+  residual cell (2). Feeds bridge as the d=15 hLayer case for cell (2). -/
 theorem residual_cell_2_layer_compression_d15
     {n : ℕ} (χ : ℕ → ℕ) (h60 : 60 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -16847,7 +16847,7 @@ theorem residual_cell_2_layer_compression_d15
   · right
     exact third_color_eq hχ60 hχ16 hχ9 hχ12 h9_ne_12 h60_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §125. R284 — residual cell (2) hLayer d = 16 (final layer).
+/-! ### §125. — residual cell (2) hLayer d = 16 (final layer).
 
   **Target.** Under cell (2) hypotheses, mono-free `bAdicEquation 4` at
   n ≥ 64, prove χ(64) ∈ {χ(12), χ(16)}. Closes the cell (2) hLayer table.
@@ -16856,31 +16856,31 @@ theorem residual_cell_2_layer_compression_d15
 
   Under h64_eq_9: χ(64) = A.
 
-  | Step | Position  | Triple(s) |
+  | Step | Position | Triple(s) |
   |------|-----------|-----------|
-  | S1 | χ(25) = C  | (64, 9, 25) [≠A] + (20, 20, 25) [≠B; degenerate y=z] |
-  | S2 | χ(24) = B  | (4, 24, 25) [≠C; uses S1, χ(4)=χ(25)=C] + R274 [χ(24)∈{B,C}] |
-  | S3 | χ(21) = B  | (64, 5, 21) [≠A; uses χ(5)=A R277] + (16, 21, 25) [≠C; uses S1] |
-  | S4 | χ(32) = C  | self-loop m=8 [χ(24)≠χ(32); uses S2] + R276 [χ(32)∈{B,C}] |
-  | S5 | χ(33) = B  | (64, 17, 33) [≠A; uses χ(17)=A R276 helper] + (4, 32, 33) [≠C; uses S4] |
-  | S6 | χ(36) = B  | (16, 32, 36) [≠C; uses S4] + R277 d9 [χ(36)∈{B,C}] |
-  | T  | **(12, 33, 36) mono** | χ(12) = χ(33) = χ(36) = B (uses S5, S6) |
+  | S1 | χ(25) = C | (64, 9, 25) [≠A] + (20, 20, 25) [≠B; degenerate y=z] |
+  | S2 | χ(24) = B | (4, 24, 25) [≠C; uses S1, χ(4)=χ(25)=C] + [χ(24)∈{B,C}] |
+  | S3 | χ(21) = B | (64, 5, 21) [≠A; uses χ(5)=A ] + (16, 21, 25) [≠C; uses S1] |
+  | S4 | χ(32) = C | self-loop m=8 [χ(24)≠χ(32); uses S2] + [χ(32)∈{B,C}] |
+  | S5 | χ(33) = B | (64, 17, 33) [≠A; uses χ(17)=A helper] + (4, 32, 33) [≠C; uses S4] |
+  | S6 | χ(36) = B | (16, 32, 36) [≠C; uses S4] + d9 [χ(36)∈{B,C}] |
+  | T | **(12, 33, 36) mono** | χ(12) = χ(33) = χ(36) = B (uses S5, S6) |
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (64, 9, 25):    64 + 36 = 100 = 4·25 ✓
-  - (20, 20, 25):   20 + 80 = 100 ✓ (degenerate y=z so self-mono if χ(20)=χ(25))
-  - (4, 24, 25):    4 + 96 = 100 ✓
-  - (64, 5, 21):    64 + 20 = 84 = 4·21 ✓
-  - (16, 21, 25):   16 + 84 = 100 ✓
-  - self-loop m=8:  χ(24) ≠ χ(32) ✓
-  - (64, 17, 33):   64 + 68 = 132 = 4·33 ✓
-  - (4, 32, 33):    4 + 128 = 132 ✓
-  - (16, 32, 36):   16 + 128 = 144 = 4·36 ✓
-  - (12, 33, 36):   12 + 132 = 144 ✓ (TERMINAL MONO with all B)
+  - (64, 9, 25): 64 + 36 = 100 = 4·25 ✓
+  - (20, 20, 25): 20 + 80 = 100 ✓ (degenerate y=z so self-mono if χ(20)=χ(25))
+  - (4, 24, 25): 4 + 96 = 100 ✓
+  - (64, 5, 21): 64 + 20 = 84 = 4·21 ✓
+  - (16, 21, 25): 16 + 84 = 100 ✓
+  - self-loop m=8: χ(24) ≠ χ(32) ✓
+  - (64, 17, 33): 64 + 68 = 132 = 4·33 ✓
+  - (4, 32, 33): 4 + 128 = 132 ✓
+  - (16, 32, 36): 16 + 128 = 144 = 4·36 ✓
+  - (12, 33, 36): 12 + 132 = 144 ✓ (TERMINAL MONO with all B)
 -/
 
 set_option maxHeartbeats 1600000 in
-/-- **R284 chi(64) = chi(9) closure (cell 2)**: residual cell (2) +
+/-- ** chi(64) = chi(9) closure (cell 2)**: residual cell (2) +
   χ(64) = χ(9) ⟹ False at n ≥ 64. 6-step cascade ending in B-monochromatic
   terminal (12, 33, 36). Closes the final piece of cell (2) hLayer (d = 16). -/
 theorem residual_cell_2_chi64_eq_chi9_forces_False_short
@@ -16894,7 +16894,7 @@ theorem residual_cell_2_chi64_eq_chi9_forces_False_short
     (h8_eq_12 : χ 8 = χ 12)
     (h64_eq_9 : χ 64 = χ 9) :
     False := by
-  have hχ9  : χ 9  < 3 := hχk 9  (by omega) (by omega)
+  have hχ9 : χ 9 < 3 := hχk 9 (by omega) (by omega)
   have hχ12 : χ 12 < 3 := hχk 12 (by omega) (by omega)
   have hχ16 : χ 16 < 3 := hχk 16 (by omega) (by omega)
   have hχ21 : χ 21 < 3 := hχk 21 (by omega) (by omega)
@@ -16936,7 +16936,7 @@ theorem residual_cell_2_chi64_eq_chi9_forces_False_short
       rw [show (20 + 5 : ℕ) = 25 by decide, h20_eq_12, h25_eq_12]
   have h25_eq_16 : χ 25 = χ 16 :=
     third_color_eq hχ25 hχ16 hχ9 hχ12 h9_ne_12 h25_ne_9 h25_ne_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
-  -- S2: χ(24) = χ(12) (B). (4, 24, 25) [≠C; uses S1] + R274 [χ(24) ∈ {B,C}].
+  -- S2: χ(24) = χ(12) (B). (4, 24, 25) [≠C; uses S1] + [χ(24) ∈ {B,C}].
   have h24_disj : χ 24 = χ 12 ∨ χ 24 = χ 16 :=
     residual_cell_2_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
@@ -16974,7 +16974,7 @@ theorem residual_cell_2_chi64_eq_chi9_forces_False_short
       rw [show (21 + 4 : ℕ) = 25 by decide, h21_eq_16, ← h25_eq_16]
   have h21_eq_12 : χ 21 = χ 12 :=
     third_color_eq hχ21 hχ12 hχ9 hχ16 h9_ne_16 h21_ne_9 h21_ne_16 (Ne.symm h9_ne_12) h12_ne_16
-  -- S4: χ(32) = χ(16) (C). self-loop m=8 [χ(24) ≠ χ(32)] + R276 [χ(32) ∈ {B,C}].
+  -- S4: χ(32) = χ(16) (C). self-loop m=8 [χ(24) ≠ χ(32)] + [χ(32) ∈ {B,C}].
   have h32_disj : χ 32 = χ 12 ∨ χ 32 = χ 16 :=
     residual_cell_2_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
@@ -17010,7 +17010,7 @@ theorem residual_cell_2_chi64_eq_chi9_forces_False_short
       rw [show (32 + 1 : ℕ) = 33 by decide, h32_eq_16, h33_eq_16]
   have h33_eq_12 : χ 33 = χ 12 :=
     third_color_eq hχ33 hχ12 hχ9 hχ16 h9_ne_16 h33_ne_9 h33_ne_16 (Ne.symm h9_ne_12) h12_ne_16
-  -- S6: χ(36) = χ(12) (B). (16, 32, 36) [≠C; uses S4] + R277 d9 [χ(36) ∈ {B,C}].
+  -- S6: χ(36) = χ(12) (B). (16, 32, 36) [≠C; uses S4] + d9 [χ(36) ∈ {B,C}].
   have h36_disj : χ 36 = χ 12 ∨ χ 36 = χ 16 :=
     residual_cell_2_layer_compression_d9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
@@ -17035,7 +17035,7 @@ theorem residual_cell_2_chi64_eq_chi9_forces_False_short
   · show χ 33 = χ (33 + 3)
     rw [show (33 + 3 : ℕ) = 36 by decide, h33_eq_12, h36_eq_12]
 
-/-- **R284 contrapositive** (cell 2): χ(64) ≠ χ(9) under cell (2) hypotheses. -/
+/-- ** contrapositive** (cell 2): χ(64) ≠ χ(9) under cell (2) hypotheses. -/
 theorem residual_cell_2_chi64_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h64 : 64 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -17050,9 +17050,9 @@ theorem residual_cell_2_chi64_ne_chi9
   exact residual_cell_2_chi64_eq_chi9_forces_False_short χ h64 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12 h64_eq_9
 
-/-- **R284 layer compression d=16 (cell 2)**: χ(64) ∈ {χ(12), χ(16)} under
+/-- ** layer compression d=16 (cell 2)**: χ(64) ∈ {χ(12), χ(16)} under
   residual cell (2). **Completes the cell (2) hLayer table** — all 16 layers
-  (d = 1..16) closed. Feeds R254 bridge as the final d = 16 hLayer case for
+  (d = 1..16) closed. Feeds bridge as the final d = 16 hLayer case for
   cell (2). -/
 theorem residual_cell_2_layer_compression_d16
     {n : ℕ} (χ : ℕ → ℕ) (h64 : 64 ≤ n)
@@ -17066,7 +17066,7 @@ theorem residual_cell_2_layer_compression_d16
     χ 64 = χ 12 ∨ χ 64 = χ 16 := by
   have h64_ne_9 : χ 64 ≠ χ 9 :=
     residual_cell_2_chi64_ne_chi9 χ h64 hχk hNoMono h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
-  have hχ9  : χ 9  < 3 := hχk 9  (by omega) (by omega)
+  have hχ9 : χ 9 < 3 := hχk 9 (by omega) (by omega)
   have hχ12 : χ 12 < 3 := hχk 12 (by omega) (by omega)
   have hχ16 : χ 16 < 3 := hχk 16 (by omega) (by omega)
   have hχ64 : χ 64 < 3 := hχk 64 (by omega) (by omega)
@@ -17075,10 +17075,10 @@ theorem residual_cell_2_layer_compression_d16
   · right
     exact third_color_eq hχ64 hχ16 hχ9 hχ12 h9_ne_12 h64_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §126. R285 — full hLayer assembly for residual cell (2).
+/-! ### §126. — full hLayer assembly for residual cell (2).
 
-  **Target.** Integrate all 16 d-layer compression theorems (R273-R280 +
-  R283-R284 + base cases) into the exact hLayer shape required by R254:
+  **Target.** Integrate all 16 d-layer compression theorems (- +
+  - + base cases) into the exact hLayer shape required by :
   ```
   ∀ d, 1 ≤ d → d ≤ 16 → χ (4 * d) = χ 12 ∨ χ (4 * d) = χ 16
   ```
@@ -17087,15 +17087,15 @@ theorem residual_cell_2_layer_compression_d16
   dispatches to the corresponding cell (2) lemma or base case.
 
   **Base layers** (from cell (2) hypotheses directly):
-  - d=1: χ(4)  = χ(16) via h4_eq_16 (right branch).
-  - d=2: χ(8)  = χ(12) via h8_eq_12 (left branch).
+  - d=1: χ(4) = χ(16) via h4_eq_16 (right branch).
+  - d=2: χ(8) = χ(12) via h8_eq_12 (left branch).
   - d=3: χ(12) = χ(12) by rfl (left branch).
   - d=4: χ(16) = χ(16) by rfl (right branch).
 -/
 
-/-- **R285 full layer compression for cell (2)**: under residual cell (2)
+/-- ** full layer compression for cell (2)**: under residual cell (2)
   hypotheses, all 16 multiples-of-4 positions χ(4d) for d ∈ [1, 16] lie
-  in {χ(12), χ(16)}. This is the exact hLayer hypothesis required by R254. -/
+  in {χ(12), χ(16)}. This is the exact hLayer hypothesis required by. -/
 theorem residual_cell_2_full_layer_compression
     {n : ℕ} (χ : ℕ → ℕ) (h64 : 64 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -17116,56 +17116,56 @@ theorem residual_cell_2_full_layer_compression
     exact Or.inl (show χ (4 * 3) = χ 12 by rw [show (4 * 3 : ℕ) = 12 by decide])
   · -- d = 4: χ(16) = χ(16) by rfl.
     exact Or.inr (show χ (4 * 4) = χ 16 by rw [show (4 * 4 : ℕ) = 16 by decide])
-  · -- d = 5: R273.
+  · -- d = 5:.
     have h := residual_cell_2_layer_compression_d5 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
     rw [show (4 * 5 : ℕ) = 20 by decide]; exact h
-  · -- d = 6: R274.
+  · -- d = 6:.
     have h := residual_cell_2_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
     rw [show (4 * 6 : ℕ) = 24 by decide]; exact h
-  · -- d = 7: R275.
+  · -- d = 7:.
     have h := residual_cell_2_layer_compression_d7 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
     rw [show (4 * 7 : ℕ) = 28 by decide]; exact h
-  · -- d = 8: R276.
+  · -- d = 8:.
     have h := residual_cell_2_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
     rw [show (4 * 8 : ℕ) = 32 by decide]; exact h
-  · -- d = 9: R277.
+  · -- d = 9:.
     have h := residual_cell_2_layer_compression_d9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
     rw [show (4 * 9 : ℕ) = 36 by decide]; exact h
-  · -- d = 10: R278.
+  · -- d = 10:.
     have h := residual_cell_2_layer_compression_d10 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
     rw [show (4 * 10 : ℕ) = 40 by decide]; exact h
-  · -- d = 11: R279.
+  · -- d = 11:.
     have h := residual_cell_2_layer_compression_d11 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
     rw [show (4 * 11 : ℕ) = 44 by decide]; exact h
-  · -- d = 12: R280.
+  · -- d = 12:.
     have h := residual_cell_2_layer_compression_d12 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
     rw [show (4 * 12 : ℕ) = 48 by decide]; exact h
-  · -- d = 13: R281.
+  · -- d = 13:.
     have h := residual_cell_2_layer_compression_d13 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
     rw [show (4 * 13 : ℕ) = 52 by decide]; exact h
-  · -- d = 14: R282.
+  · -- d = 14:.
     have h := residual_cell_2_layer_compression_d14 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
     rw [show (4 * 14 : ℕ) = 56 by decide]; exact h
-  · -- d = 15: R283.
+  · -- d = 15:.
     have h := residual_cell_2_layer_compression_d15 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
     rw [show (4 * 15 : ℕ) = 60 by decide]; exact h
-  · -- d = 16: R284.
+  · -- d = 16:.
     have h := residual_cell_2_layer_compression_d16 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_16 h8_eq_12
     rw [show (4 * 16 : ℕ) = 64 by decide]; exact h
 
-/-! ### §127. R286 — residual cell (3) hLayer d = 5 — DELIVERABLE B (forced prefix).
+/-! ### §127. — residual cell (3) hLayer d = 5 — DELIVERABLE B (forced prefix).
 
   **Cell (3) hypotheses**:
   - h4_eq_12 : χ(4) = χ(12) = B
@@ -17174,7 +17174,7 @@ theorem residual_cell_2_full_layer_compression
   **Cell (3) vs cell (2)**: B↔C swap at positions 4 ↔ 8 (cell (2) had χ(4)=C, χ(8)=B).
 
   **Status**: Cell (3) d=5 is **NOT closeable at n ≥ 20** with current cascade.
-  The R254 §95 docstring notes cell (3) needs the (χ(11), χ(13)) = (A, A) sub-case,
+  The §95 docstring notes cell (3) needs the (χ(11), χ(13)) = (A, A) sub-case,
   which cascades beyond n = 20. My analysis confirms: 8 positions force, but **no
   mono triple emerges in [1, 20]**, and sub-case (χ(5), χ(7)) = (A, C) admits a
   consistent partial assignment.
@@ -17184,41 +17184,41 @@ theorem residual_cell_2_full_layer_compression
   higher n thresholds (likely n ≥ 28-40 based on §95).
 
   **Forced positions** (all under cell (3) + χ(20) = χ(9)):
-  - χ(15) = C  via self-loop m=5 + (12, 12, 15)
-  - χ(11) = A  via (16, 11, 15) + (12, 8, 11) [unconditional, χ(11) ≠ B]
-  - χ(14) = B  via (20, 9, 14) + (8, 14, 16) [unconditional, χ(14) ≠ C]
-  - χ(17) = A  via (12, 14, 17) + (8, 15, 17)
-  - χ(13) = A  via (8, 13, 15) + (4, 12, 13) [unconditional, χ(13) ≠ B]
-  - χ(18) = B  via (20, 13, 18) + (8, 16, 18) [unconditional, χ(18) ≠ C]
-  - χ(19) = A  via (4, 18, 19) + (16, 15, 19)
-  - χ(6)  = B  via (20, 6, 11) + (8, 6, 8) [unconditional, χ(6) ≠ C]
+  - χ(15) = C via self-loop m=5 + (12, 12, 15)
+  - χ(11) = A via (16, 11, 15) + (12, 8, 11) [unconditional, χ(11) ≠ B]
+  - χ(14) = B via (20, 9, 14) + (8, 14, 16) [unconditional, χ(14) ≠ C]
+  - χ(17) = A via (12, 14, 17) + (8, 15, 17)
+  - χ(13) = A via (8, 13, 15) + (4, 12, 13) [unconditional, χ(13) ≠ B]
+  - χ(18) = B via (20, 13, 18) + (8, 16, 18) [unconditional, χ(18) ≠ C]
+  - χ(19) = A via (4, 18, 19) + (16, 15, 19)
+  - χ(6) = B via (20, 6, 11) + (8, 6, 8) [unconditional, χ(6) ≠ C]
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (20, 15, 20):  20 + 60 = 80 = 4·20 ✓ (self-loop m=5: χ(15) ≠ χ(20))
-  - (12, 12, 15):  12 + 48 = 60 = 4·15 ✓ (χ(15) ≠ B unconditional)
-  - (16, 11, 15):  16 + 44 = 60 = 4·15 ✓
-  - (12, 8, 11):   12 + 32 = 44 = 4·11 ✓ — wait, this is trivial in cell (3) since χ(12)=B, χ(8)=C
+  - (20, 15, 20): 20 + 60 = 80 = 4·20 ✓ (self-loop m=5: χ(15) ≠ χ(20))
+  - (12, 12, 15): 12 + 48 = 60 = 4·15 ✓ (χ(15) ≠ B unconditional)
+  - (16, 11, 15): 16 + 44 = 60 = 4·15 ✓
+  - (12, 8, 11): 12 + 32 = 44 = 4·11 ✓ — wait, this is trivial in cell (3) since χ(12)=B, χ(8)=C
   Actually (12, 8, 11) is trivial. Correct unconditional: **(4, 11, 12)** uses χ(4) = χ(12) = B, gives χ(11) ≠ B.
-  - (4, 11, 12):   4 + 44 = 48 = 4·12 ✓
-  - (20, 9, 14):   20 + 36 = 56 = 4·14 ✓
-  - (8, 14, 16):   8 + 56 = 64 = 4·16 ✓ (χ(14) ≠ C unconditional)
-  - (12, 14, 17):  12 + 56 = 68 = 4·17 ✓
-  - (8, 15, 17):   8 + 60 = 68 ✓
-  - (8, 13, 15):   8 + 52 = 60 ✓
-  - (4, 12, 13):   4 + 48 = 52 = 4·13 ✓ (χ(13) ≠ B unconditional)
-  - (20, 13, 18):  20 + 52 = 72 = 4·18 ✓
-  - (8, 16, 18):   8 + 64 = 72 ✓ (χ(18) ≠ C unconditional)
-  - (4, 18, 19):   4 + 72 = 76 = 4·19 ✓
-  - (16, 15, 19):  16 + 60 = 76 ✓
-  - (20, 6, 11):   20 + 24 = 44 = 4·11 ✓
-  - (8, 6, 8):     8 + 24 = 32 = 4·8  ✓ (χ(6) ≠ C unconditional)
+  - (4, 11, 12): 4 + 44 = 48 = 4·12 ✓
+  - (20, 9, 14): 20 + 36 = 56 = 4·14 ✓
+  - (8, 14, 16): 8 + 56 = 64 = 4·16 ✓ (χ(14) ≠ C unconditional)
+  - (12, 14, 17): 12 + 56 = 68 = 4·17 ✓
+  - (8, 15, 17): 8 + 60 = 68 ✓
+  - (8, 13, 15): 8 + 52 = 60 ✓
+  - (4, 12, 13): 4 + 48 = 52 = 4·13 ✓ (χ(13) ≠ B unconditional)
+  - (20, 13, 18): 20 + 52 = 72 = 4·18 ✓
+  - (8, 16, 18): 8 + 64 = 72 ✓ (χ(18) ≠ C unconditional)
+  - (4, 18, 19): 4 + 72 = 76 = 4·19 ✓
+  - (16, 15, 19): 16 + 60 = 76 ✓
+  - (20, 6, 11): 20 + 24 = 44 = 4·11 ✓
+  - (8, 6, 8): 8 + 24 = 32 = 4·8 ✓ (χ(6) ≠ C unconditional)
 -/
 
 set_option maxHeartbeats 800000 in
-/-- **R286 cell (3) d=5 forced-color prefix** (Deliverable B): under cell (3)
+/-- ** cell (3) d=5 forced-color prefix** (Deliverable B): under cell (3)
   hypotheses + χ(20) = χ(9), the 8 positions {6, 11, 13, 14, 15, 17, 18, 19}
   are forced to specific colors. **No terminal mono emerges at n ≥ 20** —
-  cell (3) d=5 closure requires higher threshold (matches R254 §95 obstruction
+  cell (3) d=5 closure requires higher threshold (matches §95 obstruction
   note). This theorem documents the forced prefix for future rounds. -/
 theorem residual_cell_3_chi20_eq_chi9_forces_prefix
     {n : ℕ} (χ : ℕ → ℕ) (h20 : 20 ≤ n)
@@ -17429,9 +17429,9 @@ theorem residual_cell_3_chi20_eq_chi9_forces_prefix
   -- Conjoin all 8 forced positions.
   exact ⟨h15_eq_16, h11_eq_9, h14_eq_12, h17_eq_9, h13_eq_9, h18_eq_12, h19_eq_9, h6_eq_12⟩
 
-/-! ### §128. R287 — residual cell (3) hLayer d = 5 extended prefix + (C,C) sub-case.
+/-! ### §128. — residual cell (3) hLayer d = 5 extended prefix + (C,C) sub-case.
 
-  **Continuation from R286**.
+  **Continuation from **.
 
   **Deliverable B**: Extended prefix at n ≥ 24 adding:
   - χ(22) ≠ A via (20, 17, 22) [n ≥ 22]
@@ -17443,17 +17443,17 @@ theorem residual_cell_3_chi20_eq_chi9_forces_prefix
   **Obstruction documented**: The remaining 3 sub-cases on (χ(5), χ(7)) —
   namely (A,A), (A,C), (C,A) — all admit valid partial 3-colorings up to
   n ≥ 24 without any mono triple. Higher threshold (n ≥ 28-40) or case
-  split deeper needed; matches R254 §95 docstring's "OBSTRUCTION not closed"
+  split deeper needed; matches §95 docstring's "OBSTRUCTION not closed"
   for cell (3).
 
   Triples used (b=4):
-  - (20, 17, 22):  20 + 68 = 88 = 4·22 ✓ (χ(22) ≠ A; uses χ(17) = A from R286)
-  - (20, 19, 24):  20 + 76 = 96 = 4·24 ✓ (χ(24) ≠ A; uses χ(19) = A from R286)
-  - (8, 5, 7):     8 + 20 = 28 = 4·7  ✓ ((C, C) sub-case terminal)
+  - (20, 17, 22): 20 + 68 = 88 = 4·22 ✓ (χ(22) ≠ A; uses χ(17) = A from )
+  - (20, 19, 24): 20 + 76 = 96 = 4·24 ✓ (χ(24) ≠ A; uses χ(19) = A from )
+  - (8, 5, 7): 8 + 20 = 28 = 4·7 ✓ ((C, C) sub-case terminal)
 -/
 
-/-- **R287 cell (3) d=5 extended prefix (Deliverable B)**: under cell (3) +
-  χ(20) = χ(9) at n ≥ 24, R286's 8-position prefix plus χ(22) ≠ A and
+/-- ** cell (3) d=5 extended prefix (Deliverable B)**: under cell (3) +
+  χ(20) = χ(9) at n ≥ 24, 's 8-position prefix plus χ(22) ≠ A and
   χ(24) ≠ A. -/
 theorem residual_cell_3_chi20_eq_chi9_forces_prefix2
     {n : ℕ} (χ : ℕ → ℕ) (h24 : 24 ≤ n)
@@ -17494,7 +17494,7 @@ theorem residual_cell_3_chi20_eq_chi9_forces_prefix2
     · show χ 19 = χ (19 + 5)
       rw [show (19 + 5 : ℕ) = 24 by decide, h19, ← h24_eq_9]
 
-/-- **R287 cell (3) d=5 sub-case (C, C) closure (Deliverable C partial)**:
+/-- ** cell (3) d=5 sub-case (C, C) closure (Deliverable C partial)**:
   if χ(5) = χ(16) AND χ(7) = χ(16) under cell (3) + χ(20) = χ(9), then
   (8, 5, 7) is a mono triple all = C, giving False at n ≥ 20.
 
@@ -17523,13 +17523,13 @@ theorem residual_cell_3_chi20_eq_chi9_subcase_chi5_chi7_both_C_forces_False
   · show χ 5 = χ (5 + 2)
     rw [show (5 + 2 : ℕ) = 7 by decide, h5_eq_16, ← h7_eq_16]
 
-/-! ### §129. R288 — residual cell (3) d=5 (A,A) sub-case (Deliverable B partial).
+/-! ### §129. — residual cell (3) d=5 (A,A) sub-case (Deliverable B partial).
 
   **Sub-case**: under cell (3) + χ(20) = χ(9) + χ(5) = χ(9) + χ(7) = χ(9).
 
-  **Discovery**: Many positions force *unconditionally* under R286/R287 + χ(20) = χ(9):
-  - χ(24) = C: self-loop m=6 ((24, 18, 24)) + χ(18) = B from R286 forces χ(24) ≠ B;
-    combined with R287's χ(24) ≠ A → χ(24) = C.
+  **Discovery**: Many positions force *unconditionally* under / + χ(20) = χ(9):
+  - χ(24) = C: self-loop m=6 ((24, 18, 24)) + χ(18) = B from forces χ(24) ≠ B;
+    combined with 's χ(24) ≠ A → χ(24) = C.
   - χ(22) = B: (8, 22, 24) gives χ(22) ≠ C; combined with χ(22) ≠ A → χ(22) = B.
   - χ(25) = C: (20, 20, 25) self-mono gives χ(25) ≠ A; (12, 22, 25) gives χ(25) ≠ B.
   - χ(21) = A: (12, 18, 21) gives χ(21) ≠ B; (16, 21, 25) gives χ(21) ≠ C.
@@ -17553,30 +17553,30 @@ theorem residual_cell_3_chi20_eq_chi9_subcase_chi5_chi7_both_C_forces_False
   (n ≥ 40+ for χ(36), χ(40) derivations) or a fundamentally different terminal mechanism.
 
   Triples used (b=4):
-  - (20, 5, 10):   20 + 20 = 40 = 4·10 ✓ (χ(10) ≠ A)
-  - (8, 8, 10):    8 + 32 = 40 ✓ (χ(10) ≠ C; from R286-era)
-  - (20, 2, 7):    20 + 8 = 28 = 4·7 ✓ (χ(2) ≠ A)
-  - (24, 2, 8):    24 + 8 = 32 = 4·8 ✓ (χ(2) ≠ C; uses χ(24) = C)
-  - (24, 18, 24):  24 + 72 = 96 = 4·24 ✓ (χ(24) ≠ B; self-loop m=6)
-  - (8, 22, 24):   8 + 88 = 96 ✓ (χ(22) ≠ C)
-  - (20, 20, 25):  20 + 80 = 100 = 4·25 ✓ (χ(25) ≠ A; self-mono d=5)
-  - (12, 22, 25):  12 + 88 = 100 ✓ (χ(25) ≠ B)
-  - (12, 18, 21):  12 + 72 = 84 = 4·21 ✓ (χ(21) ≠ B)
-  - (16, 21, 25):  16 + 84 = 100 ✓ (χ(21) ≠ C)
-  - (20, 21, 26):  20 + 84 = 104 = 4·26 ✓ (χ(26) ≠ A)
-  - (8, 24, 26):   8 + 96 = 104 ✓ (χ(26) ≠ C)
-  - (12, 23, 26):  12 + 92 = 104 ✓ (χ(23) ≠ B)
-  - (8, 23, 25):   8 + 92 = 100 ✓ (χ(23) ≠ C)
-  - (20, 23, 28):  20 + 92 = 112 = 4·28 ✓ (χ(28) ≠ A)
-  - (16, 24, 28):  16 + 96 = 112 ✓ (χ(28) ≠ C)
-  - (28, 22, 29):  28 + 88 = 116 = 4·29 ✓ (χ(29) ≠ B)
-  - (16, 25, 29):  16 + 100 = 116 ✓ (χ(29) ≠ C)
-  - (12, 28, 31):  12 + 112 = 124 = 4·31 ✓ (χ(31) ≠ B)
-  - (24, 25, 31):  24 + 100 = 124 ✓ (χ(31) ≠ C)
+  - (20, 5, 10): 20 + 20 = 40 = 4·10 ✓ (χ(10) ≠ A)
+  - (8, 8, 10): 8 + 32 = 40 ✓ (χ(10) ≠ C; from -era)
+  - (20, 2, 7): 20 + 8 = 28 = 4·7 ✓ (χ(2) ≠ A)
+  - (24, 2, 8): 24 + 8 = 32 = 4·8 ✓ (χ(2) ≠ C; uses χ(24) = C)
+  - (24, 18, 24): 24 + 72 = 96 = 4·24 ✓ (χ(24) ≠ B; self-loop m=6)
+  - (8, 22, 24): 8 + 88 = 96 ✓ (χ(22) ≠ C)
+  - (20, 20, 25): 20 + 80 = 100 = 4·25 ✓ (χ(25) ≠ A; self-mono d=5)
+  - (12, 22, 25): 12 + 88 = 100 ✓ (χ(25) ≠ B)
+  - (12, 18, 21): 12 + 72 = 84 = 4·21 ✓ (χ(21) ≠ B)
+  - (16, 21, 25): 16 + 84 = 100 ✓ (χ(21) ≠ C)
+  - (20, 21, 26): 20 + 84 = 104 = 4·26 ✓ (χ(26) ≠ A)
+  - (8, 24, 26): 8 + 96 = 104 ✓ (χ(26) ≠ C)
+  - (12, 23, 26): 12 + 92 = 104 ✓ (χ(23) ≠ B)
+  - (8, 23, 25): 8 + 92 = 100 ✓ (χ(23) ≠ C)
+  - (20, 23, 28): 20 + 92 = 112 = 4·28 ✓ (χ(28) ≠ A)
+  - (16, 24, 28): 16 + 96 = 112 ✓ (χ(28) ≠ C)
+  - (28, 22, 29): 28 + 88 = 116 = 4·29 ✓ (χ(29) ≠ B)
+  - (16, 25, 29): 16 + 100 = 116 ✓ (χ(29) ≠ C)
+  - (12, 28, 31): 12 + 112 = 124 = 4·31 ✓ (χ(31) ≠ B)
+  - (24, 25, 31): 24 + 100 = 124 ✓ (χ(31) ≠ C)
 -/
 
 set_option maxHeartbeats 1600000 in
-/-- **R288 (A,A) sub-case prefix (Deliverable B)**: under cell (3) + χ(20) = χ(9)
+/-- ** (A,A) sub-case prefix (Deliverable B)**: under cell (3) + χ(20) = χ(9)
   + χ(5) = χ(9) + χ(7) = χ(9), at n ≥ 32, derive 17+ forced positions but no
   terminal mono emerges. This documents the cell (3) obstruction depth and
   provides a starting point for future deeper cascades. -/
@@ -17595,7 +17595,7 @@ theorem residual_cell_3_chi20_eq_chi9_subcase_chi5_A_chi7_A_forces_prefix
     χ 10 = χ 12 ∧ χ 24 = χ 16 ∧ χ 22 = χ 12 ∧
     χ 25 = χ 16 ∧ χ 21 = χ 9 ∧ χ 26 = χ 12 ∧
     χ 23 = χ 9 ∧ χ 28 = χ 12 ∧ χ 29 = χ 9 ∧ χ 31 = χ 9 := by
-  -- Get R286 prefix (8 positions).
+  -- Get prefix (8 positions).
   obtain ⟨h15, h11, h14, h17, h13, h18, h19, h6⟩ :=
     residual_cell_3_chi20_eq_chi9_forces_prefix χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16 h20_eq_9
@@ -17846,24 +17846,24 @@ theorem residual_cell_3_chi20_eq_chi9_subcase_chi5_A_chi7_A_forces_prefix
   exact ⟨h10_eq_12, h24_eq_16, h22_eq_12, h25_eq_16, h21_eq_9, h26_eq_12,
          h23_eq_9, h28_eq_12, h29_eq_9, h31_eq_9⟩
 
-/-! ### §130. R289 — residual cell (3) d=5 (A,A) sub-case CLOSURE.
+/-! ### §130. — residual cell (3) d=5 (A,A) sub-case CLOSURE.
 
   **Sub-case**: cell (3) + χ(20) = χ(9) + χ(5) = χ(9) + χ(7) = χ(9).
 
   **CLOSED at n ≥ 32** via case split on χ(32):
 
-  Key insight: self-loop m=8 ((32, 24, 32) using χ(24) = C from R288) forces
+  Key insight: self-loop m=8 ((32, 24, 32) using χ(24) = C from ) forces
   χ(32) ≠ C. Then by trichotomy χ(32) ∈ {A, B}, and BOTH lead to mono:
-  - χ(32) = A: terminal **(32, 5, 13)** all A (uses χ(5)=A sub-case + χ(13)=A R286).
+  - χ(32) = A: terminal **(32, 5, 13)** all A (uses χ(5)=A sub-case + χ(13)=A ).
   - χ(32) = B: terminal **(32, 4, 12)** all B (uses χ(4)=B + χ(12)=B trivial).
 
   Triples used:
-  - (32, 24, 32):  self-loop m=8, gives χ(32) ≠ χ(24) = C ✓
-  - (32, 5, 13):   32 + 20 = 52 = 4·13 ✓ (A-mono terminal)
-  - (32, 4, 12):   32 + 16 = 48 = 4·12 ✓ (B-mono terminal)
+  - (32, 24, 32): self-loop m=8, gives χ(32) ≠ χ(24) = C ✓
+  - (32, 5, 13): 32 + 20 = 52 = 4·13 ✓ (A-mono terminal)
+  - (32, 4, 12): 32 + 16 = 48 = 4·12 ✓ (B-mono terminal)
 -/
 
-/-- **R289 (A, A) sub-case CLOSURE**: under cell (3) + χ(20) = χ(9) +
+/-- ** (A, A) sub-case CLOSURE**: under cell (3) + χ(20) = χ(9) +
   χ(5) = χ(9) + χ(7) = χ(9), False at n ≥ 32. Case split on χ(32) using
   trichotomy — both terminal monos (32, 5, 13) and (32, 4, 12). -/
 theorem residual_cell_3_chi20_eq_chi9_subcase_chi5_A_chi7_A_forces_False_continuation
@@ -17879,11 +17879,11 @@ theorem residual_cell_3_chi20_eq_chi9_subcase_chi5_A_chi7_A_forces_False_continu
     (h5_eq_9 : χ 5 = χ 9)
     (h7_eq_9 : χ 7 = χ 9) :
     False := by
-  -- Get R286 prefix for χ(13) = χ(9) (5th conjunct).
+  -- Get prefix for χ(13) = χ(9) (5th conjunct).
   obtain ⟨_, _, _, _, h13_eq_9, _, _, _⟩ :=
     residual_cell_3_chi20_eq_chi9_forces_prefix χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16 h20_eq_9
-  -- Get R288 sub-case prefix for χ(24) = χ(16) (2nd conjunct).
+  -- Get sub-case prefix for χ(24) = χ(16) (2nd conjunct).
   obtain ⟨_, h24_eq_16, _, _, _, _, _, _, _, _⟩ :=
     residual_cell_3_chi20_eq_chi9_subcase_chi5_A_chi7_A_forces_prefix χ h32 hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16 h20_eq_9 h5_eq_9 h7_eq_9
@@ -17925,9 +17925,9 @@ theorem residual_cell_3_chi20_eq_chi9_subcase_chi5_A_chi7_A_forces_False_continu
     · show χ 4 = χ (4 + 8)
       rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
 
-/-! ### §131. R290 — residual cell (3) d=5 (A, C) sub-case CLOSURE.
+/-! ### §131. — residual cell (3) d=5 (A, C) sub-case CLOSURE.
 
-  **Strategic insight**: R289's proof for (A, A) sub-case never used the
+  **Strategic insight**: 's proof for (A, A) sub-case never used the
   χ(7) = χ(9) hypothesis. The closure structure (χ(32) case split with
   terminals (32, 5, 13) and (32, 4, 12)) only needs χ(5) = A.
 
@@ -17937,16 +17937,16 @@ theorem residual_cell_3_chi20_eq_chi9_subcase_chi5_A_chi7_A_forces_False_continu
   This is a strong structural observation: **cell (3) d=5 closure depends on
   χ(5), not χ(7)**. Only sub-cases χ(5) = A vs χ(5) = C matter.
 
-  Triples used (identical to R289):
-  - (24, 18, 24):  self-loop m=6, forces χ(24) ≠ B (uses χ(18) = B from R286)
-  - (32, 24, 32):  self-loop m=8, forces χ(32) ≠ C (uses χ(24) = C derived)
-  - (32, 5, 13):   32 + 20 = 52 = 4·13 ✓ (Case χ(32) = A terminal)
-  - (32, 4, 12):   32 + 16 = 48 = 4·12 ✓ (Case χ(32) = B terminal)
+  Triples used (identical to ):
+  - (24, 18, 24): self-loop m=6, forces χ(24) ≠ B (uses χ(18) = B from )
+  - (32, 24, 32): self-loop m=8, forces χ(32) ≠ C (uses χ(24) = C derived)
+  - (32, 5, 13): 32 + 20 = 52 = 4·13 ✓ (Case χ(32) = A terminal)
+  - (32, 4, 12): 32 + 16 = 48 = 4·12 ✓ (Case χ(32) = B terminal)
 -/
 
-/-- **R290 (A, C) sub-case CLOSURE**: under cell (3) + χ(20) = χ(9) +
+/-- ** (A, C) sub-case CLOSURE**: under cell (3) + χ(20) = χ(9) +
   χ(5) = χ(9) + χ(7) = χ(16), False at n ≥ 32. Identical proof structure
-  to R289 ((A,A) closure) since χ(7) is not used. -/
+  to ((A,A) closure) since χ(7) is not used. -/
 theorem residual_cell_3_chi20_eq_chi9_subcase_chi5_A_chi7_C_forces_False
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -17960,11 +17960,11 @@ theorem residual_cell_3_chi20_eq_chi9_subcase_chi5_A_chi7_C_forces_False
     (h5_eq_9 : χ 5 = χ 9)
     (_h7_eq_16 : χ 7 = χ 16) :
     False := by
-  -- Get R286 prefix for χ(13) = A (5th conjunct) and χ(18) = B (6th conjunct).
+  -- Get prefix for χ(13) = A (5th conjunct) and χ(18) = B (6th conjunct).
   obtain ⟨_, _, _, _, h13_eq_9, h18_eq_12, _, _⟩ :=
     residual_cell_3_chi20_eq_chi9_forces_prefix χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16 h20_eq_9
-  -- Get R287 prefix2 for χ(24) ≠ A (10th conjunct).
+  -- Get prefix2 for χ(24) ≠ A (10th conjunct).
   obtain ⟨_, _, _, _, _, _, _, _, _, h24_ne_9⟩ :=
     residual_cell_3_chi20_eq_chi9_forces_prefix2 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16 h20_eq_9
@@ -18020,16 +18020,16 @@ theorem residual_cell_3_chi20_eq_chi9_subcase_chi5_A_chi7_C_forces_False
     · show χ 4 = χ (4 + 8)
       rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
 
-/-! ### §132. R291 — residual cell (3) hLayer d = 5 DIRECT CLOSURE (Deliverable A).
+/-! ### §132. — residual cell (3) hLayer d = 5 DIRECT CLOSURE (Deliverable A).
 
-  **MAJOR STRATEGIC BREAKTHROUGH**: The χ(32) pivot from R289 works
+  **MAJOR STRATEGIC BREAKTHROUGH**: The χ(32) pivot from works
   WITHOUT any (χ(5), χ(7)) sub-case split. The A-case terminal can use
   **(32, 9, 17)** instead of (32, 5, 13) — and (32, 9, 17) uses only
-  χ(9) (cell hypothesis) and χ(17) = A (R286 prefix), making it
+  χ(9) (cell hypothesis) and χ(17) = A ( prefix), making it
   **independent of χ(5) and χ(7)**.
 
   **Proof structure**:
-  1. R286 prefix → χ(17) = A, χ(18) = B, χ(19) = A.
+  1. prefix → χ(17) = A, χ(18) = B, χ(19) = A.
   2. χ(24) ≠ A via (20, 19, 24).
   3. χ(24) ≠ B via self-loop m=6 (24, 18, 24).
   4. third_color_eq → χ(24) = C.
@@ -18039,22 +18039,22 @@ theorem residual_cell_3_chi20_eq_chi9_subcase_chi5_A_chi7_C_forces_False
      - χ(32) = B: terminal (32, 4, 12) all B — MONO.
      - χ(32) = C: contradicts step 5.
 
-  This **subsumes all 4 sub-cases** (R287, R289, R290) and gives the full
+  This **subsumes all 4 sub-cases** (,, ) and gives the full
   cell (3) d=5 closure in a single direct proof.
 
   Triples used:
-  - (20, 19, 24):  20 + 76 = 96 = 4·24 ✓ (χ(24) ≠ A)
-  - (24, 18, 24):  24 + 72 = 96 ✓ (self-loop m=6: χ(24) ≠ B)
-  - (32, 24, 32):  self-loop m=8 ✓ (χ(32) ≠ C)
-  - (32, 9, 17):   32 + 36 = 68 = 4·17 ✓ (A-mono terminal)
-  - (32, 4, 12):   32 + 16 = 48 = 4·12 ✓ (B-mono terminal)
+  - (20, 19, 24): 20 + 76 = 96 = 4·24 ✓ (χ(24) ≠ A)
+  - (24, 18, 24): 24 + 72 = 96 ✓ (self-loop m=6: χ(24) ≠ B)
+  - (32, 24, 32): self-loop m=8 ✓ (χ(32) ≠ C)
+  - (32, 9, 17): 32 + 36 = 68 = 4·17 ✓ (A-mono terminal)
+  - (32, 4, 12): 32 + 16 = 48 = 4·12 ✓ (B-mono terminal)
 
-  Cell (1) closed at n ≥ 20 (R260). Cell (2) closed at n ≥ 20 (R273).
+  Cell (1) closed at n ≥ 20 (). Cell (2) closed at n ≥ 20 ().
   Cell (3) closes at **n ≥ 32** due to the χ(32) pivot — higher threshold
   reflecting cell (3)'s structural asymmetry, but still finite and tractable.
 -/
 
-/-- **R291 cell (3) d=5 DIRECT CLOSURE**: under cell (3) + χ(20) = χ(9),
+/-- ** cell (3) d=5 DIRECT CLOSURE**: under cell (3) + χ(20) = χ(9),
   False at n ≥ 32. No (χ(5), χ(7)) sub-case split needed —
   the χ(32) pivot with terminal (32, 9, 17) for the A-case bypasses all
   sub-cases entirely. -/
@@ -18069,7 +18069,7 @@ theorem residual_cell_3_chi20_eq_chi9_forces_False
     (h8_eq_16 : χ 8 = χ 16)
     (h20_eq_9 : χ 20 = χ 9) :
     False := by
-  -- Get R286 prefix for χ(17) = A, χ(18) = B, χ(19) = A.
+  -- Get prefix for χ(17) = A, χ(18) = B, χ(19) = A.
   obtain ⟨_, _, _, h17_eq_9, _, h18_eq_12, h19_eq_9, _⟩ :=
     residual_cell_3_chi20_eq_chi9_forces_prefix χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16 h20_eq_9
@@ -18137,7 +18137,7 @@ theorem residual_cell_3_chi20_eq_chi9_forces_False
     · show χ 4 = χ (4 + 8)
       rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
 
-/-- **R291 contrapositive** (cell 3): χ(20) ≠ χ(9) under cell (3) hypotheses. -/
+/-- ** contrapositive** (cell 3): χ(20) ≠ χ(9) under cell (3) hypotheses. -/
 theorem residual_cell_3_chi20_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -18152,8 +18152,8 @@ theorem residual_cell_3_chi20_ne_chi9
   exact residual_cell_3_chi20_eq_chi9_forces_False χ h32 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16 h20_eq_9
 
-/-- **R291 layer compression d=5 (cell 3)**: χ(20) ∈ {χ(12), χ(16)} under
-  residual cell (3). Feeds R254 bridge as the d=5 hLayer case for cell (3).
+/-- ** layer compression d=5 (cell 3)**: χ(20) ∈ {χ(12), χ(16)} under
+  residual cell (3). Feeds bridge as the d=5 hLayer case for cell (3).
   Threshold n ≥ 32 (higher than cell (1)/(2)'s n ≥ 20 due to cell (3)'s
   structural asymmetry — the χ(32) pivot requires deeper position). -/
 theorem residual_cell_3_layer_compression_d5
@@ -18177,7 +18177,7 @@ theorem residual_cell_3_layer_compression_d5
   · right
     exact third_color_eq hχ20 hχ16 hχ9 hχ12 h9_ne_12 h20_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §133. R292 — residual cell (3) hLayer d = 6.
+/-! ### §133. — residual cell (3) hLayer d = 6.
 
   **Target.** Under cell (3) hypotheses, prove χ(24) ∈ {χ(12), χ(16)}.
 
@@ -18188,24 +18188,24 @@ theorem residual_cell_3_layer_compression_d5
   |------|----------|-----------|
   | 1 | χ(15) = C | (24, 9, 15) [≠A] + (12, 12, 15) [≠B] |
   | 2 | χ(11) = A | (16, 11, 15) [≠C] + (4, 11, 12) [≠B] |
-  | 3 | χ(5)  = C | (24, 5, 11) [≠A; uses S2] + (4, 4, 5) [≠B] |
-  | 4 | χ(3)  = C | (24, 3, 9) [≠A] + (4, 3, 4) [≠B] |
+  | 3 | χ(5) = C | (24, 5, 11) [≠A; uses S2] + (4, 4, 5) [≠B] |
+  | 4 | χ(3) = C | (24, 3, 9) [≠A] + (4, 3, 4) [≠B] |
   | T | **(8, 3, 5) mono** | χ(8) = χ(3) = χ(5) = C |
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (24, 9, 15):   24 + 36 = 60 = 4·15 ✓
-  - (12, 12, 15):  12 + 48 = 60 ✓
-  - (16, 11, 15):  16 + 44 = 60 ✓
-  - (4, 11, 12):   4 + 44 = 48 = 4·12 ✓
-  - (24, 5, 11):   24 + 20 = 44 = 4·11 ✓
-  - (4, 4, 5):     4 + 16 = 20 = 4·5 ✓
-  - (24, 3, 9):    24 + 12 = 36 = 4·9 ✓
-  - (4, 3, 4):     4 + 12 = 16 = 4·4 ✓
-  - (8, 3, 5):     8 + 12 = 20 ✓ (TERMINAL MONO with all C)
+  - (24, 9, 15): 24 + 36 = 60 = 4·15 ✓
+  - (12, 12, 15): 12 + 48 = 60 ✓
+  - (16, 11, 15): 16 + 44 = 60 ✓
+  - (4, 11, 12): 4 + 44 = 48 = 4·12 ✓
+  - (24, 5, 11): 24 + 20 = 44 = 4·11 ✓
+  - (4, 4, 5): 4 + 16 = 20 = 4·5 ✓
+  - (24, 3, 9): 24 + 12 = 36 = 4·9 ✓
+  - (4, 3, 4): 4 + 12 = 16 = 4·4 ✓
+  - (8, 3, 5): 8 + 12 = 20 ✓ (TERMINAL MONO with all C)
 -/
 
 set_option maxHeartbeats 400000 in
-/-- **R292 chi(24) = chi(9) closure (cell 3)**: cell (3) + χ(24) = χ(9) ⟹
+/-- ** chi(24) = chi(9) closure (cell 3)**: cell (3) + χ(24) = χ(9) ⟹
   False at n ≥ 24. 4-step cascade ending in terminal mono (8, 3, 5) all C. -/
 theorem residual_cell_3_chi24_eq_chi9_forces_False
     {n : ℕ} (χ : ℕ → ℕ) (h24 : 24 ≤ n)
@@ -18327,7 +18327,7 @@ theorem residual_cell_3_chi24_eq_chi9_forces_False
   · show χ 3 = χ (3 + 2)
     rw [show (3 + 2 : ℕ) = 5 by decide, h3_eq_16, ← h5_eq_16]
 
-/-- **R292 contrapositive** (cell 3): χ(24) ≠ χ(9) under cell (3) hypotheses. -/
+/-- ** contrapositive** (cell 3): χ(24) ≠ χ(9) under cell (3) hypotheses. -/
 theorem residual_cell_3_chi24_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h24 : 24 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -18342,8 +18342,8 @@ theorem residual_cell_3_chi24_ne_chi9
   exact residual_cell_3_chi24_eq_chi9_forces_False χ h24 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16 h24_eq_9
 
-/-- **R292 layer compression d=6 (cell 3)**: χ(24) ∈ {χ(12), χ(16)} under
-  residual cell (3). Feeds R254 bridge as the d=6 hLayer case for cell (3). -/
+/-- ** layer compression d=6 (cell 3)**: χ(24) ∈ {χ(12), χ(16)} under
+  residual cell (3). Feeds bridge as the d=6 hLayer case for cell (3). -/
 theorem residual_cell_3_layer_compression_d6
     {n : ℕ} (χ : ℕ → ℕ) (h24 : 24 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -18365,7 +18365,7 @@ theorem residual_cell_3_layer_compression_d6
   · right
     exact third_color_eq hχ24 hχ16 hχ9 hχ12 h9_ne_12 h24_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §134. R293 — residual cell (3) hLayer d = 7 at n ≥ 32.
+/-! ### §134. — residual cell (3) hLayer d = 7 at n ≥ 32.
 
   **Target.** Under cell (3) hypotheses, prove χ(28) ∈ {χ(12), χ(16)}.
 
@@ -18374,24 +18374,24 @@ theorem residual_cell_3_layer_compression_d6
   - Case χ(24) = C, χ(32) = A: χ(17)=C via (32, 9, 17) → χ(21)=B → terminal (4, 20, 21) all B.
   - Case χ(24) = C, χ(32) = B: terminal (32, 4, 12) all B.
 
-  Uses R291 (χ(20) = B unconditional under cell-3 + ≠C) and R292 (χ(24) ∈ {B, C}).
+  Uses (χ(20) = B unconditional under cell-3 + ≠C) and (χ(24) ∈ {B, C}).
 
   Key triples:
-  - (16, 16, 20):  20 ≠ C (R291 partner)
-  - (20, 12, 17):  17 ≠ B unconditional
+  - (16, 16, 20): 20 ≠ C ( partner)
+  - (20, 12, 17): 17 ≠ B unconditional
   - self-loop m=7 (28, 21, 28): χ(21) ≠ A
-  - (24, 4, 10):   sub-case χ(24)=B forces χ(10) ≠ B
-  - (8, 8, 10):    χ(10) ≠ C unconditional
-  - (28, 10, 17):  forces χ(17) ≠ A when χ(10) = A
-  - (32, 24, 32):  self-loop m=8, sub-case χ(24)=C forces χ(32) ≠ C
-  - (32, 9, 17):   sub-case χ(32)=A forces χ(17) ≠ A
-  - (16, 17, 21):  χ(17)=C forces χ(21) ≠ C
-  - (4, 20, 21):   B-mono terminal
-  - (32, 4, 12):   B-mono terminal in sub-case χ(32)=B
+  - (24, 4, 10): sub-case χ(24)=B forces χ(10) ≠ B
+  - (8, 8, 10): χ(10) ≠ C unconditional
+  - (28, 10, 17): forces χ(17) ≠ A when χ(10) = A
+  - (32, 24, 32): self-loop m=8, sub-case χ(24)=C forces χ(32) ≠ C
+  - (32, 9, 17): sub-case χ(32)=A forces χ(17) ≠ A
+  - (16, 17, 21): χ(17)=C forces χ(21) ≠ C
+  - (4, 20, 21): B-mono terminal
+  - (32, 4, 12): B-mono terminal in sub-case χ(32)=B
 -/
 
 set_option maxHeartbeats 1600000 in
-/-- **R293 chi(28) = chi(9) closure (cell 3)**: cell (3) + χ(28) = χ(9) ⟹
+/-- ** chi(28) = chi(9) closure (cell 3)**: cell (3) + χ(28) = χ(9) ⟹
   False at n ≥ 32. 3-branch case split on (χ(24), χ(32)) — both lead to
   B-mono terminals (4, 20, 21) or (32, 4, 12). -/
 theorem residual_cell_3_chi28_eq_chi9_forces_False
@@ -18412,7 +18412,7 @@ theorem residual_cell_3_chi28_eq_chi9_forces_False
   have hχ17 : χ 17 < 3 := hχk 17 (by omega) (by omega)
   have hχ21 : χ 21 < 3 := hχk 21 (by omega) (by omega)
   have hχ32 : χ 32 < 3 := hχk 32 (by omega) (by omega)
-  -- Preamble: χ(20) = B (R291 + ≠C).
+  -- Preamble: χ(20) = B ( + ≠C).
   have h20_disj : χ 20 = χ 12 ∨ χ 20 = χ 16 :=
     residual_cell_3_layer_compression_d5 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
@@ -18427,7 +18427,7 @@ theorem residual_cell_3_chi28_eq_chi9_forces_False
     · show χ 16 = χ (16 + 4)
       rw [show (16 + 4 : ℕ) = 20 by decide, h20_eq_16]
   have h20_eq_12 : χ 20 = χ 12 := h20_disj.resolve_right h20_ne_16
-  -- Preamble: χ(24) ∈ {B, C} (R292).
+  -- Preamble: χ(24) ∈ {B, C} ().
   have h24_disj : χ 24 = χ 12 ∨ χ 24 = χ 16 :=
     residual_cell_3_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
@@ -18577,7 +18577,7 @@ theorem residual_cell_3_chi28_eq_chi9_forces_False
       · show χ 4 = χ (4 + 8)
         rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
 
-/-- **R293 contrapositive** (cell 3): χ(28) ≠ χ(9) under cell (3) hypotheses. -/
+/-- ** contrapositive** (cell 3): χ(28) ≠ χ(9) under cell (3) hypotheses. -/
 theorem residual_cell_3_chi28_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -18592,7 +18592,7 @@ theorem residual_cell_3_chi28_ne_chi9
   exact residual_cell_3_chi28_eq_chi9_forces_False χ h32 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16 h28_eq_9
 
-/-- **R293 layer compression d=7 (cell 3)**: χ(28) ∈ {χ(12), χ(16)} under
+/-- ** layer compression d=7 (cell 3)**: χ(28) ∈ {χ(12), χ(16)} under
   residual cell (3). Threshold n ≥ 32 due to χ(32) pivot in sub-case χ(24) = C. -/
 theorem residual_cell_3_layer_compression_d7
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
@@ -18615,36 +18615,36 @@ theorem residual_cell_3_layer_compression_d7
   · right
     exact third_color_eq hχ28 hχ16 hχ9 hχ12 h9_ne_12 h28_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §135. R294 — residual cell (3) hLayer d = 8.
+/-! ### §135. — residual cell (3) hLayer d = 8.
 
   **Target.** Under cell (3) hypotheses, prove χ(32) ∈ {χ(12), χ(16)}.
 
   **4-step cascade + terminal (16, 13, 17) all C** under contradiction
-  χ(32) = χ(9). No case split needed (unlike R293's 3-branch).
+  χ(32) = χ(9). No case split needed (unlike 's 3-branch).
 
   | Step | Position | Triple(s) |
   |------|----------|-----------|
-  | P | χ(20) = B  | R291 + (16, 16, 20) [≠C] |
-  | 1 | χ(17) = C  | (32, 9, 17) [≠A] + (20, 12, 17) [≠B] |
-  | 2 | χ(21) = A  | (4, 20, 21) [≠B] + (16, 17, 21) [≠C] |
-  | 3 | χ(13) = C  | (32, 13, 21) [≠A; uses S2] + (4, 12, 13) [≠B] |
+  | P | χ(20) = B | + (16, 16, 20) [≠C] |
+  | 1 | χ(17) = C | (32, 9, 17) [≠A] + (20, 12, 17) [≠B] |
+  | 2 | χ(21) = A | (4, 20, 21) [≠B] + (16, 17, 21) [≠C] |
+  | 3 | χ(13) = C | (32, 13, 21) [≠A; uses S2] + (4, 12, 13) [≠B] |
   | T | **(16, 13, 17) mono** | χ(16) = χ(13) = χ(17) = C |
 
-  Threshold n ≥ 32 (uses R291 hLayer d=5 + position 32).
+  Threshold n ≥ 32 (uses hLayer d=5 + position 32).
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (16, 16, 20):  16 + 64 = 80 = 4·20 ✓
-  - (32, 9, 17):   32 + 36 = 68 = 4·17 ✓
-  - (20, 12, 17):  20 + 48 = 68 ✓
-  - (4, 20, 21):   4 + 80 = 84 = 4·21 ✓
-  - (16, 17, 21):  16 + 68 = 84 ✓
-  - (32, 13, 21):  32 + 52 = 84 ✓
-  - (4, 12, 13):   4 + 48 = 52 = 4·13 ✓
-  - (16, 13, 17):  16 + 52 = 68 ✓ (TERMINAL MONO with all C)
+  - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓
+  - (32, 9, 17): 32 + 36 = 68 = 4·17 ✓
+  - (20, 12, 17): 20 + 48 = 68 ✓
+  - (4, 20, 21): 4 + 80 = 84 = 4·21 ✓
+  - (16, 17, 21): 16 + 68 = 84 ✓
+  - (32, 13, 21): 32 + 52 = 84 ✓
+  - (4, 12, 13): 4 + 48 = 52 = 4·13 ✓
+  - (16, 13, 17): 16 + 52 = 68 ✓ (TERMINAL MONO with all C)
 -/
 
 set_option maxHeartbeats 400000 in
-/-- **R294 chi(32) = chi(9) closure (cell 3)**: cell (3) + χ(32) = χ(9) ⟹
+/-- ** chi(32) = chi(9) closure (cell 3)**: cell (3) + χ(32) = χ(9) ⟹
   False at n ≥ 32. 4-step cascade ending in terminal mono (16, 13, 17) all C. -/
 theorem residual_cell_3_chi32_eq_chi9_forces_False
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
@@ -18663,7 +18663,7 @@ theorem residual_cell_3_chi32_eq_chi9_forces_False
   have hχ16 : χ 16 < 3 := hχk 16 (by omega) (by omega)
   have hχ17 : χ 17 < 3 := hχk 17 (by omega) (by omega)
   have hχ21 : χ 21 < 3 := hχk 21 (by omega) (by omega)
-  -- Preamble: χ(20) = B (R291 + (16, 16, 20) ≠ C).
+  -- Preamble: χ(20) = B ( + (16, 16, 20) ≠ C).
   have h20_disj : χ 20 = χ 12 ∨ χ 20 = χ 16 :=
     residual_cell_3_layer_compression_d5 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
@@ -18757,7 +18757,7 @@ theorem residual_cell_3_chi32_eq_chi9_forces_False
   · show χ 13 = χ (13 + 4)
     rw [show (13 + 4 : ℕ) = 17 by decide, h13_eq_16, ← h17_eq_16]
 
-/-- **R294 contrapositive** (cell 3): χ(32) ≠ χ(9) under cell (3) hypotheses. -/
+/-- ** contrapositive** (cell 3): χ(32) ≠ χ(9) under cell (3) hypotheses. -/
 theorem residual_cell_3_chi32_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -18772,7 +18772,7 @@ theorem residual_cell_3_chi32_ne_chi9
   exact residual_cell_3_chi32_eq_chi9_forces_False χ h32 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16 h32_eq_9
 
-/-- **R294 layer compression d=8 (cell 3)**: χ(32) ∈ {χ(12), χ(16)} under
+/-- ** layer compression d=8 (cell 3)**: χ(32) ∈ {χ(12), χ(16)} under
   residual cell (3). -/
 theorem residual_cell_3_layer_compression_d8
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
@@ -18795,34 +18795,34 @@ theorem residual_cell_3_layer_compression_d8
   · right
     exact third_color_eq hχ32 hχ16 hχ9 hχ12 h9_ne_12 h32_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §136. R295 — residual cell (3) hLayer d = 9.
+/-! ### §136. — residual cell (3) hLayer d = 9.
 
   **Target.** Under cell (3) hypotheses, prove χ(36) ∈ {χ(12), χ(16)}.
 
-  **Clean self-loop terminal cascade** using R291 (χ(20)=B), R292 (χ(24) ∈ {B,C})
-  and R294 (χ(32) ∈ {B,C}). No case split.
+  **Clean self-loop terminal cascade** using (χ(20)=B), (χ(24) ∈ {B,C})
+  and (χ(32) ∈ {B,C}). No case split.
 
   | Step | Position | Triple(s) |
   |------|----------|-----------|
-  | P  | χ(20) = B  | R291 + (16, 16, 20) [≠C] |
-  | S1 | χ(18) = B  | (36, 9, 18) [≠A; uses h36_eq_9] + (8, 16, 18) [≠C] |
-  | S2 | χ(32) = C  | R294 + (32, 4, 12) [≠B; uses h4_eq_12] |
-  | S3 | χ(24) = B  | R292 + (32, 24, 32) [≠C; uses S2] |
-  | T  | (24, 18, 24) MONO B | χ(24) = χ(18) = χ(24) = B |
+  | P | χ(20) = B | + (16, 16, 20) [≠C] |
+  | S1 | χ(18) = B | (36, 9, 18) [≠A; uses h36_eq_9] + (8, 16, 18) [≠C] |
+  | S2 | χ(32) = C | + (32, 4, 12) [≠B; uses h4_eq_12] |
+  | S3 | χ(24) = B | + (32, 24, 32) [≠C; uses S2] |
+  | T | (24, 18, 24) MONO B | χ(24) = χ(18) = χ(24) = B |
 
   Threshold n ≥ 36 (uses position 36 in (36, 9, 18)).
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (16, 16, 20):  16 + 64 = 80 = 4·20 ✓
-  - (36, 9, 18):   36 + 36 = 72 = 4·18 ✓
-  - (8, 16, 18):   8 + 64 = 72 ✓
-  - (32, 4, 12):   32 + 16 = 48 = 4·12 ✓
-  - (32, 24, 32):  32 + 96 = 128 = 4·32 ✓ (self-loop)
-  - (24, 18, 24):  24 + 72 = 96 = 4·24 ✓ (TERMINAL self-loop MONO B)
+  - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓
+  - (36, 9, 18): 36 + 36 = 72 = 4·18 ✓
+  - (8, 16, 18): 8 + 64 = 72 ✓
+  - (32, 4, 12): 32 + 16 = 48 = 4·12 ✓
+  - (32, 24, 32): 32 + 96 = 128 = 4·32 ✓ (self-loop)
+  - (24, 18, 24): 24 + 72 = 96 = 4·24 ✓ (TERMINAL self-loop MONO B)
 -/
 
 set_option maxHeartbeats 400000 in
-/-- **R295 chi(36) = chi(9) closure (cell 3)**: cell (3) + χ(36) = χ(9) ⟹
+/-- ** chi(36) = chi(9) closure (cell 3)**: cell (3) + χ(36) = χ(9) ⟹
   False at n ≥ 36. Cascade ending in self-loop terminal (24, 18, 24) all B. -/
 theorem residual_cell_3_chi36_eq_chi9_forces_False
     {n : ℕ} (χ : ℕ → ℕ) (h36 : 36 ≤ n)
@@ -18839,7 +18839,7 @@ theorem residual_cell_3_chi36_eq_chi9_forces_False
   have hχ12 : χ 12 < 3 := hχk 12 (by omega) (by omega)
   have hχ16 : χ 16 < 3 := hχk 16 (by omega) (by omega)
   have hχ18 : χ 18 < 3 := hχk 18 (by omega) (by omega)
-  -- Preamble P: χ(20) = B (R291 d=5 + (16, 16, 20) ≠ C).
+  -- Preamble P: χ(20) = B ( d=5 + (16, 16, 20) ≠ C).
   have h20_disj : χ 20 = χ 12 ∨ χ 20 = χ 16 :=
     residual_cell_3_layer_compression_d5 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
@@ -18877,7 +18877,7 @@ theorem residual_cell_3_chi36_eq_chi9_forces_False
       rw [show (16 + 2 : ℕ) = 18 by decide, h18_eq_16]
   have h18_eq_12 : χ 18 = χ 12 :=
     third_color_eq hχ18 hχ12 hχ9 hχ16 h9_ne_16 h18_ne_9 h18_ne_16 (Ne.symm h9_ne_12) h12_ne_16
-  -- S2: χ(32) = C. Via R294 d=8 + (32, 4, 12) ≠ B.
+  -- S2: χ(32) = C. Via d=8 + (32, 4, 12) ≠ B.
   have h32_disj : χ 32 = χ 12 ∨ χ 32 = χ 16 :=
     residual_cell_3_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
@@ -18892,7 +18892,7 @@ theorem residual_cell_3_chi36_eq_chi9_forces_False
     · show χ 4 = χ (4 + 8)
       rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
   have h32_eq_16 : χ 32 = χ 16 := h32_disj.resolve_left h32_ne_12
-  -- S3: χ(24) = B. Via R292 d=6 + (32, 24, 32) ≠ C.
+  -- S3: χ(24) = B. Via d=6 + (32, 24, 32) ≠ C.
   have h24_disj : χ 24 = χ 12 ∨ χ 24 = χ 16 :=
     residual_cell_3_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
@@ -18917,7 +18917,7 @@ theorem residual_cell_3_chi36_eq_chi9_forces_False
   · show χ 18 = χ (18 + 6)
     rw [show (18 + 6 : ℕ) = 24 by decide, h18_eq_12, ← h24_eq_12]
 
-/-- **R295 contrapositive** (cell 3): χ(36) ≠ χ(9) under cell (3) hypotheses. -/
+/-- ** contrapositive** (cell 3): χ(36) ≠ χ(9) under cell (3) hypotheses. -/
 theorem residual_cell_3_chi36_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h36 : 36 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -18932,7 +18932,7 @@ theorem residual_cell_3_chi36_ne_chi9
   exact residual_cell_3_chi36_eq_chi9_forces_False χ h36 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16 h36_eq_9
 
-/-- **R295 layer compression d=9 (cell 3)**: χ(36) ∈ {χ(12), χ(16)} under
+/-- ** layer compression d=9 (cell 3)**: χ(36) ∈ {χ(12), χ(16)} under
   residual cell (3). -/
 theorem residual_cell_3_layer_compression_d9
     {n : ℕ} (χ : ℕ → ℕ) (h36 : 36 ≤ n)
@@ -18955,38 +18955,38 @@ theorem residual_cell_3_layer_compression_d9
   · right
     exact third_color_eq hχ36 hχ16 hχ9 hχ12 h9_ne_12 h36_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §137. R296 — residual cell (3) hLayer d = 10.
+/-! ### §137. — residual cell (3) hLayer d = 10.
 
   **Target.** Under cell (3) hypotheses, prove χ(40) ∈ {χ(12), χ(16)}.
 
   **Minimal sharpening cascade via χ(30) = C terminal.**
-  Uses R291/R292/R294 (d=5/6/8) to sharpen B/C anchors, then derives χ(30) = C
+  Uses // (d=5/6/8) to sharpen B/C anchors, then derives χ(30) = C
   via two self-loops, terminating in (8, 30, 32) all C.
-  Notable: R293 (d=7) and R295 (d=9) are NOT used.
+  Notable: (d=7) and (d=9) are NOT used.
 
   | Step | Position | Triple(s) |
   |------|----------|-----------|
-  | P1 | χ(20) = B  | R291 + (16, 16, 20) [self-loop x=y; ≠C] |
-  | P2 | χ(32) = C  | R294 + (32, 4, 12) [≠B] |
-  | P3 | χ(24) = B  | R292 + (32, 24, 32) [self-loop x=z; ≠C] |
-  | S1 | χ(30) ≠ B  | (24, 24, 30) [self-loop x=y; uses χ(24)=B] |
-  | S2 | χ(30) ≠ A  | (40, 30, 40) [self-loop x=z; uses h40_eq_9] |
-  | S3 | χ(30) = C  | trichotomy |
-  | T  | (8, 30, 32) MONO C | χ(8) = χ(30) = χ(32) = C |
+  | P1 | χ(20) = B | + (16, 16, 20) [self-loop x=y; ≠C] |
+  | P2 | χ(32) = C | + (32, 4, 12) [≠B] |
+  | P3 | χ(24) = B | + (32, 24, 32) [self-loop x=z; ≠C] |
+  | S1 | χ(30) ≠ B | (24, 24, 30) [self-loop x=y; uses χ(24)=B] |
+  | S2 | χ(30) ≠ A | (40, 30, 40) [self-loop x=z; uses h40_eq_9] |
+  | S3 | χ(30) = C | trichotomy |
+  | T | (8, 30, 32) MONO C | χ(8) = χ(30) = χ(32) = C |
 
   Threshold n ≥ 40 (uses position 40 in (40, 30, 40)).
 
   All triples verified for b=4 (x + 4y = 4z):
-  - (16, 16, 20):  16 + 64 = 80 = 4·20 ✓ (self-loop x=y)
-  - (32, 4, 12):   32 + 16 = 48 = 4·12 ✓
-  - (32, 24, 32):  32 + 96 = 128 = 4·32 ✓ (self-loop x=z)
-  - (24, 24, 30):  24 + 96 = 120 = 4·30 ✓ (self-loop x=y)
-  - (40, 30, 40):  40 + 120 = 160 = 4·40 ✓ (self-loop x=z)
-  - (8, 30, 32):   8 + 120 = 128 = 4·32 ✓ (TERMINAL MONO C)
+  - (16, 16, 20): 16 + 64 = 80 = 4·20 ✓ (self-loop x=y)
+  - (32, 4, 12): 32 + 16 = 48 = 4·12 ✓
+  - (32, 24, 32): 32 + 96 = 128 = 4·32 ✓ (self-loop x=z)
+  - (24, 24, 30): 24 + 96 = 120 = 4·30 ✓ (self-loop x=y)
+  - (40, 30, 40): 40 + 120 = 160 = 4·40 ✓ (self-loop x=z)
+  - (8, 30, 32): 8 + 120 = 128 = 4·32 ✓ (TERMINAL MONO C)
 -/
 
 set_option maxHeartbeats 400000 in
-/-- **R296 chi(40) = chi(9) closure (cell 3)**: cell (3) + χ(40) = χ(9) ⟹
+/-- ** chi(40) = chi(9) closure (cell 3)**: cell (3) + χ(40) = χ(9) ⟹
   False at n ≥ 40. Cascade through χ(30) = C, terminating in (8, 30, 32) all C. -/
 theorem residual_cell_3_chi40_eq_chi9_forces_False
     {n : ℕ} (χ : ℕ → ℕ) (h40 : 40 ≤ n)
@@ -19003,7 +19003,7 @@ theorem residual_cell_3_chi40_eq_chi9_forces_False
   have hχ12 : χ 12 < 3 := hχk 12 (by omega) (by omega)
   have hχ16 : χ 16 < 3 := hχk 16 (by omega) (by omega)
   have hχ30 : χ 30 < 3 := hχk 30 (by omega) (by omega)
-  -- P1: χ(20) = B (R291 d=5 + (16, 16, 20) ≠ C).
+  -- P1: χ(20) = B ( d=5 + (16, 16, 20) ≠ C).
   have h20_disj : χ 20 = χ 12 ∨ χ 20 = χ 16 :=
     residual_cell_3_layer_compression_d5 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
@@ -19018,7 +19018,7 @@ theorem residual_cell_3_chi40_eq_chi9_forces_False
     · show χ 16 = χ (16 + 4)
       rw [show (16 + 4 : ℕ) = 20 by decide, h20_eq_16]
   have h20_eq_12 : χ 20 = χ 12 := h20_disj.resolve_right h20_ne_16
-  -- P2: χ(32) = C (R294 d=8 + (32, 4, 12) ≠ B).
+  -- P2: χ(32) = C ( d=8 + (32, 4, 12) ≠ B).
   have h32_disj : χ 32 = χ 12 ∨ χ 32 = χ 16 :=
     residual_cell_3_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
@@ -19033,7 +19033,7 @@ theorem residual_cell_3_chi40_eq_chi9_forces_False
     · show χ 4 = χ (4 + 8)
       rw [show (4 + 8 : ℕ) = 12 by decide]; exact h4_eq_12
   have h32_eq_16 : χ 32 = χ 16 := h32_disj.resolve_left h32_ne_12
-  -- P3: χ(24) = B (R292 d=6 + (32, 24, 32) ≠ C).
+  -- P3: χ(24) = B ( d=6 + (32, 24, 32) ≠ C).
   have h24_disj : χ 24 = χ 12 ∨ χ 24 = χ 16 :=
     residual_cell_3_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
@@ -19083,7 +19083,7 @@ theorem residual_cell_3_chi40_eq_chi9_forces_False
   · show χ 30 = χ (30 + 2)
     rw [show (30 + 2 : ℕ) = 32 by decide, h30_eq_16, ← h32_eq_16]
 
-/-- **R296 contrapositive** (cell 3): χ(40) ≠ χ(9) under cell (3) hypotheses. -/
+/-- ** contrapositive** (cell 3): χ(40) ≠ χ(9) under cell (3) hypotheses. -/
 theorem residual_cell_3_chi40_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h40 : 40 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -19098,7 +19098,7 @@ theorem residual_cell_3_chi40_ne_chi9
   exact residual_cell_3_chi40_eq_chi9_forces_False χ h40 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16 h40_eq_9
 
-/-- **R296 layer compression d=10 (cell 3)**: χ(40) ∈ {χ(12), χ(16)} under
+/-- ** layer compression d=10 (cell 3)**: χ(40) ∈ {χ(12), χ(16)} under
   residual cell (3). -/
 theorem residual_cell_3_layer_compression_d10
     {n : ℕ} (χ : ℕ → ℕ) (h40 : 40 ≤ n)
@@ -19121,7 +19121,7 @@ theorem residual_cell_3_layer_compression_d10
   · right
     exact third_color_eq hχ40 hχ16 hχ9 hχ12 h9_ne_12 h40_ne_9 h_eq_12 (Ne.symm h9_ne_16) (Ne.symm h12_ne_16)
 
-/-! ### §138. R297 — SHORTCUT discovery + residual cell (3) hLayer d = 11.
+/-! ### §138. — SHORTCUT discovery + residual cell (3) hLayer d = 11.
 
   **AUDIT SHORTCUT.** Triple (32, 8, 16) is a valid bAdicEquation 4 triple
   (d=8, y=8, z=16; 32 + 32 = 64 = 4·16 ✓). The general Rado constraint
@@ -19129,27 +19129,27 @@ theorem residual_cell_3_layer_compression_d10
   h8_eq_16 : χ(8) = χ(16), the second conjunct holds always, so the
   constraint forces χ(32) ≠ χ(8) = χ(16) = C.
 
-  Combined with R294 d=8 (χ(32) ∈ {B, C}) and (32, 4, 12) excluding B,
+  Combined with d=8 (χ(32) ∈ {B, C}) and (32, 4, 12) excluding B,
   this gives an immediate contradiction at n ≥ 32 —
   **residual cell (3) hypotheses + hNoMono ⟹ False at n ≥ 32**.
 
   This means cell (3) closes immediately at n ≥ 32, and all hLayer facts
   for d ≥ 5 become trivial via False.elim. We introduce:
   - `residual_cell_3_closed_directly_at_32`: the direct closure theorem.
-  - R297 standard 3-theorem suite for d=11: trivial wrappers over the closure.
+  - standard 3-theorem suite for d=11: trivial wrappers over the closure.
 
-  R291-R296 are kept as historical cascade proofs (not refactored).
-  R298-R302 (d=12..d=16) will follow the same shortcut pattern.
+  - are kept as historical cascade proofs (not refactored).
+  - (d=12..d=16) will follow the same shortcut pattern.
 
   Triples in direct closure (b=4):
-  - (32, 4, 12):  32 + 16 = 48 = 4·12 ✓ (excludes χ(32) = B; from R294 proof)
-  - (32, 8, 16):  32 + 32 = 64 = 4·16 ✓ (excludes χ(32) = C; the new shortcut)
+  - (32, 4, 12): 32 + 16 = 48 = 4·12 ✓ (excludes χ(32) = B; from proof)
+  - (32, 8, 16): 32 + 32 = 64 = 4·16 ✓ (excludes χ(32) = C; the new shortcut)
 -/
 
 set_option maxHeartbeats 400000 in
-/-- **R297 direct closure of cell (3) at n ≥ 32.** Cell (3) hypotheses
-  + hNoMono ⟹ False. Uses R294 d=8 + (32, 4, 12) [≠B] + (32, 8, 16) [≠C].
-  This shortcut subsumes R295-R296 closures and trivially gives all
+/-- ** direct closure of cell (3) at n ≥ 32.** Cell (3) hypotheses
+  + hNoMono ⟹ False. Uses d=8 + (32, 4, 12) [≠B] + (32, 8, 16) [≠C].
+  This shortcut subsumes - closures and trivially gives all
   cell (3) hLayer facts for d ≥ 5 via False.elim. -/
 theorem residual_cell_3_closed_directly_at_32
     {n : ℕ} (χ : ℕ → ℕ) (h32 : 32 ≤ n)
@@ -19186,10 +19186,10 @@ theorem residual_cell_3_closed_directly_at_32
       rw [show (4 * 8 : ℕ) = 32 by decide, h32_eq_16, ← h8_eq_16]
     · show χ 8 = χ (8 + 8)
       rw [show (8 + 8 : ℕ) = 16 by decide]; exact h8_eq_16
-  -- Trichotomy: χ(32) is neither B nor C, contradicting R294's disjunction.
+  -- Trichotomy: χ(32) is neither B nor C, contradicting 's disjunction.
   exact h32_disj.elim h32_ne_12 h32_ne_16
 
-/-- **R297 chi(44) = chi(9) closure (cell 3)**: cell (3) + χ(44) = χ(9) ⟹
+/-- ** chi(44) = chi(9) closure (cell 3)**: cell (3) + χ(44) = χ(9) ⟹
   False at n ≥ 44. Trivial via `residual_cell_3_closed_directly_at_32`
   — the χ(44) = χ(9) hypothesis is unused because the direct closure
   already gives False from cell (3) hypotheses at n ≥ 32. -/
@@ -19207,7 +19207,7 @@ theorem residual_cell_3_chi44_eq_chi9_forces_False
   residual_cell_3_closed_directly_at_32 χ (by omega) hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
 
-/-- **R297 contrapositive** (cell 3): χ(44) ≠ χ(9) under cell (3) hypotheses. -/
+/-- ** contrapositive** (cell 3): χ(44) ≠ χ(9) under cell (3) hypotheses. -/
 theorem residual_cell_3_chi44_ne_chi9
     {n : ℕ} (χ : ℕ → ℕ) (h44 : 44 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -19222,7 +19222,7 @@ theorem residual_cell_3_chi44_ne_chi9
   exact residual_cell_3_chi44_eq_chi9_forces_False χ h44 hχk hNoMono
     h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16 h44_eq_9
 
-/-- **R297 layer compression d=11 (cell 3)**: χ(44) ∈ {χ(12), χ(16)} under
+/-- ** layer compression d=11 (cell 3)**: χ(44) ∈ {χ(12), χ(16)} under
   residual cell (3). Trivially derived via the direct closure since
   cell (3) hypotheses imply False at n ≥ 32 (≤ 44). -/
 theorem residual_cell_3_layer_compression_d11
@@ -19239,22 +19239,22 @@ theorem residual_cell_3_layer_compression_d11
     (residual_cell_3_closed_directly_at_32 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16)
 
-/-! ### §139. R298 — residual cell (3) hLayer d = 12..16 + full integration.
+/-! ### §139. — residual cell (3) hLayer d = 12..16 + full integration.
 
   **All five remaining hLayer disjuncts are trivial False.elim wrappers**
-  over `residual_cell_3_closed_directly_at_32` (R297 SHORTCUT). They preserve
-  API symmetry with R291-R297 and cell (1)/(2) layer compression theorems.
+  over `residual_cell_3_closed_directly_at_32` ( SHORTCUT). They preserve
+  API symmetry with - and cell (1)/(2) layer compression theorems.
 
   No cascade is needed for d=12..16 because cell (3) is already False at n ≥ 32.
 
   Following the same architecture as `residual_cell_2_full_layer_compression`,
   `residual_cell_3_full_layer_compression` dispatches via `interval_cases` on d:
   - d=1..4: direct from cell (3) anchor hypotheses + rfl.
-  - d=5..10: existing cascade proofs (R291..R296).
+  - d=5..10: existing cascade proofs (..).
   - d=11..16: False.elim wrappers via the SHORTCUT.
 -/
 
-/-- **R298 layer compression d=12 (cell 3)**: trivial via direct closure. -/
+/-- ** layer compression d=12 (cell 3)**: trivial via direct closure. -/
 theorem residual_cell_3_layer_compression_d12
     {n : ℕ} (χ : ℕ → ℕ) (h48 : 48 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -19269,7 +19269,7 @@ theorem residual_cell_3_layer_compression_d12
     (residual_cell_3_closed_directly_at_32 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16)
 
-/-- **R298 layer compression d=13 (cell 3)**: trivial via direct closure. -/
+/-- ** layer compression d=13 (cell 3)**: trivial via direct closure. -/
 theorem residual_cell_3_layer_compression_d13
     {n : ℕ} (χ : ℕ → ℕ) (h52 : 52 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -19284,7 +19284,7 @@ theorem residual_cell_3_layer_compression_d13
     (residual_cell_3_closed_directly_at_32 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16)
 
-/-- **R298 layer compression d=14 (cell 3)**: trivial via direct closure. -/
+/-- ** layer compression d=14 (cell 3)**: trivial via direct closure. -/
 theorem residual_cell_3_layer_compression_d14
     {n : ℕ} (χ : ℕ → ℕ) (h56 : 56 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -19299,7 +19299,7 @@ theorem residual_cell_3_layer_compression_d14
     (residual_cell_3_closed_directly_at_32 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16)
 
-/-- **R298 layer compression d=15 (cell 3)**: trivial via direct closure. -/
+/-- ** layer compression d=15 (cell 3)**: trivial via direct closure. -/
 theorem residual_cell_3_layer_compression_d15
     {n : ℕ} (χ : ℕ → ℕ) (h60 : 60 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -19314,7 +19314,7 @@ theorem residual_cell_3_layer_compression_d15
     (residual_cell_3_closed_directly_at_32 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16)
 
-/-- **R298 layer compression d=16 (cell 3)**: trivial via direct closure. -/
+/-- ** layer compression d=16 (cell 3)**: trivial via direct closure. -/
 theorem residual_cell_3_layer_compression_d16
     {n : ℕ} (χ : ℕ → ℕ) (h64 : 64 ≤ n)
     (hχk : IsKColoring n 3 χ)
@@ -19329,15 +19329,15 @@ theorem residual_cell_3_layer_compression_d16
     (residual_cell_3_closed_directly_at_32 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16)
 
-/-- **R298 cell (3) full layer compression**: assembles the R254 bridge interface
+/-- ** cell (3) full layer compression**: assembles the bridge interface
   `∀ d, 1 ≤ d → d ≤ 16 → χ(4·d) = χ(12) ∨ χ(4·d) = χ(16)` from cell (3)
   hypotheses. Mirrors `residual_cell_2_full_layer_compression`.
 
   Dispatch:
-  - d=1: h4_eq_12 (left).      - d=2: h8_eq_16 (right).
-  - d=3: χ(12) = χ(12) rfl.    - d=4: χ(16) = χ(16) rfl.
-  - d=5..10: R291..R296 cascade proofs.
-  - d=11..16: R297..R298 False.elim shortcuts.
+  - d=1: h4_eq_12 (left). - d=2: h8_eq_16 (right).
+  - d=3: χ(12) = χ(12) rfl. - d=4: χ(16) = χ(16) rfl.
+  - d=5..10:.. cascade proofs.
+  - d=11..16:.. False.elim shortcuts.
 -/
 theorem residual_cell_3_full_layer_compression
     {n : ℕ} (χ : ℕ → ℕ) (h64 : 64 ≤ n)
@@ -19359,51 +19359,51 @@ theorem residual_cell_3_full_layer_compression
     exact Or.inl (show χ (4 * 3) = χ 12 by rw [show (4 * 3 : ℕ) = 12 by decide])
   · -- d = 4: χ(16) = χ(16) by rfl.
     exact Or.inr (show χ (4 * 4) = χ 16 by rw [show (4 * 4 : ℕ) = 16 by decide])
-  · -- d = 5: R291.
+  · -- d = 5:.
     have h := residual_cell_3_layer_compression_d5 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
     rw [show (4 * 5 : ℕ) = 20 by decide]; exact h
-  · -- d = 6: R292.
+  · -- d = 6:.
     have h := residual_cell_3_layer_compression_d6 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
     rw [show (4 * 6 : ℕ) = 24 by decide]; exact h
-  · -- d = 7: R293.
+  · -- d = 7:.
     have h := residual_cell_3_layer_compression_d7 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
     rw [show (4 * 7 : ℕ) = 28 by decide]; exact h
-  · -- d = 8: R294.
+  · -- d = 8:.
     have h := residual_cell_3_layer_compression_d8 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
     rw [show (4 * 8 : ℕ) = 32 by decide]; exact h
-  · -- d = 9: R295.
+  · -- d = 9:.
     have h := residual_cell_3_layer_compression_d9 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
     rw [show (4 * 9 : ℕ) = 36 by decide]; exact h
-  · -- d = 10: R296.
+  · -- d = 10:.
     have h := residual_cell_3_layer_compression_d10 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
     rw [show (4 * 10 : ℕ) = 40 by decide]; exact h
-  · -- d = 11: R297 (SHORTCUT wrapper).
+  · -- d = 11: (SHORTCUT wrapper).
     have h := residual_cell_3_layer_compression_d11 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
     rw [show (4 * 11 : ℕ) = 44 by decide]; exact h
-  · -- d = 12: R298 SHORTCUT wrapper.
+  · -- d = 12: SHORTCUT wrapper.
     have h := residual_cell_3_layer_compression_d12 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
     rw [show (4 * 12 : ℕ) = 48 by decide]; exact h
-  · -- d = 13: R298 SHORTCUT wrapper.
+  · -- d = 13: SHORTCUT wrapper.
     have h := residual_cell_3_layer_compression_d13 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
     rw [show (4 * 13 : ℕ) = 52 by decide]; exact h
-  · -- d = 14: R298 SHORTCUT wrapper.
+  · -- d = 14: SHORTCUT wrapper.
     have h := residual_cell_3_layer_compression_d14 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
     rw [show (4 * 14 : ℕ) = 56 by decide]; exact h
-  · -- d = 15: R298 SHORTCUT wrapper.
+  · -- d = 15: SHORTCUT wrapper.
     have h := residual_cell_3_layer_compression_d15 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
     rw [show (4 * 15 : ℕ) = 60 by decide]; exact h
-  · -- d = 16: R298 SHORTCUT wrapper.
+  · -- d = 16: SHORTCUT wrapper.
     have h := residual_cell_3_layer_compression_d16 χ (by omega) hχk hNoMono
       h9_ne_12 h9_ne_16 h12_ne_16 h4_eq_12 h8_eq_16
     rw [show (4 * 16 : ℕ) = 64 by decide]; exact h

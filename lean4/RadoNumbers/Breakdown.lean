@@ -5,7 +5,7 @@
   Companion to Li 2026 "On Rado Numbers for $x + by = bz$".
 
   The first result establishing that the $b^k$ pattern breaks for
-  $b \ge 3$.  Encoded via the paper's explicit 5-coloring witness
+  $b \ge 3$. Encoded via the paper's explicit 5-coloring witness
   (Appendix A) on $\{1, \ldots, 243\}$ plus a Cat 2 SAT-verified
   atom for the stronger bound $R_5(3) > 296$.
 
@@ -30,8 +30,8 @@ namespace RadoNumbers
 
 /-! ### The explicit witness coloring (Li 2026, Appendix A). -/
 
-/-- The 243-element witness list.  Indexing: `r5_witness_list[j-1]
-    = χ(j)` for $j \in \{1, \ldots, 243\}$.  Color class sizes:
+/-- The 243-element witness list. Indexing: `r5_witness_list[j-1]
+    = χ(j)` for $j \in \{1, \ldots, 243\}$. Color class sizes:
     $|C_0| = 46$, $|C_1| = 29$, $|C_2| = 54$, $|C_3| = 53$,
     $|C_4| = 61$. -/
 def r5_witness_list : List ℕ :=
@@ -56,7 +56,7 @@ def r5_witness_list : List ℕ :=
     4, 4, 2, 1, 3, 2, 4, 3, 1, 4, 1, 2, 3, 0, 2, 0, 0, 0, 0, 0, 2, 0, 3, 2, 0, 3, 3
   ]
 
-/-- The witness coloring as a function `ℕ → ℕ`.  Returns
+/-- The witness coloring as a function `ℕ → ℕ`. Returns
     `r5_witness_list[j - 1]` for $j \in \{1, \ldots, 243\}$ and
     `0` outside that range. -/
 def r5_witness (j : ℕ) : ℕ :=
@@ -69,7 +69,7 @@ def r5_witness (j : ℕ) : ℕ :=
 
   The 243-entry coloring `r5_witness` (Li 2026, Appendix A) is a
   valid 5-coloring of $\{1, \ldots, 243\}$ avoiding all
-  monochromatic solutions to $x + 3·y = 3·z$.  Validity was
+  monochromatic solutions to $x + 3·y = 3·z$. Validity was
   independently confirmed by exhaustive enumeration of all $16{,}362$
   candidate Rado triples $(x, y, z)$ satisfying $x + 3y = 3z$ in
   $\{1, \ldots, 243\}$.
@@ -87,7 +87,7 @@ axiom r5_witness_valid_sat :
   Li 2026 §"Breakdown of the $b^k$ Pattern": for each $n$ from
   $244$ to $296$, the SAT formula encoding the existence of a
   valid 5-coloring of $\{1, \ldots, n\}$ remains satisfiable
-  (incremental SAT, $\sim$0.2s/step).  Therefore $R_5(3) > 296$.
+  (incremental SAT, $\sim$0.2s/step). Therefore $R_5(3) > 296$.
 
   *Status:* `gapOpen` Cat 2 (paper-cited computational
   verification; no explicit witness encoded in Lean here).
@@ -97,7 +97,7 @@ axiom r5_296_sat : RadoNumberAtLeast 3 5 297
 /-! ### Derived theorems. -/
 
 /--
-  **Theorem `thm:r5` (first half).**  $R_5(3) > 243 = 3^5$.
+  **Theorem `thm:r5` (first half).** $R_5(3) > 243 = 3^5$.
 
   In particular, the $b^k$ pattern breaks for $b = 3, k = 5$.
 -/
@@ -115,7 +115,7 @@ theorem thm_r5_243 : RadoNumberAtLeast 3 5 244 := by
     exact ⟨x, y, z, by omega, by omega, by omega, hRT, hxy, hyz⟩
 
 /--
-  **Theorem `thm:r5` (stronger half).**  $R_5(3) > 296$.
+  **Theorem `thm:r5` (stronger half).** $R_5(3) > 296$.
 
   Established by incremental SAT (`r5_296_sat`) covering each
   $n \in \{244, \ldots, 296\}$.
@@ -126,7 +126,7 @@ theorem thm_r5_296 : RadoNumberAtLeast 3 5 297 := r5_296_sat
 
   The paper notes a sharp phase transition at $n = 297$: SAT
   reaches $n = 296$ in $< 1$s/step but $n = 297$ exceeds $12$h on
-  desktop hardware.  This suggests the conjecture $R_5(3) = 297$,
+  desktop hardware. This suggests the conjecture $R_5(3) = 297$,
   which is recorded in `RadoNumbers.Threshold` as a conditional
   (not asserted as a theorem). -/
 

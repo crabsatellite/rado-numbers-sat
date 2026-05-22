@@ -13,7 +13,7 @@
   - Self-loop constraint (3m, 2m, 3m) gives χ(2m) ≠ χ(3m).
 
   Pillar 3 master theorem (`pillar_3_target`) requires showing
-  `localShift_3 χ m` is CONSTANT on {1, ..., 9} for any mono-free χ.
+  `localShift_3 χ m` is CONSTANT on {1,..., 9} for any mono-free χ.
   This is the goal of future rounds (structural proof, not case enum).
 
   No `sorry` or `axiom` here: only sound definitions and elementary lemmas.
@@ -171,8 +171,7 @@ theorem R_3_3_le_27_under_localShift_constant
      Combines lemmas 1-9 to show localShift_3 χ m = χ(3) for all m ∈ [1, 9].
 
   5. **Final `R_3_3_le_27_unconditional`**:
-     From pillar_3_localShift_constant + R_3_3_le_27_under_HasMultShift
-     (Round 146), derive R_3(3) ≤ 27 unconditionally.
+     From pillar_3_localShift_constant + R_3_3_le_27_under_HasMultShift, derive R_3(3) ≤ 27 unconditionally.
 
   ALTERNATIVE LONG-TERM PATH (multi-month Mathlib infra):
   - Define `IsPartitionRegular` for linear equations over ℕ.

@@ -2,10 +2,10 @@
   RadoNumbers/General/ColumnsCondition.lean
 
   Rado's Columns Condition for a single linear equation
-  a_1 x_1 + ... + a_n x_n = 0.
+  a_1 x_1 +... + a_n x_n = 0.
 
   For a 1×n matrix (single equation), the (full) Columns Condition reduces
-  to: there exists a non-empty subset S ⊆ {0, ..., n-1} with ∑_{i ∈ S} a_i = 0.
+  to: there exists a non-empty subset S ⊆ {0,..., n-1} with ∑_{i ∈ S} a_i = 0.
 
   This is because in 1D, "ℚ-span" of any non-zero scalar is ℚ; the
   recursive part of Columns Condition (each subsequent group's sum is in

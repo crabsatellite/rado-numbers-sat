@@ -3,11 +3,11 @@
 
   Definition `def:gstar`, Proposition `prop:gstar-tree`, Lemma
   `lem:gstartree` (Combined-$G^*$-Tree Lemma; SAT-verified), and
-  Theorem `thm:k4b3` ($R_4(3) = 81$).  Companion to Li 2026
+  Theorem `thm:k4b3` ($R_4(3) = 81$). Companion to Li 2026
   "On Rado Numbers for $x + by = bz$".
 
   The boundary case $b = 3, k = 4$ of the threshold conjecture
-  $k \le 2(b-1)$ at $b = 3$.  The upper bound $R_4(3) \le 81$ has
+  $k \le 2(b-1)$ at $b = 3$. The upper bound $R_4(3) \le 81$ has
   a fully analytic structural reduction (a self-loop step at the
   triple $(81, 54, 81)$ combined with the case analysis over the
   tree-shaped obstruction graph $G^* = G_{27} \cup G_{\mathrm{ext}}$)
@@ -55,17 +55,17 @@ def Gstar : Finset (ℕ × ℕ) := G27 ∪ Gext
   about $G^*$ which the paper proves analytically: $|G_{27}| = 53$,
   $|G_{\mathrm{ext}}| = 26$, $G_{27} \cap G_{\mathrm{ext}} =
   \emptyset$, $|G^*| = 79 = |V| - 1$, and connectedness (hence the
-  tree property).  Our Lean proof of `thm_k4b3` does NOT consume
+  tree property). Our Lean proof of `thm_k4b3` does NOT consume
   the tree property: it uses only `lem_gstartree` (Cat 2 SAT) plus
   the explicit `G27_mem_iff` / `Gext_mem_iff` / `Gstar_mem_iff`
-  unfoldings of the `Finset` definitions.  Per the anti-pattern
+  unfoldings of the `Finset` definitions. Per the anti-pattern
   catalogue §4 #7 ("Phantom downstream user"), we therefore do not
   axiomatize `prop_gstar_tree`; the structural facts are
   paper-narrative content backed by the explicit `Finset`
   constructions in this file (any user who needs cardinality /
   disjointness can derive them via Mathlib `Finset.card_image_*`
   + paper's disjointness argument $|81 - 4d| \ne 27$ for $d \in
-  \{1, \ldots, 26\}$, $4d \in \{54, 108\}$ impossible).  -/
+  \{1, \ldots, 26\}$, $4d \in \{54, 108\}$ impossible). -/
 
 /-! ### Lemma `lem:gstartree` — Cat 2 SAT-verified. -/
 
@@ -79,7 +79,7 @@ def Gstar : Finset (ℕ × ℕ) := G27 ∪ Gext
   contains at least one monochromatic edge of $G^*$.
 
   *Justification:* SAT-verification (Li 2026, Lemma
-  `lem:gstartree` and §6.1).  Four SAT instances over $4 \cdot 80
+  `lem:gstartree` and §6.1). Four SAT instances over $4 \cdot 80
   = 320$ Boolean variables, each verified UNSAT by CaDiCaL 1.5.3
   in under one second per color, with DRAT-certifiable proofs and
   a MUS lower bound of $947$ of $1729$ candidate Rado triples
@@ -119,10 +119,10 @@ lemma Gstar_mem_iff {p : ℕ × ℕ} :
 /-! ### Theorem `thm:k4b3`. -/
 
 /--
-  **Theorem `thm:k4b3`.**  $R_4(3) = 81$.
+  **Theorem `thm:k4b3`.** $R_4(3) = 81$.
 
   Lower bound: from `thm_lower` at $b = 3, k = 4$ (note
-  $3^4 = 81$).  Upper bound: proof by contradiction via
+  $3^4 = 81$). Upper bound: proof by contradiction via
   self-loop step and `lem_gstartree`.
 
   Self-loop step: $81 + 3 · 54 = 243 = 3 · 81$, so the triple

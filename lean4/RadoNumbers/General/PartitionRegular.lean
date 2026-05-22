@@ -20,8 +20,8 @@ import Mathlib.Tactic.NormNum
 namespace RadoNumbers.General
 
 /--
-  **Linear equation over ℤ**: list of integer coefficients (a_1, ..., a_n).
-  Represents equation a_1 · x_1 + a_2 · x_2 + ... + a_n · x_n = 0.
+  **Linear equation over ℤ**: list of integer coefficients (a_1,..., a_n).
+  Represents equation a_1 · x_1 + a_2 · x_2 +... + a_n · x_n = 0.
 
   Example: Schur's equation x + y - z = 0 has coefficients [1, 1, -1].
   Example: Our equation x + 3y - 3z = 0 has coefficients [1, 3, -3].

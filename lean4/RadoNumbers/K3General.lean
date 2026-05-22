@@ -1,15 +1,15 @@
 /-
   RadoNumbers/K3General.lean
 
-  Round 1 (2026-05-15) of the threshold-conjecture matching-direction
+  Round 1 of the threshold-conjecture matching-direction
   attack: generalize the Color Compression Lemma from $k = 2$
   (paper Lemma `lem:compress2`) to $k = 3$ general $b \ge 3$.
 
-  **Paper context.**  Paper §"Color Compression Thresholds" identifies
+  **Paper context.** Paper §"Color Compression Thresholds" identifies
   the exact threshold $n = 2b^2$ at which the $k = 3$ compression
   property (multiples of $b$ use at most 2 colors) first holds for
-  $b \ge 4$, SAT-verified for $b \in \{4, \ldots, 10\}$.  An analytic
-  proof is open.  The cascade route to the matching direction
+  $b \ge 4$, SAT-verified for $b \in \{4, \ldots, 10\}$. An analytic
+  proof is open. The cascade route to the matching direction
   $R_k(b) \le b^k$ for $k \le 2(b-1)$ requires this analytic
   compression as Step 1.
 
@@ -17,16 +17,16 @@
 
   1. **Lemma 1.1 (`color_avoids_distance_of_multiple`)** —
      Formalization of paper Remark `rmk:distance`: if $\chi(b \cdot d)
-     = c$, then color class $C_c$ avoids distance $d$.  Reusable
+     = c$, then color class $C_c$ avoids distance $d$. Reusable
      analytic primitive for $k \ge 3$ analytic attacks.
 
   2. **Lemma 1.2 (`chi_succ_b_ne`)** — Neighbor-of-multiple
      constraint: if $\chi(b) = c$ and $b + 1 \le n$, then
-     $\chi(b+1) \ne c$.  Derived from Rado triple $(b, b, b+1)$.
+     $\chi(b+1) \ne c$. Derived from Rado triple $(b, b, b+1)$.
 
   3. **Lemma 1.3 (`chi_pred_b_ne`)** — Predecessor-of-
      multiple constraint: if $\chi(b) = c$ and $b - 1 \ge 1$, then
-     $\chi(b-1) \ne c$.  Derived from Rado triple $(b, b-1, b)$.
+     $\chi(b-1) \ne c$. Derived from Rado triple $(b, b-1, b)$.
 
   4. **Lemma 1.4 (predecessor-constraint chain)** — Two-step
      constraint chain when $\chi(b) \ne \chi(2b)$: if $\chi(b) = 0,
@@ -35,12 +35,12 @@
 
   5. **`lem_compress3_general`** — Statement of the full $k = 3$
      compression lemma at $n = b^3 - 1$ as a SAT-verified atom for
-     $b \in \{3, \ldots, 10\}$.  Round 1 did NOT close this
+     $b \in \{3, \ldots, 10\}$. Round 1 did NOT close this
      analytically; partial constraints proved above are the entry
      point for Round 2+ cascade attacks.
 
-  **Round 1 verdict**: NEEDS-MORE-WORK.  Real math accomplished
-  (Lemmas 1.1–1.4 are derived theorems, not axioms).  The compression
+  **Round 1 verdict**: NEEDS-MORE-WORK. Real math accomplished
+  (Lemmas 1.1–1.4 are derived theorems, not axioms). The compression
   lemma itself remains open; identified sub-targets for Round 2:
   (a) prove the "first-two-multiples-agree" pair lemma for general
   $b \ge 3$ (paper has it for $b = 3$ as `lem:k3b3pair`); (b)
@@ -59,11 +59,11 @@ namespace RadoNumbers
 /-! ### Lemma 1.1 — distance-d avoidance from a multiple. -/
 
 /--
-  **Lemma 1.1.**  If `χ(b·d) = c` in a coloring avoiding monochromatic
+  **Lemma 1.1.** If `χ(b·d) = c` in a coloring avoiding monochromatic
   Rado solutions on `{1, …, n}`, then the color class `C_c` cannot
   contain a pair `(y, y + d)` of elements both within range.
 
-  Formalization of paper Remark `rmk:distance`.  Reusable analytic
+  Formalization of paper Remark `rmk:distance`. Reusable analytic
   primitive for downstream compression / cascade attacks.
 -/
 theorem color_avoids_distance_of_multiple {b n d : ℕ} (hb : 2 ≤ b)
@@ -83,7 +83,7 @@ theorem color_avoids_distance_of_multiple {b n d : ℕ} (hb : 2 ≤ b)
 /-! ### Lemma 1.2 — neighbor-of-multiple constraint. -/
 
 /--
-  **Lemma 1.2.**  For `b ≥ 2`, valid coloring of `{1, …, n}`
+  **Lemma 1.2.** For `b ≥ 2`, valid coloring of `{1, …, n}`
   avoiding monochromatic solutions, with `b + 1 ≤ n`:
   `χ(b+1) ≠ χ(b)`.
 
@@ -104,7 +104,7 @@ theorem chi_succ_b_ne {b n : ℕ} (hb : 2 ≤ b) (hbn : b ≤ n) (hbn1 : b + 1 �
 /-! ### Lemma 1.3 — predecessor-of-multiple constraint. -/
 
 /--
-  **Lemma 1.3.**  For `b ≥ 2`, valid coloring of `{1, …, n}`
+  **Lemma 1.3.** For `b ≥ 2`, valid coloring of `{1, …, n}`
   avoiding monochromatic solutions, with `b ≤ n` and `b ≥ 2`:
   `χ(b - 1) ≠ χ(b)`.
 
@@ -133,7 +133,7 @@ theorem chi_pred_b_ne {b n : ℕ} (hb : 2 ≤ b) (hbn : b ≤ n)
 /-! ### Lemma 1.4 — two-step constraint when χ(b) ≠ χ(2b). -/
 
 /--
-  **Lemma 1.4 (Two-step compression seed).**  For `b ≥ 3` and any
+  **Lemma 1.4 (Two-step compression seed).** For `b ≥ 3` and any
   valid 3-coloring of `{1, …, n}` with `2b ≤ n` and the predecessor
   hypothesis `b - 1 ≥ 1` (automatic from `b ≥ 2`):
 
@@ -142,12 +142,12 @@ theorem chi_pred_b_ne {b n : ℕ} (hb : 2 ≤ b) (hbn : b ≤ n)
 
   This is the analog of paper `compress2` step "Thus, $\chi(b - 1)
   = 1$" — but for $k = 3$ we cannot collapse to `χ(b-1) = 1`; only
-  `χ(b-1) ≠ 0`.  The third color (`2`) is still possible at this
-  step.  Hence "compression seed" not "compression step".
+  `χ(b-1) ≠ 0`. The third color (`2`) is still possible at this
+  step. Hence "compression seed" not "compression step".
 
   The lemma is structurally important: it shows the third color must
   intrude at the predecessor position when the first two multiples
-  disagree.  Round 2 will track this third-color intrusion to derive
+  disagree. Round 2 will track this third-color intrusion to derive
   a contradiction.
 -/
 theorem chi_pred_ne_zero_of_b_disagree {b n : ℕ} (hb : 3 ≤ b) (hbn : 2 * b ≤ n)
@@ -158,7 +158,7 @@ theorem chi_pred_ne_zero_of_b_disagree {b n : ℕ} (hb : 3 ≤ b) (hbn : 2 * b �
   rw [h_b_color] at h
   exact h
 
-/-! ### Round 2 (2026-05-15) — additional analytic structure. -/
+/-! ### additional analytic structure. -/
 
 /-- **Lemma 2.1 (Self-loop multiple constraint).**
 
@@ -166,12 +166,12 @@ theorem chi_pred_ne_zero_of_b_disagree {b n : ℕ} (hb : 3 ≤ b) (hbn : 2 * b �
   `b^2 ≤ n` and `(b-1)·b ≤ n`: `χ((b-1)·b) ≠ χ(b²)`.
 
   Proof: Rado triple `(b², (b-1)·b, b²)` satisfies `b² + b·(b-1)b
-  = b·b²`.  Mono would require `χ(b²) = χ((b-1)b) = χ(b²)` (first
+  = b·b²`. Mono would require `χ(b²) = χ((b-1)b) = χ(b²)` (first
   and last are `rfl`), so `χ((b-1)b) = χ(b²)` would give a mono
   solution.
 
   This generalizes paper's `thm:k4b3` self-loop step (paper uses
-  triple `(81, 54, 81)` for $b = 3, k = 4$).  Reusable across the
+  triple `(81, 54, 81)` for $b = 3, k = 4$). Reusable across the
   cascade attack — establishes structural disagreement between
   consecutive-multiple positions at the $b^2$ level. -/
 theorem chi_b_minus_one_b_ne_chi_b_sq {b n : ℕ} (hb : 2 ≤ b)
@@ -194,17 +194,17 @@ theorem chi_b_minus_one_b_ne_chi_b_sq {b n : ℕ} (hb : 2 ≤ b)
     _ = b ^ 2 * b := by rw [h]
     _ = b * b ^ 2 := by ring
 
-/-! ### Round 2 — paper `lem:k3b3pair` Step 1 analytic derivation
+/-! ### paper `lem:k3b3pair` Step 1 analytic derivation
     for $b = 3$.
 
   Paper's `lem:k3b3pair` proof Step 1: "We show $\chi(4) = 2$".
   Proof: $\chi(3) = 0$ + dist-1 avoidance → $\chi(4) \ne 0$;
   $\chi(6) = 1$ + dist-2 avoidance via triple $(6, 4, 6)$ →
-  $\chi(4) \ne 1$.  Hence $\chi(4) = 2$.
+  $\chi(4) \ne 1$. Hence $\chi(4) = 2$.
 
   We Lean-derive Step 1 explicitly, removing one analytic
   obligation from the larger SAT atom `lem_k3b3pair_sat` (which
-  bundles Steps 1+2+3).  Round 2 deliverable for the $b = 3$
+  bundles Steps 1+2+3). Round 2 deliverable for the $b = 3$
   specialised attack track. -/
 
 /-- Step 1 of paper `lem:k3b3pair`: under the disagreement
@@ -236,10 +236,10 @@ theorem lem_k3b3pair_step1 {n : ℕ} (hn : 6 ≤ n)
   have hlt : χ 4 < 3 := hValid 4 (by norm_num) (by linarith)
   omega
 
-/-! ### Round 3 (2026-05-15) — paper `lem:k3b3pair` Step 2 analytic. -/
+/-! ### paper `lem:k3b3pair` Step 2 analytic. -/
 
 /--
-  **Round 3 Lemma 3.1** — analytic Lean derivation of paper
+  **Lemma 3.1** — analytic Lean derivation of paper
   `lem:k3b3pair` Step 2: under $\chi(3) = 0, \chi(6) = 1$ in a
   valid 3-coloring of $\{1, \ldots, n\}$ with $n \ge 18$,
   $\chi(8) = 2$.
@@ -253,10 +253,10 @@ theorem lem_k3b3pair_step1 {n : ℕ} (hn : 6 ≤ n)
     - (c) $\chi(9) \ne \chi(12)$ via triple $(9, 9, 12)$.
     - (d) Hence $\{\chi(9), \chi(12)\} = \{1, 2\}$ (valid 3-coloring).
     - **Sub-case A** ($\chi(9) = 1$): pair $(6, 9)$ in $C_1$ at dist 3;
-      triple $(9, 6, 9)$ gives mono.  Contradiction.
+      triple $(9, 6, 9)$ gives mono. Contradiction.
     - **Sub-case B** ($\chi(9) = 2, \chi(12) = 1$): derive $\chi(7) = 1$
       ((e) $\chi(7) \ne 0$ via dist 1 to 8; (f) $\chi(7) \ne 2$ via
-      $\chi(4) = 2, \chi(9) = 2$ + triple $(9, 4, 7)$).  Then element
+      $\chi(4) = 2, \chi(9) = 2$ + triple $(9, 4, 7)$). Then element
       15 uncolorable:
       - $\chi(15) = 0$ + triple $(15, 3, 8)$ + $\chi(3) = \chi(8) = 0$
         → mono.
@@ -264,10 +264,10 @@ theorem lem_k3b3pair_step1 {n : ℕ} (hn : 6 ≤ n)
         → mono.
       - $\chi(15) = 2$ + triple $(15, 4, 9)$ + $\chi(4) = \chi(9) = 2$
         → mono.
-  * Hence $\chi(8) \ne 0$.  Combined with $\chi(8) \ne 1$: $\chi(8) = 2$.
+  * Hence $\chi(8) \ne 0$. Combined with $\chi(8) \ne 1$: $\chi(8) = 2$.
 
   **Significance**: removes the 2nd of 3 analytic obligations
-  bundled in Cat 2 SAT atom `lem_k3b3pair_sat`.  Step 3 (element
+  bundled in Cat 2 SAT atom `lem_k3b3pair_sat`. Step 3 (element
   18 uncolorable, 3 sub-cases SAT-verified by paper) remains
   SAT-bundled but now strictly smaller in scope.
 -/
@@ -314,13 +314,13 @@ theorem lem_k3b3pair_step2 {n : ℕ} (hn : 18 ≤ n)
     -- (d) χ(9), χ(12) ∈ {1, 2} and distinct
     have hχ9_eq : χ 9 = 1 ∨ χ 9 = 2 := by omega
     rcases hχ9_eq with hχ9_1 | hχ9_2
-    · -- Sub-case A: χ(9) = 1.  Triple (9, 6, 9): 9 + 3·6 = 27 = 3·9; mono.
+    · -- Sub-case A: χ(9) = 1. Triple (9, 6, 9): 9 + 3·6 = 27 = 3·9; mono.
       apply hAvoid
       refine ⟨9, 6, 9, by linarith, by linarith, by linarith, ?_, ?_, ?_⟩
       · refine ⟨by norm_num, by norm_num, by norm_num, ?_⟩; norm_num
       · rw [hχ9_1, h6]
       · rw [h6, hχ9_1]
-    · -- Sub-case B: χ(9) = 2.  Derive χ(12) = 1, χ(7) = 1, element 15 uncolorable.
+    · -- Sub-case B: χ(9) = 2. Derive χ(12) = 1, χ(7) = 1, element 15 uncolorable.
       have hχ12_eq : χ 12 = 1 := by omega
       -- (e) χ(7) ≠ 0 via triple (3, 7, 8): 3 + 3·7 = 24 = 3·8
       have hχ7_ne_0 : χ 7 ≠ 0 := by
@@ -365,11 +365,11 @@ theorem lem_k3b3pair_step2 {n : ℕ} (hn : 18 ≤ n)
   have hχ8_lt : χ 8 < 3 := hValid 8 (by norm_num) (by linarith)
   omega
 
-/-! ### Round 4 (2026-05-15) — conditional constraints toward
+/-! ### conditional constraints toward
     first-two-multiples-agree for general $b$. -/
 
 /--
-  **Round 4 Lemma 4.1.**  For $b \ge 3$, valid coloring of
+  **Lemma 4.1.** For $b \ge 3$, valid coloring of
   $\{1, \ldots, n\}$ ($n \ge 2b$) avoiding mono, with $\chi(2b) = 1$:
 
   If $\chi((b-1) \cdot b) = 1$, then $\chi(b + 1) \ne 1$.
@@ -382,7 +382,7 @@ theorem lem_k3b3pair_step2 {n : ℕ} (hn : 18 ≤ n)
   This is the natural generalisation of paper compress2's "$(b-1,
   b+m-1)$ pair at distance $m$ in $C_1$" closing move, but conditional
   on $\chi((b-1)b) = 1$ — a hypothesis not given a priori in the
-  first-two-multiples-disagree attack for general $b$.  Round 5+
+  first-two-multiples-disagree attack for general $b$. Round 5+
   must handle the case analysis on $\chi((b-1)b) \in \{0, 1, 2\}$.
 -/
 theorem chi_succ_b_ne_one_when_pred_b_multiple_one
@@ -407,10 +407,10 @@ theorem chi_succ_b_ne_one_when_pred_b_multiple_one
   · rw [hpredb, hContra]
   · rw [hContra, h2b]
 
-/-! ### Round 5 (2026-05-15) — branch analysis on χ((b-1)b). -/
+/-! ### branch analysis on χ((b-1)b). -/
 
 /--
-  **Round 5 Lemma 5.1** — branch $\chi((b-1)b) = 1$ determines
+  **Lemma 5.1** — branch $\chi((b-1)b) = 1$ determines
   $\chi(b+1) = 2$.
 
   For $b \ge 3$, valid 3-coloring of $\{1, \ldots, n\}$ with
@@ -445,7 +445,7 @@ theorem chi_succ_b_eq_two_branch_pred_one
   omega
 
 /--
-  **Round 5 Lemma 5.2** — branch $\chi((b-1)b) = 0$ derives
+  **Lemma 5.2** — branch $\chi((b-1)b) = 0$ derives
   $\chi(2b - 1) \ne 0$.
 
   For $b \ge 3$, valid coloring of $\{1, \ldots, n\}$ with
@@ -455,7 +455,7 @@ theorem chi_succ_b_eq_two_branch_pred_one
   $\chi(2b - 1) \ne 0$.
 
   Proof: $\chi((b-1)b) = 0$ forces $C_0$ to avoid distance $b - 1$.
-  Pair $(b, 2b - 1)$ at distance $b - 1$ with $\chi(b) = 0$.  If
+  Pair $(b, 2b - 1)$ at distance $b - 1$ with $\chi(b) = 0$. If
   $\chi(2b - 1) = 0$, pair $(b, 2b - 1)$ in $C_0$ at distance
   $b - 1$ → contradicts avoidance via Rado triple $((b-1)b, b, 2b-1)$.
 -/
@@ -476,7 +476,7 @@ theorem chi_2bm1_ne_zero_branch_pred_zero
   refine ⟨(b - 1) * b, b, 2 * b - 1, hn_bm1b, hb_le_n, hn_2bm1, ?_, ?_, ?_⟩
   · refine ⟨hbm1b_pos, hb_pos, by omega, ?_⟩
     -- (b-1)b + b·b = b·(2b-1)
-    -- LHS = b² - b + b² = 2b² - b.  RHS = 2b² - b. ✓
+    -- LHS = b² - b + b² = 2b² - b. RHS = 2b² - b. ✓
     calc (b - 1) * b + b * b
         = b * (b - 1) + b * b := by ring
       _ = b * ((b - 1) + b) := by ring
@@ -484,10 +484,10 @@ theorem chi_2bm1_ne_zero_branch_pred_zero
   · rw [hpredb, hb_color]
   · rw [hb_color, hContra]
 
-/-! ### Round 6 (2026-05-15) — branch $\chi((b-1)b) = 2$ analysis. -/
+/-! ### branch $\chi((b-1)b) = 2$ analysis. -/
 
 /--
-  **Round 6 Lemma 6.1** — conditional cascade in branch
+  **Lemma 6.1** — conditional cascade in branch
   $\chi((b-1)b) = 2$.
 
   For $b \ge 3$, valid coloring of $\{1, \ldots, n\}$ with
@@ -525,25 +525,25 @@ theorem chi_two_bminus_one_ne_two_branch_pred_two
   · rw [hpredb, hbm1]
   · rw [hbm1, hContra]
 
-/-! ### Round 7 (2026-05-15) — paper lem:k3b3pair Step 3 case
+/-! ### paper lem:k3b3pair Step 3 case
     $\chi(18) = 0$, partial cascade for $b = 3$ specific.
 
   After Steps 1-2 give $\chi(3)=0, \chi(4)=2, \chi(6)=1, \chi(8)=2$,
   Step 3 case $\chi(18) = 0$ propagates: self-loop $(18,12,18)$ forces
   $\chi(12) \ne 0$; $(12,8,12)$ forces $\chi(12) \ne 2$; hence
-  $\chi(12) = 1$.  Similar chain for $\chi(9) = 2$.  Element 15
+  $\chi(12) = 1$. Similar chain for $\chi(9) = 2$. Element 15
   then has $\chi(15) \in \{0,1,2\}$ with $\chi(15) = 2$ giving
-  immediate contradiction via $(15,4,9)$.  Sub-cases $\chi(15) \in
+  immediate contradiction via $(15,4,9)$. Sub-cases $\chi(15) \in
   \{0,1\}$ require deeper analysis (Rounds 8+). -/
 
-/-- **Round 7 Lemma 7.1.**  Case $\chi(18) = 0$ forces $\chi(12) = 1$. -/
+/-- **Lemma 7.1.** Case $\chi(18) = 0$ forces $\chi(12) = 1$. -/
 theorem chi_12_eq_one_case_18_zero {n : ℕ} (hn : 18 ≤ n)
     (χ : ℕ → ℕ) (hValid : IsValidColoring n 3 χ)
     (hAvoid : AvoidsMonoSolution 3 n χ)
     (h3 : χ 3 = 0) (h6 : χ 6 = 1) (h18 : χ 18 = 0) :
     χ 12 = 1 := by
   have h8 := lem_k3b3pair_step2 hn χ hValid hAvoid h3 h6
-  -- Self-loop (18, 12, 18): 18 + 3·12 = 54 = 3·18.  χ(12) ≠ χ(18) = 0.
+  -- Self-loop (18, 12, 18): 18 + 3·12 = 54 = 3·18. χ(12) ≠ χ(18) = 0.
   have h12_ne_0 : χ 12 ≠ 0 := by
     intro hContra
     apply hAvoid
@@ -551,7 +551,7 @@ theorem chi_12_eq_one_case_18_zero {n : ℕ} (hn : 18 ≤ n)
     · refine ⟨by norm_num, by norm_num, by norm_num, ?_⟩; norm_num
     · rw [h18, hContra]
     · rw [hContra, h18]
-  -- Triple (12, 8, 12): 12 + 3·8 = 36 = 3·12.  χ(12) ≠ χ(8) = 2.
+  -- Triple (12, 8, 12): 12 + 3·8 = 36 = 3·12. χ(12) ≠ χ(8) = 2.
   have h12_ne_2 : χ 12 ≠ 2 := by
     intro hContra
     apply hAvoid
@@ -562,7 +562,7 @@ theorem chi_12_eq_one_case_18_zero {n : ℕ} (hn : 18 ≤ n)
   have h12_lt : χ 12 < 3 := hValid 12 (by norm_num) (by linarith)
   omega
 
-/-- **Round 7 Lemma 7.2.**  Case $\chi(18) = 0$ forces $\chi(9) = 2$. -/
+/-- **Lemma 7.2.** Case $\chi(18) = 0$ forces $\chi(9) = 2$. -/
 theorem chi_9_eq_two_case_18_zero {n : ℕ} (hn : 18 ≤ n)
     (χ : ℕ → ℕ) (hValid : IsValidColoring n 3 χ)
     (hAvoid : AvoidsMonoSolution 3 n χ)
@@ -587,7 +587,7 @@ theorem chi_9_eq_two_case_18_zero {n : ℕ} (hn : 18 ≤ n)
   have h9_lt : χ 9 < 3 := hValid 9 (by norm_num) (by linarith)
   omega
 
-/-- **Round 7 Lemma 7.3.**  Case $\chi(18) = 0$ rules out $\chi(15) = 2$. -/
+/-- **Lemma 7.3.** Case $\chi(18) = 0$ rules out $\chi(15) = 2$. -/
 theorem chi_15_ne_two_case_18_zero {n : ℕ} (hn : 18 ≤ n)
     (χ : ℕ → ℕ) (hValid : IsValidColoring n 3 χ)
     (hAvoid : AvoidsMonoSolution 3 n χ)
@@ -603,7 +603,7 @@ theorem chi_15_ne_two_case_18_zero {n : ℕ} (hn : 18 ≤ n)
   · rw [hContra, h4]
   · rw [h4, h9]
 
-/-! ### Round 8 (2026-05-15) — synthesis of cascade state.
+/-! ### synthesis of cascade state.
 
   **Goal of cascade attack (Rounds 1-7)**: prove the generalisation
   of paper `lem:k3b3pair` to all $b \ge 3$:
@@ -612,7 +612,7 @@ theorem chi_15_ne_two_case_18_zero {n : ℕ} (hn : 18 ≤ n)
   > avoiding mono Rado solutions has $\chi(b) = \chi(2b)$.
 
   Paper SAT-verifies for $b \in \{3, \ldots, 8\}$ at the threshold
-  $n = (b-1)b^2$.  Cascade attack progress:
+  $n = (b-1)b^2$. Cascade attack progress:
 
   | Round | Asset | Conditional on |
   |-------|-------|----------------|
@@ -637,21 +637,21 @@ theorem chi_15_ne_two_case_18_zero {n : ℕ} (hn : 18 ≤ n)
   the cascade attack.
 -/
 
-/-! ### Round 19 (2026-05-15) — unified k=3 compression atom +
+/-! ### unified k=3 compression atom +
     general-b cascade closure.
 
   Rounds 1-8 stated TWO Cat 3 paper-novel "working assumption"
   axioms — `lem_compress3` (full compression to ≤ 2 colors) and
   `lem_first_two_agree_k3_general` (weaker pair-agreement) — as
-  cascade-attack targets.  Neither was consumed by any Lean
+  cascade-attack targets. Neither was consumed by any Lean
   theorem (Pattern 7 phantom).
 
   Round 19 replaces both with a SINGLE honest Cat 2 SAT-verified
   atom `lem_compress3_general`, stated in the exact form consumed
-  by `cascade_step` (Round 12).  Paper §"Color Compression
+  by `cascade_step`. Paper §"Color Compression
   Thresholds" SAT-verifies the compression property for
   $b \in \{4, \ldots, 10\}$; we encode it as the cascade
-  Compression hypothesis.  This makes the atom NON-PHANTOM and
+  Compression hypothesis. This makes the atom NON-PHANTOM and
   yields the general-$b$ result `thm_k3_general` below. -/
 
 /--
@@ -668,17 +668,17 @@ theorem chi_15_ne_two_case_18_zero {n : ℕ} (hn : 18 ≤ n)
   Thresholds"; the compression property "multiples of $b$ use at
   most 2 colors" SAT-verified for $b \in \{3, \ldots, 10\}$ —
   $b = 3$ via the `thm:k3b3` proof, $b \in \{4, \ldots, 10\}$ at
-  threshold $n = 2b^2 \le b^3$).  Stated in the exact
+  threshold $n = 2b^2 \le b^3$). Stated in the exact
   `∃ c₀ < 3, ∀ d ∈ [1, b²], χ(b·d) ≠ c₀` form consumed by
   `cascade_step`.
 
-  *Phase 4 audit note (Round 20):* the upper bound `b ≤ 10` is a
+  *Phase 4 audit note:* the upper bound `b ≤ 10` is a
   Phase-4 correction of Round 19's over-claim — paper SAT-verifies
   only $b \le 10$; extending to $b \ge 11$ would rely on the
   (open) threshold conjecture, risking unsoundness, so the atom is
   restricted to the genuinely SAT-verified range.
 
-  *Status:* `gapOpen` Cat 2 SAT-verified.  Replaces the former
+  *Status:* `gapOpen` Cat 2 SAT-verified. Replaces the former
   phantom Cat 3 `lem_compress3` / `lem_first_two_agree_k3_general`.
 -/
 axiom lem_compress3_general (b : ℕ) (hb : 3 ≤ b) (hb10 : b ≤ 10)
@@ -700,7 +700,7 @@ axiom lem_compress3_general (b : ℕ) (hb : 3 ≤ b) (hb10 : b ≤ 10)
   SAT-verified Theorem `thm:sat` rows ($R_3(b) = b^3$ for
   $b \in \{3, \ldots, 10\}$) through ONE clean cascade reduction
   to a single compression atom — rather than the paper's per-$b$
-  Distance-Pair-Lemma SAT table.  (Round 20 Phase-4 audit
+  Distance-Pair-Lemma SAT table. (Round 20 Phase-4 audit
   restricts the range to $b \le 10$, the genuinely SAT-verified
   span; $b \ge 11$ would need the open threshold conjecture.)
 -/
@@ -715,17 +715,17 @@ theorem thm_k3_general (b : ℕ) (hb : 3 ≤ b) (hb10 : b ≤ 10) :
     exact cascade_step b 3 (by linarith) (by norm_num) hInd
       (lem_compress3_general b hb hb10)
 
-/-! ### Round 21 (2026-05-15) — DPL at $k = 2$, ANALYTICALLY PROVEN.
+/-! ### DPL at $k = 2$, ANALYTICALLY PROVEN.
 
   The Distance Pair Property at $k = 2$ — `DistancePairProperty
   b 2` — is the $k = 2$ instance of paper's SAT-verified Lemma
-  `lem:keypair`.  Round 21 proves it ANALYTICALLY for all
+  `lem:keypair`. Round 21 proves it ANALYTICALLY for all
   $b \ge 3$, from the now-proven `lem_compress2`: a clean
   structural bridge from Color Compression to the DPL mechanism
   that paper identifies as the sharp threshold characterization. -/
 
 /--
-  **Round 21 Theorem — `DistancePairProperty b 2` for $b \ge 3$.**
+  **Theorem — `DistancePairProperty b 2` for $b \ge 3$.**
 
   In any valid 2-coloring of $\{1, \ldots, b^2 - 1\}$ avoiding
   monochromatic solutions, EVERY color class contains a pair at
@@ -740,7 +740,7 @@ theorem thm_k3_general (b : ℕ) (hb : 3 ≤ b) (hb10 : b ≤ 10) :
     — each is at distance $b - 1$ from a $c_0$-colored multiple
     ($b$ resp. $2b$), and `color_avoids_distance_of_multiple`
     applied at $\chi(b(b-1)) = c_0$ (distance $b-1$) rules out
-    both being $c_0$.  In a 2-coloring, $\chi(1) = \chi(b+1) =
+    both being $c_0$. In a 2-coloring, $\chi(1) = \chi(b+1) =
     1 - c_0$, so $(1, b+1)$ is the required pair.
 
   This is the $k = 2$ instance of paper Lemma `lem:keypair`, here
@@ -792,7 +792,7 @@ theorem dpl_property_k2 (b : ℕ) (hb : 3 ≤ b) :
   have hpow : b ^ (2 - 1) = b := by norm_num
   -- Case split on the requested color `c`.
   by_cases hcc : c = c0
-  · -- Color c0: pair (b, 2b).  j = b, j + b^(2-1) = b + b = 2b.
+  · -- Color c0: pair (b, 2b). j = b, j + b^(2-1) = b + b = 2b.
     refine ⟨b, by omega, ?_, ?_, ?_⟩
     · -- b + b^(2-1) ≤ b^2 - 1
       rw [hpow]; omega
@@ -801,10 +801,10 @@ theorem dpl_property_k2 (b : ℕ) (hb : 3 ≤ b) :
     · -- χ(b + b^(2-1)) = c
       rw [hpow, show b + b = b * 2 from by ring]
       exact hχ2b.trans hcc.symm
-  · -- Color 1 - c0: pair (1, 1+b).  j = 1, j + b^(2-1) = 1 + b.
+  · -- Color 1 - c0: pair (1, 1+b). j = 1, j + b^(2-1) = 1 + b.
     refine ⟨1, by norm_num, ?_, ?_, ?_⟩
     · rw [hpow]; omega
-    · -- χ 1 = c.  c ≠ c0, c < 2, c0 < 2, χ 1 < 2, χ 1 ≠ c0 ⟹ χ 1 = c.
+    · -- χ 1 = c. c ≠ c0, c < 2, c0 < 2, χ 1 < 2, χ 1 ≠ c0 ⟹ χ 1 = c.
       have hχ1_val : χ 1 = 1 - c0 := by omega
       have hc_val : c = 1 - c0 := by omega
       omega
@@ -820,15 +820,14 @@ theorem dpl_property_k2 (b : ℕ) (hb : 3 ≤ b) :
   **Round 22 — alternative DPL-route proof of the $R_2(b) = b^2$
   upper bound.**
 
-  Composes `dpl_property_k2` (Round 21) with `dpl_implies_rado_upper`
-  (Round 10): a fully kernel-pure derivation of
+  Composes `dpl_property_k2` with `dpl_implies_rado_upper`: a fully kernel-pure derivation of
   `RadoNumberAtMost b 2 (b^2)` for $b \ge 3$, routed through the
   Distance Pair Lemma rather than the direct Color-Compression
   case analysis of `thm_k2_upper_ge_3` (`K2.lean`).
 
   Two independent kernel-pure proofs of the $R_2(b) = b^2$ upper
   bound now exist: the direct compress2 case analysis, and this
-  DPL route.  The DPL route is the structurally cleaner one — it
+  DPL route. The DPL route is the structurally cleaner one — it
   is the $k = 2$ instance of the paper's identified sharp
   mechanism, and it exercises the abstract `dpl_implies_rado_upper`
   reduction.
@@ -838,28 +837,28 @@ theorem thm_k2_via_dpl (b : ℕ) (hb : 3 ≤ b) :
   dpl_implies_rado_upper b 2 (by linarith) (by norm_num)
     (dpl_property_k2 b hb)
 
-/-! ### Round 54 (2026-05-15) — `lem_keypair_sat`'s $k = 2$ case
+/-! ### `lem_keypair_sat`'s $k = 2$ case
     analytically, NO SAT.
 
   Direct response to the question: "does mathematical proof
-  necessarily need SAT?"  Answer: **no**.  The $k = 2$ instance
+  necessarily need SAT?" Answer: **no**. The $k = 2$ instance
   of the paper's SAT-verified `lem_keypair_sat` is provable
   analytically from `lem_compress2` (the Color Compression Lemma,
-  kernel-pure since Round 14).
+  kernel-pure).
 
   Round 54 produces `lem_keypair_at_k2`, the EXACT body of
-  `lem_keypair_sat b 2 ...` proved without any SAT atom.  Same
+  `lem_keypair_sat b 2...` proved without any SAT atom. Same
   conclusion (including the tighter $j \le b^{k-1}$ bound that
   `lem_keypair_sat` carries, not just `j + b^{k-1} \le b^k - 1`
   which `dpl_property_k2` gives).
 
   Witnesses: $j = b$ for color $c_0 = \chi(b)$ (pair $(b, 2b)$),
-  $j = 1$ for color $1 - c_0$ (pair $(1, 1+b)$).  Both $\le b$.
+  $j = 1$ for color $1 - c_0$ (pair $(1, 1+b)$). Both $\le b$.
 
   This is a concrete demonstration that SAT is a *tool* for the
   paper's $k \ge 3$ cases — at $k = 2$, an analytic proof is
   available and is essentially what Round 21's `dpl_property_k2`
-  already does.  The paper itself uses the analytic
+  already does. The paper itself uses the analytic
   `lem_compress2` for $k = 2$; only $k = 3, 4$ rely on SAT
   verification.
 
@@ -869,7 +868,7 @@ theorem thm_k2_via_dpl (b : ℕ) (hb : 3 ≤ b) :
   the mathematics. -/
 
 /--
-  **Round 54 Theorem (`lem_keypair_at_k2`, analytic).**
+  **Theorem (`lem_keypair_at_k2`, analytic).**
 
   For $b \ge 3$: every valid mono-free 2-coloring of
   $\{1, \ldots, b^2 - 1\}$ satisfies the paper's
@@ -879,7 +878,7 @@ theorem thm_k2_via_dpl (b : ℕ) (hb : 3 ≤ b) :
 
   Proof: structural argument from `lem_compress2`.
   `lem_compress2` forces every multiple $b \cdot i$ ($1 \le i \le
-  b-1$) to share color $c_0 := \chi(b)$.  Then:
+  b-1$) to share color $c_0 := \chi(b)$. Then:
   * Color $c_0$: $(b, 2b)$ — pair of multiples.
   * Color $1 - c_0$: $(1, 1+b)$ — by distance-$(b-1)$ avoidance
     forced by $\chi(b(b-1)) = c_0$.
@@ -887,8 +886,7 @@ theorem thm_k2_via_dpl (b : ℕ) (hb : 3 ≤ b) :
   Both witnesses satisfy $j \le b$ as `lem_keypair_sat` requires.
 
   **Significance**: explicitly demonstrates that `lem_keypair_sat`
-  at $k = 2$ does NOT need SAT — `lem_compress2` (analytic since
-  Round 14) suffices.  Removes SAT dependence from the $k = 2$
+  at $k = 2$ does NOT need SAT — `lem_compress2` (analytic) suffices. Removes SAT dependence from the $k = 2$
   case.
 -/
 theorem lem_keypair_at_k2 (b : ℕ) (hb : 3 ≤ b)
@@ -952,12 +950,12 @@ theorem lem_keypair_at_k2 (b : ℕ) (hb : 3 ≤ b)
       rw [h1b]
       omega
 
-/-! ### Round 55 (2026-05-15) — toward analytic CompressionHyp at
-    k = 3.  Sidon-like constraint on multiple-color index sets.
+/-! ### toward analytic CompressionHyp at
+    k = 3. Sidon-like constraint on multiple-color index sets.
 
-  Genuine attempt at the conjecture's universal content.  For
+  Genuine attempt at the conjecture's universal content. For
   every color $c$, define $A_c := \{d \in [1, n/b] : \chi(bd) = c\}$
-  — the indices whose multiples are colored $c$.  The mono-free
+  — the indices whose multiples are colored $c$. The mono-free
   Rado structure forces $A_c$ to satisfy a **Sidon-like constraint**:
   no $d_1 < d_2 \in A_c$ with $b(d_2 - d_1) \in A_c$.
 
@@ -968,14 +966,14 @@ theorem lem_keypair_at_k2 (b : ℕ) (hb : 3 ≤ b)
   mono-freeness.
 
   **Significance**: a clean structural constraint on every
-  color's multiple-index set.  Together with bounded $|A_c|$ and
+  color's multiple-index set. Together with bounded $|A_c|$ and
   the pigeonhole $\sum |A_c| = $ number of multiples, this is the
   combinatorial foundation for an analytic attack on the
   CompressionHyp universal — toward closing the threshold
   conjecture's matching direction without SAT. -/
 
 /--
-  **Round 55 Theorem (Sidon-like constraint on multiple-color
+  **Theorem (Sidon-like constraint on multiple-color
   indices).**
 
   For $b \ge 2$, $\chi$ a valid mono-free coloring of $\{1, \ldots,
@@ -992,7 +990,7 @@ theorem lem_keypair_at_k2 (b : ℕ) (hb : 3 ≤ b)
 
   **Significance**: structural constraint on every color's
   multiple-index set $A_c$ — no element of $A_c$ is $b$ times an
-  inner difference of $A_c$.  Combined with size bounds and
+  inner difference of $A_c$. Combined with size bounds and
   pigeonhole, the foundation for analytic CompressionHyp attacks.
 -/
 theorem multiples_color_no_self_distance {b n : ℕ} (hb : 2 ≤ b)
@@ -1028,9 +1026,9 @@ theorem multiples_color_no_self_distance {b n : ℕ} (hb : 2 ≤ b)
   · exact hχd1.trans hχd2.symm
 
 /--
-  **Round 56 Theorem (distance-m exclusion from $\chi(b^2 m)$).**
+  **Theorem (distance-m exclusion from $\chi(b^2 m)$).**
 
-  Direct corollary of Round 55.  For $b \ge 2$, any $m \ge 1$
+  Direct corollary of Round 55. For $b \ge 2$, any $m \ge 1$
   with $b \cdot (b m) \le n$: if $\chi(b \cdot (b m)) = c$, then
   there are no two indices $d_1, d_1 + m$ both in $A_c$.
 
@@ -1065,7 +1063,7 @@ theorem multiples_color_no_dist_m_of_b_sq_m {b n m : ℕ} (hb : 2 ≤ b)
   omega
 
 /--
-  **Round 56 Corollary 1** (no-consec for $b = 3, k = 3$).
+  **Corollary 1** (no-consec for $b = 3, k = 3$).
 
   In a valid mono-free 3-coloring of $\{1, \ldots, 26\}$ (or
   larger), if $\chi(9) = c$, then $A_c$ has no two consecutive
@@ -1085,7 +1083,7 @@ theorem A_c_no_consec_at_b3_k3 {n : ℕ} (hn : 9 ≤ n)
   exact hχ9
 
 /--
-  **Round 56 Corollary 2** (no-dist-2 for $b = 3, k = 3$).
+  **Corollary 2** (no-dist-2 for $b = 3, k = 3$).
 
   In a valid mono-free 3-coloring of $\{1, \ldots, 26\}$ (or
   larger), if $\chi(18) = c$, then $A_c$ has no two indices at
@@ -1103,11 +1101,11 @@ theorem A_c_no_dist_2_at_b3_k3 {n : ℕ} (hn : 18 ≤ n)
   show χ 18 = c
   exact hχ18
 
-/-! ### Round 57 (2026-05-15) — combinatorial infeasibility: 5-AP
+/-! ### combinatorial infeasibility: 5-AP
     partition.
 
   Pure combinatorial lemma underlying the CompressionHyp 3 3
-  analytic attack.  Given 5 positions in arithmetic progression
+  analytic attack. Given 5 positions in arithmetic progression
   (positions $a, a+d, a+2d, a+3d, a+4d$) and a 2-coloring with
   colors $c_1, c_2$ subject to:
 
@@ -1126,21 +1124,21 @@ theorem A_c_no_dist_2_at_b3_k3 {n : ℕ} (hn : 18 ≤ n)
     AP-distance-2 from position 2). Then positions 1 and 3 must
     be $c_2$ (no consec with $c_1$ neighbors). Same contradiction.
 
-  **Significance**: combinatorial workhorse.  When applied to the
+  **Significance**: combinatorial workhorse. When applied to the
   9-element AP in class mod-3 = 1 of $\{1, \ldots, 26\}$ (positions
   $1, 4, 7, 10, 13, 16, 19, 22, 25$), with $c_1 = C_1$ and $c_2 =
   C_2$ avoidance constraints, no 5 consecutive positions can be
-  partitioned.  Hence the 6+1+1 distribution in CompressionHyp 3 3
+  partitioned. Hence the 6+1+1 distribution in CompressionHyp 3 3
   is **infeasible** — a key step toward analytic closure. -/
 
 /--
-  **Round 57 Theorem (5-AP partition infeasibility).**
+  **Theorem (5-AP partition infeasibility).**
 
   No coloring of 5 positions in arithmetic progression
   $a, a+d, a+2d, a+3d, a+4d$ into $\{c_1, c_2\}$ satisfies BOTH
   "no consecutive $c_1$" AND "no AP-distance-2 $c_2$."
 
-  Combinatorial lemma; no Rado structure assumed.  All 12
+  Combinatorial lemma; no Rado structure assumed. All 12
   hypotheses are explicit (5 color assignments + 4 no-consec + 3
   no-dist-2).
 -/
@@ -1159,13 +1157,13 @@ theorem AP5_no_partition (χ : ℕ → ℕ) {c1 c2 : ℕ} {a d : ℕ}
     (h_nd24 : ¬(χ (a + 2 * d) = c2 ∧ χ (a + 4 * d) = c2)) :
     False := by
   rcases h_a2 with h2 | h2
-  · -- χ(a + 2d) = c1.  Positions 1, 3 forced to c2.
+  · -- χ(a + 2d) = c1. Positions 1, 3 forced to c2.
     have h1 : χ (a + d) = c2 :=
       h_a1.resolve_left (fun h => h_nc12 ⟨h, h2⟩)
     have h3 : χ (a + 3 * d) = c2 :=
       h_a3.resolve_left (fun h => h_nc23 ⟨h2, h⟩)
     exact h_nd13 ⟨h1, h3⟩
-  · -- χ(a + 2d) = c2.  Positions 0, 4 forced to c1; then 1, 3 forced to c2.
+  · -- χ(a + 2d) = c2. Positions 0, 4 forced to c1; then 1, 3 forced to c2.
     have h0 : χ a = c1 :=
       h_a0.resolve_right (fun h => h_nd02 ⟨h, h2⟩)
     have h4 : χ (a + 4 * d) = c1 :=
@@ -1176,11 +1174,11 @@ theorem AP5_no_partition (χ : ℕ → ℕ) {c1 c2 : ℕ} {a d : ℕ}
       h_a3.resolve_left (fun h => h_nc34 ⟨h, h4⟩)
     exact h_nd13 ⟨h1, h3⟩
 
-/-! ### Round 58 (2026-05-15) — AP5 + Rado avoidance contradiction
+/-! ### AP5 + Rado avoidance contradiction
     for $b = 3$.
 
   Connect the combinatorial Round 57 to the Rado-mono-free
-  structure.  In a valid mono-free 3-coloring with $\chi(9) = c_1$
+  structure. In a valid mono-free 3-coloring with $\chi(9) = c_1$
   and $\chi(18) = c_2$:
   * $C_{c_1}$ avoids distance 3 (`color_avoids_distance_of_multiple`
     at $d = 3$, multiple $b \cdot d = 9$).
@@ -1196,21 +1194,21 @@ theorem AP5_no_partition (χ : ℕ → ℕ) {c1 c2 : ℕ} {a d : ℕ}
   Apply `AP5_no_partition`: contradiction. -/
 
 /--
-  **Round 58 Theorem (AP5 + b=3 Rado avoidance).**
+  **Theorem (AP5 + b=3 Rado avoidance).**
 
   In a valid mono-free 3-coloring of $\{1, \ldots, n\}$ (with $n
   \ge 18 + a$ where $a$ is the AP start), if $\chi(9) = c_1$,
   $\chi(18) = c_2$, and the 5 positions $a, a+3, a+6, a+9, a+12$
   are all colored in $\{c_1, c_2\}$, then **False**.
 
-  Composes `AP5_no_partition` (Round 57) with the Rado-avoidance
+  Composes `AP5_no_partition` with the Rado-avoidance
   constraints from `color_avoids_distance_of_multiple` at distances
   3 and 6.
 
   **Significance**: when the 6+1+1 distribution forces all 9
   elements of mod-3 class 1 in $\{1, \ldots, 26\}$ into $C_{c_1}
   \cup C_{c_2}$, applying this lemma to 5 of them gives
-  contradiction.  Drives the analytic infeasibility of the 6+1+1
+  contradiction. Drives the analytic infeasibility of the 6+1+1
   distribution toward CompressionHyp 3 3.
 -/
 theorem AP5_avoidance_contradiction {n : ℕ}
@@ -1248,7 +1246,7 @@ theorem AP5_avoidance_contradiction {n : ℕ}
     (h_nd (a + 3) (by omega) (by omega))
     (h_nd (a + 6) (by omega) (by omega))
 
-/-! ### Round 59 (2026-05-15) — CompressionHyp 3 3 at the 6+1+1
+/-! ### CompressionHyp 3 3 at the 6+1+1
     distribution: analytic infeasibility.
 
   In CompressionHyp 3 3 setting (valid mono-free 3-coloring of
@@ -1265,15 +1263,15 @@ theorem AP5_avoidance_contradiction {n : ℕ}
      forbidden distance ($1, 2, 4, 5, 7, 8$) from some color-0
      multiple.
   2. Hence each $\chi(x) \in \{1, 2\}$ (valid 3-coloring).
-  3. Apply `AP5_avoidance_contradiction` (Round 58): False.
+  3. Apply `AP5_avoidance_contradiction`: False.
 
   This is the first major case of CompressionHyp 3 3 closed
-  analytically.  Remaining cases (5+2+1, 4+3+1, 4+2+2, 3+3+2
+  analytically. Remaining cases (5+2+1, 4+3+1, 4+2+2, 3+3+2
   distributions) follow by similar — but distinct — combinatorial
   arguments. -/
 
 /--
-  **Round 59 Theorem (6+1+1 distribution infeasible in
+  **Theorem (6+1+1 distribution infeasible in
   CompressionHyp 3 3).**
 
   Given $n \ge 26$ and a valid mono-free 3-coloring of $\{1,
@@ -1284,11 +1282,11 @@ theorem AP5_avoidance_contradiction {n : ℕ}
   Proof: five specific elements $\{1, 4, 7, 10, 13\}$ in AP step
   3 of mod-3 class 1 are each forced to $\chi \ne 0$ (each is at
   one of the avoided distances $1, 2$ from a $C_0$ multiple).
-  Then $\chi \in \{1, 2\}$ for each (valid 3-coloring).  Apply
+  Then $\chi \in \{1, 2\}$ for each (valid 3-coloring). Apply
   Round 58.
 
   **Significance**: first major case of the universal
-  CompressionHyp 3 3 closed analytically without SAT.  Demonstrates
+  CompressionHyp 3 3 closed analytically without SAT. Demonstrates
   the Round 55-58 toolkit works concretely.
 -/
 theorem compression_3_3_6_1_1_distribution_infeasible {n : ℕ} (hn : 26 ≤ n)
@@ -1339,10 +1337,10 @@ theorem compression_3_3_6_1_1_distribution_infeasible {n : ℕ} (hn : 26 ≤ n)
     h_a0 h_a1 h_a2 h_a3 h_a4 hχ9 hχ18
 
 /--
-  **Round 60 Theorem (generalized CompressionHyp 3 3 closure under
+  **Theorem (generalized CompressionHyp 3 3 closure under
   $\chi(3) = \chi(6) = \chi(12) = 0$).**
 
-  Generalizes Round 59.  Drops the unused $\chi(15), \chi(21),
+  Generalizes Round 59. Drops the unused $\chi(15), \chi(21),
   \chi(24)$ hypotheses, and parameterizes $\chi(9), \chi(18)$ to
   "distinct nonzero" rather than fixed at $1, 2$.
 
@@ -1400,11 +1398,11 @@ theorem compression_3_3_with_3_6_12_color_0_infeasible {n : ℕ} (hn : 26 ≤ n)
   exact AP5_avoidance_contradiction χ hAvoid (a := 1) (c1 := χ 9) (c2 := χ 18)
     (by norm_num) (by omega) (by omega) h_a0 h_a1 h_a2 h_a3 h_a4 rfl rfl
 
-/-! ### Round 61 (2026-05-15) — reusable 5-AP infeasibility given
+/-! ### reusable 5-AP infeasibility given
     $\chi \ne 0$ at the AP positions.
 
   Factor out the application of Round 58 with the standard 5-AP
-  $\{1, 4, 7, 10, 13\}$.  Given just that all 5 AP positions and
+  $\{1, 4, 7, 10, 13\}$. Given just that all 5 AP positions and
   $\chi(9), \chi(18)$ are non-zero (with $\chi(9) \ne \chi(18)$):
   contradiction.
 
@@ -1412,7 +1410,7 @@ theorem compression_3_3_with_3_6_12_color_0_infeasible {n : ℕ} (hn : 26 ≤ n)
   from specific A_0 configurations, then call this lemma. -/
 
 /--
-  **Round 61 Theorem (5-AP {1,4,7,10,13} infeasibility).**
+  **Theorem (5-AP {1,4,7,10,13} infeasibility).**
 
   Given $n \ge 26$, a valid mono-free 3-coloring of $\{1, \ldots,
   n\}$, plus $\chi(x) \ne 0$ for $x \in \{1, 4, 7, 10, 13, 9,
@@ -1420,7 +1418,7 @@ theorem compression_3_3_with_3_6_12_color_0_infeasible {n : ℕ} (hn : 26 ≤ n)
 
   Proof: each $\chi(x) \in \{1, 2\}$ (valid + nonzero), and
   $\{\chi(9), \chi(18)\} = \{1, 2\}$ (distinct nonzero in $\{1, 2\}$),
-  so each $\chi(x) \in \{\chi(9), \chi(18)\}$.  Apply Round 58.
+  so each $\chi(x) \in \{\chi(9), \chi(18)\}$. Apply Round 58.
 -/
 theorem compression_3_3_AP_1_4_7_10_13_infeasible {n : ℕ} (hn : 26 ≤ n)
     (χ : ℕ → ℕ) (hValid : IsValidColoring n 3 χ)
@@ -1444,16 +1442,16 @@ theorem compression_3_3_AP_1_4_7_10_13_infeasible {n : ℕ} (hn : 26 ≤ n)
   exact AP5_avoidance_contradiction χ hAvoid (a := 1) (c1 := χ 9) (c2 := χ 18)
     (by norm_num) (by omega) (by omega) h_a0 h_a1 h_a2 h_a3 h_a4 rfl rfl
 
-/-! ### Round 62 (2026-05-15) — second distribution class
+/-! ### second distribution class
     ($A_0 \supseteq \{1, 2, 5\}$).
 
   Covers the 5+2+1 sub-case $A_0 = \{1, 2, 5, 7, 8\}$ (which
-  Round 60 misses since $4 \notin A_0$).  Uses different
+  Round 60 misses since $4 \notin A_0$). Uses different
   witnesses for $\chi(10) \ne 0$ and $\chi(13) \ne 0$ via $\chi(15)
   = 0$ (= $5 \in A_0$) instead of $\chi(12) = 0$. -/
 
 /--
-  **Round 62 Theorem ($A_0 \supseteq \{1, 2, 5\}$ case).**
+  **Theorem ($A_0 \supseteq \{1, 2, 5\}$ case).**
 
   Under $\chi(3) = \chi(6) = \chi(15) = 0$ and $\chi(9), \chi(18)$
   distinct nonzero: False.
@@ -1477,26 +1475,26 @@ theorem compression_3_3_with_3_6_15_color_0_infeasible {n : ℕ} (hn : 26 ≤ n)
   have h_chi_7_ne : χ 7 ≠ 0 := fun h =>
     c0_avoid 1 (by omega) (by omega) hχ3 6 (by norm_num) (by omega) hχ6 h
   -- DIFFERENT from Round 60: uses 15 as the witness multiple.
-  -- χ(10): pair (10, 15) at distance 5.  3·5 = 15, χ(15) = 0.
+  -- χ(10): pair (10, 15) at distance 5. 3·5 = 15, χ(15) = 0.
   have h_chi_10_ne : χ 10 ≠ 0 := fun h =>
     c0_avoid 5 (by omega) (by omega) hχ15 10 (by norm_num) (by omega) h hχ15
-  -- χ(13): pair (13, 15) at distance 2.  3·2 = 6, χ(6) = 0.
+  -- χ(13): pair (13, 15) at distance 2. 3·2 = 6, χ(6) = 0.
   have h_chi_13_ne : χ 13 ≠ 0 := fun h =>
     c0_avoid 2 (by omega) (by omega) hχ6 13 (by norm_num) (by omega) h hχ15
   exact compression_3_3_AP_1_4_7_10_13_infeasible hn χ hValid hAvoid
     h_chi_1_ne h_chi_4_ne h_chi_7_ne h_chi_10_ne h_chi_13_ne
     hχ9_ne hχ18_ne hχ9_18_ne
 
-/-! ### Round 63 (2026-05-15) — generalized 5-AP infeasibility for
+/-! ### generalized 5-AP infeasibility for
     any starting position $a$.
 
   Generalizes Round 61 (specific to $a = 1$) to ANY $a$ with $a +
-  12 \le n$.  Useful for CompressionHyp 3 3 sub-cases that require
+  12 \le n$. Useful for CompressionHyp 3 3 sub-cases that require
   a different AP (e.g., $a = 2$ for $A_0 = \{1, 4, 5, 7, 8\}$
   case). -/
 
 /--
-  **Round 63 Theorem (generalized AP-$a$ infeasibility).**
+  **Theorem (generalized AP-$a$ infeasibility).**
 
   Same as Round 61 but parameterized by AP start $a$.
 -/
@@ -1524,7 +1522,7 @@ theorem compression_3_3_AP_general_infeasible {n : ℕ} (hn : 26 ≤ n)
   exact AP5_avoidance_contradiction χ hAvoid (a := a) (c1 := χ 9) (c2 := χ 18)
     ha_pos ha_bound (by omega) h_a0 h_a1 h_a2 h_a3 h_a4 rfl rfl
 
-/-! ### Round 64 (2026-05-15) — third distribution class: 5+2+1
+/-! ### third distribution class: 5+2+1
     sub-case $A_0 = \{1, 4, 5, 7, 8\}$ (missing 2).
 
   Uses AP $\{2, 5, 8, 11, 14\}$ (i.e., $a = 2$) instead of the
@@ -1532,14 +1530,14 @@ theorem compression_3_3_AP_general_infeasible {n : ℕ} (hn : 26 ≤ n)
   $\ne 0$ when $2 \notin A_0$. -/
 
 /--
-  **Round 64 Theorem ($A_0 = \{1, 4, 5, 7, 8\}$ case).**
+  **Theorem ($A_0 = \{1, 4, 5, 7, 8\}$ case).**
 
   Under $\chi(3) = \chi(12) = \chi(15) = \chi(21) = \chi(24) = 0$
   (i.e., A_0 ⊇ {1, 4, 5, 7, 8}) plus $\chi(9), \chi(18)$ distinct
   nonzero: False.
 
   Uses AP {2, 5, 8, 11, 14} via Round 63 (generalized) with
-  $a = 2$.  Witnesses:
+  $a = 2$. Witnesses:
   * $\chi(2)$: pair $(2, 3)$ at distance 1, multiple $3 \in C_0$.
   * $\chi(5)$: pair $(5, 12)$ at distance 7, multiple $21 \in
     C_0$.
@@ -1584,16 +1582,16 @@ theorem compression_3_3_with_3_12_15_21_24_color_0_infeasible {n : ℕ} (hn : 26
     h_chi_2_ne h_chi_5_ne h_chi_8_ne h_chi_11_ne h_chi_14_ne
     hχ9_ne hχ18_ne hχ9_18_ne
 
-/-! ### Round 65 (2026-05-15) — fourth distribution case: 5+2+1
+/-! ### fourth distribution case: 5+2+1
     sub-case $A_0 = \{2, 4, 5, 7, 8\}$ (missing 1).
 
   Uses AP $\{2, 5, 8, 11, 14\}$ via Round 63, with witnesses
   drawn from {6, 12, 15, 21, 24} (the $C_0$ multiples for this
-  $A_0$).  Note $\chi(3) \ne 0$ here (since $1 \notin A_0$), so
+  $A_0$). Note $\chi(3) \ne 0$ here (since $1 \notin A_0$), so
   we cannot use 3 as a witness multiple. -/
 
 /--
-  **Round 65 Theorem ($A_0 = \{2, 4, 5, 7, 8\}$ case).**
+  **Theorem ($A_0 = \{2, 4, 5, 7, 8\}$ case).**
 
   Under $\chi(6) = \chi(12) = \chi(15) = \chi(21) = \chi(24) = 0$
   (i.e., $A_0 \supseteq \{2, 4, 5, 7, 8\}$) plus $\chi(9),
@@ -1639,7 +1637,7 @@ theorem compression_3_3_with_6_12_15_21_24_color_0_infeasible {n : ℕ} (hn : 26
     h_chi_2_ne h_chi_5_ne h_chi_8_ne h_chi_11_ne h_chi_14_ne
     hχ9_ne hχ18_ne hχ9_18_ne
 
-/-! ### Round 66 (2026-05-15) — corner case: $A_0 = \{2, 4, 5, 7, 8\}$,
+/-! ### corner case: $A_0 = \{2, 4, 5, 7, 8\}$,
     $A_1 = \{3, 6\}$, $A_2 = \{1\}$.
 
   The case where $\chi(9) = \chi(18)$ (= color 1), so Round 65's
@@ -1658,10 +1656,10 @@ theorem compression_3_3_with_6_12_15_21_24_color_0_infeasible {n : ℕ} (hn : 26
      = 2$ — contradicts mono-freeness. -/
 
 /--
-  **Round 66 Theorem (corner case $A_1 = \{3, 6\}$).**
+  **Theorem (corner case $A_1 = \{3, 6\}$).**
 
   Closes the corner sub-case of 5+2+1 distribution where the
-  2-block contains both 3 and 6.  Chain of forced colorings
+  2-block contains both 3 and 6. Chain of forced colorings
   culminates in mono triple $(3, 7, 8)$.
 -/
 theorem compression_3_3_corner_A1_3_6_infeasible {n : ℕ} (hn : 26 ≤ n)
@@ -1712,7 +1710,7 @@ theorem compression_3_3_corner_A1_3_6_infeasible {n : ℕ} (hn : 26 ≤ n)
       6 (by norm_num) (by omega)
       (by show χ (3 * 2) = χ 6; rfl)
       (by show χ 6 = χ (6 + 2); rw [show (6:ℕ)+2 = 8 from by norm_num, hχ6, h])
-  -- χ(8) ≠ 1: triple (18, 2, 8). 18 + 6 = 24 = 3·8.  χ(18) = 1 = χ(2) = h → χ(8) = 1.
+  -- χ(8) ≠ 1: triple (18, 2, 8). 18 + 6 = 24 = 3·8. χ(18) = 1 = χ(2) = h → χ(8) = 1.
   have h_chi_8_ne_1 : χ 8 ≠ 1 := fun h =>
     mono_3 18 2 8 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
@@ -1726,25 +1724,25 @@ theorem compression_3_3_corner_A1_3_6_infeasible {n : ℕ} (hn : 26 ≤ n)
       7 (by norm_num) (by omega)
       (by show χ (3 * 5) = χ 7; rw [show (3:ℕ)*5 = 15 from by norm_num, _hχ15, h])
       (by show χ 7 = χ (7 + 5); rw [show (7:ℕ)+5 = 12 from by norm_num, h, hχ12])
-  -- χ(7) ≠ 1: triple (9, 4, 7).  9 + 12 = 21 = 3·7.
+  -- χ(7) ≠ 1: triple (9, 4, 7). 9 + 12 = 21 = 3·7.
   have h_chi_7_ne_1 : χ 7 ≠ 1 := fun h =>
     mono_3 9 4 7 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
       (hχ9.trans h_chi_4.symm) (h_chi_4.trans h.symm)
   have h_v7 : χ 7 < 3 := hValid 7 (by norm_num) (by omega)
   have h_chi_7 : χ 7 = 2 := by omega
-  -- Final: triple (3, 7, 8).  3 + 21 = 24 = 3·8.  All three colored 2.
+  -- Final: triple (3, 7, 8). 3 + 21 = 24 = 3·8. All three colored 2.
   exact mono_3 3 7 8 (by norm_num) (by norm_num) (by norm_num)
     (by omega) (by omega) (by omega) (by norm_num)
     (hχ3.trans h_chi_7.symm) (h_chi_7.trans h_chi_8.symm)
 
-/-! ### Round 67 (2026-05-15) — broader distribution class: $A_0
+/-! ### broader distribution class: $A_0
     \supseteq \{1, 2, 7\}$ via $\chi(3) = \chi(6) = \chi(21) = 0$.
 
   Distinguished from Rounds 60–66 by using {3, 6, 21} as the
   $C_0$-multiple witnesses (Round 60 used {3, 6, 12}; Rounds 62–63
   used {6, 12, 15}; Round 64 used {3, 12, 15, 21, 24}; Round 65
-  used {6, 12, 15, 21, 24}).  Distance pair $d = 7$ via the
+  used {6, 12, 15, 21, 24}). Distance pair $d = 7$ via the
   $C_0$-multiple 21 covers AP {1, 4, 7, 10, 13} positions
   $\{10, 13\}$ that the smaller multiples cannot reach.
 
@@ -1753,7 +1751,7 @@ theorem compression_3_3_corner_A1_3_6_infeasible {n : ℕ} (hn : 26 ≤ n)
   $A_0 = \{1, 2, 4, 5, 7\}$. -/
 
 /--
-  **Round 67 Theorem ($A_0 \supseteq \{1, 2, 7\}$ case).**
+  **Theorem ($A_0 \supseteq \{1, 2, 7\}$ case).**
 
   Under $\chi(3) = \chi(6) = \chi(21) = 0$ plus $\chi(9),
   \chi(18)$ distinct nonzero: False.
@@ -1766,7 +1764,7 @@ theorem compression_3_3_corner_A1_3_6_infeasible {n : ℕ} (hn : 26 ≤ n)
   * $\chi(13)$: pair $(6, 13)$ dist 7, multiple 21.
 
   This covers a much broader $A_0$ configuration class than
-  Rounds 60–66 (specific $A_0$).  Any $A_0 \supseteq \{1, 2, 7\}$
+  Rounds 60–66 (specific $A_0$). Any $A_0 \supseteq \{1, 2, 7\}$
   is handled by this single theorem.
 -/
 theorem compression_3_3_with_3_6_21_color_0_infeasible {n : ℕ} (hn : 26 ≤ n)
@@ -1800,7 +1798,7 @@ theorem compression_3_3_with_3_6_21_color_0_infeasible {n : ℕ} (hn : 26 ≤ n)
     h_chi_1_ne h_chi_4_ne h_chi_7_ne h_chi_10_ne h_chi_13_ne
     hχ9_ne hχ18_ne hχ9_18_ne
 
-/-! ### Round 68 (2026-05-15) — broader distribution class: $A_0
+/-! ### broader distribution class: $A_0
     \supseteq \{2, 4, 5\}$ via $\chi(6) = \chi(12) = \chi(15) = 0$.
 
   All 5 AP {1, 4, 7, 10, 13} positions reachable with witnesses
@@ -1813,12 +1811,12 @@ theorem compression_3_3_with_3_6_21_color_0_infeasible {n : ℕ} (hn : 26 ≤ n)
   * $\chi(13)$: pair $(13, 15)$ dist 2, multiple 6.
 
   Subsumes Round 65's specific $A_0 = \{2, 4, 5, 7, 8\}$ case
-  (the 3-element {2, 4, 5} suffices).  Together with Round 67
+  (the 3-element {2, 4, 5} suffices). Together with Round 67
   ($A_0 \supseteq \{1, 2, 7\}$) covers a much larger portion of
   the 5+2+1 distribution space. -/
 
 /--
-  **Round 68 Theorem ($A_0 \supseteq \{2, 4, 5\}$ case).**
+  **Theorem ($A_0 \supseteq \{2, 4, 5\}$ case).**
 
   Under $\chi(6) = \chi(12) = \chi(15) = 0$ plus $\chi(9),
   \chi(18)$ distinct nonzero: False.
@@ -1857,7 +1855,7 @@ theorem compression_3_3_with_6_12_15_color_0_infeasible {n : ℕ} (hn : 26 ≤ n
     h_chi_1_ne h_chi_4_ne h_chi_7_ne h_chi_10_ne h_chi_13_ne
     hχ9_ne hχ18_ne hχ9_18_ne
 
-/-! ### Round 69 (2026-05-15) — broader distribution class: $A_0
+/-! ### broader distribution class: $A_0
     \supseteq \{2, 5, 8\}$ via $\chi(6) = \chi(15) = \chi(24) = 0$.
 
   All 5 AP {1, 4, 7, 10, 13} positions reachable with witnesses
@@ -1870,13 +1868,13 @@ theorem compression_3_3_with_6_12_15_color_0_infeasible {n : ℕ} (hn : 26 ≤ n
   * $\chi(13)$: pair $(13, 15)$ dist 2, multiple 6.
 
   Uses distance 8 / multiple 24 to reach $\chi(7)$ — a distance
-  pair Rounds 60–68 did not exploit.  This breaks new combinatorial
-  ground in the $C_0$-multiple landscape.  Together with Rounds 67,
+  pair Rounds 60–68 did not exploit. This breaks new combinatorial
+  ground in the $C_0$-multiple landscape. Together with Rounds 67,
   68 the broader-class coverage of the 5+2+1 distribution space
   expands further. -/
 
 /--
-  **Round 69 Theorem ($A_0 \supseteq \{2, 5, 8\}$ case).**
+  **Theorem ($A_0 \supseteq \{2, 5, 8\}$ case).**
 
   Under $\chi(6) = \chi(15) = \chi(24) = 0$ plus $\chi(9),
   \chi(18)$ distinct nonzero: False.
@@ -1915,27 +1913,27 @@ theorem compression_3_3_with_6_15_24_color_0_infeasible {n : ℕ} (hn : 26 ≤ n
     h_chi_1_ne h_chi_4_ne h_chi_7_ne h_chi_10_ne h_chi_13_ne
     hχ9_ne hχ18_ne hχ9_18_ne
 
-/-! ### Round 70 (2026-05-15) — broader distribution class via AP-2:
+/-! ### broader distribution class via AP-2:
     $A_0 \supseteq \{1, 4, 7\}$ via $\chi(3) = \chi(12) = \chi(21)
     = 0$, using AP {2, 5, 8, 11, 14}.
 
   Rounds 60-69 exclusively used AP {1, 4, 7, 10, 13} (= Round 61).
   Round 70 is the FIRST broader-class theorem using the generalized
-  AP starting at $a = 2$ (Round 63), reaching configurations
+  AP starting at $a = 2$, reaching configurations
   Rounds 67-69's AP-1 setup cannot directly cover.
 
   Crucially, the triple $\{3, 12, 21\}$ (corresponding to
   $A_0 \supseteq \{1, 4, 7\}$) does NOT reach all of AP
   {1, 4, 7, 10, 13} positions: $\chi(1)$ cannot be deduced ≠ 0
   from {3, 12, 21} alone (need $\chi(6)$ or other low-index
-  multiple).  But AP {2, 5, 8, 11, 14} IS reachable: $\chi(11)$
+  multiple). But AP {2, 5, 8, 11, 14} IS reachable: $\chi(11)$
   via $(11, 12)$ dist 1, $\chi(14)$ via $(14, 21)$ dist 7.
 
   This expands the broader-class technique to a NEW $A_0$
   configuration family. -/
 
 /--
-  **Round 70 Theorem ($A_0 \supseteq \{1, 4, 7\}$ via AP-2).**
+  **Theorem ($A_0 \supseteq \{1, 4, 7\}$ via AP-2).**
 
   Under $\chi(3) = \chi(12) = \chi(21) = 0$ plus $\chi(9),
   \chi(18)$ distinct nonzero: False.
@@ -1981,7 +1979,7 @@ theorem compression_3_3_with_3_12_21_color_0_infeasible {n : ℕ} (hn : 26 ≤ n
     h_chi_2_ne h_chi_5_ne h_chi_8_ne h_chi_11_ne h_chi_14_ne
     hχ9_ne hχ18_ne hχ9_18_ne
 
-/-! ### Round 71 (2026-05-15) — second AP-2 broader-class: $A_0
+/-! ### second AP-2 broader-class: $A_0
     \supseteq \{1, 2, 8\}$ via $\chi(3) = \chi(6) = \chi(24) = 0$.
 
   After Round 70's {3, 12, 21}, this is the only OTHER 3-element
@@ -1990,10 +1988,10 @@ theorem compression_3_3_with_3_12_21_color_0_infeasible {n : ℕ} (hn : 26 ≤ n
   already subsumed by an AP-1 broader theorem).
 
   Distinguished by using the rare distance pair $d = 8 /$ multiple
-  $= 24$ (also used in Round 69) to reach AP positions 11, 14. -/
+  $= 24$ (also used) to reach AP positions 11, 14. -/
 
 /--
-  **Round 71 Theorem ($A_0 \supseteq \{1, 2, 8\}$ via AP-2).**
+  **Theorem ($A_0 \supseteq \{1, 2, 8\}$ via AP-2).**
 
   Under $\chi(3) = \chi(6) = \chi(24) = 0$ plus $\chi(9), \chi(18)$
   distinct nonzero: False.
@@ -2037,22 +2035,22 @@ theorem compression_3_3_with_3_6_24_color_0_infeasible {n : ℕ} (hn : 26 ≤ n)
     h_chi_2_ne h_chi_5_ne h_chi_8_ne h_chi_11_ne h_chi_14_ne
     hχ9_ne hχ18_ne hχ9_18_ne
 
-/-! ### Round 72 (2026-05-15) — first AP-4 broader-class: $A_0
+/-! ### first AP-4 broader-class: $A_0
     \supseteq \{1, 4, 5\}$ via $\chi(3) = \chi(12) = \chi(15) = 0$,
     using AP {4, 7, 10, 13, 16}.
 
-  Rounds 60-69 used AP-1 (Round 61).  Rounds 70-71 used AP-2
-  (Round 63 with $a = 2$).  Round 72 is the FIRST to use AP-4
+  Rounds 60-69 used AP-1. Rounds 70-71 used AP-2
+  (Round 63 with $a = 2$). Round 72 is the FIRST to use AP-4
   (Round 63 with $a = 4$), reaching configurations the previous
   paths cannot.
 
   Crucially, {3, 12, 15} cannot reach AP-1 χ(1) (no χ(6)=0,
   χ(15)=0 simultaneously available with one zero close to 1), and
   cannot reach AP-2 χ(5) for the same reason ({3, 6} or {12, 21}
-  both unavailable).  But AP-4 IS reachable. -/
+  both unavailable). But AP-4 IS reachable. -/
 
 /--
-  **Round 72 Theorem ($A_0 \supseteq \{1, 4, 5\}$ via AP-4).**
+  **Theorem ($A_0 \supseteq \{1, 4, 5\}$ via AP-4).**
 
   Under $\chi(3) = \chi(12) = \chi(15) = 0$ plus $\chi(9), \chi(18)$
   distinct nonzero: False.
@@ -2096,17 +2094,17 @@ theorem compression_3_3_with_3_12_15_color_0_infeasible {n : ℕ} (hn : 26 ≤ n
     h_chi_4_ne h_chi_7_ne h_chi_10_ne h_chi_13_ne h_chi_16_ne
     hχ9_ne hχ18_ne hχ9_18_ne
 
-/-! ### Round 73 (2026-05-15) — first AP-5 broader-class: $A_0
+/-! ### first AP-5 broader-class: $A_0
     \supseteq \{4, 5, 7\}$ via $\chi(12) = \chi(15) = \chi(21) = 0$,
     using AP {5, 8, 11, 14, 17}.
 
-  Rounds 60-69 used AP-1.  Rounds 70-71 used AP-2.  Round 72 used
-  AP-4.  Round 73 introduces AP-5 (Round 63 with $a = 5$).  Each
+  Rounds 60-69 used AP-1. Rounds 70-71 used AP-2. Round 72 used
+  AP-4. Round 73 introduces AP-5 (Round 63 with $a = 5$). Each
   AP-shift opens a NEW family of $A_0$ configurations that the
   previous AP shifts cannot reach. -/
 
 /--
-  **Round 73 Theorem ($A_0 \supseteq \{4, 5, 7\}$ via AP-5).**
+  **Theorem ($A_0 \supseteq \{4, 5, 7\}$ via AP-5).**
 
   Under $\chi(12) = \chi(15) = \chi(21) = 0$ plus $\chi(9), \chi(18)$
   distinct nonzero: False.
@@ -2150,18 +2148,18 @@ theorem compression_3_3_with_12_15_21_color_0_infeasible {n : ℕ} (hn : 26 ≤ 
     h_chi_5_ne h_chi_8_ne h_chi_11_ne h_chi_14_ne h_chi_17_ne
     hχ9_ne hχ18_ne hχ9_18_ne
 
-/-! ### Round 74 (2026-05-15) — second corner case: $A_0 =
+/-! ### second corner case: $A_0 =
     \{1, 4, 5, 7, 8\}$, $A_1 = \{3, 6\}$ (i.e., $\chi(9) =
     \chi(18) = 1$), $A_2 = \{2\}$ (i.e., $\chi(6) = 2$).
 
   Round 66 handled the corner $A_2 = \{1\}$ ($\chi(3) = 2$); Round
-  74 handles the corner $A_2 = \{2\}$ ($\chi(6) = 2$).  Different
+  74 handles the corner $A_2 = \{2\}$ ($\chi(6) = 2$). Different
   attack: distance pair on χ(6) = 2 gives "distance 2 forbidden in
-  color 2".  This forces a chain $\chi(4) = 1, \chi(7) = 2,
+  color 2". This forces a chain $\chi(4) = 1, \chi(7) = 2,
   \chi(5) = 1$, after which $\chi(8)$ has no valid color. -/
 
 /--
-  **Round 74 Theorem (corner case $A_2 = \{2\}$).**
+  **Theorem (corner case $A_2 = \{2\}$).**
 
   Closes the corner sub-case of 5+2+1 where $\chi(9) = \chi(18) =
   1$ and the only color-2 multiple is $\chi(6) = 2$.
@@ -2176,7 +2174,7 @@ theorem compression_3_3_with_12_15_21_color_0_infeasible {n : ℕ} (hn : 26 ≤ 
      $\chi(5) = 2$.
   4. $\chi(8)$ contradicts: distance pair $(3, 8)$ via mult 15
      rules out 0; triple $(9, 5, 8)$ rules out 1; distance pair
-     $(6, 8)$ via mult 6 rules out 2.  No valid color → False.
+     $(6, 8)$ via mult 6 rules out 2. No valid color → False.
 -/
 theorem compression_3_3_corner_A2_at_6_infeasible {n : ℕ} (hn : 26 ≤ n)
     (χ : ℕ → ℕ) (hValid : IsValidColoring n 3 χ)
@@ -2259,11 +2257,11 @@ theorem compression_3_3_corner_A2_at_6_infeasible {n : ℕ} (hn : 26 ≤ n)
   have h_v8 : χ 8 < 3 := hValid 8 (by norm_num) (by omega)
   omega
 
-/-! ### Round 75 (2026-05-15) — broader-class capstone: dispatcher
+/-! ### broader-class capstone: dispatcher
     theorem combining Rounds 60, 62, 67-73.
 
   Rounds 60, 62, 67-73 each handle a specific 3-element zero-set
-  configuration in the 5+2+1 distribution.  Round 75 combines them
+  configuration in the 5+2+1 distribution. Round 75 combines them
   into a single dispatcher: given that ANY of 9 specific triples
   is fully zero, derive False.
 
@@ -2271,7 +2269,7 @@ theorem compression_3_3_corner_A2_at_6_infeasible {n : ℕ} (hn : 26 ≤ n)
   distribution space into ONE theorem usable by any caller. -/
 
 /--
-  **Round 75 Theorem (broader-class dispatcher).**
+  **Theorem (broader-class dispatcher).**
 
   Given the standard CompressionHyp 3 3 hypotheses ($\chi(9),
   \chi(18)$ distinct nonzero), if ANY of the following 9 triples
@@ -2321,13 +2319,13 @@ theorem compression_3_3_broader_dispatch {n : ℕ} (hn : 26 ≤ n)
   · exact compression_3_3_with_12_15_21_color_0_infeasible hn χ hValid hAvoid
       h12 h15 h21 hχ9_ne hχ18_ne hχ9_18_ne
 
-/-! ### Round 76 (2026-05-15) — third corner case: $A_0 = \{1, 2,
+/-! ### third corner case: $A_0 = \{1, 2,
     5, 7, 8\}$, $A_1 = \{3, 6\}$ ($\chi(9) = \chi(18) = 1$),
     $A_2 = \{4\}$ ($\chi(12) = 2$).
 
   Different attack than Rounds 66, 74 (which used singleton-2 with
-  small distance 1, 2).  Here distance 4 is the color-2 forbidden
-  distance.  Uses richer chain involving multiple self-loops at
+  small distance 1, 2). Here distance 4 is the color-2 forbidden
+  distance. Uses richer chain involving multiple self-loops at
   positions 12, 16, 24.
 
   Chain: χ(16) = 1 (self-loops (24, 16, 24) and (12, 12, 16));
@@ -2336,10 +2334,10 @@ theorem compression_3_3_broader_dispatch {n : ℕ} (hn : 26 ≤ n)
   (forced via χ(16) = 1 through triple (9, 13, 16)); then χ(10)
   contradicts: rules 0 via self-loop (15, 10, 15), 1 via triple
   (18, 10, 16) using χ(16) = 1, 2 via triple (12, 10, 14) using
-  χ(14) = 2.  No valid color → False. -/
+  χ(14) = 2. No valid color → False. -/
 
 /--
-  **Round 76 Theorem (corner case $A_2 = \{4\}$).**
+  **Theorem (corner case $A_2 = \{4\}$).**
 
   Closes the corner sub-case of 5+2+1 where $\chi(9) = \chi(18) =
   1$ and the only color-2 multiple is $\chi(12) = 2$.
@@ -2362,12 +2360,12 @@ theorem compression_3_3_corner_A2_at_12_infeasible {n : ℕ} (hn : 26 ≤ n)
     fun x y z hx hy hz hxn hyn hzn heq hxy hyz =>
       hAvoid ⟨x, y, z, hxn, hyn, hzn, ⟨hx, hy, hz, heq⟩, hxy, hyz⟩
   -- Step 1: χ(16) = 1.
-  -- χ(16) ≠ 0: self-loop (24, 16, 24).  24 + 48 = 72 = 3·24.
+  -- χ(16) ≠ 0: self-loop (24, 16, 24). 24 + 48 = 72 = 3·24.
   have h_chi_16_ne_0 : χ 16 ≠ 0 := fun h =>
     mono_3 24 16 24 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
       (hχ24.trans h.symm) (h.trans hχ24.symm)
-  -- χ(16) ≠ 2: self-loop (12, 12, 16).  12 + 36 = 48 = 3·16.
+  -- χ(16) ≠ 2: self-loop (12, 12, 16). 12 + 36 = 48 = 3·16.
   have h_chi_16_ne_2 : χ 16 ≠ 2 := fun h =>
     mono_3 12 12 16 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
@@ -2375,12 +2373,12 @@ theorem compression_3_3_corner_A2_at_12_infeasible {n : ℕ} (hn : 26 ≤ n)
   have h_v16 : χ 16 < 3 := hValid 16 (by norm_num) (by omega)
   have h_chi_16 : χ 16 = 1 := by omega
   -- Step 2: χ(8) = 1.
-  -- χ(8) ≠ 0: triple (6, 6, 8).  6 + 18 = 24 = 3·8.
+  -- χ(8) ≠ 0: triple (6, 6, 8). 6 + 18 = 24 = 3·8.
   have h_chi_8_ne_0 : χ 8 ≠ 0 := fun h =>
     mono_3 6 6 8 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
       rfl (hχ6.trans h.symm)
-  -- χ(8) ≠ 2: self-loop (12, 8, 12).  12 + 24 = 36 = 3·12.
+  -- χ(8) ≠ 2: self-loop (12, 8, 12). 12 + 24 = 36 = 3·12.
   have h_chi_8_ne_2 : χ 8 ≠ 2 := fun h =>
     mono_3 12 8 12 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
@@ -2388,12 +2386,12 @@ theorem compression_3_3_corner_A2_at_12_infeasible {n : ℕ} (hn : 26 ≤ n)
   have h_v8 : χ 8 < 3 := hValid 8 (by norm_num) (by omega)
   have h_chi_8 : χ 8 = 1 := by omega
   -- Step 3: χ(14) = 2.
-  -- χ(14) ≠ 0: triple (3, 14, 15).  3 + 42 = 45 = 3·15.
+  -- χ(14) ≠ 0: triple (3, 14, 15). 3 + 42 = 45 = 3·15.
   have h_chi_14_ne_0 : χ 14 ≠ 0 := fun h =>
     mono_3 3 14 15 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
       (hχ3.trans h.symm) (h.trans hχ15.symm)
-  -- χ(14) ≠ 1: triple (18, 8, 14).  18 + 24 = 42 = 3·14.
+  -- χ(14) ≠ 1: triple (18, 8, 14). 18 + 24 = 42 = 3·14.
   have h_chi_14_ne_1 : χ 14 ≠ 1 := fun h =>
     mono_3 18 8 14 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
@@ -2401,12 +2399,12 @@ theorem compression_3_3_corner_A2_at_12_infeasible {n : ℕ} (hn : 26 ≤ n)
   have h_v14 : χ 14 < 3 := hValid 14 (by norm_num) (by omega)
   have h_chi_14 : χ 14 = 2 := by omega
   -- Step 4: χ(13) = 2.
-  -- χ(13) ≠ 0: triple (21, 6, 13).  21 + 18 = 39 = 3·13.
+  -- χ(13) ≠ 0: triple (21, 6, 13). 21 + 18 = 39 = 3·13.
   have h_chi_13_ne_0 : χ 13 ≠ 0 := fun h =>
     mono_3 21 6 13 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
       (hχ21.trans hχ6.symm) (hχ6.trans h.symm)
-  -- χ(13) ≠ 1: triple (9, 13, 16).  9 + 39 = 48 = 3·16.
+  -- χ(13) ≠ 1: triple (9, 13, 16). 9 + 39 = 48 = 3·16.
   have h_chi_13_ne_1 : χ 13 ≠ 1 := fun h =>
     mono_3 9 13 16 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
@@ -2414,17 +2412,17 @@ theorem compression_3_3_corner_A2_at_12_infeasible {n : ℕ} (hn : 26 ≤ n)
   have h_v13 : χ 13 < 3 := hValid 13 (by norm_num) (by omega)
   have h_chi_13 : χ 13 = 2 := by omega
   -- Step 5: χ(10) has no valid color.
-  -- χ(10) ≠ 0: self-loop (15, 10, 15).  15 + 30 = 45 = 3·15.
+  -- χ(10) ≠ 0: self-loop (15, 10, 15). 15 + 30 = 45 = 3·15.
   have h_chi_10_ne_0 : χ 10 ≠ 0 := fun h =>
     mono_3 15 10 15 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
       (hχ15.trans h.symm) (h.trans hχ15.symm)
-  -- χ(10) ≠ 2: triple (12, 10, 14).  12 + 30 = 42 = 3·14.
+  -- χ(10) ≠ 2: triple (12, 10, 14). 12 + 30 = 42 = 3·14.
   have h_chi_10_ne_2 : χ 10 ≠ 2 := fun h =>
     mono_3 12 10 14 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
       (hχ12.trans h.symm) (h.trans h_chi_14.symm)
-  -- χ(10) ≠ 1: triple (18, 10, 16).  18 + 30 = 48 = 3·16.
+  -- χ(10) ≠ 1: triple (18, 10, 16). 18 + 30 = 48 = 3·16.
   have h_chi_10_ne_1 : χ 10 ≠ 1 := fun h =>
     mono_3 18 10 16 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
@@ -2432,22 +2430,22 @@ theorem compression_3_3_corner_A2_at_12_infeasible {n : ℕ} (hn : 26 ≤ n)
   have h_v10 : χ 10 < 3 := hValid 10 (by norm_num) (by omega)
   omega
 
-/-! ### Round 77 (2026-05-15) — fourth corner case: $A_2 = \{5\}$
+/-! ### fourth corner case: $A_2 = \{5\}$
     ($\chi(15) = 2$).
 
   Most complex corner case so far: requires a chain of 11 forced
-  colorings before reaching contradiction at $\chi(13)$.  Pattern:
+  colorings before reaching contradiction at $\chi(13)$. Pattern:
   derive $\chi$ values progressively through distance-pair and
   self-loop arguments, each new value enabling further deductions.
 
   Chain (each value forced ≠ 0 and ≠ wrong-color, leaving exactly
   one valid value):
-  1. χ(20) = 1.   2. χ(10) = 1.   3. χ(17) = 2.   4. χ(7) = 2.
-  5. χ(16) = 2.   6. χ(2) = 1.    7. χ(8) = 2.    8. χ(11) = 1.
-  9. χ(14) = 2.   10. χ(19) = 1.  11. χ(13) contradicts. -/
+  1. χ(20) = 1. 2. χ(10) = 1. 3. χ(17) = 2. 4. χ(7) = 2.
+  5. χ(16) = 2. 6. χ(2) = 1. 7. χ(8) = 2. 8. χ(11) = 1.
+  9. χ(14) = 2. 10. χ(19) = 1. 11. χ(13) contradicts. -/
 
 /--
-  **Round 77 Theorem (corner case $A_2 = \{5\}$).**
+  **Theorem (corner case $A_2 = \{5\}$).**
 
   Closes the corner sub-case of 5+2+1 where $\chi(9) = \chi(18) =
   1$ and the only color-2 multiple is $\chi(15) = 2$.
@@ -2594,16 +2592,16 @@ theorem compression_3_3_corner_A2_at_15_infeasible {n : ℕ} (hn : 26 ≤ n)
   have h_v13 : χ 13 < 3 := hValid 13 (by norm_num) (by omega)
   omega
 
-/-! ### Round 78 (2026-05-15) — fifth corner case: $A_2 = \{8\}$
+/-! ### fifth corner case: $A_2 = \{8\}$
     ($\chi(24) = 2$).
 
-  Cleanest corner case so far.  5-step chain: $\chi(16) = 1$,
+  Cleanest corner case so far. 5-step chain: $\chi(16) = 1$,
   $\chi(13) = 2$, $\chi(5) = 1$, $\chi(2) = 2$, $\chi(10) = 1$,
   then direct mono triple $(18, 10, 16)$ all color 1 gives
   contradiction. -/
 
 /--
-  **Round 78 Theorem (corner case $A_2 = \{8\}$).**
+  **Theorem (corner case $A_2 = \{8\}$).**
 
   Closes the corner sub-case of 5+2+1 where $\chi(9) = \chi(18) =
   1$ and the only color-2 multiple is $\chi(24) = 2$.
@@ -2683,7 +2681,7 @@ theorem compression_3_3_corner_A2_at_24_infeasible {n : ℕ} (hn : 26 ≤ n)
     (by omega) (by omega) (by omega) (by norm_num)
     (hχ18.trans h_chi_10.symm) (h_chi_10.trans h_chi_16.symm)
 
-/-! ### Round 79 (2026-05-15) — sixth and FINAL corner case:
+/-! ### sixth and FINAL corner case:
     $A_2 = \{7\}$ ($\chi(21) = 2$).
 
   Chain: $\chi(14) = 1$, $\chi(11) = 2$, $\chi(4) = 1$, $\chi(17)
@@ -2694,7 +2692,7 @@ theorem compression_3_3_corner_A2_at_24_infeasible {n : ℕ} (hn : 26 ≤ n)
   (Rounds 66, 74, 76, 77, 78, 79). -/
 
 /--
-  **Round 79 Theorem (corner case $A_2 = \{7\}$).**
+  **Theorem (corner case $A_2 = \{7\}$).**
 
   Closes the corner sub-case of 5+2+1 where $\chi(9) = \chi(18) =
   1$ and the only color-2 multiple is $\chi(21) = 2$.
@@ -2775,10 +2773,10 @@ theorem compression_3_3_corner_A2_at_21_infeasible {n : ℕ} (hn : 26 ≤ n)
   have h_v10 : χ 10 < 3 := hValid 10 (by norm_num) (by omega)
   omega
 
-/-! ### Round 80 (2026-05-15) — corner-case dispatcher.
+/-! ### corner-case dispatcher.
 
   Combines all 6 corner-case theorems (Rounds 66, 74, 76, 77, 78,
-  79) into a single dispatcher.  Given $\chi(9) = \chi(18) = 1$
+  79) into a single dispatcher. Given $\chi(9) = \chi(18) = 1$
   and that EXACTLY ONE of $\{3, 6, 12, 15, 21, 24\}$ is colored 2
   (the other 5 are 0), derive False.
 
@@ -2787,7 +2785,7 @@ theorem compression_3_3_corner_A2_at_21_infeasible {n : ℕ} (hn : 26 ≤ n)
   covered. -/
 
 /--
-  **Round 80 Theorem (corner-case dispatcher).**
+  **Theorem (corner-case dispatcher).**
 
   6-way disjunction matching the six 5+2+1 corner sub-cases.
   Combined with Round 75 (broader dispatcher), covers all 5+2+1
@@ -2822,7 +2820,7 @@ theorem compression_3_3_corner_dispatch {n : ℕ} (hn : 26 ≤ n)
   · exact compression_3_3_corner_A2_at_24_infeasible hn χ hValid hAvoid
       h3 h6 h12 h15 h21 h24 hχ9 hχ18
 
-/-! ### Round 81 (2026-05-15) — 5+2+1 MASTER theorem.
+/-! ### 5+2+1 MASTER theorem.
 
   Combines Round 75 (broader dispatcher, χ(9) ≠ χ(18)) and Round 80
   (corner dispatcher, χ(9) = χ(18) = 1) into a single master
@@ -2830,7 +2828,7 @@ theorem compression_3_3_corner_dispatch {n : ℕ} (hn : 26 ≤ n)
   CompressionHyp 3 3 analytically. -/
 
 /--
-  **Round 81 Theorem (5+2+1 MASTER).**
+  **Theorem (5+2+1 MASTER).**
 
   Given χ(9), χ(18) both nonzero, derive False from the 5+2+1
   distribution hypothesis encoded as:
@@ -2871,7 +2869,7 @@ theorem compression_3_3_5_2_1_master {n : ℕ} (hn : 26 ≤ n)
   · exact compression_3_3_corner_dispatch hn χ hValid hAvoid
       h9 h18 h_corner
 
-/-! ### Round 82 (2026-05-15) — first 4+3+1 corner sub-case:
+/-! ### first 4+3+1 corner sub-case:
     $A_1 = \{3, 6, 7\}$ (k-index), $A_2 = \{8\}$.
 
   Distribution: $\chi(3) = \chi(6) = \chi(12) = \chi(15) = 0$,
@@ -2887,9 +2885,9 @@ theorem compression_3_3_5_2_1_master {n : ℕ} (hn : 26 ≤ n)
   self-loop. -/
 
 /--
-  **Round 82 Theorem (4+3+1 corner: $A_1 = \{3, 6, 7\}, A_2 = \{8\}$).**
+  **Theorem (4+3+1 corner: $A_1 = \{3, 6, 7\}, A_2 = \{8\}$).**
 
-  First analytically-closed 4+3+1 corner case.  Demonstrates the
+  First analytically-closed 4+3+1 corner case. Demonstrates the
   technique extends to 4+3+1: with $A_1$ containing an extra
   position 21, the distance-7 constraint for color 1 enables a
   rapid 3-step contradiction.
@@ -2907,14 +2905,14 @@ theorem compression_3_3_corner_4_3_1_A1_3_6_7_A2_8_infeasible {n : ℕ} (hn : 26
       x + 3 * y = 3 * z → χ x = χ y → χ y = χ z → False :=
     fun x y z hx hy hz hxn hyn hzn heq hxy hyz =>
       hAvoid ⟨x, y, z, hxn, hyn, hzn, ⟨hx, hy, hz, heq⟩, hxy, hyz⟩
-  -- Use position 16 to derive contradiction.  All three colors ruled out.
+  -- Use position 16 to derive contradiction. All three colors ruled out.
   -- χ(16) ≠ 0: self-loop (12, 12, 16).
   have h_chi_16_ne_0 : χ 16 ≠ 0 := fun h =>
     mono_3 12 12 16 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
       rfl (hχ12.trans h.symm)
   -- χ(16) ≠ 1: triple (21, 9, 16) all colored 1.
-  -- Key: 21 + 27 = 48 = 3·16.  χ(21) = χ(9) = 1.
+  -- Key: 21 + 27 = 48 = 3·16. χ(21) = χ(9) = 1.
   have h_chi_16_ne_1 : χ 16 ≠ 1 := fun h =>
     mono_3 21 9 16 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
@@ -2927,18 +2925,18 @@ theorem compression_3_3_corner_4_3_1_A1_3_6_7_A2_8_infeasible {n : ℕ} (hn : 26
   have h_v16 : χ 16 < 3 := hValid 16 (by norm_num) (by omega)
   omega
 
-/-! ### Round 83 (2026-05-15) — first 4+2+2 corner sub-case:
+/-! ### first 4+2+2 corner sub-case:
     $A_2 = \{3, 6\}$ (k-index = $\{1, 2\}$), $A_1 = \{9, 18\}$.
 
   **Fundamental new mathematics direction**: extends beyond 5+2+1
-  and 4+3+1 to the 4+2+2 distribution.  In 4+2+2, TWO non-zero
+  and 4+3+1 to the 4+2+2 distribution. In 4+2+2, TWO non-zero
   color classes each have 2 elements, giving DIFFERENT distance
   constraints than 5+2+1 (which has |A_1|=2, |A_2|=1) or 4+3+1
   (|A_1|=3, |A_2|=1).
 
   Specifically, with $A_2 = \{3, 6\}$ (i.e., $\chi(3) = \chi(6) =
   2$), color 2 forbids BOTH distance 1 (from χ(3)) and distance 2
-  (from χ(6)).  This very tight pair of constraints forces a
+  (from χ(6)). This very tight pair of constraints forces a
   longer chain of color decisions.
 
   Chain: $\chi(7) = 1$, $\chi(10) = 2$, $\chi(11) = 1$, $\chi(14)
@@ -2946,9 +2944,9 @@ theorem compression_3_3_corner_4_3_1_A1_3_6_7_A2_8_infeasible {n : ℕ} (hn : 26
   triple $(18, 11, 17)$ all color 1. -/
 
 /--
-  **Round 83 Theorem (4+2+2 corner: $A_2 = \{3, 6\}, A_1 = \{9, 18\}$).**
+  **Theorem (4+2+2 corner: $A_2 = \{3, 6\}, A_1 = \{9, 18\}$).**
 
-  First analytically-closed 4+2+2 corner case.  Distribution:
+  First analytically-closed 4+2+2 corner case. Distribution:
   $A_0 = \{4, 5, 7, 8\}$ (k-index, multiples 12, 15, 21, 24),
   $A_1 = \{9, 18\}$, $A_2 = \{3, 6\}$.
 -/
@@ -3043,27 +3041,27 @@ theorem compression_3_3_4_2_2_A2_3_6_infeasible {n : ℕ} (hn : 26 ≤ n)
   have h_v17 : χ 17 < 3 := hValid 17 (by norm_num) (by omega)
   have h_chi_17 : χ 17 = 1 := by omega
   -- Final: mono triple (18, 11, 17) all colored 1.
-  -- 18 + 33 = 51 = 3·17.  χ(18) = χ(11) = χ(17) = 1.
+  -- 18 + 33 = 51 = 3·17. χ(18) = χ(11) = χ(17) = 1.
   exact mono_3 18 11 17 (by norm_num) (by norm_num) (by norm_num)
     (by omega) (by omega) (by omega) (by norm_num)
     (hχ18.trans h_chi_11.symm) (h_chi_11.trans h_chi_17.symm)
 
-/-! ### Round 84 (2026-05-15) — second 4+2+2 corner: $A_2 = \{3,
+/-! ### second 4+2+2 corner: $A_2 = \{3,
     24\}$, distance-1+8 case.
 
   Distinguished from Round 83 ($A_2 = \{3, 6\}$, distances 1+2) by
   the SPREAD distance pair: distance 1 (from χ(3) = 2) and distance
-  8 (from χ(24) = 2).  The distance-8 constraint enables the
+  8 (from χ(24) = 2). The distance-8 constraint enables the
   "long-range" tour through $\chi(11) = ?$ via triple $(24, 3, 11)$.
 
   Short 4-step chain culminating in χ(11) ruling all 3 colors. -/
 
 /--
-  **Round 84 Theorem (4+2+2 corner: $A_2 = \{3, 24\}, A_1 = \{9,
+  **Theorem (4+2+2 corner: $A_2 = \{3, 24\}, A_1 = \{9,
   18\}$).**
 
   Distribution: $A_0 = \{6, 12, 15, 21\}$ (multiples of 3 colored
-  0), $A_1 = \{9, 18\}$, $A_2 = \{3, 24\}$.  Distance pair {1, 8}
+  0), $A_1 = \{9, 18\}$, $A_2 = \{3, 24\}$. Distance pair {1, 8}
   for color 2.
 -/
 theorem compression_3_3_4_2_2_A2_3_24_infeasible {n : ℕ} (hn : 26 ≤ n)
@@ -3128,10 +3126,10 @@ theorem compression_3_3_4_2_2_A2_3_24_infeasible {n : ℕ} (hn : 26 ≤ n)
   have h_v11 : χ 11 < 3 := hValid 11 (by norm_num) (by omega)
   omega
 
-/-! ### Round 85 (2026-05-15) — first 3+3+2 corner case.
+/-! ### first 3+3+2 corner case.
 
   **Most novel distribution yet**: $A_0 = \{2, 5, 8\}$, $A_1 = \{1,
-  4, 7\}$, $A_2 = \{3, 6\}$ (k-index).  Equivalently $\chi(6) =
+  4, 7\}$, $A_2 = \{3, 6\}$ (k-index). Equivalently $\chi(6) =
   \chi(15) = \chi(24) = 0$, $\chi(3) = \chi(12) = \chi(21) = 1$,
   $\chi(9) = \chi(18) = 2$.
 
@@ -3144,10 +3142,10 @@ theorem compression_3_3_4_2_2_A2_3_24_infeasible {n : ℕ} (hn : 26 ≤ n)
   step. -/
 
 /--
-  **Round 85 Theorem (3+3+2 corner: $A_2 = \{9, 18\}$, $A_1 =
+  **Theorem (3+3+2 corner: $A_2 = \{9, 18\}$, $A_1 =
   \{3, 12, 21\}$).**
 
-  First analytically-closed 3+3+2 corner case.  Distribution:
+  First analytically-closed 3+3+2 corner case. Distribution:
   $A_0 = \{6, 15, 24\}$, $A_1 = \{3, 12, 21\}$ ($\chi = 1$),
   $A_2 = \{9, 18\}$ ($\chi = 2$).
 -/
@@ -3234,7 +3232,7 @@ theorem compression_3_3_3_3_2_A2_9_18_A1_3_12_21_infeasible {n : ℕ} (hn : 26 �
   have h_v16 : χ 16 < 3 := hValid 16 (by norm_num) (by omega)
   omega
 
-/-! ### Round 86 (2026-05-15) — minimal 4+3+1 case: 2-step chain.
+/-! ### minimal 4+3+1 case: 2-step chain.
 
   Distribution: $A_0 = \{2, 5, 7, 8\}$ (multiples 6, 15, 21, 24),
   $A_1 = \{1, 3, 4\}$ k-idx (multiples 3, 9, 12, χ = 1), $A_2 =
@@ -3251,10 +3249,10 @@ theorem compression_3_3_3_3_2_A2_9_18_A1_3_12_21_infeasible {n : ℕ} (hn : 26 �
   immediately constrain $\chi(10)$. -/
 
 /--
-  **Round 86 Theorem (4+3+1 minimal: $A_1 = \{3, 9, 12\}$).**
+  **Theorem (4+3+1 minimal: $A_1 = \{3, 9, 12\}$).**
 
   Distribution: $A_0 = \{6, 15, 21, 24\}$, $A_1 = \{3, 9, 12\}$
-  ($\chi = 1$), $A_2 = \{18\}$ ($\chi = 2$).  Two-step chain.
+  ($\chi = 1$), $A_2 = \{18\}$ ($\chi = 2$). Two-step chain.
 -/
 theorem compression_3_3_4_3_1_A1_3_9_12_A2_18_infeasible {n : ℕ} (hn : 26 ≤ n)
     (χ : ℕ → ℕ) (hValid : IsValidColoring n 3 χ)
@@ -3296,21 +3294,21 @@ theorem compression_3_3_4_3_1_A1_3_9_12_A2_18_infeasible {n : ℕ} (hn : 26 ≤ 
   have h_v10 : χ 10 < 3 := hValid 10 (by norm_num) (by omega)
   omega
 
-/-! ### Round 87 (2026-05-15) — second 3+3+2 corner case.
+/-! ### second 3+3+2 corner case.
 
   Distribution: $A_0 = \{5, 7, 8\}$ (k-idx, multiples 15, 21, 24),
   $A_1 = \{3, 4, 6\}$ k-idx (multiples 9, 12, 18, $\chi = 1$),
   $A_2 = \{1, 2\}$ k-idx (multiples 3, 6, $\chi = 2$).
 
   Distance forbidden: color 0 has $d \in \{5, 7, 8\}$; color 1 has
-  $d \in \{3, 4, 6\}$; color 2 has $d \in \{1, 2\}$.  Tight color-2
+  $d \in \{3, 4, 6\}$; color 2 has $d \in \{1, 2\}$. Tight color-2
   constraints (adjacent distances 1 and 2) enable rapid cascade.
 
   5-step chain culminating in mono triple $(6, 11, 13)$ all color
   2 via distance-2 forbidden constraint on color 2. -/
 
 /--
-  **Round 87 Theorem (3+3+2 case: $A_2 = \{3, 6\}$, $A_1 = \{9,
+  **Theorem (3+3+2 case: $A_2 = \{3, 6\}$, $A_1 = \{9,
   12, 18\}$).**
 -/
 theorem compression_3_3_3_3_2_A2_3_6_A1_9_12_18_infeasible {n : ℕ} (hn : 26 ≤ n)
@@ -3380,13 +3378,13 @@ theorem compression_3_3_3_3_2_A2_3_6_A1_9_12_18_infeasible {n : ℕ} (hn : 26 �
       (hχ12.trans hχ9.symm) (hχ9.trans h.symm)
   have h_v13 : χ 13 < 3 := hValid 13 (by norm_num) (by omega)
   have h_chi_13 : χ 13 = 2 := by omega
-  -- Final: mono triple (6, 11, 13) all color 2.  6 + 33 = 39 = 3·13.
+  -- Final: mono triple (6, 11, 13) all color 2. 6 + 33 = 39 = 3·13.
   exact mono_3 6 11 13 (by norm_num) (by norm_num) (by norm_num)
     (by omega) (by omega) (by omega) (by norm_num)
     (hχ6.trans h_chi_11.symm) (h_chi_11.trans h_chi_13.symm)
 
-/-! ### Round 88 (2026-05-15) — minimal 4+3+1 case via SELF-LOOP
-    on color 1.  $A_1 = \{6, 9, 15\}$ (three multiples colored 1
+/-! ### minimal 4+3+1 case via SELF-LOOP
+    on color 1. $A_1 = \{6, 9, 15\}$ (three multiples colored 1
     that happen to include the pair (15, 10, 15) self-loop config).
 
   Distribution: $A_0 = \{1, 4, 7, 8\}$ k-idx, $A_1 = \{2, 3, 5\}$
@@ -3401,7 +3399,7 @@ theorem compression_3_3_3_3_2_A2_3_6_A1_9_12_18_infeasible {n : ℕ} (hn : 26 �
   technical first. -/
 
 /--
-  **Round 88 Theorem (4+3+1 minimal: $A_1 = \{6, 9, 15\}$).**
+  **Theorem (4+3+1 minimal: $A_1 = \{6, 9, 15\}$).**
 -/
 theorem compression_3_3_4_3_1_A1_6_9_15_A2_18_infeasible {n : ℕ} (hn : 26 ≤ n)
     (χ : ℕ → ℕ) (hValid : IsValidColoring n 3 χ)
@@ -3444,17 +3442,17 @@ theorem compression_3_3_4_3_1_A1_6_9_15_A2_18_infeasible {n : ℕ} (hn : 26 ≤ 
   have h_v10 : χ 10 < 3 := hValid 10 (by norm_num) (by omega)
   omega
 
-/-! ### Round 89 (2026-05-15) — third 3+3+2 corner case.
+/-! ### third 3+3+2 corner case.
 
   Distribution: $A_0 = \{4, 5, 7\}$ (k-idx, multiples 12, 15, 21),
   $A_1 = \{1, 2, 8\}$ k-idx (multiples 3, 6, 24, $\chi = 1$),
   $A_2 = \{3, 6\}$ k-idx (multiples 9, 18, $\chi = 2$).
 
-  Very SHORT 2-step contradiction.  Uses self-loops on color 0 AND
+  Very SHORT 2-step contradiction. Uses self-loops on color 0 AND
   color 1 in the same chain. -/
 
 /--
-  **Round 89 Theorem (3+3+2 case: $A_2 = \{9, 18\}$, $A_1 = \{3,
+  **Theorem (3+3+2 case: $A_2 = \{9, 18\}$, $A_1 = \{3,
   6, 24\}$).**
 -/
 theorem compression_3_3_3_3_2_A2_9_18_A1_3_6_24_infeasible {n : ℕ} (hn : 26 ≤ n)
@@ -3480,18 +3478,18 @@ theorem compression_3_3_3_3_2_A2_9_18_A1_3_6_24_infeasible {n : ℕ} (hn : 26 �
       (hχ3.trans h.symm) (h.trans hχ6.symm)
   have h_v5 : χ 5 < 3 := hValid 5 (by norm_num) (by omega)
   have h_chi_5 : χ 5 = 2 := by omega
-  -- Step 2: χ(8) impossible.  Uses TWO self-loops + (9, 5, 8).
-  -- χ(8) ≠ 0: self-loop (12, 8, 12) on color 0.  12+24=36=3·12.
+  -- Step 2: χ(8) impossible. Uses TWO self-loops + (9, 5, 8).
+  -- χ(8) ≠ 0: self-loop (12, 8, 12) on color 0. 12+24=36=3·12.
   have h_chi_8_ne_0 : χ 8 ≠ 0 := fun h =>
     mono_3 12 8 12 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
       (hχ12.trans h.symm) (h.trans hχ12.symm)
-  -- χ(8) ≠ 1: self-loop (6, 6, 8) on color 1.  6+18=24=3·8.
+  -- χ(8) ≠ 1: self-loop (6, 6, 8) on color 1. 6+18=24=3·8.
   have h_chi_8_ne_1 : χ 8 ≠ 1 := fun h =>
     mono_3 6 6 8 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
       rfl (hχ6.trans h.symm)
-  -- χ(8) ≠ 2: triple (9, 5, 8).  9+15=24=3·8.  χ(9)=χ(5)=2.
+  -- χ(8) ≠ 2: triple (9, 5, 8). 9+15=24=3·8. χ(9)=χ(5)=2.
   have h_chi_8_ne_2 : χ 8 ≠ 2 := fun h =>
     mono_3 9 5 8 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
@@ -3499,7 +3497,7 @@ theorem compression_3_3_3_3_2_A2_9_18_A1_3_6_24_infeasible {n : ℕ} (hn : 26 �
   have h_v8 : χ 8 < 3 := hValid 8 (by norm_num) (by omega)
   omega
 
-/-! ### Round 90 (2026-05-15) — 4+2+2 case with $\chi(9) \ne
+/-! ### 4+2+2 case with $\chi(9) \ne
     \chi(18)$.
 
   Distribution: $A_0 = \{2, 5, 7, 8\}$ k-idx, $A_1 = \{1, 3\}$
@@ -3513,7 +3511,7 @@ theorem compression_3_3_3_3_2_A2_9_18_A1_3_6_24_infeasible {n : ℕ} (hn : 26 �
   Just 2-step chain. -/
 
 /--
-  **Round 90 Theorem (4+2+2 case: $A_1 = \{3, 9\}$, $A_2 = \{12,
+  **Theorem (4+2+2 case: $A_1 = \{3, 9\}$, $A_2 = \{12,
   18\}$).**
 -/
 theorem compression_3_3_4_2_2_A1_3_9_A2_12_18_infeasible {n : ℕ} (hn : 26 ≤ n)
@@ -3556,11 +3554,11 @@ theorem compression_3_3_4_2_2_A1_3_9_A2_12_18_infeasible {n : ℕ} (hn : 26 ≤ 
   have h_v10 : χ 10 < 3 := hValid 10 (by norm_num) (by omega)
   omega
 
-/-! ### Round 91 (2026-05-15) — new 6+1+1 sub-case: $A_1 \cup A_2
+/-! ### new 6+1+1 sub-case: $A_1 \cup A_2
     = \{6, 12\}$ (BOTH $\chi(9) = \chi(18) = 0$).
 
   This is OUTSIDE the standard 5+2+1 / 4+3+1 / 4+2+2 / 3+3+2
-  framework where $\chi(9), \chi(18) \ne 0$.  In 6+1+1 with neither
+  framework where $\chi(9), \chi(18) \ne 0$. In 6+1+1 with neither
   9 nor 18 in $A_1 \cup A_2$, both $\chi(9), \chi(18) = 0$ —
   the "valuation-coloring-style" placement.
 
@@ -3572,11 +3570,11 @@ theorem compression_3_3_4_2_2_A1_3_9_A2_12_18_infeasible {n : ℕ} (hn : 26 ≤ 
 
   **Foundational significance**: handles a configuration that
   Round 59 (which assumed $\chi(9), \chi(18) \ne 0$) doesn't
-  cover.  Demonstrates the technique extends to 6+1+1 configs
+  cover. Demonstrates the technique extends to 6+1+1 configs
   outside the Round 75/80 dispatcher domains. -/
 
 /--
-  **Round 91 Theorem (6+1+1 with $\chi(9) = \chi(18) = 0$).**
+  **Theorem (6+1+1 with $\chi(9) = \chi(18) = 0$).**
 -/
 theorem compression_3_3_6_1_1_A1_6_A2_12_infeasible {n : ℕ} (hn : 26 ≤ n)
     (χ : ℕ → ℕ) (hValid : IsValidColoring n 3 χ)
@@ -3602,7 +3600,7 @@ theorem compression_3_3_6_1_1_A1_6_A2_12_infeasible {n : ℕ} (hn : 26 ≤ n)
   have h_v4 : χ 4 < 3 := hValid 4 (by norm_num) (by omega)
   have h_chi_4 : χ 4 = 2 := by omega
   -- Step 2: χ(8) impossible.
-  -- χ(8) ≠ 0: pair (3, 8) d=5 mult 15.  (15, 3, 8): 15+9=24=3·8.
+  -- χ(8) ≠ 0: pair (3, 8) d=5 mult 15. (15, 3, 8): 15+9=24=3·8.
   have h_chi_8_ne_0 : χ 8 ≠ 0 := fun h =>
     mono_3 15 3 8 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
@@ -3620,7 +3618,7 @@ theorem compression_3_3_6_1_1_A1_6_A2_12_infeasible {n : ℕ} (hn : 26 ≤ n)
   have h_v8 : χ 8 < 3 := hValid 8 (by norm_num) (by omega)
   omega
 
-/-! ### Round 106 (2026-05-15) — yet another 4+2+2 sub-case
+/-! ### yet another 4+2+2 sub-case
     closed using just $\chi(4)$ forcing.
 
   Distribution: $A_0 = \{6, 15, 21, 24\}$, $A_1 = \{3, 12\}$
@@ -3636,7 +3634,7 @@ theorem compression_3_3_6_1_1_A1_6_A2_12_infeasible {n : ℕ} (hn : 26 ≤ n)
   inline mono triples — demonstrates infrastructure value. -/
 
 /--
-  **Round 106 Theorem (4+2+2 case: $A_1 = \{3, 12\}, A_2 = \{9, 18\}$).**
+  **Theorem (4+2+2 case: $A_1 = \{3, 12\}, A_2 = \{9, 18\}$).**
 -/
 theorem compression_3_3_4_2_2_A1_3_12_A2_9_18_infeasible {n : ℕ} (hn : 26 ≤ n)
     (χ : ℕ → ℕ) (hValid : IsValidColoring n 3 χ)
@@ -3678,7 +3676,7 @@ theorem compression_3_3_4_2_2_A1_3_12_A2_9_18_infeasible {n : ℕ} (hn : 26 ≤ 
   have h_v7 : χ 7 < 3 := hValid 7 (by norm_num) (by omega)
   omega
 
-/-! ### Round 107 (2026-05-15) — 4+3+1 sub-case $A_1 = \{3, 6, 9\}$.
+/-! ### 4+3+1 sub-case $A_1 = \{3, 6, 9\}$.
 
   Distribution: $A_0 = \{12, 15, 21, 24\}$, $A_1 = \{3, 6, 9\}$
   ($\chi = 1$, three CONSECUTIVE multiples of 3 colored 1!), $A_2
@@ -3693,7 +3691,7 @@ theorem compression_3_3_4_2_2_A1_3_12_A2_9_18_infeasible {n : ℕ} (hn : 26 ≤ 
   * $\chi(10) \ne 2$ via $(18, 4, 10)$ using $\chi(4) = 2$. -/
 
 /--
-  **Round 107 Theorem (4+3+1 case: $A_1 = \{3, 6, 9\}, A_2 = \{18\}$).**
+  **Theorem (4+3+1 case: $A_1 = \{3, 6, 9\}, A_2 = \{18\}$).**
 -/
 theorem compression_3_3_4_3_1_A1_3_6_9_A2_18_infeasible {n : ℕ} (hn : 26 ≤ n)
     (χ : ℕ → ℕ) (hValid : IsValidColoring n 3 χ)
@@ -3735,7 +3733,7 @@ theorem compression_3_3_4_3_1_A1_3_6_9_A2_18_infeasible {n : ℕ} (hn : 26 ≤ n
   have h_v10 : χ 10 < 3 := hValid 10 (by norm_num) (by omega)
   omega
 
-/-! ### Round 108 (2026-05-15) — 4+3+1 sub-case $A_1 = \{3, 9, 15\}$.
+/-! ### 4+3+1 sub-case $A_1 = \{3, 9, 15\}$.
 
   Distribution: $A_0 = \{6, 12, 21, 24\}$, $A_1 = \{3, 9, 15\}$
   ($\chi = 1$ at three positions 6 apart!), $A_2 = \{18\}$.
@@ -3751,7 +3749,7 @@ theorem compression_3_3_4_3_1_A1_3_6_9_A2_18_infeasible {n : ℕ} (hn : 26 ≤ n
   three color-1 self-loops. -/
 
 /--
-  **Round 108 Theorem (4+3+1 case: $A_1 = \{3, 9, 15\}, A_2 = \{18\}$).**
+  **Theorem (4+3+1 case: $A_1 = \{3, 9, 15\}, A_2 = \{18\}$).**
 -/
 theorem compression_3_3_4_3_1_A1_3_9_15_A2_18_infeasible {n : ℕ} (hn : 26 ≤ n)
     (χ : ℕ → ℕ) (hValid : IsValidColoring n 3 χ)
@@ -3794,7 +3792,7 @@ theorem compression_3_3_4_3_1_A1_3_9_15_A2_18_infeasible {n : ℕ} (hn : 26 ≤ 
   have h_v10 : χ 10 < 3 := hValid 10 (by norm_num) (by omega)
   omega
 
-/-! ### Round 109 (2026-05-20) — 7+1+1 distribution, color-majority core.
+/-! ### 7+1+1 distribution, color-majority core.
 
   Final 3-into-9-multiples partition shape for $b = 3$, $k = 3$
   compression: seven multiples of $3$ in one majority color, the
@@ -3803,13 +3801,13 @@ theorem compression_3_3_4_3_1_A1_3_9_15_A2_18_infeasible {n : ℕ} (hn : 26 ≤ 
   The universal forbidden-edge graph on multiples
   $\{3, 6, 9, 12, 15, 18, 21, 24, 27\}$ has edges
   $\{(6, 9), (9, 12), (12, 18), (18, 24), (18, 27)\}$ (Rounds
-  92-93).  Its unique minimum vertex cover is $\{9, 18\}$ —
+  92-93). Its unique minimum vertex cover is $\{9, 18\}$ —
   so the only $7$-element independent set is the complement
   $\{3, 6, 12, 15, 21, 24, 27\}$ (call this $S$).
 
   $S$ is **not Rado-independent**: the triple $(27, 6, 15)$
   satisfies $27 + 3 \cdot 6 = 45 = 3 \cdot 15$, with all three
-  points in $S$.  So if any color holds the entire $S$ (i.e., is
+  points in $S$. So if any color holds the entire $S$ (i.e., is
   the majority color of a $7+1+1$ distribution), that color
   carries a monochromatic Rado triple — contradicting
   `AvoidsMonoSolution`.
@@ -3820,7 +3818,7 @@ theorem compression_3_3_4_3_1_A1_3_9_15_A2_18_infeasible {n : ℕ} (hn : 26 ≤ 
     $\chi(27) = \chi(6) = \chi(15) = c$.
   * Color-$0$, color-$1$, color-$2$ majority wrappers each
     instantiate the core lemma with $c = 0, 1, 2$.
-  * The full $7+1+1$ partition wrappers from R406 are rewritten
+  * The full $7+1+1$ partition wrappers from are rewritten
     in terms of the core lemma.
 
   (Alternative monochromatic triples in $S$ include
@@ -3841,7 +3839,7 @@ theorem compression_3_3_4_3_1_A1_3_9_15_A2_18_infeasible {n : ℕ} (hn : 26 ≤ 
 
   This lemma is **color-symmetric** — it depends only on three
   $\chi$-values being **equal to each other**, not on what color
-  they are.  All color-majority wrappers (color $0$, $1$, $2$)
+  they are. All color-majority wrappers (color $0$, $1$, $2$)
   factor through this core via `h27.trans h6.symm` and
   `h6.trans h15.symm`.
 -/
@@ -3860,14 +3858,14 @@ theorem compression_3_3_7_1_1_majority_core_infeasible
   · exact h6.trans h15.symm
 
 /--
-  **Round 109 Theorem (7+1+1, color-0 majority, $\chi(9) = 1, \chi(18) = 2$).**
+  **Theorem (7+1+1, color-0 majority, $\chi(9) = 1, \chi(18) = 2$).**
 
   Sub-case A of the $7+1+1$ distribution: color $0$ on
   $\{3, 6, 12, 15, 21, 24, 27\}$, color $1$ on $\{9\}$, color $2$
   on $\{18\}$.
 
-  R407 refactor: now a one-line wrapper around the core lemma at
-  $c = 0$.  The labels of colors $1$ and $2$ on $\{9, 18\}$ are
+   refactor: now a one-line wrapper around the core lemma at
+  $c = 0$. The labels of colors $1$ and $2$ on $\{9, 18\}$ are
   irrelevant — the contradiction lives entirely inside color $0$.
 -/
 theorem compression_3_3_7_1_1_case_0major_9eq1_18eq2
@@ -3881,11 +3879,11 @@ theorem compression_3_3_7_1_1_case_0major_9eq1_18eq2
   compression_3_3_7_1_1_majority_core_infeasible χ hAvoid h27 h6 h15
 
 /--
-  **Round 109 Theorem (7+1+1, color-0 majority, $\chi(9) = 2, \chi(18) = 1$).**
+  **Theorem (7+1+1, color-0 majority, $\chi(9) = 2, \chi(18) = 1$).**
 
   Sub-case B of the $7+1+1$ distribution: same color-$0$ set
   $\{3, 6, 12, 15, 21, 24, 27\}$, with $\{9, 18\}$ swapped
-  between colors $1$ and $2$.  Wrapper around the core lemma at
+  between colors $1$ and $2$. Wrapper around the core lemma at
   $c = 0$.
 -/
 theorem compression_3_3_7_1_1_case_0major_9eq2_18eq1
@@ -3905,7 +3903,7 @@ theorem compression_3_3_7_1_1_case_0major_9eq2_18eq1
   labels on $\{9, 18\}$, the color-$0$ set already contains a
   monochromatic Rado triple $(27, 6, 15)$.
 
-  R407 refactor: wrapper around the core lemma at $c = 0$.
+   refactor: wrapper around the core lemma at $c = 0$.
 -/
 theorem compression_3_3_7_1_1_color0_majority_infeasible
     (χ : ℕ → ℕ)
@@ -3918,15 +3916,15 @@ theorem compression_3_3_7_1_1_color0_majority_infeasible
   compression_3_3_7_1_1_majority_core_infeasible χ hAvoid h27 h6 h15
 
 /--
-  **Round 109 (R407) — 7+1+1, color-1 majority infeasibility.**
+  **Round 109 () — 7+1+1, color-1 majority infeasibility.**
 
   Symmetric analogue: if color $1$ is the majority color (in the
   $7+1+1$ shape, this forces $\chi(27) = \chi(6) = \chi(15) = 1$),
-  the configuration is infeasible.  Wrapper around the core lemma
+  the configuration is infeasible. Wrapper around the core lemma
   at $c = 1$.
 
   Hypotheses are minimal: only $\chi(6), \chi(15), \chi(27)$ are
-  needed.  This is intentional — the wrapper says "anywhere a
+  needed. This is intentional — the wrapper says "anywhere a
   $7+1+1$ shape forces $\{6, 15, 27\}$ into a single color,
   contradiction follows", and we don't yet prove the
   forced-shape implication (that step needs a vertex-cover
@@ -3942,7 +3940,7 @@ theorem compression_3_3_7_1_1_color1_majority_infeasible
   compression_3_3_7_1_1_majority_core_infeasible χ hAvoid h27 h6 h15
 
 /--
-  **Round 109 (R407) — 7+1+1, color-2 majority infeasibility.**
+  **Round 109 () — 7+1+1, color-2 majority infeasibility.**
 
   Symmetric analogue at $c = 2$.
 -/
@@ -3955,13 +3953,12 @@ theorem compression_3_3_7_1_1_color2_majority_infeasible
   compression_3_3_7_1_1_majority_core_infeasible χ hAvoid h27 h6 h15
 
 /--
-  **Round 109 (R407) — any-majority $7+1+1$ infeasibility (forced
+  **Round 109 () — any-majority $7+1+1$ infeasibility (forced
   shape level).**
 
   Shape-agnostic wrapper: if any color $c < 3$ holds the entire
   forced $7$-set $\{3, 6, 12, 15, 21, 24, 27\}$ (the unique
-  maximum independent set of the universal forbidden-edge graph
-  in Round 92), the configuration is infeasible.
+  maximum independent set of the universal forbidden-edge graph), the configuration is infeasible.
 
   This is the "$7+1+1$ closure at the forced-shape level": given
   the structural fact that the $7$-element majority of a $7+1+1$
@@ -3983,14 +3980,14 @@ theorem compression_3_3_7_1_1_any_majority_infeasible
     False :=
   compression_3_3_7_1_1_majority_core_infeasible χ hAvoid h27 h6 h15
 
-/-! ### Round 110 (R408, 2026-05-20) — 7+1+1 structural pair-omission closure.
+/-! ### 7+1+1 structural pair-omission closure.
 
-  R407 closed the $7+1+1$ majority shape at the "forced-shape
+   closed the $7+1+1$ majority shape at the "forced-shape
   level": given that the $7$-element majority is the specific set
   $\{3, 6, 12, 15, 21, 24, 27\}$, every color choice for the
   majority leads to contradiction.
 
-  R408 lifts this to the "pair-omission level": given **any** two
+   lifts this to the "pair-omission level": given **any** two
   layer points $p, q \in \{3, 6, 9, 12, 15, 18, 21, 24, 27\}$
   ($p \ne q$) serving as the two non-majority positions, the
   $7+1+1$ configuration is infeasible.
@@ -4003,16 +4000,16 @@ theorem compression_3_3_7_1_1_any_majority_infeasible
   Its unique minimum vertex cover of size $2$ is $\{9, 18\}$.
   So:
   * If $\{p, q\} = \{9, 18\}$: the seven majority points are
-    $\{3, 6, 12, 15, 21, 24, 27\}$ — apply the R407 core lemma
+    $\{3, 6, 12, 15, 21, 24, 27\}$ — apply the core lemma
     via $\{6, 15, 27\}$.
   * If $\{p, q\} \ne \{9, 18\}$: there exists a forbidden edge
-    $(u, v) \in E$ with $u, v \notin \{p, q\}$.  Then $\chi(u) =
+    $(u, v) \in E$ with $u, v \notin \{p, q\}$. Then $\chi(u) =
     \chi(v) = c$ but $\chi(u) \ne \chi(v)$ (Round 92 universal
     self-loop) — contradiction.
 
   The proof is a finite case dispatch over the $9 \times 9 = 81$
   ordered $(p, q)$ pairs (9 trivial $p = q$, 1 core-lemma case,
-  71 forbidden-edge cases).  A single `first` block tries each
+  71 forbidden-edge cases). A single `first` block tries each
   option; the appropriate witness fires automatically because
   `by decide` on the inequality side-conditions succeeds exactly
   when the chosen $u, v$ avoid $\{p, q\}$.
@@ -4021,7 +4018,7 @@ theorem compression_3_3_7_1_1_any_majority_infeasible
   this is a concrete, kernel-pure dispatcher. -/
 
 /--
-  **Round 110 Theorem (R408) — 7+1+1 pair-omission infeasibility.**
+  **Theorem () — 7+1+1 pair-omission infeasibility.**
 
   For any two layer points $p, q \in \{3, 6, 9, 12, 15, 18, 21,
   24, 27\}$ with $p \ne q$: if every layer point other than $p$
@@ -4029,17 +4026,17 @@ theorem compression_3_3_7_1_1_any_majority_infeasible
   with $\{p, q\}$ as the two non-majority positions), the
   configuration is infeasible.
 
-  Proof: case analysis on $(p, q)$.  The unique pair $\{9, 18\}$
-  uses the R407 core lemma; all other pairs miss at least one
+  Proof: case analysis on $(p, q)$. The unique pair $\{9, 18\}$
+  uses the core lemma; all other pairs miss at least one
   forbidden edge and contradict via a Round 92 universal
   self-loop.
 
   **Structural significance**: this closes $7+1+1$ at the pair-
   omission level — without any cardinality/Finset infrastructure,
-  every pair of "omitted" multiples gives a contradiction.  The
-  only remaining gap (R409 candidate) is the cardinality-to-pair
+  every pair of "omitted" multiples gives a contradiction. The
+  only remaining gap ( candidate) is the cardinality-to-pair
   extraction: "if exactly 7 layer points share a color, there
-  exist two omitted points".  That step uses pigeonhole on the
+  exist two omitted points". That step uses pigeonhole on the
   $9$-element layer and is not done here.
 -/
 theorem compression_3_3_7_1_1_omission_pair_infeasible
@@ -4077,10 +4074,10 @@ theorem compression_3_3_7_1_1_omission_pair_infeasible
   -- Unfold layer membership into 9-way disjunction.
   simp only [List.mem_cons, List.not_mem_nil, or_false] at hp_layer hq_layer
   -- Case split: 9 values for p × 9 values for q = 81 sub-goals.
-  -- The `first` block dispatches each via: p=q absurdity, R407 core
+  -- The `first` block dispatches each via: p=q absurdity, core
   -- (when {p,q}={9,18} or more generally when {6,15,27}∩{p,q}=∅),
   -- or one of the 5 forbidden-edge lemmas (when both endpoints
-  -- avoid {p,q}).  `by decide` succeeds on the inequality side-
+  -- avoid {p,q}). `by decide` succeeds on the inequality side-
   -- conditions exactly when the chosen witnesses avoid the omitted
   -- pair, so the correct branch fires automatically per case.
   rcases hp_layer with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl <;>
@@ -4089,11 +4086,11 @@ theorem compression_3_3_7_1_1_omission_pair_infeasible
     | exact absurd rfl hpq
     | exact compression_3_3_7_1_1_majority_core_infeasible χ hAvoid
         (hOnly 27 (by decide) (by decide) (by decide))
-        (hOnly 6  (by decide) (by decide) (by decide))
+        (hOnly 6 (by decide) (by decide) (by decide))
         (hOnly 15 (by decide) (by decide) (by decide))
     | exact e_6_9 ((hOnly 6 (by decide) (by decide) (by decide)).trans
                    (hOnly 9 (by decide) (by decide) (by decide)).symm)
-    | exact e_9_12 ((hOnly 9  (by decide) (by decide) (by decide)).trans
+    | exact e_9_12 ((hOnly 9 (by decide) (by decide) (by decide)).trans
                     (hOnly 12 (by decide) (by decide) (by decide)).symm)
     | exact e_12_18 ((hOnly 12 (by decide) (by decide) (by decide)).trans
                      (hOnly 18 (by decide) (by decide) (by decide)).symm)
@@ -4108,7 +4105,7 @@ theorem compression_3_3_7_1_1_omission_pair_infeasible
 
   Identical statement to `compression_3_3_7_1_1_omission_pair_infeasible`,
   re-exposed under the "structural" naming used by the master $b=3,
-  k=3$ dispatcher.  Future R409+ work can plug this in as the
+  k=3$ dispatcher. Future + work can plug this in as the
   $7+1+1$ closure leaf without needing to track the omission pair
   representation explicitly.
 -/
@@ -4125,23 +4122,23 @@ theorem compression_3_3_7_1_1_pair_omission_structural_infeasible
     False :=
   compression_3_3_7_1_1_omission_pair_infeasible χ hAvoid hp_layer hq_layer hpq hOnly
 
-/-! ### Round 111 (R409, 2026-05-20) — 7+1+1 cardinality lift.
+/-! ### 7+1+1 cardinality lift.
 
-  R408 closed $7+1+1$ at the **pair-omission level**: given any two
+   closed $7+1+1$ at the **pair-omission level**: given any two
   layer points $p, q$ ($p \ne q$) as the two non-majority
   positions, the configuration is infeasible.
 
-  R409 lifts this to the **cardinality / distribution level**:
+   lifts this to the **cardinality / distribution level**:
   given only that the majority color appears on **exactly 7** of
-  the 9 layer points, the configuration is infeasible.  This
+  the 9 layer points, the configuration is infeasible. This
   matches the form a master $b=3, k=3$ dispatcher would invoke.
 
   **Approach**: From a $\mathrm{length} = 7$ hypothesis on
   `(layer.filter (· has color c)).length`, derive a length-$2$
   complementary filter via `(layer.filter c).length +
-  (layer.filter (¬c)).length = layer.length = 9`.  By
+  (layer.filter (¬c)).length = layer.length = 9`. By
   `List.length_eq_two`, the complement filter equals $[p, q]$ for
-  concrete $p, q$.  Then $p, q$ inherit:
+  concrete $p, q$. Then $p, q$ inherit:
   * $p, q \in \text{layer}$ (filter is a sub-list),
   * $\chi(p), \chi(q) \ne c$ (filter predicate),
   * $p \ne q$ (filter preserves nodup, layer is nodup).
@@ -4149,17 +4146,17 @@ theorem compression_3_3_7_1_1_pair_omission_structural_infeasible
   $\chi \ne c$ would also lie in the complement filter and hence
   in $[p, q]$.
 
-  R408 then closes the configuration. -/
+   then closes the configuration. -/
 
 /--
-  **Round 111 Lemma (R409) — layer cardinality 7 ⇒ exists two omitted.**
+  **Lemma () — layer cardinality 7 ⇒ exists two omitted.**
 
   If a coloring $\chi$ assigns the value $c$ to exactly $7$ of the
   $9$ multiples of $3$ in $\{1, \ldots, 27\}$, then there exist two
   distinct layer points $p, q$ where $\chi$ differs from $c$, and
   every other layer point has $\chi \cdot = c$.
 
-  This is the cardinality-to-pair extraction needed to plug R408
+  This is the cardinality-to-pair extraction needed to plug 
   into a card-7-based master dispatcher.
 
   Proof uses Mathlib's `List.length_eq_length_filter_add`: the
@@ -4231,7 +4228,7 @@ theorem layer3_card7_filter_exists_two_omitted
     exact hmq hm2
 
 /--
-  **Round 111 Theorem (R409) — 7+1+1 card-7 infeasibility.**
+  **Theorem () — 7+1+1 card-7 infeasibility.**
 
   If a coloring assigns some color $c$ to exactly $7$ of the $9$
   multiples of $3$ in $\{1, \ldots, 27\}$, then no such coloring
@@ -4243,8 +4240,8 @@ theorem layer3_card7_filter_exists_two_omitted
   theorem directly without tracking the omission-pair
   representation.
 
-  Proof: extract the two omitted positions via the R409 helper
-  lemma, then dispatch through the R408 pair-omission theorem.
+  Proof: extract the two omitted positions via the helper
+  lemma, then dispatch through the pair-omission theorem.
 -/
 theorem compression_3_3_7_1_1_card7_infeasible
     (χ : ℕ → ℕ)
@@ -4258,7 +4255,7 @@ theorem compression_3_3_7_1_1_card7_infeasible
   exact compression_3_3_7_1_1_omission_pair_infeasible χ hAvoid hp hq hpq hOnly
 
 /--
-  **Round 111 (R409) — color-0 card-7 specialization.**  Wrapper
+  **Round 111 () — color-0 card-7 specialization.** Wrapper
   around `compression_3_3_7_1_1_card7_infeasible` at $c = 0$.
 -/
 theorem compression_3_3_7_1_1_color0_card7_infeasible
@@ -4270,7 +4267,7 @@ theorem compression_3_3_7_1_1_color0_card7_infeasible
   compression_3_3_7_1_1_card7_infeasible χ hAvoid hCard
 
 /--
-  **Round 111 (R409) — color-1 card-7 specialization.**
+  **Round 111 () — color-1 card-7 specialization.**
 -/
 theorem compression_3_3_7_1_1_color1_card7_infeasible
     (χ : ℕ → ℕ)
@@ -4281,7 +4278,7 @@ theorem compression_3_3_7_1_1_color1_card7_infeasible
   compression_3_3_7_1_1_card7_infeasible χ hAvoid hCard
 
 /--
-  **Round 111 (R409) — color-2 card-7 specialization.**
+  **Round 111 () — color-2 card-7 specialization.**
 -/
 theorem compression_3_3_7_1_1_color2_card7_infeasible
     (χ : ℕ → ℕ)
@@ -4291,20 +4288,20 @@ theorem compression_3_3_7_1_1_color2_card7_infeasible
     False :=
   compression_3_3_7_1_1_card7_infeasible χ hAvoid hCard
 
-/-! ### Round 112 (R410, 2026-05-20) — partition-shape structural audit
+/-! ### partition-shape structural audit
     and 6+2+1 partial closure (χ(18) = majority case).
 
   **Layer partition audit summary** (from
   `src/R410_layer_partition_audit.py`):
 
-  | Shape    | Total | Edge-closed | Triple-closed | Survivors |
+  | Shape | Total | Edge-closed | Triple-closed | Survivors |
   | -------- | ----- | ----------- | ------------- | --------- |
-  | (6, 2, 1) |  252 |         234 |            16 |       **2** |
-  | (5, 3, 1) |  504 |         456 |            44 |         4 |
-  | (5, 2, 2) |  378 |         327 |            39 |        12 |
-  | (4, 4, 1) |  315 |         283 |            28 |         4 |
-  | (4, 3, 2) | 1260 |        1043 |           161 |        56 |
-  | (3, 3, 3) |  280 |         223 |            44 |        13 |
+  | (6, 2, 1) | 252 | 234 | 16 | **2** |
+  | (5, 3, 1) | 504 | 456 | 44 | 4 |
+  | (5, 2, 2) | 378 | 327 | 39 | 12 |
+  | (4, 4, 1) | 315 | 283 | 28 | 4 |
+  | (4, 3, 2) | 1260 | 1043 | 161 | 56 |
+  | (3, 3, 3) | 280 | 223 | 44 | 13 |
 
   The 16 non-trivial layer-internal Rado triples (with $x, y, z$
   distinct):
@@ -4319,11 +4316,11 @@ theorem compression_3_3_7_1_1_color2_card7_infeasible
   * Survivor A: size-2 class $\{9, 18\}$, size-1 class $\{27\}$.
   * Survivor B: size-2 class $\{9, 27\}$, size-1 class $\{18\}$.
 
-  Both survivors require off-layer analysis (R411+).
+  Both survivors require off-layer analysis (+).
 
-  **R410 deliverable**: partial closure of 6+2+1 at the cardinality
+  ** deliverable**: partial closure of 6+2+1 at the cardinality
   level — specifically, the χ(18) = majority case (which forces the
-  majority class to violate the (6, 9) forbidden edge).  This
+  majority class to violate the (6, 9) forbidden edge). This
   eliminates the χ(18) = majority "branch" of any 6+2+1 dispatcher.
 
   **Argument**: If χ(18) = c and (filter (· = c) on layer).length = 6:
@@ -4343,14 +4340,14 @@ theorem compression_3_3_7_1_1_color2_card7_infeasible
   required). -/
 
 /--
-  **Round 112 Lemma (R410) — 6+2+1, $\chi(18) =$ majority case is
+  **Lemma () — 6+2+1, $\chi(18) =$ majority case is
   infeasible.**
 
   Layer-internal closure for the sub-case where the size-6 majority
-  color contains $\chi(18)$.  This is one of three "$\chi(?) =$
+  color contains $\chi(18)$. This is one of three "$\chi(?) =$
   majority" branches of any 6+2+1 dispatcher (the other two,
   $\chi(9) =$ majority and $\chi(27) =$ majority, each leave one
-  survivor — see R411 audit).
+  survivor — see audit).
 -/
 theorem compression_3_3_card6_chi18_eq_majority_infeasible
     (χ : ℕ → ℕ)
@@ -4442,18 +4439,18 @@ theorem compression_3_3_card6_chi18_eq_majority_infeasible
     rw [show ({9, 12, 24, 27} : Finset ℕ).card = 4 from by decide,
         hToFinsetCard] at this
     omega
-  -- Now χ(6) = χ(9) = c.  Triple (9, 6, 9) is monochromatic.
+  -- Now χ(6) = χ(9) = c. Triple (9, 6, 9) is monochromatic.
   exact hAvoid ⟨9, 6, 9, by norm_num, by norm_num, by norm_num,
     ⟨by norm_num, by norm_num, by norm_num, by norm_num⟩,
     h9.trans h6.symm, h6.trans h9.symm⟩
 
-/-! ### Round 113 (R411, 2026-05-20) — 6+2+1 cardinality closure: χ(9), χ(27) anchors.
+/-! ### 6+2+1 cardinality closure: χ(9), χ(27) anchors.
 
-  R410 closed the $\chi(18) = c$ anchor.  R411 closes the remaining
+   closed the $\chi(18) = c$ anchor. closes the remaining
   two cardinality-level anchor cases:
   * **$\chi(9) = c$**: $(6, 9), (9, 12)$ edges force $\chi(6),
-    \chi(12) \ne c$.  Complement length-$3$ leaves one more
-    non-$c$ position.  Case-split on $\chi(15), \chi(18)$:
+    \chi(12) \ne c$. Complement length-$3$ leaves one more
+    non-$c$ position. Case-split on $\chi(15), \chi(18)$:
     - If both $= c$: triple $(9, 15, 18)$ mono.
     - Otherwise: force $\chi(21), \chi(24) = c$ by cardinality;
       triple $(9, 21, 24)$ mono.
@@ -4468,16 +4465,16 @@ theorem compression_3_3_card6_chi18_eq_majority_infeasible
   Each anchor case is closed by layer-internal Rado triples
   alone — no off-layer analysis required.
 
-  **Combined with R410**: any $7+1+1$ majority hitting one of
-  $\{9, 18, 27\}$ is now infeasible.  The only remaining
+  **Combined with **: any $7+1+1$ majority hitting one of
+  $\{9, 18, 27\}$ is now infeasible. The only remaining
   cardinality survivor structure for $6+2+1$ has all of
   $\{9, 18, 27\} \notin$ majority class — these are precisely the
-  two R410-audit survivors (R411-c candidates: off-layer
+  two -audit survivors (-c candidates: off-layer
   closure). -/
 
-/-- **Round 113 helper (R411)** — Finset-cardinality contradiction
+/-- **Round 113 helper ()** — Finset-cardinality contradiction
     from 4 distinct non-$c$ layer positions when complement Finset
-    has card 3.  Used in R411's by_cases dispatches. -/
+    has card 3. Used in 's by_cases dispatches. -/
 private lemma layer3_four_non_c_impossible
     (χ : ℕ → ℕ) {c : ℕ}
     (hToFinsetCard : (([3, 6, 9, 12, 15, 18, 21, 24, 27] : List ℕ).filter
@@ -4508,11 +4505,11 @@ private lemma layer3_four_non_c_impossible
   omega
 
 /--
-  **Round 113 Lemma (R411) — 6+2+1, $\chi(9) =$ majority case is
+  **Lemma () — 6+2+1, $\chi(9) =$ majority case is
   infeasible.**
 
   Layer-internal closure for the sub-case where the size-6 majority
-  color contains $\chi(9)$.  Uses forbidden edges $(6, 9), (9, 12)$
+  color contains $\chi(9)$. Uses forbidden edges $(6, 9), (9, 12)$
   plus Rado triples $(9, 15, 18)$ or $(9, 21, 24)$.
 -/
 theorem compression_3_3_card6_chi9_eq_majority_infeasible
@@ -4564,7 +4561,7 @@ theorem compression_3_3_card6_chi9_eq_majority_infeasible
       exact hAvoid ⟨9, 15, 18, by norm_num, by norm_num, by norm_num,
         ⟨by norm_num, by norm_num, by norm_num, by norm_num⟩,
         h9.trans h15.symm, h15.trans h18.symm⟩
-    · -- χ(18) ≠ c.  Force χ(21), χ(24) = c via 4-element complement contradiction.
+    · -- χ(18) ≠ c. Force χ(21), χ(24) = c via 4-element complement contradiction.
       have h18_in : 18 ∈ ([3, 6, 9, 12, 15, 18, 21, 24, 27] : List ℕ).filter
                       (fun m => !decide (χ m = c)) := by
         rw [List.mem_filter]; refine ⟨by simp, ?_⟩; simp [h18]
@@ -4586,7 +4583,7 @@ theorem compression_3_3_card6_chi9_eq_majority_infeasible
       exact hAvoid ⟨9, 21, 24, by norm_num, by norm_num, by norm_num,
         ⟨by norm_num, by norm_num, by norm_num, by norm_num⟩,
         h9.trans h21.symm, h21.trans h24.symm⟩
-  · -- χ(15) ≠ c.  Force χ(21), χ(24) = c.
+  · -- χ(15) ≠ c. Force χ(21), χ(24) = c.
     have h15_in : 15 ∈ ([3, 6, 9, 12, 15, 18, 21, 24, 27] : List ℕ).filter
                     (fun m => !decide (χ m = c)) := by
       rw [List.mem_filter]; refine ⟨by simp, ?_⟩; simp [h15]
@@ -4610,11 +4607,11 @@ theorem compression_3_3_card6_chi9_eq_majority_infeasible
       h9.trans h21.symm, h21.trans h24.symm⟩
 
 /--
-  **Round 113 Lemma (R411) — 6+2+1, $\chi(27) =$ majority case is
+  **Lemma () — 6+2+1, $\chi(27) =$ majority case is
   infeasible.**
 
   Layer-internal closure for the sub-case where the size-6 majority
-  color contains $\chi(27)$.  Uses forbidden edges $(6, 9), (9, 12),
+  color contains $\chi(27)$. Uses forbidden edges $(6, 9), (9, 12),
   (18, 27)$ plus Rado triples $(27, 6, 15), (27, 15, 24), (27, 3,
   12)$.
 -/
@@ -4667,7 +4664,7 @@ theorem compression_3_3_card6_chi27_eq_majority_infeasible
         exact hAvoid ⟨9, 9, 12, by norm_num, by norm_num, by norm_num,
           ⟨by norm_num, by norm_num, by norm_num, by norm_num⟩,
           rfl, h9.trans h12.symm⟩
-      · -- χ(12) ≠ c.  Complement ⊇ {6, 12, 18}, length 3 ⇒ those 3.
+      · -- χ(12) ≠ c. Complement ⊇ {6, 12, 18}, length 3 ⇒ those 3.
         -- Force χ(15), χ(24) = c via cardinality; triple (27, 15, 24).
         have h12_in : 12 ∈ ([3, 6, 9, 12, 15, 18, 21, 24, 27] : List ℕ).filter
                         (fun m => !decide (χ m = c)) := by
@@ -4690,7 +4687,7 @@ theorem compression_3_3_card6_chi27_eq_majority_infeasible
         exact hAvoid ⟨27, 15, 24, by norm_num, by norm_num, by norm_num,
           ⟨by norm_num, by norm_num, by norm_num, by norm_num⟩,
           h27.trans h15.symm, h15.trans h24.symm⟩
-  · -- χ(9) ≠ c.  Complement ⊇ {9, 18}, plus 1 more.
+  · -- χ(9) ≠ c. Complement ⊇ {9, 18}, plus 1 more.
     have h9_in : 9 ∈ ([3, 6, 9, 12, 15, 18, 21, 24, 27] : List ℕ).filter
                    (fun m => !decide (χ m = c)) := by
       rw [List.mem_filter]; refine ⟨by simp, ?_⟩; simp [h9]
@@ -4701,7 +4698,7 @@ theorem compression_3_3_card6_chi27_eq_majority_infeasible
         exact hAvoid ⟨27, 6, 15, by norm_num, by norm_num, by norm_num,
           ⟨by norm_num, by norm_num, by norm_num, by norm_num⟩,
           h27.trans h6.symm, h6.trans h15.symm⟩
-      · -- χ(6) ≠ c.  Complement = {6, 9, 18}.  c-class includes {3, 12, 15, 21, 24, 27}.
+      · -- χ(6) ≠ c. Complement = {6, 9, 18}. c-class includes {3, 12, 15, 21, 24, 27}.
         -- Force χ(3), χ(12) = c; triple (27, 3, 12).
         have h6_in : 6 ∈ ([3, 6, 9, 12, 15, 18, 21, 24, 27] : List ℕ).filter
                        (fun m => !decide (χ m = c)) := by
@@ -4724,7 +4721,7 @@ theorem compression_3_3_card6_chi27_eq_majority_infeasible
         exact hAvoid ⟨27, 3, 12, by norm_num, by norm_num, by norm_num,
           ⟨by norm_num, by norm_num, by norm_num, by norm_num⟩,
           h27.trans h3.symm, h3.trans h12.symm⟩
-    · -- χ(15) ≠ c.  Complement = {9, 15, 18}.  c-class includes {3, 6, 12, 21, 24, 27}.
+    · -- χ(15) ≠ c. Complement = {9, 15, 18}. c-class includes {3, 6, 12, 21, 24, 27}.
       -- Force χ(3), χ(12) = c; triple (27, 3, 12).
       have h15_in : 15 ∈ ([3, 6, 9, 12, 15, 18, 21, 24, 27] : List ℕ).filter
                       (fun m => !decide (χ m = c)) := by
@@ -4749,18 +4746,18 @@ theorem compression_3_3_card6_chi27_eq_majority_infeasible
         h27.trans h3.symm, h3.trans h12.symm⟩
 
 /--
-  **Round 113 (R411) — 6+2+1 anchor dispatcher.**
+  **Round 113 () — 6+2+1 anchor dispatcher.**
 
   If a color $c$ appears exactly 6 times on the layer and any of
   $\{9, 18, 27\}$ is in the majority class, then contradiction.
-  Combines R410 ($\chi(18)$) with R411-a ($\chi(9)$), R411-b
+  Combines ($\chi(18)$) with -a ($\chi(9)$), -b
   ($\chi(27)$).
 
   **Consequence**: any feasible 6+2+1 cardinality majority must
   have $\chi(9), \chi(18), \chi(27)$ all distinct from $c$ —
-  i.e., $\{9, 18, 27\}$ is precisely the size-3 complement.  Per
-  the R410 partition audit, this leaves exactly the two
-  off-layer survivors (R412+ target).
+  i.e., $\{9, 18, 27\}$ is precisely the size-3 complement. Per
+  the partition audit, this leaves exactly the two
+  off-layer survivors (+ target).
 -/
 theorem compression_3_3_card6_anchor_at_9_18_27_infeasible
     (χ : ℕ → ℕ)
@@ -4775,14 +4772,14 @@ theorem compression_3_3_card6_anchor_at_9_18_27_infeasible
   · exact compression_3_3_card6_chi18_eq_majority_infeasible χ hAvoid hCard h18
   · exact compression_3_3_card6_chi27_eq_majority_infeasible χ hAvoid hCard h27
 
-/-! ### Round 114 (R412, 2026-05-21) — 6+2+1 off-layer survivor closure.
+/-! ### 6+2+1 off-layer survivor closure.
 
-  R410-R411 closed the cardinality anchor cases at $\chi(9), \chi(18),
-  \chi(27)$.  Any remaining feasible 6+2+1 coloring must therefore
+  - closed the cardinality anchor cases at $\chi(9), \chi(18),
+  \chi(27)$. Any remaining feasible 6+2+1 coloring must therefore
   have the 6-majority class exactly $C_7 = \{3, 6, 12, 15, 21, 24\}$
   and the omission triple exactly $\{9, 18, 27\}$.
 
-  R410 partition audit identified two surviving structures:
+   partition audit identified two surviving structures:
   * **Survivor A**: $\chi$ on $C_7 = c$, $\chi(9) = \chi(18) = b$,
     $\chi(27) = a$.
   * **Survivor B**: $\chi$ on $C_7 = c$, $\chi(9) = \chi(27) = b$,
@@ -4791,7 +4788,7 @@ theorem compression_3_3_card6_anchor_at_9_18_27_infeasible
   $(18, 27)$.)
 
   Both survivors are layer-internally consistent — closing them
-  requires **off-layer** propagation.  Constraint search
+  requires **off-layer** propagation. Constraint search
   (`src/R412_survivor_search.py`) found short chains in both cases
   via `χ(1)` branching:
 
@@ -4823,17 +4820,17 @@ theorem compression_3_3_card6_anchor_at_9_18_27_infeasible
   Trichotomy on $\chi(1)$ (= $a$, $b$, or $c$) uses `IsValidColoring
   27 3 χ`: combined with $\chi(1) \ne c$ (from $(6, 1, 3)$ forbidden
   triple) and $\chi(1) \ne b$/$\ne a$ branch, $\chi(1)$ takes the
-  remaining value.  Closing both branches discharges the survivor. -/
+  remaining value. Closing both branches discharges the survivor. -/
 
 set_option maxHeartbeats 1000000 in
 /--
-  **Round 114 Theorem (R412) — 6+2+1 Survivor A is infeasible.**
+  **Theorem () — 6+2+1 Survivor A is infeasible.**
 
   Survivor A: $\chi$ on $\{3, 6, 12, 15, 21, 24\} = c$, $\chi(9) =
   \chi(18) = b$, $\chi(27) = a$, with $a, b, c$ pairwise distinct.
 
   Proof by case-split on $\chi(1)$ (which is $\ne c$ by triple
-  $(6, 1, 3)$, then $\in \{a, b\}$ by `IsValidColoring`).  Each
+  $(6, 1, 3)$, then $\in \{a, b\}$ by `IsValidColoring`). Each
   branch terminates in a layer-touching monochromatic Rado triple.
 -/
 theorem compression_3_3_6_2_1_survivorA_infeasible
@@ -4962,7 +4959,7 @@ theorem compression_3_3_6_2_1_survivorA_infeasible
 
 set_option maxHeartbeats 1000000 in
 /--
-  **Round 114 Theorem (R412) — 6+2+1 Survivor B is infeasible.**
+  **Theorem () — 6+2+1 Survivor B is infeasible.**
 
   Survivor B: $\chi$ on $\{3, 6, 12, 15, 21, 24\} = c$, $\chi(9) =
   \chi(27) = b$, $\chi(18) = a$.
@@ -5053,7 +5050,7 @@ theorem compression_3_3_6_2_1_survivorB_infeasible
       (h18.trans h4.symm) (h4.trans h10.symm)
 
 /--
-  **Round 114 (R412) — 6+2+1 survivor dispatcher.**
+  **Round 114 () — 6+2+1 survivor dispatcher.**
 
   Combines Survivor A and Survivor B: given that the 6-majority is
   $C_7$ and the size-2 class is either $\{9, 18\}$ (Survivor A) or
@@ -5076,25 +5073,25 @@ theorem compression_3_3_6_2_1_survivors_infeasible
   · exact compression_3_3_6_2_1_survivorB_infeasible χ hValid hAvoid
       h3 h6 h12 h15 h21 h24 h9 h27 h18 hcb hca hba
 
-/-! ### Round 115 (R413, 2026-05-21) — 6+2+1 master cardinality wrapper.
+/-! ### 6+2+1 master cardinality wrapper.
 
-  R410-R412 closed all sub-cases of the 6+2+1 partition shape for
+  - closed all sub-cases of the 6+2+1 partition shape for
   $b=3, k=3$ compression:
-  * **R411 anchor dispatcher** (`compression_3_3_card6_anchor_at_9_18_27_infeasible`):
+  * ** anchor dispatcher** (`compression_3_3_card6_anchor_at_9_18_27_infeasible`):
     if any of $\chi(9), \chi(18), \chi(27) = c$ (majority), False.
-  * **R412 survivor dispatcher** (`compression_3_3_6_2_1_survivors_infeasible`):
+  * ** survivor dispatcher** (`compression_3_3_6_2_1_survivors_infeasible`):
     if none of $\chi(9), \chi(18), \chi(27)$ is majority, then they
     occupy the size-3 complement; the only feasible splits are
     Survivor A or Survivor B, both infeasible.
 
-  R413 bundles these into a SINGLE master theorem taking only
+   bundles these into a SINGLE master theorem taking only
   `hCard : (layer.filter (· = c)).length = 6` as cardinality
   hypothesis — usable by a future $b=3, k=3$ master dispatch that
   consumes the per-color count vector on the multiples layer.
 
   **Proof structure**:
   1. By_cases on the anchor disjunction $\chi(9) = c \lor \chi(18)
-     = c \lor \chi(27) = c$.  True branch: R411 dispatcher.
+     = c \lor \chi(27) = c$. True branch: dispatcher.
   2. False branch: derive $\chi(9), \chi(18), \chi(27) \ne c$.
   3. From cardinality (complement = 3 elements) + 3 known
      non-$c$ positions $\{9, 18, 27\}$: derive $\chi(m) = c$ for
@@ -5103,19 +5100,19 @@ theorem compression_3_3_6_2_1_survivors_infeasible
      - $\chi(18) = \chi(27)$: forbidden edge $(18, 27)$ ⇒ mono
        triple $(27, 18, 27)$.
      - $\chi(9) = \chi(18) \land \chi(18) \ne \chi(27)$:
-       Survivor A (R412 survivorA).
+       Survivor A ( survivorA).
      - $\chi(9) = \chi(27) \land \chi(9) \ne \chi(18)$:
-       Survivor B (R412 survivorB).
+       Survivor B ( survivorB).
      - $\chi(9), \chi(18), \chi(27)$ pairwise distinct: with $c$,
        4 pairwise distinct values $< 3$, impossible (omega).
 
   Closes the entire 6+2+1 partition at the **cardinality /
-  distribution level**.  Layer-internal + off-layer survivor
+  distribution level**. Layer-internal + off-layer survivor
   analysis fully integrated. -/
 
 set_option maxHeartbeats 1000000 in
 /--
-  **Round 115 Theorem (R413) — 6+2+1 cardinality master closure.**
+  **Theorem () — 6+2+1 cardinality master closure.**
 
   If a coloring $\chi$ assigns some color $c$ to exactly 6 of the 9
   multiples of 3 in $\{1, \ldots, 27\}$ (the canonical layer), then
@@ -5229,7 +5226,7 @@ theorem compression_3_3_6_2_1_card6_infeasible
           h3 h6 h12 h15 h21 h24
           rfl h9_27.symm rfl
           (Ne.symm h9_ne_c) (Ne.symm h18_ne_c) h9_18
-      · -- All three pairwise distinct.  With c, 4 distinct values < 3 ⇒ impossible.
+      · -- All three pairwise distinct. With c, 4 distinct values < 3 ⇒ impossible.
         have h9_lt : χ 9 < 3 := hValid 9 (by norm_num) (by norm_num)
         have h18_lt : χ 18 < 3 := hValid 18 (by norm_num) (by norm_num)
         have h27_lt : χ 27 < 3 := hValid 27 (by norm_num) (by norm_num)
@@ -5237,7 +5234,7 @@ theorem compression_3_3_6_2_1_card6_infeasible
         omega
 
 /--
-  **Round 115 (R413) — color-0 wrapper for 6+2+1 card6.**
+  **Round 115 () — color-0 wrapper for 6+2+1 card6.**
 -/
 theorem compression_3_3_6_2_1_color0_card6_infeasible
     (χ : ℕ → ℕ)
@@ -5248,7 +5245,7 @@ theorem compression_3_3_6_2_1_color0_card6_infeasible
     False :=
   compression_3_3_6_2_1_card6_infeasible χ hValid hAvoid hCard
 
-/-- **Round 115 (R413) — color-1 wrapper for 6+2+1 card6.** -/
+/-- **Round 115 () — color-1 wrapper for 6+2+1 card6.** -/
 theorem compression_3_3_6_2_1_color1_card6_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -5258,7 +5255,7 @@ theorem compression_3_3_6_2_1_color1_card6_infeasible
     False :=
   compression_3_3_6_2_1_card6_infeasible χ hValid hAvoid hCard
 
-/-- **Round 115 (R413) — color-2 wrapper for 6+2+1 card6.** -/
+/-- **Round 115 () — color-2 wrapper for 6+2+1 card6.** -/
 theorem compression_3_3_6_2_1_color2_card6_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -5268,11 +5265,11 @@ theorem compression_3_3_6_2_1_color2_card6_infeasible
     False :=
   compression_3_3_6_2_1_card6_infeasible χ hValid hAvoid hCard
 
-/-! ### Round 115β (R415β, 2026-05-21) — 5+3+1 survivor closures.
+/-! ### β (R415β, 2026-05-21) — 5+3+1 survivor closures.
 
-  R414α audit found 4 survivors for shape 5+3+1.  All close by
+  R414α audit found 4 survivors for shape 5+3+1. All close by
   layer-internal + off-layer propagation alone (no χ branching).
-  Singleton class is always {18}.  Each chain forces 2 off-layer
+  Singleton class is always {18}. Each chain forces 2 off-layer
   positions to $c_2$ via 2-step elimination, ending in a mono triple
   at $c_2$. -/
 
@@ -5280,7 +5277,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115β (R415β) — 5+3+1 Survivor A is infeasible.**
   Layer: $c_0 = \{3, 6, 12, 15, 24\}$, $c_1 = \{9, 21, 27\}$,
-  $c_2 = \{18\}$.  Chain forces $\chi(14), \chi(20) = c_2$; mono
+  $c_2 = \{18\}$. Chain forces $\chi(14), \chi(20) = c_2$; mono
   $(18, 14, 20)$ at $c_2$.
 -/
 theorem compression_3_3_5_3_1_survivorA_infeasible
@@ -5337,7 +5334,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115β (R415β) — 5+3+1 Survivor B is infeasible.**
   Layer: $c_0 = \{3, 6, 12, 21, 24\}$, $c_1 = \{9, 15, 27\}$,
-  $c_2 = \{18\}$.  Mono $(18, 4, 10)$ at $c_2$.
+  $c_2 = \{18\}$. Mono $(18, 4, 10)$ at $c_2$.
 -/
 theorem compression_3_3_5_3_1_survivorB_infeasible
     (χ : ℕ → ℕ)
@@ -5393,7 +5390,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115β (R415β) — 5+3+1 Survivor C is infeasible.**
   Layer: $c_0 = \{3, 9, 15, 21, 27\}$, $c_1 = \{6, 12, 24\}$,
-  $c_2 = \{18\}$.  Mono $(18, 2, 8)$ at $c_2$.
+  $c_2 = \{18\}$. Mono $(18, 2, 8)$ at $c_2$.
 -/
 theorem compression_3_3_5_3_1_survivorC_infeasible
     (χ : ℕ → ℕ)
@@ -5449,7 +5446,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115β (R415β) — 5+3+1 Survivor D is infeasible.**
   Layer: $c_0 = \{6, 12, 15, 21, 24\}$, $c_1 = \{3, 9, 27\}$,
-  $c_2 = \{18\}$.  Mono $(18, 2, 8)$ at $c_2$.
+  $c_2 = \{18\}$. Mono $(18, 2, 8)$ at $c_2$.
 -/
 theorem compression_3_3_5_3_1_survivorD_infeasible
     (χ : ℕ → ℕ)
@@ -5485,7 +5482,7 @@ theorem compression_3_3_5_3_1_survivorD_infeasible
   have h2 : χ 2 = c2 := by omega
   -- χ(8) = c2.
   have h8_ne_c0 : χ 8 ≠ c0 := fun h8 =>
-    -- (21, 8, 15): 21 + 24 = 45 = 3·15.  χ(21) = χ(15) = c0
+    -- (21, 8, 15): 21 + 24 = 45 = 3·15. χ(21) = χ(15) = c0
     mono_3 21 8 15 (by norm_num) (by norm_num) (by norm_num)
       (by norm_num) (by norm_num) (by norm_num) (by norm_num)
       (h21.trans h8.symm) (h8.trans h15.symm)
@@ -5539,11 +5536,11 @@ theorem compression_3_3_5_3_1_survivors_infeasible
   · exact compression_3_3_5_3_1_survivorD_infeasible χ hValid hAvoid
       h6 h12 h15 h21 h24 h3 h9 h27 h18 hc01 hc02 hc12
 
-/-! ### Round 115γ (R415γ, 2026-05-21) — 4+4+1 survivor closures.
+/-! ### γ (R415γ, 2026-05-21) — 4+4+1 survivor closures.
 
   R414α audit found 4 survivors for shape 4+4+1; all have $c_2 =
   \{18\}$ and close by propagation alone via 2 off-layer positions
-  forced to $c_2$.  Survivors B, C, D share an identical chain
+  forced to $c_2$. Survivors B, C, D share an identical chain
   (depends only on $\chi(3), \chi(6), \chi(9), \chi(12)$, which are
   fixed by $c_0/c_1$ patterns of those survivors). -/
 
@@ -5551,7 +5548,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115γ (R415γ) — 4+4+1 Survivor A is infeasible.**
   Layer: $c_0 = \{3, 6, 12, 24\}$, $c_1 = \{9, 15, 21, 27\}$,
-  $c_2 = \{18\}$.  Mono $(18, 4, 10)$ at $c_2$.
+  $c_2 = \{18\}$. Mono $(18, 4, 10)$ at $c_2$.
 -/
 theorem compression_3_3_4_4_1_survivorA_infeasible
     (χ : ℕ → ℕ)
@@ -5601,7 +5598,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115γ (R415γ) — 4+4+1 Survivor B is infeasible.**
   Layer: $c_0 = \{3, 9, 15, 21\}$, $c_1 = \{6, 12, 24, 27\}$,
-  $c_2 = \{18\}$.  Mono $(18, 2, 8)$ at $c_2$.
+  $c_2 = \{18\}$. Mono $(18, 2, 8)$ at $c_2$.
 -/
 theorem compression_3_3_4_4_1_survivorB_infeasible
     (χ : ℕ → ℕ)
@@ -5651,7 +5648,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115γ (R415γ) — 4+4+1 Survivor C is infeasible.**
   Layer: $c_0 = \{3, 9, 15, 27\}$, $c_1 = \{6, 12, 21, 24\}$,
-  $c_2 = \{18\}$.  Mono $(18, 2, 8)$ at $c_2$.
+  $c_2 = \{18\}$. Mono $(18, 2, 8)$ at $c_2$.
 -/
 theorem compression_3_3_4_4_1_survivorC_infeasible
     (χ : ℕ → ℕ)
@@ -5699,7 +5696,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115γ (R415γ) — 4+4+1 Survivor D is infeasible.**
   Layer: $c_0 = \{3, 9, 21, 27\}$, $c_1 = \{6, 12, 15, 24\}$,
-  $c_2 = \{18\}$.  Mono $(18, 2, 8)$ at $c_2$.
+  $c_2 = \{18\}$. Mono $(18, 2, 8)$ at $c_2$.
 -/
 theorem compression_3_3_4_4_1_survivorD_infeasible
     (χ : ℕ → ℕ)
@@ -5777,10 +5774,10 @@ theorem compression_3_3_4_4_1_survivors_infeasible
   · exact compression_3_3_4_4_1_survivorD_infeasible χ hValid hAvoid
       h3 h9 h21 h27 h6 h12 h15 h24 h18 hc01 hc02 hc12
 
-/-! ### Round 115δ (R415δ, 2026-05-21) — 5+2+2 survivor closures (stage 1).
+/-! ### δ (R415δ, 2026-05-21) — 5+2+2 survivor closures (stage 1).
 
-  R414α audit found 12 survivors for shape 5+2+2.  Stage 1 closes
-  the 4 shortest-chain survivors A-D (audit IDs S#1-S#4).  Stages
+  R414α audit found 12 survivors for shape 5+2+2. Stage 1 closes
+  the 4 shortest-chain survivors A-D (audit IDs S#1-S#4). Stages
   2-3 (E-L) follow if stage 1 clean.
 
   Per-survivor mono triple:
@@ -5795,7 +5792,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115δ (R415δ) — 5+2+2 Survivor A is infeasible.**
   Layer: $c_0 = \{3, 6, 12, 15, 21\}$, $c_1 = \{9, 18\}$,
-  $c_2 = \{24, 27\}$.  Mono $(9, 16, 19)$ at $c_1$.
+  $c_2 = \{24, 27\}$. Mono $(9, 16, 19)$ at $c_1$.
 -/
 theorem compression_3_3_5_2_2_survivorA_infeasible
     (χ : ℕ → ℕ)
@@ -5851,7 +5848,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115δ (R415δ) — 5+2+2 Survivor B is infeasible.**
   Layer: $c_0 = \{3, 6, 12, 15, 24\}$, $c_1 = \{9, 18\}$,
-  $c_2 = \{21, 27\}$.  Mono $(18, 14, 20)$ at $c_1$.
+  $c_2 = \{21, 27\}$. Mono $(18, 14, 20)$ at $c_1$.
 -/
 theorem compression_3_3_5_2_2_survivorB_infeasible
     (χ : ℕ → ℕ)
@@ -5902,7 +5899,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115δ (R415δ) — 5+2+2 Survivor C is infeasible.**
   Layer: $c_0 = \{3, 6, 12, 15, 24\}$, $c_1 = \{9, 27\}$,
-  $c_2 = \{18, 21\}$.  Mono $(9, 11, 14)$ at $c_1$.
+  $c_2 = \{18, 21\}$. Mono $(9, 11, 14)$ at $c_1$.
 -/
 theorem compression_3_3_5_2_2_survivorC_infeasible
     (χ : ℕ → ℕ)
@@ -5955,7 +5952,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115δ (R415δ) — 5+2+2 Survivor D is infeasible.**
   Layer: $c_0 = \{3, 6, 12, 21, 24\}$, $c_1 = \{9, 18\}$,
-  $c_2 = \{15, 27\}$.  Mono $(9, 7, 10)$ at $c_1$.
+  $c_2 = \{15, 27\}$. Mono $(9, 7, 10)$ at $c_1$.
 
   Longer chain: forces $\chi(10) = c_1$, then $\chi(16) = c_2$
   intermediate, then $\chi(7) = c_1$, then final mono.
@@ -6021,7 +6018,7 @@ theorem compression_3_3_5_2_2_survivorD_infeasible
     (by norm_num) (by norm_num) (by norm_num) (by norm_num)
     (h9.trans h7.symm) (h7.trans h10.symm)
 
-/-! ### Round 115δ (R415δ, 2026-05-21) — 5+2+2 survivor closures (stage 2: E-H).
+/-! ### δ (R415δ, 2026-05-21) — 5+2+2 survivor closures (stage 2: E-H).
 
   Survivors E-H (audit IDs S#5-S#8):
   * **E** (S#5): mono $(9, 10, 13)$ at $c_1$.
@@ -6035,7 +6032,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115δ (R415δ) — 5+2+2 Survivor E is infeasible.**
   Layer: $c_0 = \{3, 6, 12, 21, 24\}$, $c_1 = \{9, 27\}$,
-  $c_2 = \{15, 18\}$.  Mono $(9, 10, 13)$ at $c_1$.
+  $c_2 = \{15, 18\}$. Mono $(9, 10, 13)$ at $c_1$.
 -/
 theorem compression_3_3_5_2_2_survivorE_infeasible
     (χ : ℕ → ℕ)
@@ -6089,7 +6086,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115δ (R415δ) — 5+2+2 Survivor F is infeasible.**
   Layer: $c_0 = \{3, 6, 15, 21, 24\}$, $c_1 = \{9, 18\}$,
-  $c_2 = \{12, 27\}$.  Mono $(9, 5, 8)$ at $c_1$.
+  $c_2 = \{12, 27\}$. Mono $(9, 5, 8)$ at $c_1$.
   Chain: force $\chi(8) = c_1$, then $\chi(14) = c_2$, then
   $\chi(5) = c_1$, mono.
 -/
@@ -6159,7 +6156,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115δ (R415δ) — 5+2+2 Survivor G is infeasible.**
   Layer: $c_0 = \{3, 6, 21, 24, 27\}$, $c_1 = \{9, 18\}$,
-  $c_2 = \{12, 15\}$.  Mono $(9, 7, 10)$ at $c_1$.
+  $c_2 = \{12, 15\}$. Mono $(9, 7, 10)$ at $c_1$.
 -/
 theorem compression_3_3_5_2_2_survivorG_infeasible
     (χ : ℕ → ℕ)
@@ -6214,7 +6211,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115δ (R415δ) — 5+2+2 Survivor H is infeasible.**
   Layer: $c_0 = \{3, 9, 15, 21, 27\}$, $c_1 = \{6, 18\}$,
-  $c_2 = \{12, 24\}$.  Mono $(12, 4, 8)$ at $c_2$.
+  $c_2 = \{12, 24\}$. Mono $(12, 4, 8)$ at $c_2$.
 -/
 theorem compression_3_3_5_2_2_survivorH_infeasible
     (χ : ℕ → ℕ)
@@ -6264,14 +6261,14 @@ theorem compression_3_3_5_2_2_survivorH_infeasible
     (by norm_num) (by norm_num) (by norm_num) (by norm_num)
     (h12.trans h4.symm) (h4.trans h8.symm)
 
-/-! ### Round 115δ (R415δ, 2026-05-21) — 5+2+2 survivor closures (stage 3: I-L).
+/-! ### δ (R415δ, 2026-05-21) — 5+2+2 survivor closures (stage 3: I-L).
 
-  Survivors I-L (audit IDs S#9-S#12).  These survivors share the
+  Survivors I-L (audit IDs S#9-S#12). These survivors share the
   pattern of needing an intermediate $\chi(4) = c_2$ derivation
   via the $(6, 4, 6)$ self-loop and a c0-pair triple, then chain
   to forced $c_1$ positions for the final mono triple.
 
-  * **I** (S#9):  mono $(18, 7, 13)$ at $c_1$.
+  * **I** (S#9): mono $(18, 7, 13)$ at $c_1$.
   * **J** (S#10): mono $(27, 10, 19)$ at $c_1$ — longest chain
     (5 intermediate positions: $\chi(4), \chi(7), \chi(16),
     \chi(19), \chi(10)$).
@@ -6283,7 +6280,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115δ (R415δ) — 5+2+2 Survivor I is infeasible.**
   Layer: $c_0 = \{3, 12, 15, 21, 24\}$, $c_1 = \{6, 18\}$,
-  $c_2 = \{9, 27\}$.  Mono $(18, 7, 13)$ at $c_1$.
+  $c_2 = \{9, 27\}$. Mono $(18, 7, 13)$ at $c_1$.
 -/
 theorem compression_3_3_5_2_2_survivorI_infeasible
     (χ : ℕ → ℕ)
@@ -6348,7 +6345,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115δ (R415δ) — 5+2+2 Survivor J is infeasible.**
   Layer: $c_0 = \{3, 12, 15, 21, 24\}$, $c_1 = \{6, 27\}$,
-  $c_2 = \{9, 18\}$.  Mono $(27, 10, 19)$ at $c_1$.
+  $c_2 = \{9, 18\}$. Mono $(27, 10, 19)$ at $c_1$.
   Longest stage-3 chain: forces $\chi(4) = c_2$, $\chi(7) = c_1$,
   $\chi(16) = c_2$, $\chi(19) = c_1$, $\chi(10) = c_1$, then mono.
 -/
@@ -6439,7 +6436,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115δ (R415δ) — 5+2+2 Survivor K is infeasible.**
   Layer: $c_0 = \{6, 12, 15, 21, 24\}$, $c_1 = \{3, 18\}$,
-  $c_2 = \{9, 27\}$.  Mono $(18, 1, 7)$ at $c_1$.
+  $c_2 = \{9, 27\}$. Mono $(18, 1, 7)$ at $c_1$.
 -/
 theorem compression_3_3_5_2_2_survivorK_infeasible
     (χ : ℕ → ℕ)
@@ -6505,7 +6502,7 @@ set_option maxHeartbeats 1000000 in
 /--
   **Round 115δ (R415δ) — 5+2+2 Survivor L is infeasible.**
   Layer: $c_0 = \{6, 12, 15, 21, 24\}$, $c_1 = \{3, 27\}$,
-  $c_2 = \{9, 18\}$.  Mono $(27, 1, 10)$ at $c_1$.
+  $c_2 = \{9, 18\}$. Mono $(27, 1, 10)$ at $c_1$.
 -/
 theorem compression_3_3_5_2_2_survivorL_infeasible
     (χ : ℕ → ℕ)
@@ -6641,10 +6638,10 @@ theorem compression_3_3_5_2_2_survivors_infeasible
   · exact compression_3_3_5_2_2_survivorL_infeasible χ hValid hAvoid
       h6 h12 h15 h21 h24 h3 h27 h9 h18 hc01 hc02 hc12
 
-/-! ### Round 116δ (R416δ, 2026-05-21) — Layer cardinality helpers.
+/-! ### δ (R416δ, 2026-05-21) — Layer cardinality helpers.
 
   Shared definitions and extraction lemmas for use by cardinality
-  wrappers (R416α/β/γ + future work).  `layer3` and `layerCount`
+  wrappers (R416α/β/γ + future work). `layer3` and `layerCount`
   give a clean interface; `layer3_card1_extract` and
   `layer3_card2_extract` extract concrete position(s) from card
   hypotheses. -/
@@ -6718,28 +6715,28 @@ theorem layer3_card2_extract
     · rw [List.mem_singleton] at hmem2
       exact hmq hmem2
 
-/-! ### Round 116α (R416α, 2026-05-21) — 5+3+1 partial cardinality wrapper.
+/-! ### α (R416α, 2026-05-21) — 5+3+1 partial cardinality wrapper.
 
-  **Status**: PARTIAL.  R414α audit established that all 4 surviving
-  5+3+1 patterns have $c_2 = \{18\}$.  The full cardinality wrapper
+  **Status**: PARTIAL. R414α audit established that all 4 surviving
+  5+3+1 patterns have $c_2 = \{18\}$. The full cardinality wrapper
   requires (i) extracting singleton-at-18, (ii) showing other 8
   singleton candidates lead to contradiction, (iii) deriving the
-  $c_0/c_1$ split into one of 4 survivor patterns.  Steps (i)-(iii)
+  $c_0/c_1$ split into one of 4 survivor patterns. Steps (i)-(iii)
   require ~300-500 Lean lines (case analysis over 56 possible splits
   per singleton candidate).
 
   R416α delivers a "structural wrapper" assuming both $\chi(18) =
-  c_2$ AND the explicit survivor pattern disjunction.  This packages
+  c_2$ AND the explicit survivor pattern disjunction. This packages
   the cardinality hypotheses with the existing
-  `compression_3_3_5_3_1_survivors_infeasible` dispatcher.  The full
-  cardinality-to-pattern extraction is deferred to R417+. -/
+  `compression_3_3_5_3_1_survivors_infeasible` dispatcher. The full
+  cardinality-to-pattern extraction is deferred to +. -/
 
 /--
   **Round 116α (R416α) — 5+3+1 cardinality-aware survivor dispatcher.**
 
   Packages `compression_3_3_5_3_1_survivors_infeasible` (R415β
   dispatcher) with explicit `hCard0/hCard1/hCard2` cardinality
-  hypotheses.  Assumes $\chi(18) = c_2$ (singleton-at-18 forced
+  hypotheses. Assumes $\chi(18) = c_2$ (singleton-at-18 forced
   separately) and the 4-way survivor pattern disjunction.
 
   Future R417α should derive `hSurvivorPattern` from
@@ -6800,12 +6797,12 @@ theorem compression_3_3_4_4_1_card_at_18_via_pattern_infeasible
 
   Packages `compression_3_3_5_2_2_survivors_infeasible` (R415δ
   dispatcher) with explicit `hCard0/hCard1/hCard2` cardinality
-  hypotheses.  Unlike the 5+3+1 / 4+4+1 wrappers, the 5+2+2
+  hypotheses. Unlike the 5+3+1 / 4+4+1 wrappers, the 5+2+2
   partition has no shared singleton-at-18 invariant ($\chi(18)$
   is either $c_1$ or $c_2$ depending on the survivor pattern),
   so no `h18` hypothesis is taken.
 
-  Future R425+ should derive `hSurvivor` from
+  Future + should derive `hSurvivor` from
   `hCard0/hCard1/hCard2` automatically.
 -/
 theorem compression_3_3_5_2_2_pattern_dispatch_infeasible
@@ -6845,10 +6842,10 @@ theorem compression_3_3_5_2_2_pattern_dispatch_infeasible
     False :=
   compression_3_3_5_2_2_survivors_infeasible χ hValid hAvoid h01 h02 h12 hSurvivor
 
-/-! ### Round 117δ (R417δ, 2026-05-21) — Extended cardinality helpers.
+/-! ### δ (R417δ, 2026-05-21) — Extended cardinality helpers.
 
   Continues R416δ with card-3, card-4, and card-5-complement
-  extraction lemmas.  Uses Mathlib's `List.length_eq_three` and
+  extraction lemmas. Uses Mathlib's `List.length_eq_three` and
   `List.length_eq_four`. -/
 
 /-- **R417δ Helper card-3 extract**: $\mathrm{layerCount} = 3$
@@ -7010,8 +7007,8 @@ theorem layer3_card5_complement_extract
   · intro m hm hmp hmq hmr hms
     by_contra hne
     -- m ∈ layer3, χ m ≠ c, so m in complement filter, hence in [p, q, r, s] — but
-    -- m ≠ any of them.  But wait, we want χ m = c.  So assume χ m ≠ c.
-    -- Actually we want to prove χ m = c.  by_contra gives χ m ≠ c.
+    -- m ≠ any of them. But wait, we want χ m = c. So assume χ m ≠ c.
+    -- Actually we want to prove χ m = c. by_contra gives χ m ≠ c.
     have hm_in : m ∈ layer3.filter (fun m => !decide (χ m = c)) := by
       rw [List.mem_filter]; exact ⟨hm, by simpa using hne⟩
     rw [hQuad] at hm_in
@@ -7023,7 +7020,7 @@ theorem layer3_card5_complement_extract
         · exact hmr rfl
         · rw [List.mem_singleton] at hm4; exact hms hm4
 
-/-! ### Round 118α (R418α, 2026-05-21) — generic helper for "χ(18) = c
+/-! ### α (R418α, 2026-05-21) — generic helper for "χ(18) = c
     and layerCount = 5 ⇒ False".
 
   Used by the 5+3+1 master to close the χ(18) = c0 (size-5 majority)
@@ -7031,7 +7028,7 @@ theorem layer3_card5_complement_extract
 
   Forbidden edges (12, 18), (18, 24), (18, 27) force 12, 24, 27 ∉ c.
   With layerCount = 5 and 18 ∈ c-class, c-class = {18} ∪ (4 of
-  {3, 6, 9, 15, 21}).  Each of 5 such configurations contains a
+  {3, 6, 9, 15, 21}). Each of 5 such configurations contains a
   mono Rado triple. -/
 
 set_option maxHeartbeats 1000000 in
@@ -7088,9 +7085,9 @@ theorem layer3_card5_chi18_eq_color_infeasible
                   ↓reduceIte, Nat.zero_add, Nat.add_zero] at hCard
        omega)
 
-/-! ### Round 118 (R418, 2026-05-21) — 5+3+1 cardinality wrapper.
+/-! ### 5+3+1 cardinality wrapper.
 
-  **STATUS**: PARTIAL.  This round delivers the generic helper
+  **STATUS**: PARTIAL. This round delivers the generic helper
   `layer3_card5_chi18_eq_color_infeasible` (above), which closes the
   χ(18) = c sub-case for ANY color c with layerCount = 5.
 
@@ -7106,32 +7103,32 @@ theorem layer3_card5_chi18_eq_color_infeasible
     or contradict. Estimated ~250 lines.
 
   The helper above + R416α partial wrapper provide a foundation for the
-  full master in a future round (R419). -/
+  full master in a future round (). -/
 
-/-! ### Round 119 (R419, 2026-05-21) — 5+3+1 split-form master toolkit.
+/-! ### 5+3+1 split-form master toolkit.
 
-  R419 splits the full master into reusable helper blocks per user
+   splits the full master into reusable helper blocks per user
   guidance:
   * **R419δ**: `layer3_chi_lt_3` and `layer3_color_lt_3_of_card_pos`
     bound layer-3 colors via hValid.
 
-  **R419 Target A (deferred)**:
+  ** Target A (deferred)**:
   `compression_3_3_5_3_1_singleton18_pattern_dispatch` — handles p=18
   case fully via 15 sub-cases (4 χ(9)/χ(15) × 3-5 sub-cases each).
   Estimated 400+ lines, hits user stop condition #1.
 
-  **R419 Target B (deferred)**: p≠18 contradiction pack.
+  ** Target B (deferred)**: p≠18 contradiction pack.
 
-  **R419 Target C (deferred)**: full master assembly.
+  ** Target C (deferred)**: full master assembly.
 
   Stop condition triggered: attempting Target A's full proof exceeded
-  the 400-line ceiling.  The bottleneck is per-sub-case uniqueness
+  the 400-line ceiling. The bottleneck is per-sub-case uniqueness
   derivation from `layer3_card3_extract` — each "χ(m) = c1 implies m
   is one of {p, q, r}" requires unfolding the disjunction and
-  applying `hOther` 3×.  These uniqueness assertions account for ~50%
+  applying `hOther` 3×. These uniqueness assertions account for ~50%
   of the line cost per sub-case.
 
-  Recommended R420 strategy: build a focused helper
+  Recommended strategy: build a focused helper
   `layer3_card3_extract_named_three` that takes 3 explicit "χ(?) = c"
   hypotheses and concludes "the c-class is exactly these 3 positions",
   collapsing the uniqueness boilerplate. -/
@@ -7161,24 +7158,24 @@ theorem layer3_color_lt_3_of_card_pos
   rw [← hp_eq]
   exact layer3_chi_lt_3 χ hValid hp_layer
 
-/-! ### Round 120 (R420, 2026-05-21) — `layer3_card3_classify` helper +
+/-! ### `layer3_card3_classify` helper +
     full 5+3+1 singleton18 pattern dispatch.
 
-  R420 introduces a critical uniqueness helper that collapses the
-  ~10-line per-subcase boilerplate from R419 Target A's attempt:
+   introduces a critical uniqueness helper that collapses the
+  ~10-line per-subcase boilerplate from Target A's attempt:
 
   `layer3_card3_classify`: given 3 explicit layer-3 positions with
   color $c$ and `layerCount χ c = 3`, no other layer point has color
-  $c$.  Proof is a 4-element Finset cardinality contradiction (a la
-  R411's `layer3_four_non_c_impossible`).
+  $c$. Proof is a 4-element Finset cardinality contradiction (a la
+  's `layer3_four_non_c_impossible`).
 
   With this helper, each `χ(m) = c1 → χ(other) ≠ c1` derivation
   reduces from ~10 lines to 1 line, enabling the full Target A
   proof in ~250 lines (was 450+ without). -/
 
-/-- **R426 helper**: 2 named layer-3 positions with color $c$ classify
-    the c-class.  Every other layer point has $\chi \ne c$.  Analog of
-    R420 `layer3_card3_classify` for cardinality 2. -/
+/-- ** helper**: 2 named layer-3 positions with color $c$ classify
+    the c-class. Every other layer point has $\chi \ne c$. Analog of
+     `layer3_card3_classify` for cardinality 2. -/
 theorem layer3_card2_classify
     (χ : ℕ → ℕ) {c : ℕ}
     (hCard : layerCount χ c = 2)
@@ -7207,7 +7204,7 @@ theorem layer3_card2_classify
       | exact hp'q' rfl
       | exact hp'q' (by rfl)
 
-/-- **R420 helper**: 4 distinct layer points with color $c$ + card 3 → False. -/
+/-- ** helper**: 4 distinct layer points with color $c$ + card 3 → False. -/
 private theorem layer3_card3_four_hits_impossible
     (χ : ℕ → ℕ) {c a b d m : ℕ}
     (hCard : layerCount χ c = 3)
@@ -7246,8 +7243,8 @@ private theorem layer3_card3_four_hits_impossible
   have := Finset.card_le_card hSubset
   omega
 
-/-- **R420 helper**: 3 named layer-3 positions with color $c$ classify
-    the c-class.  Every other layer point has $\chi \ne c$. -/
+/-- ** helper**: 3 named layer-3 positions with color $c$ classify
+    the c-class. Every other layer point has $\chi \ne c$. -/
 theorem layer3_card3_classify
     (χ : ℕ → ℕ) {c : ℕ}
     (hCard : layerCount χ c = 3)
@@ -7260,9 +7257,9 @@ theorem layer3_card3_classify
   exact layer3_card3_four_hits_impossible χ hCard haL hbL hdL hmL
     hab had (Ne.symm hma) hbd (Ne.symm hmb) (Ne.symm hmd) ha hb hd hm
 
-/-- **R423 helper (private)**: 5 distinct layer points with color $c$
-    + layerCount $c = 4$ → False.  Analog of `layer3_card3_four_hits_impossible`
-    (R420) for cardinality 4. -/
+/-- ** helper (private)**: 5 distinct layer points with color $c$
+    + layerCount $c = 4$ → False. Analog of `layer3_card3_four_hits_impossible`
+    () for cardinality 4. -/
 private theorem layer3_card4_five_hits_impossible
     (χ : ℕ → ℕ) {c a b d e m : ℕ}
     (hCard : layerCount χ c = 4)
@@ -7309,9 +7306,9 @@ private theorem layer3_card4_five_hits_impossible
   have := Finset.card_le_card hSubset
   omega
 
-/-- **R423 helper**: 4 named layer-3 positions with color $c$ classify
-    the c-class.  Every other layer point has $\chi \ne c$.  Analog of
-    R420 `layer3_card3_classify` for cardinality 4. -/
+/-- ** helper**: 4 named layer-3 positions with color $c$ classify
+    the c-class. Every other layer point has $\chi \ne c$. Analog of
+     `layer3_card3_classify` for cardinality 4. -/
 theorem layer3_card4_classify
     (χ : ℕ → ℕ) {c : ℕ}
     (hCard : layerCount χ c = 4)
@@ -7326,11 +7323,11 @@ theorem layer3_card4_classify
     hab had hae (Ne.symm hma) hbd hbe (Ne.symm hmb) hde (Ne.symm hmd) (Ne.symm hme)
     ha hb hd he hm
 
-/-! ### Round 121 (R421, 2026-05-21) — `layer3_card3_two_known_force_third`
+/-! ### `layer3_card3_two_known_force_third`
     completion helper.
 
-  R420 introduced `layer3_card3_classify` (the "negative" direction:
-  3 known c-positions ⇒ all other layer points are not c).  R421
+   introduced `layer3_card3_classify` (the "negative" direction:
+  3 known c-positions ⇒ all other layer points are not c). 
   adds the complementary "positive" direction:
 
   `layer3_card3_two_known_force_third`: given 2 known c-positions
@@ -7347,7 +7344,7 @@ theorem layer3_card4_classify
   Cost in 5+3+1 Target 3: 3 occurrences × ~25 lines each saved ⇒
   ~75 lines below the 300-line budget. -/
 
-/-- **R421 helper**: 2 known c-positions plus singleton candidate
+/-- ** helper**: 2 known c-positions plus singleton candidate
     closure ⇒ the candidate has color $c$.
 
     Complementary to `layer3_card3_classify`: instead of using
@@ -7385,35 +7382,35 @@ theorem layer3_card3_two_known_force_third
       (fun h => hne (Or.inr (Or.inl h)))
       (fun h => hne (Or.inr (Or.inr h))) hr
   clear hpL hqL hrL haL hbL hxL hCard
-  -- 27-case rcases.  3 valid permutations (one of p, q, r = x) close
-  -- by transferring χ ? = c to χ x = c.  Remaining 24 cases collapse
+  -- 27-case rcases. 3 valid permutations (one of p, q, r = x) close
+  -- by transferring χ ? = c to χ x = c. Remaining 24 cases collapse
   -- via duplicate-position contradictions.
   rcases hp_in_abx with rfl | rfl | rfl
   · -- p = a
     rcases hq_in_abx with rfl | rfl | rfl
-    · exact absurd rfl hpq                       -- q = a = p
+    · exact absurd rfl hpq -- q = a = p
     · -- q = b
       rcases hr_in_abx with rfl | rfl | rfl
-      · exact absurd rfl hpr                     -- r = a = p
-      · exact absurd rfl hqr                     -- r = b = q
-      · exact hr                                 -- r = x ✓
-    · exact hq                                   -- q = x ✓
+      · exact absurd rfl hpr -- r = a = p
+      · exact absurd rfl hqr -- r = b = q
+      · exact hr -- r = x ✓
+    · exact hq -- q = x ✓
   · -- p = b
     rcases hq_in_abx with rfl | rfl | rfl
     · -- q = a
       rcases hr_in_abx with rfl | rfl | rfl
-      · exact absurd rfl hqr                     -- r = a = q
-      · exact absurd rfl hpr                     -- r = b = p
-      · exact hr                                 -- r = x ✓
-    · exact absurd rfl hpq                       -- q = b = p
-    · exact hq                                   -- q = x ✓
-  · exact hp                                     -- p = x ✓
+      · exact absurd rfl hqr -- r = a = q
+      · exact absurd rfl hpr -- r = b = p
+      · exact hr -- r = x ✓
+    · exact absurd rfl hpq -- q = b = p
+    · exact hq -- q = x ✓
+  · exact hp -- p = x ✓
 
-/-! ### Round 121 (R421, 2026-05-21, cont.) — 5+3+1 singleton-18 pattern
+/-! ### 5+3+1 singleton-18 pattern
     dispatch master.
 
   Closes the principal $\chi(18) = c_2$ sub-case of the 5+3+1 cardinality
-  master.  Given:
+  master. Given:
   * layerCount $c_0 = 5$, $c_1 = 3$, $c_2 = 1$ (the 5+3+1 partition),
   * $\chi(18) = c_2$ (singleton class anchored at 18),
   * $c_0, c_1, c_2$ pairwise distinct,
@@ -7424,7 +7421,7 @@ theorem layer3_card3_two_known_force_third
 
   Tree structure:
   * Case A ($\chi(9) = c_1$): forbidden edges force $\chi(6) = \chi(12)
-    = c_0$.  Sub-cases on $\chi(27)$:
+    = c_0$. Sub-cases on $\chi(27)$:
     - A0 ($\chi(27) = c_1$): 5 leaves — survivors A, B, D, mono via
       $(9, 24, 27)$, plus 1 cardinality-contradiction leaf.
     - A1 ($\chi(27) = c_0$): 11 leaves — 6 mono closures (using
@@ -7432,15 +7429,15 @@ theorem layer3_card3_two_known_force_third
       $(27, 3, 12)$ and $c_1$-internal $(9, 21, 24)$), 5 cardinality
       contradictions.
   * Case B ($\chi(9) = c_0$): forbidden edges force $\chi(6) = \chi(12)
-    = c_1$.  6 leaves — survivor C, 4 mono closures via $(9, 21, 24)$
+    = c_1$. 6 leaves — survivor C, 4 mono closures via $(9, 21, 24)$
     and $(27, 15, 24)$, 1 cardinality contradiction.
 
-  Total 22 leaves, ~300 lines.  Both R420 `layer3_card3_classify` and
-  R421 `layer3_card3_two_known_force_third` collapse uniqueness
+  Total 22 leaves, ~300 lines. Both `layer3_card3_classify` and
+   `layer3_card3_two_known_force_third` collapse uniqueness
   derivations to single calls. -/
 
 set_option maxHeartbeats 4000000 in
-/-- **R421 Target 3**: 5+3+1 singleton-18 pattern dispatch master.
+/-- ** Target 3**: 5+3+1 singleton-18 pattern dispatch master.
     Identifies the layer-3 coloring as one of survivors A-D and
     dispatches; otherwise derives mono via an internal Rado triple. -/
 theorem compression_3_3_5_3_1_singleton18_pattern_dispatch
@@ -7751,34 +7748,34 @@ theorem compression_3_3_5_3_1_singleton18_pattern_dispatch
         exact compression_3_3_5_3_1_survivorD_infeasible χ hValid hAvoid
           h6 h12 h15 h21 h24 h3 h9 h27 h18 hc01 hc02 hc12
 
-/-! ### Round 122 (R422, 2026-05-21) — 5+3+1 singleton p≠18 closure +
+/-! ### 5+3+1 singleton p≠18 closure +
     cardinality master assembly.
 
-  R422 Target A: `compression_3_3_5_3_1_singleton_not18_infeasible`
+   Target A: `compression_3_3_5_3_1_singleton_not18_infeasible`
   handles the case where the c₂ singleton is at some p ≠ 18.
 
   Key structural observations:
   * If $\chi(18) = c_0$: directly apply
     `layer3_card5_chi18_eq_color_infeasible` (R418α).
   * If $\chi(18) = c_1$: forbidden edges force $\chi(12), \chi(24),
-    \chi(27) \ne c_1$.  The c₁-class has 3 elements, with 18 known.
+    \chi(27) \ne c_1$. The c₁-class has 3 elements, with 18 known.
   * Within $\chi(18) = c_1$, three-way split on $\chi(9)$:
     - $\chi(9) = c_0$: triple $(9, 9, 12)$ forces $\chi(12) \ne c_0$,
-      hence $\chi(12) = c_2$, hence $p = 12$.  Then $\chi(6) = c_1$
+      hence $\chi(12) = c_2$, hence $p = 12$. Then $\chi(6) = c_1$
       (forced) and 4 sub-cases close via c₀-mono.
     - $\chi(9) = c_1$: triples $(18,3,9), (9,6,9), (18,9,15), (9,18,21)$
       force $\chi(3), \chi(6), \chi(15), \chi(21) \ne c_1$ — leaving
       only 2 c₁ positions, contradicting hCard1 = 3.
-    - $\chi(9) = c_2$: implies $p = 9$.  5 valid c₁ patterns from
+    - $\chi(9) = c_2$: implies $p = 9$. 5 valid c₁ patterns from
       $\{3, 6, 15, 21\}$, each closes via c₀-mono.
 
-  R422 Target B: `compression_3_3_5_3_1_card_distribution_infeasible`
+   Target B: `compression_3_3_5_3_1_card_distribution_infeasible`
   master assembly via `layer3_card1_extract` on c₂ followed by
   dispatch to singleton18 (p=18) or singleton_not18 (p≠18). -/
 
 set_option maxHeartbeats 4000000 in
-/-- **R422 Target A**: 5+3+1 partition with c₂ singleton at p ≠ 18
-    is infeasible.  Closes the p ≠ 18 sub-case of the 5+3+1
+/-- ** Target A**: 5+3+1 partition with c₂ singleton at p ≠ 18
+    is infeasible. Closes the p ≠ 18 sub-case of the 5+3+1
     cardinality master. -/
 theorem compression_3_3_5_3_1_singleton_not18_infeasible
     (χ : ℕ → ℕ)
@@ -7837,7 +7834,7 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
   have to_c1 : ∀ m, m ∈ layer3 → m ≠ p → χ m ≠ c0 → χ m = c1 :=
     fun m hmL hmp hne => (chi_c0_or_c1 m hmL hmp).resolve_left hne
   have to_ne_c1 : ∀ {m}, χ m = c0 → χ m ≠ c1 := fun {_} h h' => h01 (h.symm.trans h')
-  -- χ(18) ≠ c2 since 18 ≠ p.  Branch on χ(18) ∈ {c0, c1}.
+  -- χ(18) ≠ c2 since 18 ≠ p. Branch on χ(18) ∈ {c0, c1}.
   rcases chi_c0_or_c1 18 L18 (Ne.symm hp_ne_18) with h18 | h18
   · -- ═══ Case χ(18) = c0 ═══ Dispatch to R418α helper.
     exact layer3_card5_chi18_eq_color_infeasible χ hValid hAvoid h18 hCard0
@@ -7853,7 +7850,7 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
       (by norm_num) (by norm_num) (by norm_num) (h.trans h18.symm) (h18.trans h.symm)
     -- 3-way split on χ(9).
     rcases chi_in_3colors 9 L9 with h9 | h9 | h9
-    · -- ─── χ(9) = c0 sub-case.  Force p = 12.
+    · -- ─── χ(9) = c0 sub-case. Force p = 12.
       have h12_ne_c0 : χ 12 ≠ c0 := fun h => mono_3 9 9 12
         (by norm_num) (by norm_num) (by norm_num) (by norm_num)
         (by norm_num) (by norm_num) (by norm_num) rfl (h9.trans h.symm)
@@ -7863,7 +7860,7 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
         by_contra hne
         exact hOnlyC2 12 L12 (Ne.symm hne) h12
       subst hp_eq_12
-      -- Now p = 12.  Derive χ(6) = c1, χ(24) = χ(27) = c0.
+      -- Now p = 12. Derive χ(6) = c1, χ(24) = χ(27) = c0.
       have h6_ne_c0 : χ 6 ≠ c0 := fun h => mono_3 9 6 9
         (by norm_num) (by norm_num) (by norm_num) (by norm_num)
         (by norm_num) (by norm_num) (by norm_num) (h9.trans h.symm) (h.trans h9.symm)
@@ -7876,7 +7873,7 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
         rcases chi_c0_or_c1 15 L15 (by norm_num) with h15 | h15
         · -- 3=c0, 15=c0.
           rcases chi_c0_or_c1 21 L21 (by norm_num) with h21 | h21
-          · -- All c0.  c₁ = {6, 18}.  Contradiction.
+          · -- All c0. c₁ = {6, 18}. Contradiction.
             have e_3 := to_ne_c1 h3
             have e_9 := to_ne_c1 h9
             have e_15 := to_ne_c1 h15
@@ -7887,11 +7884,11 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
                        e_3, h6, e_9, e_12, e_15, h18, e_21, e_24, e_27,
                        ↓reduceIte, Nat.zero_add] at hCard1
             omega
-          · -- 21=c1.  c₁ = {6, 18, 21}.  Mono (27, 15, 24) all c0.
+          · -- 21=c1. c₁ = {6, 18, 21}. Mono (27, 15, 24) all c0.
             exact mono_3 27 15 24 (by norm_num) (by norm_num) (by norm_num)
               (by norm_num) (by norm_num) (by norm_num) (by norm_num)
               (h27.trans h15.symm) (h15.trans h24.symm)
-        · -- 15=c1.  c₁ = {6, 18, 15}.  Mono (9, 21, 24) all c0.
+        · -- 15=c1. c₁ = {6, 18, 15}. Mono (9, 21, 24) all c0.
           have classify := layer3_card3_classify χ hCard1 L6 L15 L18
             (by norm_num) (by norm_num) (by norm_num) h6 h15 h18
           have h21 : χ 21 = c0 := to_c0 21 L21 (by norm_num)
@@ -7899,7 +7896,7 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
           exact mono_3 9 21 24 (by norm_num) (by norm_num) (by norm_num)
             (by norm_num) (by norm_num) (by norm_num) (by norm_num)
             (h9.trans h21.symm) (h21.trans h24.symm)
-      · -- χ(3) = c1.  c₁ = {3, 6, 18}.  Mono (27, 15, 24) all c0.
+      · -- χ(3) = c1. c₁ = {3, 6, 18}. Mono (27, 15, 24) all c0.
         have classify := layer3_card3_classify χ hCard1 L3 L6 L18
           (by norm_num) (by norm_num) (by norm_num) h3 h6 h18
         have h15 : χ 15 = c0 := to_c0 15 L15 (by norm_num)
@@ -7907,7 +7904,7 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
         exact mono_3 27 15 24 (by norm_num) (by norm_num) (by norm_num)
           (by norm_num) (by norm_num) (by norm_num) (by norm_num)
           (h27.trans h15.symm) (h15.trans h24.symm)
-    · -- ─── χ(9) = c1 sub-case.  Many Rado triples force layerCount < 3.
+    · -- ─── χ(9) = c1 sub-case. Many Rado triples force layerCount < 3.
       have e_3 : χ 3 ≠ c1 := fun h => mono_3 18 3 9
         (by norm_num) (by norm_num) (by norm_num) (by norm_num)
         (by norm_num) (by norm_num) (by norm_num) (h18.trans h.symm) (h.trans h9.symm)
@@ -7926,25 +7923,25 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
                  e_3, e_6, h9, e_12, e_15, h18, e_21, e_24, e_27,
                  ↓reduceIte, Nat.zero_add] at hCard1
       omega
-    · -- ─── χ(9) = c2 sub-case.  Force p = 9.
+    · -- ─── χ(9) = c2 sub-case. Force p = 9.
       have hp_eq_9 : p = 9 := by
         by_contra hne
         exact hOnlyC2 9 L9 (Ne.symm hne) h9
       subst hp_eq_9
-      -- Now p = 9.  χ(12), χ(24), χ(27) ≠ c1 (already), ≠ c2 (since ≠ 9). So all = c0.
+      -- Now p = 9. χ(12), χ(24), χ(27) ≠ c1 (already), ≠ c2 (since ≠ 9). So all = c0.
       have H12 : χ 12 = c0 := to_c0 12 L12 (by norm_num) e_12
       have H24 : χ 24 = c0 := to_c0 24 L24 (by norm_num) e_24
       have H27 : χ 27 = c0 := to_c0 27 L27 (by norm_num) e_27
       have e_9 : χ 9 ≠ c1 := fun h => h12 (h.symm.trans h9)
-      -- c₁ has 18 + 2 from {3, 6, 15, 21}.  Constraint: NOT both {15, 21}.
+      -- c₁ has 18 + 2 from {3, 6, 15, 21}. Constraint: NOT both {15, 21}.
       rcases chi_c0_or_c1 3 L3 (by norm_num) with h3 | h3
       · -- χ(3) = c0.
         rcases chi_c0_or_c1 6 L6 (by norm_num) with h6 | h6
-        · -- 3=c0, 6=c0.  c₁ ⊆ {18, 15, 21}; mono (18, 15, 21) if both.
+        · -- 3=c0, 6=c0. c₁ ⊆ {18, 15, 21}; mono (18, 15, 21) if both.
           rcases chi_c0_or_c1 15 L15 (by norm_num) with h15 | h15
           · -- 15=c0.
             rcases chi_c0_or_c1 21 L21 (by norm_num) with h21 | h21
-            · -- 21=c0. c₁ = {18}, size 1.  Contradiction.
+            · -- 21=c0. c₁ = {18}, size 1. Contradiction.
               have e_3 := to_ne_c1 h3
               have e_6 := to_ne_c1 h6
               have e_15 := to_ne_c1 h15
@@ -7955,7 +7952,7 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
                          e_3, e_6, e_9, e_12, e_15, h18, e_21, e_24, e_27,
                          ↓reduceIte, Nat.zero_add] at hCard1
               omega
-            · -- 21=c1. c₁ = {18, 21}, size 2.  Contradiction.
+            · -- 21=c1. c₁ = {18, 21}, size 2. Contradiction.
               have e_3 := to_ne_c1 h3
               have e_6 := to_ne_c1 h6
               have e_15 := to_ne_c1 h15
@@ -7967,7 +7964,7 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
               omega
           · -- 15=c1.
             rcases chi_c0_or_c1 21 L21 (by norm_num) with h21 | h21
-            · -- 21=c0. c₁ = {18, 15}, size 2.  Contradiction.
+            · -- 21=c0. c₁ = {18, 15}, size 2. Contradiction.
               have e_3 := to_ne_c1 h3
               have e_6 := to_ne_c1 h6
               have e_21 := to_ne_c1 h21
@@ -7977,7 +7974,7 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
                          e_3, e_6, e_9, e_12, h15, h18, e_21, e_24, e_27,
                          ↓reduceIte, Nat.zero_add] at hCard1
               omega
-            · -- 21=c1.  Mono (18, 15, 21) all c1.
+            · -- 21=c1. Mono (18, 15, 21) all c1.
               exact mono_3 18 15 21 (by norm_num) (by norm_num) (by norm_num)
                 (by norm_num) (by norm_num) (by norm_num) (by norm_num)
                 (h18.trans h15.symm) (h15.trans h21.symm)
@@ -7985,7 +7982,7 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
           rcases chi_c0_or_c1 15 L15 (by norm_num) with h15 | h15
           · -- 3=c0, 6=c1, 15=c0.
             rcases chi_c0_or_c1 21 L21 (by norm_num) with h21 | h21
-            · -- 21=c0. c₁ = {6, 18}, size 2.  Contradiction.
+            · -- 21=c0. c₁ = {6, 18}, size 2. Contradiction.
               have e_3 := to_ne_c1 h3
               have e_15 := to_ne_c1 h15
               have e_21 := to_ne_c1 h21
@@ -7995,11 +7992,11 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
                          e_3, h6, e_9, e_12, e_15, h18, e_21, e_24, e_27,
                          ↓reduceIte, Nat.zero_add] at hCard1
               omega
-            · -- 21=c1. c₁ = {6, 18, 21}.  Mono (27, 3, 12) all c0.
+            · -- 21=c1. c₁ = {6, 18, 21}. Mono (27, 3, 12) all c0.
               exact mono_3 27 3 12 (by norm_num) (by norm_num) (by norm_num)
                 (by norm_num) (by norm_num) (by norm_num) (by norm_num)
                 (H27.trans h3.symm) (h3.trans H12.symm)
-          · -- 3=c0, 6=c1, 15=c1. c₁ = {6, 15, 18}.  Mono (27, 3, 12) all c0.
+          · -- 3=c0, 6=c1, 15=c1. c₁ = {6, 15, 18}. Mono (27, 3, 12) all c0.
             exact mono_3 27 3 12 (by norm_num) (by norm_num) (by norm_num)
               (by norm_num) (by norm_num) (by norm_num) (by norm_num)
               (H27.trans h3.symm) (h3.trans H12.symm)
@@ -8009,7 +8006,7 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
           rcases chi_c0_or_c1 15 L15 (by norm_num) with h15 | h15
           · -- 3=c1, 6=c0, 15=c0.
             rcases chi_c0_or_c1 21 L21 (by norm_num) with h21 | h21
-            · -- 21=c0. c₁ = {3, 18}, size 2.  Contradiction.
+            · -- 21=c0. c₁ = {3, 18}, size 2. Contradiction.
               have e_6 := to_ne_c1 h6
               have e_15 := to_ne_c1 h15
               have e_21 := to_ne_c1 h21
@@ -8019,11 +8016,11 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
                          h3, e_6, e_9, e_12, e_15, h18, e_21, e_24, e_27,
                          ↓reduceIte, Nat.zero_add] at hCard1
               omega
-            · -- 21=c1. c₁ = {3, 18, 21}.  Mono (27, 6, 15) all c0.
+            · -- 21=c1. c₁ = {3, 18, 21}. Mono (27, 6, 15) all c0.
               exact mono_3 27 6 15 (by norm_num) (by norm_num) (by norm_num)
                 (by norm_num) (by norm_num) (by norm_num) (by norm_num)
                 (H27.trans h6.symm) (h6.trans h15.symm)
-          · -- 3=c1, 6=c0, 15=c1. c₁ = {3, 15, 18}.  Mono (27, 12, 21) via classify.
+          · -- 3=c1, 6=c0, 15=c1. c₁ = {3, 15, 18}. Mono (27, 12, 21) via classify.
             have classify := layer3_card3_classify χ hCard1 L3 L15 L18
               (by norm_num) (by norm_num) (by norm_num) h3 h15 h18
             have h21 : χ 21 = c0 := to_c0 21 L21 (by norm_num)
@@ -8031,7 +8028,7 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
             exact mono_3 27 12 21 (by norm_num) (by norm_num) (by norm_num)
               (by norm_num) (by norm_num) (by norm_num) (by norm_num)
               (H27.trans H12.symm) (H12.trans h21.symm)
-        · -- 3=c1, 6=c1. c₁ = {3, 6, 18}.  Mono (27, 15, 24) via classify.
+        · -- 3=c1, 6=c1. c₁ = {3, 6, 18}. Mono (27, 15, 24) via classify.
           have classify := layer3_card3_classify χ hCard1 L3 L6 L18
             (by norm_num) (by norm_num) (by norm_num) h3 h6 h18
           have h15 : χ 15 = c0 := to_c0 15 L15 (by norm_num)
@@ -8040,7 +8037,7 @@ theorem compression_3_3_5_3_1_singleton_not18_infeasible
             (by norm_num) (by norm_num) (by norm_num) (by norm_num)
             (H27.trans h15.symm) (h15.trans H24.symm)
 
-/-- **R422 Target B**: 5+3+1 cardinality master.  Layer-3 partition
+/-- ** Target B**: 5+3+1 cardinality master. Layer-3 partition
     with $|c_0| = 5$, $|c_1| = 3$, $|c_2| = 1$ is infeasible.
 
     Extracts the c₂ singleton via `layer3_card1_extract`, then
@@ -8061,34 +8058,34 @@ theorem compression_3_3_5_3_1_card_distribution_infeasible
     False := by
   obtain ⟨p, hp, hp_color, hp_only⟩ := layer3_card1_extract χ hCard2
   by_cases hp_eq_18 : p = 18
-  · -- p = 18.  Dispatch to singleton-18 pattern dispatcher.
+  · -- p = 18. Dispatch to singleton-18 pattern dispatcher.
     subst hp_eq_18
     exact compression_3_3_5_3_1_singleton18_pattern_dispatch χ hValid hAvoid
       hp_color h01 h02 h12 hCard0 hCard1 hCard2
-  · -- p ≠ 18.  Dispatch to singleton-not-18 closure.
+  · -- p ≠ 18. Dispatch to singleton-not-18 closure.
     exact compression_3_3_5_3_1_singleton_not18_infeasible χ hValid hAvoid
       h01 h02 h12 hCard0 hCard1 hCard2 hp hp_eq_18 hp_color hp_only
 
-/-! ### Round 123 (R423, 2026-05-21) — 4+4+1 cardinality master.
+/-! ### 4+4+1 cardinality master.
 
   Closes the 4+4+1 partition shape at cardinality/distribution level.
-  Parallel structure to R421/R422 (5+3+1) but with c₀/c₁ swap
+  Parallel structure to / (5+3+1) but with c₀/c₁ swap
   symmetry (both have layerCount 4): the dispatcher's "main" form
   assumes χ(3) = c₀, and a thin wrapper handles χ(3) = c₁ via label
   swap.
 
   Components:
-  * R423-α-main: `compression_3_3_4_4_1_singleton18_pattern_dispatch_main`
+  * -α-main: `compression_3_3_4_4_1_singleton18_pattern_dispatch_main`
     — singleton-18 dispatch assuming χ(3) = c₀.
-  * R423-α: `compression_3_3_4_4_1_singleton18_pattern_dispatch` —
+  * -α: `compression_3_3_4_4_1_singleton18_pattern_dispatch` —
     label-swap wrapper.
-  * R423-β: `compression_3_3_4_4_1_singleton_not18_infeasible` —
+  * -β: `compression_3_3_4_4_1_singleton_not18_infeasible` —
     handles c₂ singleton at p ≠ 18.
-  * R423-γ: `compression_3_3_4_4_1_card_distribution_infeasible` —
+  * -γ: `compression_3_3_4_4_1_card_distribution_infeasible` —
     master assembly. -/
 
 set_option maxHeartbeats 4000000 in
-/-- **R423-α-main**: 4+4+1 singleton-18 dispatch assuming χ(3) = c₀.
+/-- **-α-main**: 4+4+1 singleton-18 dispatch assuming χ(3) = c₀.
     Identifies one of survivors A-D and dispatches, or derives mono. -/
 theorem compression_3_3_4_4_1_singleton18_pattern_dispatch_main
     (χ : ℕ → ℕ)
@@ -8161,7 +8158,7 @@ theorem compression_3_3_4_4_1_singleton18_pattern_dispatch_main
           h3 h9 h15 h21 h6 h12 h24 h27 h18 hc01 hc02 hc12
       · -- 15=c0, 21=c1.
         rcases chi_c0_or_c1 24 L24 (by norm_num) with h24 | h24
-        · -- 24=c0. c₀ = {3, 9, 15, 24}.  Mono (27, 12, 21) all c₁.
+        · -- 24=c0. c₀ = {3, 9, 15, 24}. Mono (27, 12, 21) all c₁.
           have classify_c0 := layer3_card4_classify χ hCard0 L3 L9 L15 L24
             (by norm_num) (by norm_num) (by norm_num)
             (by norm_num) (by norm_num) (by norm_num) h3 h9 h15 h24
@@ -8170,7 +8167,7 @@ theorem compression_3_3_4_4_1_singleton18_pattern_dispatch_main
           exact mono_3 27 12 21 (by norm_num) (by norm_num) (by norm_num)
             (by norm_num) (by norm_num) (by norm_num) (by norm_num)
             (h27.trans h12.symm) (h12.trans h21.symm)
-        · -- 24=c1.  Survivor C: c₁ = {6, 12, 21, 24}, c₀ = {3, 9, 15, 27}.
+        · -- 24=c1. Survivor C: c₁ = {6, 12, 21, 24}, c₀ = {3, 9, 15, 27}.
           have classify_c1 := layer3_card4_classify χ hCard1 L6 L12 L21 L24
             (by norm_num) (by norm_num) (by norm_num)
             (by norm_num) (by norm_num) (by norm_num) h6 h12 h21 h24
@@ -8182,11 +8179,11 @@ theorem compression_3_3_4_4_1_singleton18_pattern_dispatch_main
       rcases chi_c0_or_c1 21 L21 (by norm_num) with h21 | h21
       · -- 21=c0.
         rcases chi_c0_or_c1 24 L24 (by norm_num) with h24 | h24
-        · -- 24=c0. c₀ = {3, 9, 21, 24}.  Mono (9, 21, 24) all c₀.
+        · -- 24=c0. c₀ = {3, 9, 21, 24}. Mono (9, 21, 24) all c₀.
           exact mono_3 9 21 24 (by norm_num) (by norm_num) (by norm_num)
             (by norm_num) (by norm_num) (by norm_num) (by norm_num)
             (h9.trans h21.symm) (h21.trans h24.symm)
-        · -- 24=c1.  Survivor D: c₁ = {6, 12, 15, 24}, c₀ = {3, 9, 21, 27}.
+        · -- 24=c1. Survivor D: c₁ = {6, 12, 15, 24}, c₀ = {3, 9, 21, 27}.
           have classify_c1 := layer3_card4_classify χ hCard1 L6 L12 L15 L24
             (by norm_num) (by norm_num) (by norm_num)
             (by norm_num) (by norm_num) (by norm_num) h6 h12 h15 h24
@@ -8194,7 +8191,7 @@ theorem compression_3_3_4_4_1_singleton18_pattern_dispatch_main
             (classify_c1 27 L27 (by norm_num) (by norm_num) (by norm_num) (by norm_num))
           exact compression_3_3_4_4_1_survivorD_infeasible χ hValid hAvoid
             h3 h9 h21 h27 h6 h12 h15 h24 h18 hc01 hc02 hc12
-      · -- 21=c1.  c₁ = {6, 12, 15, 21}, 4 elements.  c₀ = {3, 9, 24, 27}.
+      · -- 21=c1. c₁ = {6, 12, 15, 21}, 4 elements. c₀ = {3, 9, 24, 27}.
         have classify_c1 := layer3_card4_classify χ hCard1 L6 L12 L15 L21
           (by norm_num) (by norm_num) (by norm_num)
           (by norm_num) (by norm_num) (by norm_num) h6 h12 h15 h21
@@ -8230,7 +8227,7 @@ theorem compression_3_3_4_4_1_singleton18_pattern_dispatch_main
         h3 h6 h12 h24 h9 h15 h21 h27 h18 hc01 hc02 hc12
     · -- χ(24) = c1.
       rcases chi_c0_or_c1 15 L15 (by norm_num) with h15 | h15
-      · -- 15=c0. c₀ = {3, 6, 12, 15}.  Mono (9, 21, 24) all c₁.
+      · -- 15=c0. c₀ = {3, 6, 12, 15}. Mono (9, 21, 24) all c₁.
         have classify_c0 := layer3_card4_classify χ hCard0 L3 L6 L12 L15
           (by norm_num) (by norm_num) (by norm_num)
           (by norm_num) (by norm_num) (by norm_num) h3 h6 h12 h15
@@ -8241,7 +8238,7 @@ theorem compression_3_3_4_4_1_singleton18_pattern_dispatch_main
           (h9.trans h21.symm) (h21.trans h24.symm)
       · -- 15=c1.
         rcases chi_c0_or_c1 21 L21 (by norm_num) with h21 | h21
-        · -- 21=c0. c₀ = {3, 6, 12, 21}.  Mono (27, 15, 24) all c₁.
+        · -- 21=c0. c₀ = {3, 6, 12, 21}. Mono (27, 15, 24) all c₁.
           have classify_c0 := layer3_card4_classify χ hCard0 L3 L6 L12 L21
             (by norm_num) (by norm_num) (by norm_num)
             (by norm_num) (by norm_num) (by norm_num) h3 h6 h12 h21
@@ -8250,12 +8247,12 @@ theorem compression_3_3_4_4_1_singleton18_pattern_dispatch_main
           exact mono_3 27 15 24 (by norm_num) (by norm_num) (by norm_num)
             (by norm_num) (by norm_num) (by norm_num) (by norm_num)
             (h27.trans h15.symm) (h15.trans h24.symm)
-        · -- 21=c1.  c₁ = {9, 15, 21, 24}, 4 elements.  Mono (9, 21, 24) all c₁.
+        · -- 21=c1. c₁ = {9, 15, 21, 24}, 4 elements. Mono (9, 21, 24) all c₁.
           exact mono_3 9 21 24 (by norm_num) (by norm_num) (by norm_num)
             (by norm_num) (by norm_num) (by norm_num) (by norm_num)
             (h9.trans h21.symm) (h21.trans h24.symm)
 
-/-- **R423-α**: 4+4+1 singleton-18 pattern dispatch.  Wraps the main
+/-- **-α**: 4+4+1 singleton-18 pattern dispatch. Wraps the main
     dispatcher with c₀/c₁ swap to handle both χ(3) = c₀ and χ(3) = c₁. -/
 theorem compression_3_3_4_4_1_singleton18_pattern_dispatch
     (χ : ℕ → ℕ)
@@ -8293,9 +8290,9 @@ theorem compression_3_3_4_4_1_singleton18_pattern_dispatch
       (c0 := c1) (c1 := c0) h18 h3 hc01.symm hc12 hc02 hCard1 hCard0 hCard2
 
 set_option maxHeartbeats 8000000 in
-/-- **R423-β-main**: 4+4+1 singleton-not-18 closure assuming χ(18) = c₀.
+/-- **-β-main**: 4+4+1 singleton-not-18 closure assuming χ(18) = c₀.
     Three-way split on χ(9): c₀ contradicts directly (cardinality), c₁
-    forces p = 12, c₂ forces p = 9.  Each terminal leaf closes via
+    forces p = 12, c₂ forces p = 9. Each terminal leaf closes via
     layer-internal mono or layerCount contradiction. -/
 theorem compression_3_3_4_4_1_singleton_not18_infeasible_main
     (χ : ℕ → ℕ)
@@ -8363,7 +8360,7 @@ theorem compression_3_3_4_4_1_singleton_not18_infeasible_main
     (by norm_num) (by norm_num) (by norm_num) (h.trans h18.symm) (h18.trans h.symm)
   -- 3-way split on χ(9).
   rcases chi_in_3colors 9 L9 with h9 | h9 | h9
-  · -- ─── χ(9) = c0.  Forces c0 ⊆ {9, 18}, size ≤ 2.  Contradicts hCard0 = 4.
+  · -- ─── χ(9) = c0. Forces c0 ⊆ {9, 18}, size ≤ 2. Contradicts hCard0 = 4.
     have e_3 : χ 3 ≠ c0 := fun h => mono_3 18 3 9
       (by norm_num) (by norm_num) (by norm_num) (by norm_num)
       (by norm_num) (by norm_num) (by norm_num) (h18.trans h.symm) (h.trans h9.symm)
@@ -8382,7 +8379,7 @@ theorem compression_3_3_4_4_1_singleton_not18_infeasible_main
                e_3, e_6, h9, e_12_c0, e_15, h18, e_21, e_24_c0, e_27_c0,
                ↓reduceIte, Nat.zero_add] at hCard0
     omega
-  · -- ─── χ(9) = c1.  Force χ(12) = c2, hence p = 12.
+  · -- ─── χ(9) = c1. Force χ(12) = c2, hence p = 12.
     have h12_ne_c1 : χ 12 ≠ c1 := fun h => mono_3 9 9 12
       (by norm_num) (by norm_num) (by norm_num) (by norm_num)
       (by norm_num) (by norm_num) (by norm_num) rfl (h9.trans h.symm)
@@ -8417,12 +8414,12 @@ theorem compression_3_3_4_4_1_singleton_not18_infeasible_main
                      h3, h6, e_9, e_12_c0, h15, h18, h21, e_24, e_27,
                      ↓reduceIte, Nat.zero_add] at hCard0
           omega
-        · -- 3=c0, 15=c0, 21=c1: c0 = {3, 6, 15, 18}.  Mono (9, 21, 24) c1.
+        · -- 3=c0, 15=c0, 21=c1: c0 = {3, 6, 15, 18}. Mono (9, 21, 24) c1.
           exact mono_3 9 21 24 (by norm_num) (by norm_num) (by norm_num)
             (by norm_num) (by norm_num) (by norm_num) (by norm_num)
             (h9.trans h21.symm) (h21.trans h24.symm)
       · rcases chi_c0_or_c1 21 L21 (by norm_num) with h21 | h21
-        · -- 3=c0, 15=c1, 21=c0: c0 = {3, 6, 18, 21}.  Mono (27, 15, 24) c1.
+        · -- 3=c0, 15=c1, 21=c0: c0 = {3, 6, 18, 21}. Mono (27, 15, 24) c1.
           exact mono_3 27 15 24 (by norm_num) (by norm_num) (by norm_num)
             (by norm_num) (by norm_num) (by norm_num) (by norm_num)
             (h27.trans h15.symm) (h15.trans h24.symm)
@@ -8439,7 +8436,7 @@ theorem compression_3_3_4_4_1_singleton_not18_infeasible_main
           omega
     · rcases chi_c0_or_c1 15 L15 (by norm_num) with h15 | h15
       · rcases chi_c0_or_c1 21 L21 (by norm_num) with h21 | h21
-        · -- 3=c1, 15=c0, 21=c0: c0 = {6, 15, 18, 21}.  Mono (18, 15, 21) c0.
+        · -- 3=c1, 15=c0, 21=c0: c0 = {6, 15, 18, 21}. Mono (18, 15, 21) c0.
           exact mono_3 18 15 21 (by norm_num) (by norm_num) (by norm_num)
             (by norm_num) (by norm_num) (by norm_num) (by norm_num)
             (h18.trans h15.symm) (h15.trans h21.symm)
@@ -8481,12 +8478,12 @@ theorem compression_3_3_4_4_1_singleton_not18_infeasible_main
                      e_3, h6, e_9, e_12_c0, e_15, h18, e_21, e_24, e_27,
                      ↓reduceIte, Nat.zero_add] at hCard0
           omega
-  · -- ─── χ(9) = c2.  Force p = 9.
+  · -- ─── χ(9) = c2. Force p = 9.
     have hp_eq_9 : p = 9 := by
       by_contra hne
       exact hOnlyC2 9 L9 (Ne.symm hne) h9
     subst hp_eq_9
-    -- χ(12), χ(24), χ(27) ≠ c2 (≠ 9) and ≠ c0 (edges).  So c1.
+    -- χ(12), χ(24), χ(27) ≠ c2 (≠ 9) and ≠ c0 (edges). So c1.
     have h12_c1 : χ 12 = c1 := to_c1 12 L12 (by norm_num) e_12_c0
     have h24 : χ 24 = c1 := to_c1 24 L24 (by norm_num) e_24_c0
     have h27 : χ 27 = c1 := to_c1 27 L27 (by norm_num) e_27_c0
@@ -8506,12 +8503,12 @@ theorem compression_3_3_4_4_1_singleton_not18_infeasible_main
                        h3, h6, e_9_c0, e_12, h15, h18, h21, e_24, e_27,
                        ↓reduceIte, Nat.zero_add] at hCard0
             omega
-          · -- 3=c0, 6=c0, 15=c0, 21=c1: c0 = {3, 6, 15, 18}.  Mono (27, 12, 21) c1.
+          · -- 3=c0, 6=c0, 15=c0, 21=c1: c0 = {3, 6, 15, 18}. Mono (27, 12, 21) c1.
             exact mono_3 27 12 21 (by norm_num) (by norm_num) (by norm_num)
               (by norm_num) (by norm_num) (by norm_num) (by norm_num)
               (h27.trans h12_c1.symm) (h12_c1.trans h21.symm)
         · rcases chi_c0_or_c1 21 L21 (by norm_num) with h21 | h21
-          · -- 3=c0, 6=c0, 15=c1, 21=c0: c0 = {3, 6, 18, 21}.  Mono (27, 15, 24) c1.
+          · -- 3=c0, 6=c0, 15=c1, 21=c0: c0 = {3, 6, 18, 21}. Mono (27, 15, 24) c1.
             exact mono_3 27 15 24 (by norm_num) (by norm_num) (by norm_num)
               (by norm_num) (by norm_num) (by norm_num) (by norm_num)
               (h27.trans h15.symm) (h15.trans h24.symm)
@@ -8529,7 +8526,7 @@ theorem compression_3_3_4_4_1_singleton_not18_infeasible_main
             omega
       · rcases chi_c0_or_c1 15 L15 (by norm_num) with h15 | h15
         · rcases chi_c0_or_c1 21 L21 (by norm_num) with h21 | h21
-          · -- 3=c0, 6=c1, 15=c0, 21=c0: c0 = {3, 15, 18, 21}.  Mono (18, 15, 21) c0.
+          · -- 3=c0, 6=c1, 15=c0, 21=c0: c0 = {3, 15, 18, 21}. Mono (18, 15, 21) c0.
             exact mono_3 18 15 21 (by norm_num) (by norm_num) (by norm_num)
               (by norm_num) (by norm_num) (by norm_num) (by norm_num)
               (h18.trans h15.symm) (h15.trans h21.symm)
@@ -8574,7 +8571,7 @@ theorem compression_3_3_4_4_1_singleton_not18_infeasible_main
     · rcases chi_c0_or_c1 6 L6 (by norm_num) with h6 | h6
       · rcases chi_c0_or_c1 15 L15 (by norm_num) with h15 | h15
         · rcases chi_c0_or_c1 21 L21 (by norm_num) with h21 | h21
-          · -- 3=c1, 6=c0, 15=c0, 21=c0: c0 = {6, 15, 18, 21}.  Mono (18, 15, 21) c0.
+          · -- 3=c1, 6=c0, 15=c0, 21=c0: c0 = {6, 15, 18, 21}. Mono (18, 15, 21) c0.
             exact mono_3 18 15 21 (by norm_num) (by norm_num) (by norm_num)
               (by norm_num) (by norm_num) (by norm_num) (by norm_num)
               (h18.trans h15.symm) (h15.trans h21.symm)
@@ -8672,7 +8669,7 @@ theorem compression_3_3_4_4_1_singleton_not18_infeasible_main
                        ↓reduceIte, Nat.zero_add] at hCard0
             omega
 
-/-- **R423-β**: 4+4+1 singleton-not-18 closure.  Wraps the main version
+/-- **-β**: 4+4+1 singleton-not-18 closure. Wraps the main version
     with c₀/c₁ swap to handle both χ(18) ∈ {c₀, c₁}. -/
 theorem compression_3_3_4_4_1_singleton_not18_infeasible
     (χ : ℕ → ℕ)
@@ -8707,7 +8704,7 @@ theorem compression_3_3_4_4_1_singleton_not18_infeasible
     exact compression_3_3_4_4_1_singleton_not18_infeasible_main χ hValid hAvoid
       (c0 := c1) (c1 := c0) h01.symm h12 h02 hCard1 hCard0 hCard2 hp hp_ne_18 hp_color hOnlyC2 h18
 
-/-- **R423-γ**: 4+4+1 cardinality master.  Layer-3 partition with
+/-- **-γ**: 4+4+1 cardinality master. Layer-3 partition with
     $|c_0| = 4$, $|c_1| = 4$, $|c_2| = 1$ is infeasible.
 
     Extracts the c₂ singleton via `layer3_card1_extract`, then
@@ -8728,15 +8725,15 @@ theorem compression_3_3_4_4_1_card_distribution_infeasible
     False := by
   obtain ⟨p, hp, hp_color, hp_only⟩ := layer3_card1_extract χ hCard2
   by_cases hp_eq_18 : p = 18
-  · -- p = 18.  Dispatch to singleton-18 pattern dispatcher.
+  · -- p = 18. Dispatch to singleton-18 pattern dispatcher.
     subst hp_eq_18
     exact compression_3_3_4_4_1_singleton18_pattern_dispatch χ hValid hAvoid
       hp_color h01 h02 h12 hCard0 hCard1 hCard2
-  · -- p ≠ 18.  Dispatch to singleton-not-18 closure.
+  · -- p ≠ 18. Dispatch to singleton-not-18 closure.
     exact compression_3_3_4_4_1_singleton_not18_infeasible χ hValid hAvoid
       h01 h02 h12 hCard0 hCard1 hCard2 hp hp_eq_18 hp_color hp_only
 
-/-! ### Round 125 (R425, 2026-05-21) — 5+2+2 cardinality master.
+/-! ### 5+2+2 cardinality master.
 
   Closes the 5+2+2 partition shape at cardinality/distribution level
   via χ(18) case-split:
@@ -8746,10 +8743,10 @@ theorem compression_3_3_4_4_1_card_distribution_infeasible
     patterns (8 canonical A/B/D/F/G/H/I/K + 4 swap C'/E'/J'/L').
   * χ(18) = c₂: handled by the χ(18) = c₁ closure with c₁/c₂ swap.
 
-  Uses R415δ per-survivor theorems for dispatch.  Total ~500 lines.
+  Uses R415δ per-survivor theorems for dispatch. Total ~500 lines.
 -/
 
-/-- **R425 Part 1**: 5+2+2 χ(18) = c₀ kill via R418α. -/
+/-- ** Part 1**: 5+2+2 χ(18) = c₀ kill via R418α. -/
 theorem compression_3_3_5_2_2_chi18_eq_c0_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -8763,17 +8760,17 @@ theorem compression_3_3_5_2_2_chi18_eq_c0_infeasible
     False :=
   layer3_card5_chi18_eq_color_infeasible χ hValid hAvoid h18 hCard0
 
-/-! ### Round 126 (R426, 2026-05-21) — 5+2+2 swap-aware dispatcher.
+/-! ### 5+2+2 swap-aware dispatcher.
 
   The R424α `compression_3_3_5_2_2_pattern_dispatch_infeasible` accepts
   the 12-way canonical disjunction (c₁ has the smaller-min 2-class).
   However, the cardinality master is invoked with arbitrary (c₀, c₁,
   c₂) labels and may need to dispatch SWAPPED patterns (c₁/c₂ swapped
-  vs canonical).  This wrapper accepts either orientation and forwards
+  vs canonical). This wrapper accepts either orientation and forwards
   with appropriate label permutation. -/
 
 set_option maxHeartbeats 2000000 in
-/-- **R426 Target A**: 5+2+2 swap-aware pattern dispatcher.  Accepts the
+/-- ** Target A**: 5+2+2 swap-aware pattern dispatcher. Accepts the
     canonical 12-way disjunction OR the c₁/c₂-swapped 12-way disjunction
     and dispatches via R424α with appropriate label permutation. -/
 theorem compression_3_3_5_2_2_pattern_dispatch_or_swap_infeasible
@@ -8842,16 +8839,16 @@ theorem compression_3_3_5_2_2_pattern_dispatch_or_swap_infeasible
   · exact compression_3_3_5_2_2_pattern_dispatch_infeasible χ hValid hAvoid
       (c1 := c2) (c2 := c1) h02 h01 h12.symm hCard0 hCard2 hCard1 hSwap
 
-/-! ### Round 127 (R427, 2026-05-21) — 5+2+2 χ(18)=c₁ and c₂ branches +
+/-! ### 5+2+2 χ(18)=c₁ and c₂ branches +
     cardinality master.
 
-  Completes the 5+2+2 cardinality master.  Local pattern dispatcher
+  Completes the 5+2+2 cardinality master. Local pattern dispatcher
   helpers (one per of 12 patterns: 8 canonical + 4 swap) reduce
-  Or-nesting cognitive load at each leaf.  3-way split on χ(9), with
+  Or-nesting cognitive load at each leaf. 3-way split on χ(9), with
   sub-splits as needed. -/
 
 set_option maxHeartbeats 16000000 in
-/-- **R427 Target B**: 5+2+2 χ(18) = c₁ pattern dispatch. -/
+/-- ** Target B**: 5+2+2 χ(18) = c₁ pattern dispatch. -/
 theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -8975,10 +8972,10 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
       · exact h
     rcases chi_in_3colors 6 L6 with h6 | h6 | h6
     · exact absurd h6 h6_ne_c0
-    · -- χ(6) = c₁. c1 = {6, 18}.  H candidate.
+    · -- χ(6) = c₁. c1 = {6, 18}. H candidate.
       have ne_c1 := layer3_card2_classify χ hCard1 L6 L18 (by norm_num) h6 h18
       rcases chi_in_3colors 24 L24 with h24 | h24 | h24
-      · -- χ(24) = c₀.  Not H.  Find mono.
+      · -- χ(24) = c₀. Not H. Find mono.
         -- Need χ(21).
         rcases chi_in_3colors 21 L21 with h21 | h21 | h21
         · -- 21=c0. (9, 21, 24) all c0 → MONO.
@@ -8997,7 +8994,7 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
             (by norm_num) (by norm_num) (by norm_num) (by norm_num)
             (chi27.trans chi15.symm) (chi15.trans h24.symm)
       · exact absurd h24 e_24_c1
-      · -- χ(24) = c₂.  c2 = {12, 24}.  Dispatch H.
+      · -- χ(24) = c₂. c2 = {12, 24}. Dispatch H.
         have ne_c2 := layer3_card2_classify χ hCard2 L12 L24 (by norm_num) chi12_c2 h24
         have chi3 : χ 3 = c0 := to_c0 3 L3
           (ne_c1 3 L3 (by norm_num) (by norm_num))
@@ -9012,11 +9009,11 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
           (ne_c1 27 L27 (by norm_num) (by norm_num))
           (ne_c2 27 L27 (by norm_num) (by norm_num))
         exact disp_H ⟨chi3, h9, chi15, chi21, chi27, h6, h18, chi12_c2, h24⟩
-    · -- χ(6) = c₂.  c2 = {6, 12}.  KILL via c0-mono.
+    · -- χ(6) = c₂. c2 = {6, 12}. KILL via c0-mono.
       have ne_c2 := layer3_card2_classify χ hCard2 L6 L12 (by norm_num) h6 chi12_c2
       have chi24 : χ 24 = c0 := to_c0 24 L24 e_24_c1 (ne_c2 24 L24 (by norm_num) (by norm_num))
       have chi27 : χ 27 = c0 := to_c0 27 L27 e_27_c1 (ne_c2 27 L27 (by norm_num) (by norm_num))
-      -- c1 = {18, m1} with m1 ∈ {3, 15, 21}.  3 sub-cases via c0-mono.
+      -- c1 = {18, m1} with m1 ∈ {3, 15, 21}. 3 sub-cases via c0-mono.
       rcases chi_in_3colors 3 L3 with h3 | h3 | h3
       · -- 3=c0.
         rcases chi_in_3colors 15 L15 with h15 | h15 | h15
@@ -9024,7 +9021,7 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
           exact mono_3 27 15 24 (by norm_num) (by norm_num) (by norm_num)
             (by norm_num) (by norm_num) (by norm_num) (by norm_num)
             (chi27.trans h15.symm) (h15.trans chi24.symm)
-        · -- 15=c1. (27, 15, 24)?  Need χ(21) = c0.
+        · -- 15=c1. (27, 15, 24)? Need χ(21) = c0.
           have ne_c1_15 := layer3_card2_classify χ hCard1 L15 L18 (by norm_num) h15 h18
           have chi21 : χ 21 = c0 := to_c0 21 L21
             (ne_c1_15 21 L21 (by norm_num) (by norm_num))
@@ -9044,10 +9041,10 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
           (by norm_num) (by norm_num) (by norm_num) (by norm_num)
           (chi27.trans chi15.symm) (chi15.trans chi24.symm)
       · exact absurd h3 (ne_c2 3 L3 (by norm_num) (by norm_num))
-  · -- ═══ χ(9) = c₁ ═══  c1 = {9, 18}.  7 patterns: A, B, D, F, G + swap J', L'.
+  · -- ═══ χ(9) = c₁ ═══ c1 = {9, 18}. 7 patterns: A, B, D, F, G + swap J', L'.
     have ne_c1 := layer3_card2_classify χ hCard1 L9 L18 (by norm_num) h9 h18
     rcases chi_in_3colors 27 L27 with h27 | h27 | h27
-    · -- χ(27) = c₀.  Dispatch G (c2 = {12, 15}).
+    · -- χ(27) = c₀. Dispatch G (c2 = {12, 15}).
       have chi12 : χ 12 = c2 := by
         rcases chi_in_3colors 12 L12 with h | h | h
         · -- 12=c0. Find c0 mono. By (27, 3, 12): need χ(3) = c0.
@@ -9056,18 +9053,18 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
               (by norm_num) (by norm_num) (by norm_num) (by norm_num)
               (h27.trans h3.symm) (h3.trans h.symm)).elim
           · exact absurd h3 (ne_c1 3 L3 (by norm_num) (by norm_num))
-          · -- 3=c2.  c2 ⊇ {3, ?}.  Need to find more c2.
+          · -- 3=c2. c2 ⊇ {3, ?}. Need to find more c2.
             -- Try χ(24) for c0-mono via (9, 21, 24) or (27, 15, 24).
             rcases chi_in_3colors 24 L24 with h24 | h24 | h24
-            · -- 24=c0.  (27, 15, 24)?  Need χ(15) = c0.
+            · -- 24=c0. (27, 15, 24)? Need χ(15) = c0.
               rcases chi_in_3colors 15 L15 with h15 | h15 | h15
               · exact (mono_3 27 15 24 (by norm_num) (by norm_num) (by norm_num)
                   (by norm_num) (by norm_num) (by norm_num) (by norm_num)
                   (h27.trans h15.symm) (h15.trans h24.symm)).elim
               · exact absurd h15 (ne_c1 15 L15 (by norm_num) (by norm_num))
-              · -- 15=c2.  c2 ⊇ {3, 15}.  Apply card2_classify.
+              · -- 15=c2. c2 ⊇ {3, 15}. Apply card2_classify.
                 have ne_c2 := layer3_card2_classify χ hCard2 L3 L15 (by norm_num) h3 h15
-                -- (27, 12, 21)?  Need χ(21) = c0.
+                -- (27, 12, 21)? Need χ(21) = c0.
                 have chi21 : χ 21 = c0 := to_c0 21 L21
                   (ne_c1 21 L21 (by norm_num) (by norm_num))
                   (ne_c2 21 L21 (by norm_num) (by norm_num))
@@ -9075,9 +9072,9 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
                   (by norm_num) (by norm_num) (by norm_num) (by norm_num)
                   (h27.trans h.symm) (h.trans chi21.symm)).elim
             · exact absurd h24 e_24_c1
-            · -- 24=c2.  c2 ⊇ {3, 24}.
+            · -- 24=c2. c2 ⊇ {3, 24}.
               have ne_c2 := layer3_card2_classify χ hCard2 L3 L24 (by norm_num) h3 h24
-              -- (27, 12, 21)?  Need χ(21) = c0.
+              -- (27, 12, 21)? Need χ(21) = c0.
               have chi21 : χ 21 = c0 := to_c0 21 L21
                 (ne_c1 21 L21 (by norm_num) (by norm_num))
                 (ne_c2 21 L21 (by norm_num) (by norm_num))
@@ -9088,13 +9085,13 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
         · exact h
       have chi15 : χ 15 = c2 := by
         rcases chi_in_3colors 15 L15 with h | h | h
-        · -- 15=c0. (27, 15, 24)?  Need χ(24).
+        · -- 15=c0. (27, 15, 24)? Need χ(24).
           rcases chi_in_3colors 24 L24 with h24 | h24 | h24
           · exact (mono_3 27 15 24 (by norm_num) (by norm_num) (by norm_num)
               (by norm_num) (by norm_num) (by norm_num) (by norm_num)
               (h27.trans h.symm) (h.trans h24.symm)).elim
           · exact absurd h24 e_24_c1
-          · -- 24=c2.  c2 = {12, 24}.
+          · -- 24=c2. c2 = {12, 24}.
             have ne_c2 := layer3_card2_classify χ hCard2 L12 L24 (by norm_num) chi12 h24
             have chi3 : χ 3 = c0 := to_c0 3 L3
               (ne_c1 3 L3 (by norm_num) (by norm_num))
@@ -9122,7 +9119,7 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
         (ne_c2 24 L24 (by norm_num) (by norm_num))
       exact disp_G ⟨chi3, chi6, chi21, chi24, h27, h9, h18, chi12, chi15⟩
     · exact absurd h27 e_27_c1
-    · -- χ(27) = c₂.  6 patterns identified via 2nd c2 position in {3, 6, 12, 15, 21, 24}.
+    · -- χ(27) = c₂. 6 patterns identified via 2nd c2 position in {3, 6, 12, 15, 21, 24}.
       rcases chi_in_3colors 3 L3 with h3 | h3 | h3
       · -- 3=c0.
         rcases chi_in_3colors 6 L6 with h6 | h6 | h6
@@ -9139,7 +9136,7 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
                   have e_6 : χ 6 ≠ c1 := ne_c1 6 L6 (by norm_num) (by norm_num)
                   have e_15 : χ 15 ≠ c1 := ne_c1 15 L15 (by norm_num) (by norm_num)
                   have e_21 : χ 21 ≠ c1 := ne_c1 21 L21 (by norm_num) (by norm_num)
-                  -- All 6 c0 positions + 9, 18 c1 + 27 c2 = c1 count = 2.  layerCount c1 = 2 OK, but c0 count = 6 ≠ 5.
+                  -- All 6 c0 positions + 9, 18 c1 + 27 c2 = c1 count = 2. layerCount c1 = 2 OK, but c0 count = 6 ≠ 5.
                   -- Use simp on layerCount c0.
                   have e_27 : χ 27 ≠ c0 := fun h => h02 (h.symm.trans h27)
                   have e_18_c0 : χ 18 ≠ c0 := fun h => h01 (h.symm.trans h18)
@@ -9151,7 +9148,7 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
                              ↓reduceIte, Nat.zero_add] at hCard0
                   omega
                 · exact absurd h24 e_24_c1
-                · -- 24=c2.  c2 = {24, 27}. A.
+                · -- 24=c2. c2 = {24, 27}. A.
                   exact disp_A ⟨h3, h6, h12c, h15, h21, h9, h18, h24, h27⟩
               · exact absurd h21 (ne_c1 21 L21 (by norm_num) (by norm_num))
               · -- 21=c2. c2 = {21, 27}. B.
@@ -9211,8 +9208,8 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
         have chi24 : χ 24 = c0 := to_c0 24 L24 e_24_c1
           (ne_c2 24 L24 (by norm_num) (by norm_num))
         exact disp_swap_L ⟨chi6, chi12, chi15, chi21, chi24, h3, h27, h9, h18⟩
-  · -- ═══ χ(9) = c₂ ═══  4 patterns: I, K + swap C', E'.
-    -- (9, 9, 12) forces χ(12) ≠ c2.  Combined with e_12_c1, χ(12) = c0.
+  · -- ═══ χ(9) = c₂ ═══ 4 patterns: I, K + swap C', E'.
+    -- (9, 9, 12) forces χ(12) ≠ c2. Combined with e_12_c1, χ(12) = c0.
     have chi12_c0 : χ 12 = c0 := by
       rcases chi_in_3colors 12 L12 with h | h | h
       · exact h
@@ -9239,7 +9236,7 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
         · exact absurd h21 (ne_c1_3 21 L21 (by norm_num) (by norm_num))
         · -- 21=c2. c2 = {9, 21}.
           have ne_c2 := layer3_card2_classify χ hCard2 L9 L21 (by norm_num) h9 h21
-          -- (27, 6, 15)?  Need χ(6), χ(15) = c0.
+          -- (27, 6, 15)? Need χ(6), χ(15) = c0.
           have chi6 : χ 6 = c0 := to_c0 6 L6
             (ne_c1_3 6 L6 (by norm_num) (by norm_num))
             (ne_c2 6 L6 (by norm_num) (by norm_num))
@@ -9269,7 +9266,7 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
             (h27.trans chi6.symm) (chi6.trans chi15.symm)
         · exact absurd h21 (ne_c2 21 L21 (by norm_num) (by norm_num))
     · exact absurd h27 e_27_c1
-    · -- 27=c2.  c2 = {9, 27}.  4 patterns: I, K + swap C', E'.
+    · -- 27=c2. c2 = {9, 27}. 4 patterns: I, K + swap C', E'.
       have ne_c2 := layer3_card2_classify χ hCard2 L9 L27 (by norm_num) h9 h27
       rcases chi_in_3colors 3 L3 with h3 | h3 | h3
       · -- 3=c0.
@@ -9286,7 +9283,7 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
               have e_15_ne : χ 15 ≠ c1 := fun h => h01 (h15.symm.trans h)
               have e_21_ne : χ 21 ≠ c1 := fun h => h01 (h21.symm.trans h)
               have e_9_ne : χ 9 ≠ c1 := fun h => h12 (h9.symm.trans (h.symm ▸ rfl)).symm |>.elim
-              -- Hmm complicated.  Alternative: derive c1 has at most {18}, layerCount c1 ≤ 1.
+              -- Hmm complicated. Alternative: derive c1 has at most {18}, layerCount c1 ≤ 1.
               -- Use simp + omega.
               have e_9_c1 : χ 9 ≠ c1 := fun h => h12 (h.symm.trans h9)
               have e_12_c1' : χ 12 ≠ c1 := e_12_c1
@@ -9298,14 +9295,14 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
                          e_3_ne, e_6_ne, e_9_ne, e_12_c1', e_15_ne, h18, e_21_ne, e_24_ne, e_27_ne,
                          ↓reduceIte, Nat.zero_add] at hCard1
               omega
-            · -- 21=c1. c1 = {18, 21}.  swap C'.
+            · -- 21=c1. c1 = {18, 21}. swap C'.
               have ne_c1_21 := layer3_card2_classify χ hCard1 L18 L21 (by norm_num) h18 h21
               have chi24 : χ 24 = c0 := to_c0 24 L24
                 (ne_c1_21 24 L24 (by norm_num) (by norm_num))
                 (ne_c2 24 L24 (by norm_num) (by norm_num))
               exact disp_swap_C ⟨h3, h6, chi12_c0, h15, chi24, h9, h27, h18, h21⟩
             · exact absurd h21 (ne_c2 21 L21 (by norm_num) (by norm_num))
-          · -- 15=c1. c1 = {15, 18}.  swap E'.
+          · -- 15=c1. c1 = {15, 18}. swap E'.
             have ne_c1_15 := layer3_card2_classify χ hCard1 L15 L18 (by norm_num) h15 h18
             have chi21 : χ 21 = c0 := to_c0 21 L21
               (ne_c1_15 21 L21 (by norm_num) (by norm_num))
@@ -9315,7 +9312,7 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
               (ne_c2 24 L24 (by norm_num) (by norm_num))
             exact disp_swap_E ⟨h3, h6, chi12_c0, chi21, chi24, h9, h27, h15, h18⟩
           · exact absurd h15 (ne_c2 15 L15 (by norm_num) (by norm_num))
-        · -- 6=c1. c1 = {6, 18}.  I.
+        · -- 6=c1. c1 = {6, 18}. I.
           have ne_c1_6 := layer3_card2_classify χ hCard1 L6 L18 (by norm_num) h6 h18
           have chi15 : χ 15 = c0 := to_c0 15 L15
             (ne_c1_6 15 L15 (by norm_num) (by norm_num))
@@ -9328,7 +9325,7 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
             (ne_c2 24 L24 (by norm_num) (by norm_num))
           exact disp_I ⟨h3, chi12_c0, chi15, chi21, chi24, h6, h18, h9, h27⟩
         · exact absurd h6 h6_ne_c2
-      · -- 3=c1. c1 = {3, 18}.  K.
+      · -- 3=c1. c1 = {3, 18}. K.
         have ne_c1_3 := layer3_card2_classify χ hCard1 L3 L18 (by norm_num) h3 h18
         have chi6 : χ 6 = c0 := to_c0 6 L6
           (ne_c1_3 6 L6 (by norm_num) (by norm_num))
@@ -9345,7 +9342,7 @@ theorem compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch
         exact disp_K ⟨chi6, chi12_c0, chi15, chi21, chi24, h3, h18, h9, h27⟩
       · exact absurd h3 (ne_c2 3 L3 (by norm_num) (by norm_num))
 
-/-- **R427 Target C**: 5+2+2 χ(18) = c₂ pattern dispatch.  Swap wrapper. -/
+/-- ** Target C**: 5+2+2 χ(18) = c₂ pattern dispatch. Swap wrapper. -/
 theorem compression_3_3_5_2_2_chi18_eq_c2_pattern_dispatch
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9360,7 +9357,7 @@ theorem compression_3_3_5_2_2_chi18_eq_c2_pattern_dispatch
   compression_3_3_5_2_2_chi18_eq_c1_pattern_dispatch χ hValid hAvoid
     (c1 := c2) (c2 := c1) h02 h01 h12.symm hCard0 hCard2 hCard1 h18
 
-/-- **R427 Target D**: 5+2+2 cardinality master.  Dispatches via χ(18). -/
+/-- ** Target D**: 5+2+2 cardinality master. Dispatches via χ(18). -/
 theorem compression_3_3_5_2_2_card_distribution_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9390,11 +9387,11 @@ theorem compression_3_3_5_2_2_card_distribution_infeasible
   · exact compression_3_3_5_2_2_chi18_eq_c2_pattern_dispatch χ hValid hAvoid
       h01 h02 h12 hCard0 hCard1 hCard2 h18
 
-/-! ### Round 128 (R428, 2026-05-21) — 3+3+3 representative survivor closures.
+/-! ### 3+3+3 representative survivor closures.
 
   Tests survivor-level infrastructure for the 3+3+3 partition shape.
   13 unordered survivors per R424C audit; all close by propagation
-  alone with chain lengths 11-25.  R428 formalizes 4 representatives
+  alone with chain lengths 11-25. formalizes 4 representatives
   covering the 4 distinct mono-triple clusters:
 
   * Survivor #1: mono (15, 15, 20) at c₁ — c₀ = {3, 6, 18}.
@@ -9403,11 +9400,11 @@ theorem compression_3_3_5_2_2_card_distribution_infeasible
   * Survivor #12: mono (15, 4, 9) at c₂ — c₀ = {3, 18, 21}.
 
   Plus an S₃ permutation wrapper test (survivor #1 with c₀/c₁ swap)
-  to determine whether the S₃ symmetry is cheap enough for R429. -/
+  to determine whether the S₃ symmetry is cheap enough for. -/
 
 set_option maxHeartbeats 1000000 in
-/-- **R428 Survivor #1** (3+3+3): c₀ = {3, 6, 18}, c₁ = {9, 15, 21},
-    c₂ = {12, 24, 27}.  Mono (15, 15, 20) at c₁ via off-layer χ(20). -/
+/-- ** Survivor #1** (3+3+3): c₀ = {3, 6, 18}, c₁ = {9, 15, 21},
+    c₂ = {12, 24, 27}. Mono (15, 15, 20) at c₁ via off-layer χ(20). -/
 theorem compression_3_3_3_3_3_survivor1_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9445,8 +9442,8 @@ theorem compression_3_3_3_3_3_survivor1_infeasible
     rfl (h15.trans h20.symm)
 
 set_option maxHeartbeats 1000000 in
-/-- **R428 Survivor #4** (3+3+3): c₀ = {3, 9, 15}, c₁ = {6, 18, 21},
-    c₂ = {12, 24, 27}.  Mono (12, 4, 8) at c₂. -/
+/-- ** Survivor #4** (3+3+3): c₀ = {3, 9, 15}, c₁ = {6, 18, 21},
+    c₂ = {12, 24, 27}. Mono (12, 4, 8) at c₂. -/
 theorem compression_3_3_3_3_3_survivor4_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9497,8 +9494,8 @@ theorem compression_3_3_3_3_3_survivor4_infeasible
     (h12.trans h4.symm) (h4.trans h8.symm)
 
 set_option maxHeartbeats 1000000 in
-/-- **R428 Survivor #11** (3+3+3): c₀ = {3, 15, 18}, c₁ = {6, 12, 24},
-    c₂ = {9, 21, 27}.  Mono (21, 2, 9) at c₂. -/
+/-- ** Survivor #11** (3+3+3): c₀ = {3, 15, 18}, c₁ = {6, 12, 24},
+    c₂ = {9, 21, 27}. Mono (21, 2, 9) at c₂. -/
 theorem compression_3_3_3_3_3_survivor11_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9519,8 +9516,8 @@ theorem compression_3_3_3_3_3_survivor11_infeasible
   have hc2_lt : c2 < 3 := h9 ▸ hValid 9 (by norm_num) (by norm_num)
   -- χ(2) = c₂.
   have h2_ne_c0 : χ 2 ≠ c0 := fun h2 =>
-    -- (3, 2, 3) self-loop: 3 + 6 = 9 = 3·3.  Mono: χ(3) = χ(2)?
-    -- Actually (3, 2, 3): 3 + 3·2 = 3 + 6 = 9 = 3·3.  χ(3) = χ(2) = χ(3) → all c0 → mono.
+    -- (3, 2, 3) self-loop: 3 + 6 = 9 = 3·3. Mono: χ(3) = χ(2)?
+    -- Actually (3, 2, 3): 3 + 3·2 = 3 + 6 = 9 = 3·3. χ(3) = χ(2) = χ(3) → all c0 → mono.
     mono_3 3 2 3 (by norm_num) (by norm_num) (by norm_num)
       (by norm_num) (by norm_num) (by norm_num) (by norm_num)
       (h3.trans h2.symm) (h2.trans h3.symm)
@@ -9537,8 +9534,8 @@ theorem compression_3_3_3_3_3_survivor11_infeasible
     (h21.trans h2.symm) (h2.trans h9.symm)
 
 set_option maxHeartbeats 1000000 in
-/-- **R428 Survivor #12** (3+3+3): c₀ = {3, 18, 21}, c₁ = {6, 12, 24},
-    c₂ = {9, 15, 27}.  Mono (15, 4, 9) at c₂. -/
+/-- ** Survivor #12** (3+3+3): c₀ = {3, 18, 21}, c₁ = {6, 12, 24},
+    c₂ = {9, 15, 27}. Mono (15, 4, 9) at c₂. -/
 theorem compression_3_3_3_3_3_survivor12_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9573,9 +9570,9 @@ theorem compression_3_3_3_3_3_survivor12_infeasible
     (by norm_num) (by norm_num) (by norm_num) (by norm_num)
     (h15.trans h4.symm) (h4.trans h9.symm)
 
-/-- **R428 S₃ wrapper test**: 3+3+3 Survivor #1 with c₀/c₁ swapped.
+/-- ** S₃ wrapper test**: 3+3+3 Survivor #1 with c₀/c₁ swapped.
     Tests whether color permutation wrappers are cheap (~12 lines)
-    enough to support an S₃ symmetric closure approach in R429.
+    enough to support an S₃ symmetric closure approach in.
     Result: yes, single-line forwarding works. -/
 theorem compression_3_3_3_3_3_survivor1_swap01_infeasible
     (χ : ℕ → ℕ)
@@ -9593,8 +9590,8 @@ theorem compression_3_3_3_3_3_survivor1_swap01_infeasible
     hc01.symm hc12 hc02
 
 set_option maxHeartbeats 1000000 in
-/-- **R428 Survivor #2** (3+3+3): c₀ = {3, 6, 18}, c₁ = {9, 15, 27},
-    c₂ = {12, 21, 24}.  Mono (15, 15, 20) at c₁. -/
+/-- ** Survivor #2** (3+3+3): c₀ = {3, 6, 18}, c₁ = {9, 15, 27},
+    c₂ = {12, 21, 24}. Mono (15, 15, 20) at c₁. -/
 theorem compression_3_3_3_3_3_survivor2_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9628,8 +9625,8 @@ theorem compression_3_3_3_3_3_survivor2_infeasible
     rfl (h15.trans h20.symm)
 
 set_option maxHeartbeats 1000000 in
-/-- **R428 Survivor #3** (3+3+3): c₀ = {3, 6, 18}, c₁ = {9, 21, 27},
-    c₂ = {12, 15, 24}.  Mono (21, 9, 16) at c₁. -/
+/-- ** Survivor #3** (3+3+3): c₀ = {3, 6, 18}, c₁ = {9, 21, 27},
+    c₂ = {12, 15, 24}. Mono (21, 9, 16) at c₁. -/
 theorem compression_3_3_3_3_3_survivor3_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9666,8 +9663,8 @@ theorem compression_3_3_3_3_3_survivor3_infeasible
     (h21.trans h9.symm) (h9.trans h16.symm)
 
 set_option maxHeartbeats 1000000 in
-/-- **R428 Survivor #5** (3+3+3): c₀ = {3, 9, 21}, c₁ = {6, 15, 18},
-    c₂ = {12, 24, 27}.  Mono (12, 4, 8) at c₂. -/
+/-- ** Survivor #5** (3+3+3): c₀ = {3, 9, 21}, c₁ = {6, 15, 18},
+    c₂ = {12, 24, 27}. Mono (12, 4, 8) at c₂. -/
 theorem compression_3_3_3_3_3_survivor5_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9711,8 +9708,8 @@ theorem compression_3_3_3_3_3_survivor5_infeasible
     (h12.trans h4.symm) (h4.trans h8.symm)
 
 set_option maxHeartbeats 1000000 in
-/-- **R428 Survivor #6** (3+3+3): c₀ = {3, 9, 27}, c₁ = {6, 15, 18},
-    c₂ = {12, 21, 24}.  Mono (12, 4, 8) at c₂. -/
+/-- ** Survivor #6** (3+3+3): c₀ = {3, 9, 27}, c₁ = {6, 15, 18},
+    c₂ = {12, 21, 24}. Mono (12, 4, 8) at c₂. -/
 theorem compression_3_3_3_3_3_survivor6_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9756,8 +9753,8 @@ theorem compression_3_3_3_3_3_survivor6_infeasible
     (h12.trans h4.symm) (h4.trans h8.symm)
 
 set_option maxHeartbeats 1000000 in
-/-- **R428 Survivor #7** (3+3+3): c₀ = {3, 9, 24}, c₁ = {6, 18, 21},
-    c₂ = {12, 15, 27}.  Mono (12, 4, 8) at c₂. -/
+/-- ** Survivor #7** (3+3+3): c₀ = {3, 9, 24}, c₁ = {6, 18, 21},
+    c₂ = {12, 15, 27}. Mono (12, 4, 8) at c₂. -/
 theorem compression_3_3_3_3_3_survivor7_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9801,8 +9798,8 @@ theorem compression_3_3_3_3_3_survivor7_infeasible
     (h12.trans h4.symm) (h4.trans h8.symm)
 
 set_option maxHeartbeats 1000000 in
-/-- **R428 Survivor #8** (3+3+3): c₀ = {3, 9, 27}, c₁ = {6, 18, 21},
-    c₂ = {12, 15, 24}.  Mono (12, 4, 8) at c₂. -/
+/-- ** Survivor #8** (3+3+3): c₀ = {3, 9, 27}, c₁ = {6, 18, 21},
+    c₂ = {12, 15, 24}. Mono (12, 4, 8) at c₂. -/
 theorem compression_3_3_3_3_3_survivor8_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9846,8 +9843,8 @@ theorem compression_3_3_3_3_3_survivor8_infeasible
     (h12.trans h4.symm) (h4.trans h8.symm)
 
 set_option maxHeartbeats 1000000 in
-/-- **R428 Survivor #9** (3+3+3): c₀ = {3, 12, 24}, c₁ = {6, 15, 18},
-    c₂ = {9, 21, 27}.  Mono (12, 12, 16) at c₀. -/
+/-- ** Survivor #9** (3+3+3): c₀ = {3, 12, 24}, c₁ = {6, 15, 18},
+    c₂ = {9, 21, 27}. Mono (12, 12, 16) at c₀. -/
 theorem compression_3_3_3_3_3_survivor9_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9884,8 +9881,8 @@ theorem compression_3_3_3_3_3_survivor9_infeasible
     rfl (h12.trans h16.symm)
 
 set_option maxHeartbeats 1000000 in
-/-- **R428 Survivor #10** (3+3+3): c₀ = {3, 12, 24}, c₁ = {6, 18, 21},
-    c₂ = {9, 15, 27}.  Mono (12, 20, 24) at c₀. -/
+/-- ** Survivor #10** (3+3+3): c₀ = {3, 12, 24}, c₁ = {6, 18, 21},
+    c₂ = {9, 15, 27}. Mono (12, 20, 24) at c₀. -/
 theorem compression_3_3_3_3_3_survivor10_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9922,8 +9919,8 @@ theorem compression_3_3_3_3_3_survivor10_infeasible
     (h12.trans h20.symm) (h20.trans h24.symm)
 
 set_option maxHeartbeats 1000000 in
-/-- **R428 Survivor #13** (3+3+3): c₀ = {3, 18, 21}, c₁ = {6, 12, 27},
-    c₂ = {9, 15, 24}.  Mono (15, 4, 9) at c₂. -/
+/-- ** Survivor #13** (3+3+3): c₀ = {3, 18, 21}, c₁ = {6, 12, 27},
+    c₂ = {9, 15, 24}. Mono (15, 4, 9) at c₂. -/
 theorem compression_3_3_3_3_3_survivor13_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -9957,7 +9954,7 @@ theorem compression_3_3_3_3_3_survivor13_infeasible
     (h15.trans h4.symm) (h4.trans h9.symm)
 
 set_option maxHeartbeats 4000000 in
-/-- **R428 13-survivor dispatcher**: 3+3+3 survivors disjunction. -/
+/-- ** 13-survivor dispatcher**: 3+3+3 survivors disjunction. -/
 theorem compression_3_3_3_3_3_survivors_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -10059,33 +10056,33 @@ theorem compression_3_3_3_3_3_survivors_infeasible
   · exact compression_3_3_3_3_3_survivor13_infeasible χ hValid hAvoid
       h3 h18 h21 h6 h12 h27 h9 h15 h24 hc01 hc02 hc12
 
-/-! ### Round 129 (R429, 2026-05-21) — 3+3+3 cardinality master, χ(18) = c₀
+/-! ### 3+3+3 cardinality master, χ(18) = c₀
     sub-tree.
 
-  R428 closed the survivor-level 3+3+3 infrastructure: 13 per-survivor
+   closed the survivor-level 3+3+3 infrastructure: 13 per-survivor
   closure theorems plus a 13-way disjunction aggregator
   `compression_3_3_3_3_3_survivors_infeasible`.
 
-  R429 promotes that to a cardinality-level master.  Per
+   promotes that to a cardinality-level master. Per
   `audit/R429_3_3_3_wrapper_plan.md`, the plan recommends Option B
-  (mirror R427's 5+2+2 master): three sub-dispatchers split by χ(18)
-  value, plus thin S₃ swap wrappers.  Per the wrapper plan's stop
+  (mirror 's 5+2+2 master): three sub-dispatchers split by χ(18)
+  value, plus thin S₃ swap wrappers. Per the wrapper plan's stop
   conditions (700-line ceiling per theorem, 250-line ceiling per
   helper), the χ(18) = c₀ branch is further decomposed into four
-  case helpers split by (χ(3) =?= c₀, χ(6) =?= c₀).  This round
+  case helpers split by (χ(3) =?= c₀, χ(6) =?= c₀). This round
   delivers the KILL helper `chi18_c0_case_not3_not6` only;
   remaining cases (case_3_6, case_3_not6, case_not3_6) are deferred. -/
 
 set_option maxHeartbeats 1000000 in
-/-- **R429 Phase 1 — case (¬3, ¬6) KILL**: 3+3+3 master, χ(18) = c₀
-    sub-tree where χ(3) ≠ c₀ ∧ χ(6) ≠ c₀.  Given χ(18) = c₀ alone,
+/-- ** Phase 1 — case (¬3, ¬6) KILL**: 3+3+3 master, χ(18) = c₀
+    sub-tree where χ(3) ≠ c₀ ∧ χ(6) ≠ c₀. Given χ(18) = c₀ alone,
     self-loops (18, 12, 18), (18, 18, 24), (27, 18, 27) force
-    χ(12), χ(24), χ(27) ≠ c₀.  Combined with the case hypotheses
+    χ(12), χ(24), χ(27) ≠ c₀. Combined with the case hypotheses
     χ(3), χ(6) ≠ c₀, the c₀-class has 18 plus AT MOST one of
-    {9, 15, 21}.  Since |c₀| = 3, at least two of {9, 15, 21}
+    {9, 15, 21}. Since |c₀| = 3, at least two of {9, 15, 21}
     must lie in c₀; each such pair forms a layer-internal Rado
     triple inside c₀ ((9, 15, 18) / (9, 18, 21) / (18, 15, 21))
-    and closes via `hAvoid`.  All "≤ 1 of {9, 15, 21} is c₀"
+    and closes via `hAvoid`. All "≤ 1 of {9, 15, 21} is c₀"
     branches close by cardinality contradiction against
     `hCard0 = 3`. -/
 theorem compression_3_3_3_3_3_chi18_c0_case_not3_not6
@@ -10169,9 +10166,9 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_not6
         omega
 
 set_option maxHeartbeats 4000000 in
-/-- **R430 — case (3, 6) dispatch**: 3+3+3 master, χ(18) = c₀ sub-tree
-    where χ(3) = c₀ ∧ χ(6) = c₀.  c₀ is locked to {3, 6, 18} (via
-    `layer3_card3_classify` on hCard0).  The remaining 6 layer positions
+/-- ** — case (3, 6) dispatch**: 3+3+3 master, χ(18) = c₀ sub-tree
+    where χ(3) = c₀ ∧ χ(6) = c₀. c₀ is locked to {3, 6, 18} (via
+    `layer3_card3_classify` on hCard0). The remaining 6 layer positions
     {9, 12, 15, 21, 24, 27} partition into c₁ and c₂ (3 each).
     Of the 20 = C(6,3) partitions:
       * 8 fail immediately via self-loop (9, 9, 12) when χ(9) = χ(12)
@@ -10179,8 +10176,8 @@ set_option maxHeartbeats 4000000 in
       * 6 are canonical-survivor matches (S1/S2/S3 × {identity, c₁↔c₂ swap}).
       * 6 close via layer-internal Rado triples T9 = (27, 12, 21),
         T14 = (9, 21, 24), T16 = (9, 24, 27) at c₁ or c₂.
-    All closures use either R428 survivor dispatch or layer-internal
-    `mono_3` calls.  No off-layer propagation. -/
+    All closures use either survivor dispatch or layer-internal
+    `mono_3` calls. No off-layer propagation. -/
 theorem compression_3_3_3_3_3_chi18_c0_case_3_6
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -10250,11 +10247,11 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
       exact mono_3 9 9 12 (by norm_num) (by norm_num) (by norm_num)
         (by norm_num) (by norm_num) (by norm_num) (by norm_num)
         rfl (h9.trans h12.symm)
-    · -- χ(9) = c₁, χ(12) = c₂.  7 sub-leaves on χ(15), χ(21), χ(24).
+    · -- χ(9) = c₁, χ(12) = c₂. 7 sub-leaves on χ(15), χ(21), χ(24).
       rcases c1_or_c2 15 L15 (by norm_num) (by norm_num) (by norm_num) with h15 | h15
       · -- 15 = c₁.
         rcases c1_or_c2 21 L21 (by norm_num) (by norm_num) (by norm_num) with h21 | h21
-        · -- 15=c₁, 21=c₁.  c₁ = {9, 15, 21}.  S1 identity.
+        · -- 15=c₁, 21=c₁. c₁ = {9, 15, 21}. S1 identity.
           have ne_c1 := layer3_card3_classify χ hCard1 L9 L15 L21
             (by norm_num) (by norm_num) (by norm_num) h9 h15 h21
           have h24 : χ 24 = c2 := to_c2 24 L24 (by norm_num) (by norm_num)
@@ -10265,7 +10262,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
             h3 h6 h18 h9 h15 h21 h12 h24 h27 hc01 hc02 hc12
         · -- 15=c₁, 21=c₂.
           rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
-          · -- 15=c₁, 21=c₂, 24=c₁.  c₁ = {9, 15, 24}; c₂ ⊇ {12, 21, 27}.
+          · -- 15=c₁, 21=c₂, 24=c₁. c₁ = {9, 15, 24}; c₂ ⊇ {12, 21, 27}.
             have ne_c1 := layer3_card3_classify χ hCard1 L9 L15 L24
               (by norm_num) (by norm_num) (by norm_num) h9 h15 h24
             have h27 : χ 27 = c2 := to_c2 27 L27 (by norm_num) (by norm_num)
@@ -10274,7 +10271,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
             exact mono_3 27 12 21 (by norm_num) (by norm_num) (by norm_num)
               (by norm_num) (by norm_num) (by norm_num) (by norm_num)
               (h27.trans h12.symm) (h12.trans h21.symm)
-          · -- 15=c₁, 21=c₂, 24=c₂.  c₂ = {12, 21, 24}; c₁ = {9, 15, 27}.  S2 identity.
+          · -- 15=c₁, 21=c₂, 24=c₂. c₂ = {12, 21, 24}; c₁ = {9, 15, 27}. S2 identity.
             have ne_c2 := layer3_card3_classify χ hCard2 L12 L21 L24
               (by norm_num) (by norm_num) (by norm_num) h12 h21 h24
             have h27 : χ 27 = c1 := to_c1 27 L27 (by norm_num) (by norm_num)
@@ -10285,14 +10282,14 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
         rcases c1_or_c2 21 L21 (by norm_num) (by norm_num) (by norm_num) with h21 | h21
         · -- 15=c₂, 21=c₁.
           rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
-          · -- 15=c₂, 21=c₁, 24=c₁.  c₁ = {9, 21, 24}; c₂ ⊇ {12, 15, 27}.
+          · -- 15=c₂, 21=c₁, 24=c₁. c₁ = {9, 21, 24}; c₂ ⊇ {12, 15, 27}.
             have ne_c1 := layer3_card3_classify χ hCard1 L9 L21 L24
               (by norm_num) (by norm_num) (by norm_num) h9 h21 h24
             -- mono (9, 21, 24) at c₁: 9 + 63 = 72 = 3·24.
             exact mono_3 9 21 24 (by norm_num) (by norm_num) (by norm_num)
               (by norm_num) (by norm_num) (by norm_num) (by norm_num)
               (h9.trans h21.symm) (h21.trans h24.symm)
-          · -- 15=c₂, 21=c₁, 24=c₂.  c₂ = {12, 15, 24}; c₁ = {9, 21, 27}.  S3 identity.
+          · -- 15=c₂, 21=c₁, 24=c₂. c₂ = {12, 15, 24}; c₁ = {9, 21, 27}. S3 identity.
             have ne_c2 := layer3_card3_classify χ hCard2 L12 L15 L24
               (by norm_num) (by norm_num) (by norm_num) h12 h15 h24
             have h27 : χ 27 = c1 := to_c1 27 L27 (by norm_num) (by norm_num)
@@ -10301,7 +10298,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
               h3 h6 h18 h9 h21 h27 h12 h15 h24 hc01 hc02 hc12
         · -- 15=c₂, 21=c₂.
           rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
-          · -- 15=c₂, 21=c₂, 24=c₁.  c₂ = {12, 15, 21}; c₁ = {9, 24, 27}.
+          · -- 15=c₂, 21=c₂, 24=c₁. c₂ = {12, 15, 21}; c₁ = {9, 24, 27}.
             have ne_c2 := layer3_card3_classify χ hCard2 L12 L15 L21
               (by norm_num) (by norm_num) (by norm_num) h12 h15 h21
             have h27 : χ 27 = c1 := to_c1 27 L27 (by norm_num) (by norm_num)
@@ -10310,7 +10307,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
             exact mono_3 9 24 27 (by norm_num) (by norm_num) (by norm_num)
               (by norm_num) (by norm_num) (by norm_num) (by norm_num)
               (h9.trans h24.symm) (h24.trans h27.symm)
-          · -- 15=c₂, 21=c₂, 24=c₂.  c₂ ⊇ {12, 15, 21, 24}; |c₂|=3 contradiction.
+          · -- 15=c₂, 21=c₂, 24=c₂. c₂ ⊇ {12, 15, 21, 24}; |c₂|=3 contradiction.
             have e_9_c2 : χ 9 ≠ c2 := fun h => hc12 (h9.symm.trans h)
             simp only [layerCount,
                        show layer3 = [3, 6, 9, 12, 15, 18, 21, 24, 27] from rfl,
@@ -10321,13 +10318,13 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
             omega
   · -- χ(9) = c₂.
     rcases c1_or_c2 12 L12 (by norm_num) (by norm_num) (by norm_num) with h12 | h12
-    · -- χ(9) = c₂, χ(12) = c₁.  Mirror branch.
+    · -- χ(9) = c₂, χ(12) = c₁. Mirror branch.
       rcases c1_or_c2 15 L15 (by norm_num) (by norm_num) (by norm_num) with h15 | h15
       · -- 15 = c₁.
         rcases c1_or_c2 21 L21 (by norm_num) (by norm_num) (by norm_num) with h21 | h21
         · -- 15=c₁, 21=c₁.
           rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
-          · -- 15=c₁, 21=c₁, 24=c₁.  c₁ ⊇ {12, 15, 21, 24}; |c₁|=3 contradiction.
+          · -- 15=c₁, 21=c₁, 24=c₁. c₁ ⊇ {12, 15, 21, 24}; |c₁|=3 contradiction.
             have e_9_c1 : χ 9 ≠ c1 := fun h => hc12 (h.symm.trans h9)
             simp only [layerCount,
                        show layer3 = [3, 6, 9, 12, 15, 18, 21, 24, 27] from rfl,
@@ -10336,7 +10333,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
                        e_3_c1, e_6_c1, e_9_c1, h12, h15, e_18_c1, h21, h24,
                        ↓reduceIte, Nat.zero_add] at hCard1
             omega
-          · -- 15=c₁, 21=c₁, 24=c₂.  c₁ = {12, 15, 21}; c₂ = {9, 24, 27}.
+          · -- 15=c₁, 21=c₁, 24=c₂. c₁ = {12, 15, 21}; c₂ = {9, 24, 27}.
             have ne_c1 := layer3_card3_classify χ hCard1 L12 L15 L21
               (by norm_num) (by norm_num) (by norm_num) h12 h15 h21
             have h27 : χ 27 = c2 := to_c2 27 L27 (by norm_num) (by norm_num)
@@ -10347,7 +10344,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
               (h9.trans h24.symm) (h24.trans h27.symm)
         · -- 15=c₁, 21=c₂.
           rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
-          · -- 15=c₁, 21=c₂, 24=c₁.  c₁ = {12, 15, 24}; c₂ = {9, 21, 27}.  S3 swap.
+          · -- 15=c₁, 21=c₂, 24=c₁. c₁ = {12, 15, 24}; c₂ = {9, 21, 27}. S3 swap.
             have ne_c1 := layer3_card3_classify χ hCard1 L12 L15 L24
               (by norm_num) (by norm_num) (by norm_num) h12 h15 h24
             have h27 : χ 27 = c2 := to_c2 27 L27 (by norm_num) (by norm_num)
@@ -10355,7 +10352,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
             exact compression_3_3_3_3_3_survivor3_infeasible χ hValid hAvoid
               (c1 := c2) (c2 := c1)
               h3 h6 h18 h9 h21 h27 h12 h15 h24 hc02 hc01 hc12.symm
-          · -- 15=c₁, 21=c₂, 24=c₂.  c₂ ⊇ {9, 21, 24}; non-survivor.
+          · -- 15=c₁, 21=c₂, 24=c₂. c₂ ⊇ {9, 21, 24}; non-survivor.
             have ne_c2 := layer3_card3_classify χ hCard2 L9 L21 L24
               (by norm_num) (by norm_num) (by norm_num) h9 h21 h24
             -- mono (9, 21, 24) at c₂.
@@ -10366,7 +10363,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
         rcases c1_or_c2 21 L21 (by norm_num) (by norm_num) (by norm_num) with h21 | h21
         · -- 15=c₂, 21=c₁.
           rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
-          · -- 15=c₂, 21=c₁, 24=c₁.  c₁ = {12, 21, 24}; c₂ = {9, 15, 27}.  S2 swap.
+          · -- 15=c₂, 21=c₁, 24=c₁. c₁ = {12, 21, 24}; c₂ = {9, 15, 27}. S2 swap.
             have ne_c1 := layer3_card3_classify χ hCard1 L12 L21 L24
               (by norm_num) (by norm_num) (by norm_num) h12 h21 h24
             have h27 : χ 27 = c2 := to_c2 27 L27 (by norm_num) (by norm_num)
@@ -10374,7 +10371,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
             exact compression_3_3_3_3_3_survivor2_infeasible χ hValid hAvoid
               (c1 := c2) (c2 := c1)
               h3 h6 h18 h9 h15 h27 h12 h21 h24 hc02 hc01 hc12.symm
-          · -- 15=c₂, 21=c₁, 24=c₂.  c₂ ⊇ {9, 15, 24}; non-survivor.
+          · -- 15=c₂, 21=c₁, 24=c₂. c₂ ⊇ {9, 15, 24}; non-survivor.
             have ne_c2 := layer3_card3_classify χ hCard2 L9 L15 L24
               (by norm_num) (by norm_num) (by norm_num) h9 h15 h24
             have h27 : χ 27 = c1 := to_c1 27 L27 (by norm_num) (by norm_num)
@@ -10383,9 +10380,9 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
             exact mono_3 27 12 21 (by norm_num) (by norm_num) (by norm_num)
               (by norm_num) (by norm_num) (by norm_num) (by norm_num)
               (h27.trans h12.symm) (h12.trans h21.symm)
-        · -- 15=c₂, 21=c₂.  c₂ ⊇ {9, 15, 21}; only one slot.
+        · -- 15=c₂, 21=c₂. c₂ ⊇ {9, 15, 21}; only one slot.
           rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
-          · -- 24=c₁.  c₂ = {9, 15, 21}; c₁ = {12, 24, 27}.  S1 swap.
+          · -- 24=c₁. c₂ = {9, 15, 21}; c₁ = {12, 24, 27}. S1 swap.
             have ne_c2 := layer3_card3_classify χ hCard2 L9 L15 L21
               (by norm_num) (by norm_num) (by norm_num) h9 h15 h21
             have h27 : χ 27 = c1 := to_c1 27 L27 (by norm_num) (by norm_num)
@@ -10393,7 +10390,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
             exact compression_3_3_3_3_3_survivor1_infeasible χ hValid hAvoid
               (c1 := c2) (c2 := c1)
               h3 h6 h18 h9 h15 h21 h12 h24 h27 hc02 hc01 hc12.symm
-          · -- 24=c₂.  c₂ ⊇ {9, 15, 21, 24}; |c₂|=3 contradiction.
+          · -- 24=c₂. c₂ ⊇ {9, 15, 21, 24}; |c₂|=3 contradiction.
             have e_12_c2 : χ 12 ≠ c2 := fun h => hc12 (h12.symm.trans h)
             simp only [layerCount,
                        show layer3 = [3, 6, 9, 12, 15, 18, 21, 24, 27] from rfl,
@@ -10408,12 +10405,12 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_6
         rfl (h9.trans h12.symm)
 
 set_option maxHeartbeats 4000000 in
-/-- **R430 — case (3, ¬6) dispatch**: 3+3+3 master, χ(18) = c₀ sub-tree
-    where χ(3) = c₀ ∧ χ(6) ≠ c₀.  c₀ ⊇ {3, 18}.  The (18, 3, 9) Rado
-    triple forces χ(9) ≠ c₀.  Combined with universal self-loop
-    exclusions for {12, 24, 27}, c₀ ⊆ {3, 15, 18, 21}.  Since
+/-- ** — case (3, ¬6) dispatch**: 3+3+3 master, χ(18) = c₀ sub-tree
+    where χ(3) = c₀ ∧ χ(6) ≠ c₀. c₀ ⊇ {3, 18}. The (18, 3, 9) Rado
+    triple forces χ(9) ≠ c₀. Combined with universal self-loop
+    exclusions for {12, 24, 27}, c₀ ⊆ {3, 15, 18, 21}. Since
     |c₀| = 3, the third c₀ element is 15 (→ S11) or 21 (→ S12/S13);
-    case-split closes all branches via R428 survivor dispatch with
+    case-split closes all branches via survivor dispatch with
     appropriate (c₁ ↔ c₂) swap. -/
 theorem compression_3_3_3_3_3_chi18_c0_case_3_not6
     (χ : ℕ → ℕ)
@@ -10487,7 +10484,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_not6
         decide_eq_true_iff, h3, h6_ne, e_9_c0, e_12_c0, h15, h18, h21, e_24_c0,
         e_27_c0, ↓reduceIte, Nat.zero_add] at hCard0
       omega
-    · -- (T, F): c₀ = {3, 15, 18}.  S11 territory.
+    · -- (T, F): c₀ = {3, 15, 18}. S11 territory.
       have ne_c0 := layer3_card3_classify χ hCard0 L3 L15 L18
         (by norm_num) (by norm_num) (by norm_num) h3 h15 h18
       have c1_or_c2 : ∀ m, m ∈ layer3 → m ≠ 3 → m ≠ 15 → m ≠ 18 →
@@ -10512,18 +10509,18 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_not6
               · exact m_9_21_24 (h9.trans h21'.symm) (h21'.trans h24.symm)
               · rcases c1_or_c2 27 L27 (by norm_num) (by norm_num) (by norm_num) with h27 | h27
                 · exact m_9_24_27 (h9.trans h24.symm) (h24.trans h27.symm)
-                · -- c₂ ⊇ {6, 12, 21, 27}.  classify c₂ on {6, 12, 21}.
+                · -- c₂ ⊇ {6, 12, 21, 27}. classify c₂ on {6, 12, 21}.
                   have ne_c2 := layer3_card3_classify χ hCard2 L6 L12 L21
                     (by norm_num) (by norm_num) (by norm_num) h6 h12 h21'
                   exact absurd h27 (ne_c2 27 L27 (by norm_num) (by norm_num) (by norm_num))
-            · -- 24 = c₂.  c₂ ⊇ {6, 12, 24}.  classify c₂ → 27, 21 ∈ c₁.
+            · -- 24 = c₂. c₂ ⊇ {6, 12, 24}. classify c₂ → 27, 21 ∈ c₁.
               have ne_c2 := layer3_card3_classify χ hCard2 L6 L12 L24
                 (by norm_num) (by norm_num) (by norm_num) h6 h12 h24
               have h27 : χ 27 = c1 := to_c1 27 L27 (by norm_num) (by norm_num)
                 (by norm_num) (ne_c2 27 L27 (by norm_num) (by norm_num) (by norm_num))
               have h21' : χ 21 = c1 := to_c1 21 L21 (by norm_num) (by norm_num)
                 (by norm_num) (ne_c2 21 L21 (by norm_num) (by norm_num) (by norm_num))
-              -- c₁ = {9, 21, 27}, c₂ = {6, 12, 24}.  S11 swap.
+              -- c₁ = {9, 21, 27}, c₂ = {6, 12, 24}. S11 swap.
               exact compression_3_3_3_3_3_survivor11_infeasible χ hValid hAvoid
                 (c1 := c2) (c2 := c1) h3 h15 h18 h6 h12 h24 h9 h21' h27
                 hc02 hc01 hc12.symm
@@ -10532,7 +10529,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_not6
           rcases c1_or_c2 6 L6 (by norm_num) (by norm_num) (by norm_num) with h6 | h6
           · -- χ(6) = c₁.
             rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
-            · -- 24 = c₁.  c₁ = {6, 12, 24}.  S11 identity.
+            · -- 24 = c₁. c₁ = {6, 12, 24}. S11 identity.
               have ne_c1 := layer3_card3_classify χ hCard1 L6 L12 L24
                 (by norm_num) (by norm_num) (by norm_num) h6 h12 h24
               have h27 : χ 27 = c2 := to_c2 27 L27 (by norm_num) (by norm_num)
@@ -10552,11 +10549,11 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_not6
                   exact m_9_21_24 (h9.trans h21'.symm) (h21'.trans h24.symm)
               · -- (9, 24, 27) mono at c₂.
                 exact m_9_24_27 (h9.trans h24.symm) (h24.trans h27.symm)
-          · -- χ(6) = c₂.  (9, 6, 9) at c₂.
+          · -- χ(6) = c₂. (9, 6, 9) at c₂.
             exact m_9_6_9 (h9.trans h6.symm)
         · exact m_99_12 (h9.trans h12.symm)
   · by_cases h21 : χ 21 = c0
-    · -- (F, T): c₀ = {3, 18, 21}.  S12/S13 territory.
+    · -- (F, T): c₀ = {3, 18, 21}. S12/S13 territory.
       have ne_c0 := layer3_card3_classify χ hCard0 L3 L18 L21
         (by norm_num) (by norm_num) (by norm_num) h3 h18 h21
       have c1_or_c2 : ∀ m, m ∈ layer3 → m ≠ 3 → m ≠ 18 → m ≠ 21 →
@@ -10577,7 +10574,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_not6
           · exact m_9_6_9 (h9.trans h6.symm)
           · rcases c1_or_c2 15 L15 (by norm_num) (by norm_num) (by norm_num) with h15' | h15'
             · rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
-              · -- c₁ = {9, 15, 24}, c₂ = {6, 12, 27}.  S13 swap.
+              · -- c₁ = {9, 15, 24}, c₂ = {6, 12, 27}. S13 swap.
                 have ne_c1 := layer3_card3_classify χ hCard1 L9 L15 L24
                   (by norm_num) (by norm_num) (by norm_num) h9 h15' h24
                 have h27 : χ 27 = c2 := to_c2 27 L27 (by norm_num) (by norm_num)
@@ -10586,7 +10583,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_not6
                   (c1 := c2) (c2 := c1) h3 h18 h21 h6 h12 h27 h9 h15' h24
                   hc02 hc01 hc12.symm
               · rcases c1_or_c2 27 L27 (by norm_num) (by norm_num) (by norm_num) with h27 | h27
-                · -- c₁ = {9, 15, 27}.  S12 swap.
+                · -- c₁ = {9, 15, 27}. S12 swap.
                   have ne_c1 := layer3_card3_classify χ hCard1 L9 L15 L27
                     (by norm_num) (by norm_num) (by norm_num) h9 h15' h27
                   exact compression_3_3_3_3_3_survivor12_infeasible χ hValid hAvoid
@@ -10596,7 +10593,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_not6
                   have ne_c2 := layer3_card3_classify χ hCard2 L6 L12 L24
                     (by norm_num) (by norm_num) (by norm_num) h6 h12 h24
                   exact absurd h27 (ne_c2 27 L27 (by norm_num) (by norm_num) (by norm_num))
-            · -- 15 = c₂.  c₂ ⊇ {6, 12, 15}.
+            · -- 15 = c₂. c₂ ⊇ {6, 12, 15}.
               rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
               · rcases c1_or_c2 27 L27 (by norm_num) (by norm_num) (by norm_num) with h27 | h27
                 · exact m_9_24_27 (h9.trans h24.symm) (h24.trans h27.symm)
@@ -10609,7 +10606,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_not6
       · rcases c1_or_c2 12 L12 (by norm_num) (by norm_num) (by norm_num) with h12 | h12
         · rcases c1_or_c2 6 L6 (by norm_num) (by norm_num) (by norm_num) with h6 | h6
           · rcases c1_or_c2 15 L15 (by norm_num) (by norm_num) (by norm_num) with h15' | h15'
-            · -- c₁ = {6, 12, 15}.  Force χ(24), χ(27) ∈ c₂, then (9, 24, 27) mono.
+            · -- c₁ = {6, 12, 15}. Force χ(24), χ(27) ∈ c₂, then (9, 24, 27) mono.
               have ne_c1 := layer3_card3_classify χ hCard1 L6 L12 L15
                 (by norm_num) (by norm_num) (by norm_num) h6 h12 h15'
               have h24 : χ 24 = c2 := to_c2 24 L24 (by norm_num) (by norm_num)
@@ -10618,7 +10615,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_not6
                 (by norm_num) (ne_c1 27 L27 (by norm_num) (by norm_num) (by norm_num))
               exact m_9_24_27 (h9.trans h24.symm) (h24.trans h27.symm)
             · rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
-              · -- c₁ = {6, 12, 24}, c₂ = {9, 15, 27}.  S12 identity.
+              · -- c₁ = {6, 12, 24}, c₂ = {9, 15, 27}. S12 identity.
                 have ne_c1 := layer3_card3_classify χ hCard1 L6 L12 L24
                   (by norm_num) (by norm_num) (by norm_num) h6 h12 h24
                 have h27 : χ 27 = c2 := to_c2 27 L27 (by norm_num) (by norm_num)
@@ -10626,7 +10623,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_not6
                 exact compression_3_3_3_3_3_survivor12_infeasible χ hValid hAvoid
                   h3 h18 h21 h6 h12 h24 h9 h15' h27 hc01 hc02 hc12
               · rcases c1_or_c2 27 L27 (by norm_num) (by norm_num) (by norm_num) with h27 | h27
-                · -- c₁ = {6, 12, 27}, c₂ = {9, 15, 24}.  S13 identity.
+                · -- c₁ = {6, 12, 27}, c₂ = {9, 15, 24}. S13 identity.
                   have ne_c1 := layer3_card3_classify χ hCard1 L6 L12 L27
                     (by norm_num) (by norm_num) (by norm_num) h6 h12 h27
                   exact compression_3_3_3_3_3_survivor13_infeasible χ hValid hAvoid
@@ -10645,13 +10642,13 @@ theorem compression_3_3_3_3_3_chi18_c0_case_3_not6
       omega
 
 set_option maxHeartbeats 4000000 in
-/-- **R430 — case (¬3, 6) with c₀ = {6, 15, 18} dispatch**: 3+3+3 master,
-    χ(18) = c₀ sub-tree where χ(3) ≠ c₀, χ(6) = c₀, χ(15) = c₀.  Combined
-    with universal exclusions, c₀ is locked to {6, 15, 18}.  The remaining
+/-- ** — case (¬3, 6) with c₀ = {6, 15, 18} dispatch**: 3+3+3 master,
+    χ(18) = c₀ sub-tree where χ(3) ≠ c₀, χ(6) = c₀, χ(15) = c₀. Combined
+    with universal exclusions, c₀ is locked to {6, 15, 18}. The remaining
     6 layer positions {3, 9, 12, 21, 24, 27} split between c₁ and c₂.
     Canonical survivors with canonical c₁ = {6, 15, 18}: S5, S6, S9 (3
     survivors), each yielding 2 labeled cases under the c₀↔c₁ swap and
-    (c₀,c₂,c₁) 3-cycle.  Total 6 labeled survivor cases; non-survivor
+    (c₀,c₂,c₁) 3-cycle. Total 6 labeled survivor cases; non-survivor
     leaves close via layer-internal Rado triples; impossible distributions
     close by cardinality contradiction. -/
 theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_15_18
@@ -10719,14 +10716,14 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_15_18
   have m_9_24_27 : χ 9 = χ 24 → χ 24 = χ 27 → False := fun e1 e2 => mono_3 9 24 27
     (by norm_num) (by norm_num) (by norm_num) (by norm_num)
     (by norm_num) (by norm_num) (by norm_num) e1 e2
-  -- Outer split on χ(9), then χ(12).  Same-color → (9, 9, 12) self-loop.
+  -- Outer split on χ(9), then χ(12). Same-color → (9, 9, 12) self-loop.
   rcases c1_or_c2 9 L9 (by norm_num) (by norm_num) (by norm_num) with h9 | h9
   · rcases c1_or_c2 12 L12 (by norm_num) (by norm_num) (by norm_num) with h12 | h12
     · exact m_99_12 (h9.trans h12.symm)
-    · -- χ(9)=c₁, χ(12)=c₂.  Sub-split on χ(3), χ(21), χ(24).
+    · -- χ(9)=c₁, χ(12)=c₂. Sub-split on χ(3), χ(21), χ(24).
       rcases c1_or_c2 3 L3 (by norm_num) (by norm_num) (by norm_num) with h3 | h3
       · rcases c1_or_c2 21 L21 (by norm_num) (by norm_num) (by norm_num) with h21 | h21
-        · -- χ(3)=c₁, χ(21)=c₁.  c₁ = {3, 9, 21}.  S5 swap.
+        · -- χ(3)=c₁, χ(21)=c₁. c₁ = {3, 9, 21}. S5 swap.
           have ne_c1 := layer3_card3_classify χ hCard1 L3 L9 L21
             (by norm_num) (by norm_num) (by norm_num) h3 h9 h21
           have h24 : χ 24 = c2 := to_c2 24 L24 (by norm_num) (by norm_num)
@@ -10738,13 +10735,13 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_15_18
             hc01.symm hc12 hc02
         · -- χ(3)=c₁, χ(21)=c₂.
           rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
-          · -- χ(24)=c₁.  c₁ = {3, 9, 24}; c₂ ⊇ {12, 21, 27}.  T9 mono at c₂.
+          · -- χ(24)=c₁. c₁ = {3, 9, 24}; c₂ ⊇ {12, 21, 27}. T9 mono at c₂.
             have ne_c1 := layer3_card3_classify χ hCard1 L3 L9 L24
               (by norm_num) (by norm_num) (by norm_num) h3 h9 h24
             have h27 : χ 27 = c2 := to_c2 27 L27 (by norm_num) (by norm_num)
               (by norm_num) (ne_c1 27 L27 (by norm_num) (by norm_num) (by norm_num))
             exact m_27_12_21 (h27.trans h12.symm) (h12.trans h21.symm)
-          · -- χ(24)=c₂.  c₂ = {12, 21, 24}; c₁ = {3, 9, 27}.  S6 swap.
+          · -- χ(24)=c₂. c₂ = {12, 21, 24}; c₁ = {3, 9, 27}. S6 swap.
             have ne_c2 := layer3_card3_classify χ hCard2 L12 L21 L24
               (by norm_num) (by norm_num) (by norm_num) h12 h21 h24
             have h27 : χ 27 = c1 := to_c1 27 L27 (by norm_num) (by norm_num)
@@ -10755,9 +10752,9 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_15_18
       · rcases c1_or_c2 21 L21 (by norm_num) (by norm_num) (by norm_num) with h21 | h21
         · -- χ(3)=c₂, χ(21)=c₁.
           rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
-          · -- χ(24)=c₁.  c₁ = {9, 21, 24}.  T14 mono at c₁.
+          · -- χ(24)=c₁. c₁ = {9, 21, 24}. T14 mono at c₁.
             exact m_9_21_24 (h9.trans h21.symm) (h21.trans h24.symm)
-          · -- χ(24)=c₂.  c₂ = {3, 12, 24}; c₁ = {9, 21, 27}.  S9 3-cycle.
+          · -- χ(24)=c₂. c₂ = {3, 12, 24}; c₁ = {9, 21, 27}. S9 3-cycle.
             have ne_c2 := layer3_card3_classify χ hCard2 L3 L12 L24
               (by norm_num) (by norm_num) (by norm_num) h3 h12 h24
             have h27 : χ 27 = c1 := to_c1 27 L27 (by norm_num) (by norm_num)
@@ -10765,7 +10762,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_15_18
             exact compression_3_3_3_3_3_survivor9_infeasible χ hValid hAvoid
               (c0 := c2) (c1 := c0) (c2 := c1) h3 h12 h24 h6 h15 h18 h9 h21 h27
               hc02.symm hc12.symm hc01
-        · -- χ(3)=c₂, χ(21)=c₂.  c₂ = {3, 12, 21}; c₁ = {9, 24, 27}.  T16 mono.
+        · -- χ(3)=c₂, χ(21)=c₂. c₂ = {3, 12, 21}; c₁ = {9, 24, 27}. T16 mono.
           have ne_c2 := layer3_card3_classify χ hCard2 L3 L12 L21
             (by norm_num) (by norm_num) (by norm_num) h3 h12 h21
           have h24 : χ 24 = c1 := to_c1 24 L24 (by norm_num) (by norm_num)
@@ -10774,10 +10771,10 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_15_18
             (by norm_num) (ne_c2 27 L27 (by norm_num) (by norm_num) (by norm_num))
           exact m_9_24_27 (h9.trans h24.symm) (h24.trans h27.symm)
   · rcases c1_or_c2 12 L12 (by norm_num) (by norm_num) (by norm_num) with h12 | h12
-    · -- χ(9)=c₂, χ(12)=c₁.  Mirror branch.
+    · -- χ(9)=c₂, χ(12)=c₁. Mirror branch.
       rcases c1_or_c2 3 L3 (by norm_num) (by norm_num) (by norm_num) with h3 | h3
       · rcases c1_or_c2 21 L21 (by norm_num) (by norm_num) (by norm_num) with h21 | h21
-        · -- χ(3)=c₁, χ(21)=c₁.  c₁ = {3, 12, 21}; c₂ = {9, 24, 27}.  T16 mono at c₂.
+        · -- χ(3)=c₁, χ(21)=c₁. c₁ = {3, 12, 21}; c₂ = {9, 24, 27}. T16 mono at c₂.
           have ne_c1 := layer3_card3_classify χ hCard1 L3 L12 L21
             (by norm_num) (by norm_num) (by norm_num) h3 h12 h21
           have h24 : χ 24 = c2 := to_c2 24 L24 (by norm_num) (by norm_num)
@@ -10787,7 +10784,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_15_18
           exact m_9_24_27 (h9.trans h24.symm) (h24.trans h27.symm)
         · -- χ(3)=c₁, χ(21)=c₂.
           rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
-          · -- χ(24)=c₁.  c₁ = {3, 12, 24}; c₂ = {9, 21, 27}.  S9 swap.
+          · -- χ(24)=c₁. c₁ = {3, 12, 24}; c₂ = {9, 21, 27}. S9 swap.
             have ne_c1 := layer3_card3_classify χ hCard1 L3 L12 L24
               (by norm_num) (by norm_num) (by norm_num) h3 h12 h24
             have h27 : χ 27 = c2 := to_c2 27 L27 (by norm_num) (by norm_num)
@@ -10795,12 +10792,12 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_15_18
             exact compression_3_3_3_3_3_survivor9_infeasible χ hValid hAvoid
               (c0 := c1) (c1 := c0) h3 h12 h24 h6 h15 h18 h9 h21 h27
               hc01.symm hc12 hc02
-          · -- χ(24)=c₂.  c₂ = {9, 21, 24}.  T14 mono at c₂.
+          · -- χ(24)=c₂. c₂ = {9, 21, 24}. T14 mono at c₂.
             exact m_9_21_24 (h9.trans h21.symm) (h21.trans h24.symm)
       · rcases c1_or_c2 21 L21 (by norm_num) (by norm_num) (by norm_num) with h21 | h21
         · -- χ(3)=c₂, χ(21)=c₁.
           rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
-          · -- χ(24)=c₁.  c₁ = {12, 21, 24}; c₂ = {3, 9, 27}.  S6 3-cycle.
+          · -- χ(24)=c₁. c₁ = {12, 21, 24}; c₂ = {3, 9, 27}. S6 3-cycle.
             have ne_c1 := layer3_card3_classify χ hCard1 L12 L21 L24
               (by norm_num) (by norm_num) (by norm_num) h12 h21 h24
             have h27 : χ 27 = c2 := to_c2 27 L27 (by norm_num) (by norm_num)
@@ -10808,13 +10805,13 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_15_18
             exact compression_3_3_3_3_3_survivor6_infeasible χ hValid hAvoid
               (c0 := c2) (c1 := c0) (c2 := c1) h3 h9 h27 h6 h15 h18 h12 h21 h24
               hc02.symm hc12.symm hc01
-          · -- χ(24)=c₂.  c₂ = {3, 9, 24}; c₁ = {12, 21, 27}.  T9 mono at c₁.
+          · -- χ(24)=c₂. c₂ = {3, 9, 24}; c₁ = {12, 21, 27}. T9 mono at c₁.
             have ne_c2 := layer3_card3_classify χ hCard2 L3 L9 L24
               (by norm_num) (by norm_num) (by norm_num) h3 h9 h24
             have h27 : χ 27 = c1 := to_c1 27 L27 (by norm_num) (by norm_num)
               (by norm_num) (ne_c2 27 L27 (by norm_num) (by norm_num) (by norm_num))
             exact m_27_12_21 (h27.trans h12.symm) (h12.trans h21.symm)
-        · -- χ(3)=c₂, χ(21)=c₂.  c₂ = {3, 9, 21}; c₁ = {12, 24, 27}.  S5 3-cycle.
+        · -- χ(3)=c₂, χ(21)=c₂. c₂ = {3, 9, 21}; c₁ = {12, 24, 27}. S5 3-cycle.
           have ne_c2 := layer3_card3_classify χ hCard2 L3 L9 L21
             (by norm_num) (by norm_num) (by norm_num) h3 h9 h21
           have h24 : χ 24 = c1 := to_c1 24 L24 (by norm_num) (by norm_num)
@@ -10827,12 +10824,12 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_15_18
     · exact m_99_12 (h9.trans h12.symm)
 
 set_option maxHeartbeats 4000000 in
-/-- **R430 — case (¬3, 6) with c₀ = {6, 18, 21} dispatch**: 3+3+3 master,
+/-- ** — case (¬3, 6) with c₀ = {6, 18, 21} dispatch**: 3+3+3 master,
     χ(18) = c₀ sub-tree where χ(3) ≠ c₀, χ(6) = c₀, χ(21) = c₀, χ(15) ≠ c₀.
     Combined with universal exclusions, c₀ is locked to {6, 18, 21}.
     Canonical survivors with canonical c₁ = {6, 18, 21}: S4, S7, S8, S10
     (4 survivors), each yielding 2 labeled cases under the c₀↔c₁ swap and
-    (c₀, c₂, c₁) 3-cycle.  Total 8 labeled survivor cases; non-survivor
+    (c₀, c₂, c₁) 3-cycle. Total 8 labeled survivor cases; non-survivor
     leaves close via layer-internal Rado triples or cardinality. -/
 theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_18_21
     (χ : ℕ → ℕ)
@@ -10896,11 +10893,11 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_18_21
   have m_9_24_27 : χ 9 = χ 24 → χ 24 = χ 27 → False := fun e1 e2 => mono_3 9 24 27
     (by norm_num) (by norm_num) (by norm_num) (by norm_num)
     (by norm_num) (by norm_num) (by norm_num) e1 e2
-  -- Outer split on χ(9), then χ(12).  Same-color → (9, 9, 12) self-loop.
+  -- Outer split on χ(9), then χ(12). Same-color → (9, 9, 12) self-loop.
   rcases c1_or_c2 9 L9 (by norm_num) (by norm_num) (by norm_num) with h9 | h9
   · rcases c1_or_c2 12 L12 (by norm_num) (by norm_num) (by norm_num) with h12 | h12
     · exact m_99_12 (h9.trans h12.symm)
-    · -- χ(9) = c₁, χ(12) = c₂.  Split on χ(15), χ(24), χ(27).
+    · -- χ(9) = c₁, χ(12) = c₂. Split on χ(15), χ(24), χ(27).
       rcases c1_or_c2 15 L15 (by norm_num) (by norm_num) (by norm_num) with h15 | h15
       · rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
         · rcases c1_or_c2 27 L27 (by norm_num) (by norm_num) (by norm_num) with h27 | h27
@@ -10908,14 +10905,14 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_18_21
             exact absurd h27 (layer3_card3_classify χ hCard1 L9 L15 L24
               (by norm_num) (by norm_num) (by norm_num) h9 h15 h24
               27 L27 (by norm_num) (by norm_num) (by norm_num))
-          · -- (c₁,c₁,c₂): c₁ = {9,15,24}, c₂ ⊇ {3,12,27}.  T3 mono at c₂.
+          · -- (c₁,c₁,c₂): c₁ = {9,15,24}, c₂ ⊇ {3,12,27}. T3 mono at c₂.
             have ne_c1 := layer3_card3_classify χ hCard1 L9 L15 L24
               (by norm_num) (by norm_num) (by norm_num) h9 h15 h24
             have h3 : χ 3 = c2 := to_c2 3 L3 (by norm_num) (by norm_num)
               (by norm_num) (ne_c1 3 L3 (by norm_num) (by norm_num) (by norm_num))
             exact m_27_3_12 (h27.trans h3.symm) (h3.trans h12.symm)
         · rcases c1_or_c2 27 L27 (by norm_num) (by norm_num) (by norm_num) with h27 | h27
-          · -- (c₁,c₂,c₁): c₁ = {9,15,27}.  S10 3-cycle.
+          · -- (c₁,c₂,c₁): c₁ = {9,15,27}. S10 3-cycle.
             have ne_c1 := layer3_card3_classify χ hCard1 L9 L15 L27
               (by norm_num) (by norm_num) (by norm_num) h9 h15 h27
             have h3 : χ 3 = c2 := to_c2 3 L3 (by norm_num) (by norm_num)
@@ -10923,7 +10920,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_18_21
             exact compression_3_3_3_3_3_survivor10_infeasible χ hValid hAvoid
               (c0 := c2) (c1 := c0) (c2 := c1) h3 h12 h24 h6 h18 h21 h9 h15 h27
               hc02.symm hc12.symm hc01
-          · -- (c₁,c₂,c₂): c₁ = {3,9,15}.  S4 swap.
+          · -- (c₁,c₂,c₂): c₁ = {3,9,15}. S4 swap.
             have ne_c2 := layer3_card3_classify χ hCard2 L12 L24 L27
               (by norm_num) (by norm_num) (by norm_num) h12 h24 h27
             have h3 : χ 3 = c1 := to_c1 3 L3 (by norm_num) (by norm_num)
@@ -10933,9 +10930,9 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_18_21
               hc01.symm hc12 hc02
       · rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
         · rcases c1_or_c2 27 L27 (by norm_num) (by norm_num) (by norm_num) with h27 | h27
-          · -- (c₂,c₁,c₁): c₁ = {9,24,27}.  T16 mono at c₁.
+          · -- (c₂,c₁,c₁): c₁ = {9,24,27}. T16 mono at c₁.
             exact m_9_24_27 (h9.trans h24.symm) (h24.trans h27.symm)
-          · -- (c₂,c₁,c₂): c₁ = {3,9,24}.  S7 swap.
+          · -- (c₂,c₁,c₂): c₁ = {3,9,24}. S7 swap.
             have ne_c2 := layer3_card3_classify χ hCard2 L12 L15 L27
               (by norm_num) (by norm_num) (by norm_num) h12 h15 h27
             have h3 : χ 3 = c1 := to_c1 3 L3 (by norm_num) (by norm_num)
@@ -10944,7 +10941,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_18_21
               (c0 := c1) (c1 := c0) h3 h9 h24 h6 h18 h21 h12 h15 h27
               hc01.symm hc12 hc02
         · rcases c1_or_c2 27 L27 (by norm_num) (by norm_num) (by norm_num) with h27 | h27
-          · -- (c₂,c₂,c₁): c₁ = {3,9,27}.  S8 swap.
+          · -- (c₂,c₂,c₁): c₁ = {3,9,27}. S8 swap.
             have ne_c2 := layer3_card3_classify χ hCard2 L12 L15 L24
               (by norm_num) (by norm_num) (by norm_num) h12 h15 h24
             have h3 : χ 3 = c1 := to_c1 3 L3 (by norm_num) (by norm_num)
@@ -10957,7 +10954,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_18_21
               (by norm_num) (by norm_num) (by norm_num) h12 h15 h24
               27 L27 (by norm_num) (by norm_num) (by norm_num))
   · rcases c1_or_c2 12 L12 (by norm_num) (by norm_num) (by norm_num) with h12 | h12
-    · -- χ(9) = c₂, χ(12) = c₁.  Mirror branch.
+    · -- χ(9) = c₂, χ(12) = c₁. Mirror branch.
       rcases c1_or_c2 15 L15 (by norm_num) (by norm_num) (by norm_num) with h15 | h15
       · rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
         · rcases c1_or_c2 27 L27 (by norm_num) (by norm_num) (by norm_num) with h27 | h27
@@ -10965,7 +10962,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_18_21
             exact absurd h27 (layer3_card3_classify χ hCard1 L12 L15 L24
               (by norm_num) (by norm_num) (by norm_num) h12 h15 h24
               27 L27 (by norm_num) (by norm_num) (by norm_num))
-          · -- (c₁,c₁,c₂): c₁ = {12,15,24}.  S8 3-cycle.
+          · -- (c₁,c₁,c₂): c₁ = {12,15,24}. S8 3-cycle.
             have ne_c1 := layer3_card3_classify χ hCard1 L12 L15 L24
               (by norm_num) (by norm_num) (by norm_num) h12 h15 h24
             have h3 : χ 3 = c2 := to_c2 3 L3 (by norm_num) (by norm_num)
@@ -10974,7 +10971,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_18_21
               (c0 := c2) (c1 := c0) (c2 := c1) h3 h9 h27 h6 h18 h21 h12 h15 h24
               hc02.symm hc12.symm hc01
         · rcases c1_or_c2 27 L27 (by norm_num) (by norm_num) (by norm_num) with h27 | h27
-          · -- (c₁,c₂,c₁): c₁ = {12,15,27}.  S7 3-cycle.
+          · -- (c₁,c₂,c₁): c₁ = {12,15,27}. S7 3-cycle.
             have ne_c1 := layer3_card3_classify χ hCard1 L12 L15 L27
               (by norm_num) (by norm_num) (by norm_num) h12 h15 h27
             have h3 : χ 3 = c2 := to_c2 3 L3 (by norm_num) (by norm_num)
@@ -10982,11 +10979,11 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_18_21
             exact compression_3_3_3_3_3_survivor7_infeasible χ hValid hAvoid
               (c0 := c2) (c1 := c0) (c2 := c1) h3 h9 h24 h6 h18 h21 h12 h15 h27
               hc02.symm hc12.symm hc01
-          · -- (c₁,c₂,c₂): c₂ ⊇ {9,24,27}.  T16 (9, 24, 27) mono at c₂.
+          · -- (c₁,c₂,c₂): c₂ ⊇ {9,24,27}. T16 (9, 24, 27) mono at c₂.
             exact m_9_24_27 (h9.trans h24.symm) (h24.trans h27.symm)
       · rcases c1_or_c2 24 L24 (by norm_num) (by norm_num) (by norm_num) with h24 | h24
         · rcases c1_or_c2 27 L27 (by norm_num) (by norm_num) (by norm_num) with h27 | h27
-          · -- (c₂,c₁,c₁): c₁ = {12,24,27}.  S4 3-cycle.
+          · -- (c₂,c₁,c₁): c₁ = {12,24,27}. S4 3-cycle.
             have ne_c1 := layer3_card3_classify χ hCard1 L12 L24 L27
               (by norm_num) (by norm_num) (by norm_num) h12 h24 h27
             have h3 : χ 3 = c2 := to_c2 3 L3 (by norm_num) (by norm_num)
@@ -10994,7 +10991,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_18_21
             exact compression_3_3_3_3_3_survivor4_infeasible χ hValid hAvoid
               (c0 := c2) (c1 := c0) (c2 := c1) h3 h9 h15 h6 h18 h21 h12 h24 h27
               hc02.symm hc12.symm hc01
-          · -- (c₂,c₁,c₂): c₁ = {3,12,24}.  S10 swap.
+          · -- (c₂,c₁,c₂): c₁ = {3,12,24}. S10 swap.
             have ne_c2 := layer3_card3_classify χ hCard2 L9 L15 L27
               (by norm_num) (by norm_num) (by norm_num) h9 h15 h27
             have h3 : χ 3 = c1 := to_c1 3 L3 (by norm_num) (by norm_num)
@@ -11003,7 +11000,7 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_18_21
               (c0 := c1) (c1 := c0) h3 h12 h24 h6 h18 h21 h9 h15 h27
               hc01.symm hc12 hc02
         · rcases c1_or_c2 27 L27 (by norm_num) (by norm_num) (by norm_num) with h27 | h27
-          · -- (c₂,c₂,c₁): c₁ = {3,12,27}.  T3 mono at c₁.
+          · -- (c₂,c₂,c₁): c₁ = {3,12,27}. T3 mono at c₁.
             have ne_c2 := layer3_card3_classify χ hCard2 L9 L15 L24
               (by norm_num) (by norm_num) (by norm_num) h9 h15 h24
             have h3 : χ 3 = c1 := to_c1 3 L3 (by norm_num) (by norm_num)
@@ -11016,12 +11013,12 @@ theorem compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_18_21
     · exact m_99_12 (h9.trans h12.symm)
 
 set_option maxHeartbeats 2000000 in
-/-- **R430 master — χ(18) = c₀ pattern dispatch**: 3+3+3 cardinality
-    master, χ(18) = c₀ sub-tree.  Combines five case helpers:
+/-- ** master — χ(18) = c₀ pattern dispatch**: 3+3+3 cardinality
+    master, χ(18) = c₀ sub-tree. Combines five case helpers:
     `case_not3_not6` / `case_3_6` / `case_3_not6` /
     `case_not3_6_c0_eq_6_15_18` / `case_not3_6_c0_eq_6_18_21` via
     case-split on (χ(3) =?= c₀, χ(6) =?= c₀, χ(15) =?= c₀,
-    χ(21) =?= c₀).  In the (¬3, 6) sub-tree, additionally derives
+    χ(21) =?= c₀). In the (¬3, 6) sub-tree, additionally derives
     χ(9) ≠ c₀ via the (9, 6, 9) self-loop and closes cardinality-kill
     leaves where c₀ would exceed 3 elements (both χ(15) = χ(21) = c₀)
     or fall below 3 (neither χ(15) nor χ(21) = c₀). -/
@@ -11067,7 +11064,7 @@ theorem compression_3_3_3_3_3_chi18_eq_c0_pattern_dispatch
         (by norm_num) (by norm_num) (by norm_num) (h.trans h6.symm) (h6.trans h.symm)
       by_cases h15 : χ 15 = c0
       · by_cases h21 : χ 21 = c0
-        · -- c₀ ⊇ {6, 15, 18, 21}.  Cardinality kill (4 = 3 → False).
+        · -- c₀ ⊇ {6, 15, 18, 21}. Cardinality kill (4 = 3 → False).
           simp only [layerCount,
                      show layer3 = [3, 6, 9, 12, 15, 18, 21, 24, 27] from rfl,
                      List.filter_cons, List.filter_nil,
@@ -11075,14 +11072,14 @@ theorem compression_3_3_3_3_3_chi18_eq_c0_pattern_dispatch
                      h3, h6, e_9_c0, e_12_c0, h15, h18, h21, e_24_c0, e_27_c0,
                      ↓reduceIte, Nat.zero_add] at hCard0
           omega
-        · -- c₀ = {6, 15, 18}.  Dispatch case_not3_6_c0_eq_6_15_18.
+        · -- c₀ = {6, 15, 18}. Dispatch case_not3_6_c0_eq_6_15_18.
           exact compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_15_18 χ hValid hAvoid
             hc01 hc02 hc12 hCard0 hCard1 hCard2 h18 h6 h15 h3
       · by_cases h21 : χ 21 = c0
-        · -- c₀ = {6, 18, 21}.  Dispatch case_not3_6_c0_eq_6_18_21.
+        · -- c₀ = {6, 18, 21}. Dispatch case_not3_6_c0_eq_6_18_21.
           exact compression_3_3_3_3_3_chi18_c0_case_not3_6_c0_eq_6_18_21 χ hValid hAvoid
             hc01 hc02 hc12 hCard0 hCard1 hCard2 h18 h6 h21 h3 h15
-        · -- c₀ ⊆ {6, 18}.  Cardinality kill (2 = 3 → False).
+        · -- c₀ ⊆ {6, 18}. Cardinality kill (2 = 3 → False).
           simp only [layerCount,
                      show layer3 = [3, 6, 9, 12, 15, 18, 21, 24, 27] from rfl,
                      List.filter_cons, List.filter_nil,
@@ -11094,19 +11091,19 @@ theorem compression_3_3_3_3_3_chi18_eq_c0_pattern_dispatch
       exact compression_3_3_3_3_3_chi18_c0_case_not3_not6 χ hValid hAvoid hc01 hc02 hc12
         hCard0 hCard1 hCard2 h18 h3 h6
 
-/-! ### Round 131 (R431, 2026-05-21) — 3+3+3 cardinality master.
+/-! ### 3+3+3 cardinality master.
 
-  R430 closed the χ(18) = c₀ branch via the five case helpers + the
-  `chi18_eq_c0_pattern_dispatch` master.  R431 supplies the two thin
+   closed the χ(18) = c₀ branch via the five case helpers + the
+  `chi18_eq_c0_pattern_dispatch` master. supplies the two thin
   swap wrappers (χ(18) = c₁, χ(18) = c₂) using the full S₃ symmetry
   of 3+3+3 (all three colour-classes have cardinality 3, so any S₃
   relabeling preserves the cardinality hypotheses), and assembles the
   final cardinality master via χ(18) trichotomy.
 
   This completes the 3+3+3 partition-shape closure trio
-  (5+3+1 R421/R422, 4+4+1 R423, 5+2+2 R427, 3+3+3 R430/R431). -/
+  (5+3+1 /, 4+4+1, 5+2+2, 3+3+3 /). -/
 
-/-- **R431 — χ(18) = c₁ pattern dispatch (3+3+3)**: swap wrapper that
+/-- ** — χ(18) = c₁ pattern dispatch (3+3+3)**: swap wrapper that
     relabels (c₀ ↔ c₁) and forwards to `chi18_eq_c0_pattern_dispatch`. -/
 theorem compression_3_3_3_3_3_chi18_eq_c1_pattern_dispatch
     (χ : ℕ → ℕ)
@@ -11122,7 +11119,7 @@ theorem compression_3_3_3_3_3_chi18_eq_c1_pattern_dispatch
   compression_3_3_3_3_3_chi18_eq_c0_pattern_dispatch χ hValid hAvoid
     (c0 := c1) (c1 := c0) hc01.symm hc12 hc02 hCard1 hCard0 hCard2 h18
 
-/-- **R431 — χ(18) = c₂ pattern dispatch (3+3+3)**: swap wrapper that
+/-- ** — χ(18) = c₂ pattern dispatch (3+3+3)**: swap wrapper that
     relabels (c₀ ↔ c₂) and forwards to `chi18_eq_c0_pattern_dispatch`. -/
 theorem compression_3_3_3_3_3_chi18_eq_c2_pattern_dispatch
     (χ : ℕ → ℕ)
@@ -11138,9 +11135,9 @@ theorem compression_3_3_3_3_3_chi18_eq_c2_pattern_dispatch
   compression_3_3_3_3_3_chi18_eq_c0_pattern_dispatch χ hValid hAvoid
     (c0 := c2) (c2 := c0) hc12.symm hc02.symm hc01.symm hCard2 hCard1 hCard0 h18
 
-/-- **R431 — 3+3+3 cardinality master**: dispatches via χ(18) trichotomy
-    into the three pattern-dispatch sub-theorems.  Together with the
-    5+3+1 (R422), 4+4+1 (R423), and 5+2+2 (R427) cardinality masters,
+/-- ** — 3+3+3 cardinality master**: dispatches via χ(18) trichotomy
+    into the three pattern-dispatch sub-theorems. Together with the
+    5+3+1 (), 4+4+1 (), and 5+2+2 () cardinality masters,
     this closes the trio of 3-equal-block partition shapes for layer3
     under b = 3, k = 3. -/
 theorem compression_3_3_3_3_3_card_distribution_infeasible
@@ -11173,15 +11170,15 @@ theorem compression_3_3_3_3_3_card_distribution_infeasible
       hc01 hc02 hc12 hCard0 hCard1 hCard2 h18
 
 -- R433_4_3_2_SURVIVORS_BEGIN (mode=56)
-/-! ### Round 133 (R433, 2026-05-21) — 4+3+2 survivor theorem batch
+/-! ### 4+3+2 survivor theorem batch
 
-  Script-generated kernel-pure per-survivor closures.  Each survivor is
+  Script-generated kernel-pure per-survivor closures. Each survivor is
   closed by the standard propagation chain → final mono triple via
-  the `mono_3` helper.  Mode: 56 of 56 survivors emitted by
+  the `mono_3` helper. Mode: 56 of 56 survivors emitted by
   `src/R433_emit_4_3_2_survivors.py`. -/
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #1** (4+3+2): c₀ = {3, 6, 12, 15}, c₁ = {21, 24, 27}, c₂ = {9, 18}. Mono (9, 13, 16) at c2. -/
+/-- ** Survivor #1** (4+3+2): c₀ = {3, 6, 12, 15}, c₁ = {21, 24, 27}, c₂ = {9, 18}. Mono (9, 13, 16) at c2. -/
 theorem compression_3_3_4_3_2_survivor01_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -11341,7 +11338,7 @@ theorem compression_3_3_4_3_2_survivor01_infeasible
     (h9.trans h13.symm) (h13.trans h16.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #2** (4+3+2): c₀ = {3, 6, 12, 24}, c₁ = {9, 15, 27}, c₂ = {18, 21}. Mono (18, 4, 10) at c2. -/
+/-- ** Survivor #2** (4+3+2): c₀ = {3, 6, 12, 24}, c₁ = {9, 15, 27}, c₂ = {18, 21}. Mono (18, 4, 10) at c2. -/
 theorem compression_3_3_4_3_2_survivor02_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -11482,7 +11479,7 @@ theorem compression_3_3_4_3_2_survivor02_infeasible
     (h18.trans h4.symm) (h4.trans h10.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #3** (4+3+2): c₀ = {3, 6, 12, 24}, c₁ = {15, 21, 27}, c₂ = {9, 18}. Mono (18, 10, 16) at c2. -/
+/-- ** Survivor #3** (4+3+2): c₀ = {3, 6, 12, 24}, c₁ = {15, 21, 27}, c₂ = {9, 18}. Mono (18, 10, 16) at c2. -/
 theorem compression_3_3_4_3_2_survivor03_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -11632,7 +11629,7 @@ theorem compression_3_3_4_3_2_survivor03_infeasible
     (h18.trans h10.symm) (h10.trans h16.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #4** (4+3+2): c₀ = {3, 6, 12, 24}, c₁ = {9, 21, 27}, c₂ = {15, 18}. Mono (21, 13, 20) at c1. -/
+/-- ** Survivor #4** (4+3+2): c₀ = {3, 6, 12, 24}, c₁ = {9, 21, 27}, c₂ = {15, 18}. Mono (21, 13, 20) at c1. -/
 theorem compression_3_3_4_3_2_survivor04_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -11786,7 +11783,7 @@ theorem compression_3_3_4_3_2_survivor04_infeasible
     (h21.trans h13.symm) (h13.trans h20.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #5** (4+3+2): c₀ = {3, 6, 15, 18}, c₁ = {9, 21, 27}, c₂ = {12, 24}. Mono (21, 9, 16) at c1. -/
+/-- ** Survivor #5** (4+3+2): c₀ = {3, 6, 15, 18}, c₁ = {9, 21, 27}, c₂ = {12, 24}. Mono (21, 9, 16) at c1. -/
 theorem compression_3_3_4_3_2_survivor05_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -11923,7 +11920,7 @@ theorem compression_3_3_4_3_2_survivor05_infeasible
     (h21.trans h9.symm) (h9.trans h16.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #6** (4+3+2): c₀ = {3, 6, 15, 18}, c₁ = {12, 24, 27}, c₂ = {9, 21}. Mono (21, 9, 16) at c2. -/
+/-- ** Survivor #6** (4+3+2): c₀ = {3, 6, 15, 18}, c₁ = {12, 24, 27}, c₂ = {9, 21}. Mono (21, 9, 16) at c2. -/
 theorem compression_3_3_4_3_2_survivor06_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -12069,7 +12066,7 @@ theorem compression_3_3_4_3_2_survivor06_infeasible
     (h21.trans h9.symm) (h9.trans h16.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #7** (4+3+2): c₀ = {3, 6, 15, 18}, c₁ = {12, 21, 24}, c₂ = {9, 27}. Mono (27, 4, 13) at c2. -/
+/-- ** Survivor #7** (4+3+2): c₀ = {3, 6, 15, 18}, c₁ = {12, 21, 24}, c₂ = {9, 27}. Mono (27, 4, 13) at c2. -/
 theorem compression_3_3_4_3_2_survivor07_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -12246,7 +12243,7 @@ theorem compression_3_3_4_3_2_survivor07_infeasible
     (h27.trans h4.symm) (h4.trans h13.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #8** (4+3+2): c₀ = {3, 6, 15, 21}, c₁ = {12, 24, 27}, c₂ = {9, 18}. Mono (24, 2, 10) at c1. -/
+/-- ** Survivor #8** (4+3+2): c₀ = {3, 6, 15, 21}, c₁ = {12, 24, 27}, c₂ = {9, 18}. Mono (24, 2, 10) at c1. -/
 theorem compression_3_3_4_3_2_survivor08_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -12436,7 +12433,7 @@ theorem compression_3_3_4_3_2_survivor08_infeasible
     (h24.trans h2.symm) (h2.trans h10.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #9** (4+3+2): c₀ = {3, 6, 18, 21}, c₁ = {9, 15, 24}, c₂ = {12, 27}. Mono (24, 8, 16) at c1. -/
+/-- ** Survivor #9** (4+3+2): c₀ = {3, 6, 18, 21}, c₁ = {9, 15, 24}, c₂ = {12, 27}. Mono (24, 8, 16) at c1. -/
 theorem compression_3_3_4_3_2_survivor09_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -12644,7 +12641,7 @@ theorem compression_3_3_4_3_2_survivor09_infeasible
     (h24.trans h8.symm) (h8.trans h16.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #10** (4+3+2): c₀ = {3, 6, 18, 21}, c₁ = {9, 15, 27}, c₂ = {12, 24}. Mono (15, 15, 20) at c1. -/
+/-- ** Survivor #10** (4+3+2): c₀ = {3, 6, 18, 21}, c₁ = {9, 15, 27}, c₂ = {12, 24}. Mono (15, 15, 20) at c1. -/
 theorem compression_3_3_4_3_2_survivor10_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -12776,7 +12773,7 @@ theorem compression_3_3_4_3_2_survivor10_infeasible
     rfl (h15.trans h20.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #11** (4+3+2): c₀ = {3, 6, 18, 21}, c₁ = {12, 24, 27}, c₂ = {9, 15}. Mono (15, 15, 20) at c2. -/
+/-- ** Survivor #11** (4+3+2): c₀ = {3, 6, 18, 21}, c₁ = {12, 24, 27}, c₂ = {9, 15}. Mono (15, 15, 20) at c2. -/
 theorem compression_3_3_4_3_2_survivor11_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -12917,7 +12914,7 @@ theorem compression_3_3_4_3_2_survivor11_infeasible
     rfl (h15.trans h20.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #12** (4+3+2): c₀ = {9, 15, 21, 27}, c₁ = {3, 6, 18}, c₂ = {12, 24}. Mono (15, 15, 20) at c0. -/
+/-- ** Survivor #12** (4+3+2): c₀ = {9, 15, 21, 27}, c₁ = {3, 6, 18}, c₂ = {12, 24}. Mono (15, 15, 20) at c0. -/
 theorem compression_3_3_4_3_2_survivor12_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -13041,7 +13038,7 @@ theorem compression_3_3_4_3_2_survivor12_infeasible
     rfl (h15.trans h20.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #13** (4+3+2): c₀ = {3, 6, 18, 21}, c₁ = {12, 15, 27}, c₂ = {9, 24}. Mono (24, 8, 16) at c2. -/
+/-- ** Survivor #13** (4+3+2): c₀ = {3, 6, 18, 21}, c₁ = {12, 15, 27}, c₂ = {9, 24}. Mono (24, 8, 16) at c2. -/
 theorem compression_3_3_4_3_2_survivor13_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -13249,7 +13246,7 @@ theorem compression_3_3_4_3_2_survivor13_infeasible
     (h24.trans h8.symm) (h8.trans h16.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #14** (4+3+2): c₀ = {3, 6, 18, 21}, c₁ = {12, 15, 24}, c₂ = {9, 27}. Mono (27, 7, 16) at c2. -/
+/-- ** Survivor #14** (4+3+2): c₀ = {3, 6, 18, 21}, c₁ = {12, 15, 24}, c₂ = {9, 27}. Mono (27, 7, 16) at c2. -/
 theorem compression_3_3_4_3_2_survivor14_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -13466,7 +13463,7 @@ theorem compression_3_3_4_3_2_survivor14_infeasible
     (h27.trans h7.symm) (h7.trans h16.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #15** (4+3+2): c₀ = {12, 15, 21, 24}, c₁ = {3, 6, 18}, c₂ = {9, 27}. Mono (27, 7, 16) at c2. -/
+/-- ** Survivor #15** (4+3+2): c₀ = {12, 15, 21, 24}, c₁ = {3, 6, 18}, c₂ = {9, 27}. Mono (27, 7, 16) at c2. -/
 theorem compression_3_3_4_3_2_survivor15_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -13660,7 +13657,7 @@ theorem compression_3_3_4_3_2_survivor15_infeasible
     (h27.trans h7.symm) (h7.trans h16.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #16** (4+3+2): c₀ = {3, 6, 21, 24}, c₁ = {12, 15, 27}, c₂ = {9, 18}. Mono (21, 17, 24) at c0. -/
+/-- ** Survivor #16** (4+3+2): c₀ = {3, 6, 21, 24}, c₁ = {12, 15, 27}, c₂ = {9, 18}. Mono (21, 17, 24) at c0. -/
 theorem compression_3_3_4_3_2_survivor16_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -13899,7 +13896,7 @@ theorem compression_3_3_4_3_2_survivor16_infeasible
     (h21.trans h17.symm) (h17.trans h24.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #17** (4+3+2): c₀ = {3, 6, 21, 27}, c₁ = {12, 15, 24}, c₂ = {9, 18}. Mono (9, 4, 7) at c2. -/
+/-- ** Survivor #17** (4+3+2): c₀ = {3, 6, 21, 27}, c₁ = {12, 15, 24}, c₂ = {9, 18}. Mono (9, 4, 7) at c2. -/
 theorem compression_3_3_4_3_2_survivor17_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -14138,7 +14135,7 @@ theorem compression_3_3_4_3_2_survivor17_infeasible
     (h9.trans h4.symm) (h4.trans h7.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #18** (4+3+2): c₀ = {3, 6, 24, 27}, c₁ = {12, 15, 21}, c₂ = {9, 18}. Mono (24, 6, 14) at c0. -/
+/-- ** Survivor #18** (4+3+2): c₀ = {3, 6, 24, 27}, c₁ = {12, 15, 21}, c₂ = {9, 18}. Mono (24, 6, 14) at c0. -/
 theorem compression_3_3_4_3_2_survivor18_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -14350,7 +14347,7 @@ theorem compression_3_3_4_3_2_survivor18_infeasible
     (h24.trans h6.symm) (h6.trans h14.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #19** (4+3+2): c₀ = {12, 15, 21, 24}, c₁ = {3, 6, 27}, c₂ = {9, 18}. Mono (3, 13, 14) at c1. -/
+/-- ** Survivor #19** (4+3+2): c₀ = {12, 15, 21, 24}, c₁ = {3, 6, 27}, c₂ = {9, 18}. Mono (3, 13, 14) at c1. -/
 theorem compression_3_3_4_3_2_survivor19_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -14598,7 +14595,7 @@ theorem compression_3_3_4_3_2_survivor19_infeasible
     (h3.trans h13.symm) (h13.trans h14.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #20** (4+3+2): c₀ = {3, 9, 15, 24}, c₁ = {6, 12, 27}, c₂ = {18, 21}. Mono (18, 2, 8) at c2. -/
+/-- ** Survivor #20** (4+3+2): c₀ = {3, 9, 15, 24}, c₁ = {6, 12, 27}, c₂ = {18, 21}. Mono (18, 2, 8) at c2. -/
 theorem compression_3_3_4_3_2_survivor20_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -14742,7 +14739,7 @@ theorem compression_3_3_4_3_2_survivor20_infeasible
     (h18.trans h2.symm) (h2.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #21** (4+3+2): c₀ = {3, 9, 15, 27}, c₁ = {6, 12, 24}, c₂ = {18, 21}. Mono (18, 2, 8) at c2. -/
+/-- ** Survivor #21** (4+3+2): c₀ = {3, 9, 15, 27}, c₁ = {6, 12, 24}, c₂ = {18, 21}. Mono (18, 2, 8) at c2. -/
 theorem compression_3_3_4_3_2_survivor21_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -14891,7 +14888,7 @@ theorem compression_3_3_4_3_2_survivor21_infeasible
     (h18.trans h2.symm) (h2.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #22** (4+3+2): c₀ = {6, 12, 24, 27}, c₁ = {3, 9, 15}, c₂ = {18, 21}. Mono (18, 2, 8) at c2. -/
+/-- ** Survivor #22** (4+3+2): c₀ = {6, 12, 24, 27}, c₁ = {3, 9, 15}, c₂ = {18, 21}. Mono (18, 2, 8) at c2. -/
 theorem compression_3_3_4_3_2_survivor22_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -15030,7 +15027,7 @@ theorem compression_3_3_4_3_2_survivor22_infeasible
     (h18.trans h2.symm) (h2.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #23** (4+3+2): c₀ = {6, 12, 15, 24}, c₁ = {3, 9, 27}, c₂ = {18, 21}. Mono (18, 2, 8) at c2. -/
+/-- ** Survivor #23** (4+3+2): c₀ = {6, 12, 15, 24}, c₁ = {3, 9, 27}, c₂ = {18, 21}. Mono (18, 2, 8) at c2. -/
 theorem compression_3_3_4_3_2_survivor23_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -15167,7 +15164,7 @@ theorem compression_3_3_4_3_2_survivor23_infeasible
     (h18.trans h2.symm) (h2.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #24** (4+3+2): c₀ = {3, 9, 21, 27}, c₁ = {6, 12, 24}, c₂ = {15, 18}. Mono (15, 10, 15) at c2. -/
+/-- ** Survivor #24** (4+3+2): c₀ = {3, 9, 21, 27}, c₁ = {6, 12, 24}, c₂ = {15, 18}. Mono (15, 10, 15) at c2. -/
 theorem compression_3_3_4_3_2_survivor24_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -15310,7 +15307,7 @@ theorem compression_3_3_4_3_2_survivor24_infeasible
     (h15.trans h10.symm) (h10.trans h15.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #25** (4+3+2): c₀ = {6, 12, 24, 27}, c₁ = {3, 9, 21}, c₂ = {15, 18}. Mono (15, 10, 15) at c2. -/
+/-- ** Survivor #25** (4+3+2): c₀ = {6, 12, 24, 27}, c₁ = {3, 9, 21}, c₂ = {15, 18}. Mono (15, 10, 15) at c2. -/
 theorem compression_3_3_4_3_2_survivor25_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -15452,7 +15449,7 @@ theorem compression_3_3_4_3_2_survivor25_infeasible
     (h15.trans h10.symm) (h10.trans h15.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #26** (4+3+2): c₀ = {6, 12, 21, 24}, c₁ = {3, 9, 27}, c₂ = {15, 18}. Mono (15, 10, 15) at c2. -/
+/-- ** Survivor #26** (4+3+2): c₀ = {6, 12, 21, 24}, c₁ = {3, 9, 27}, c₂ = {15, 18}. Mono (15, 10, 15) at c2. -/
 theorem compression_3_3_4_3_2_survivor26_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -15593,7 +15590,7 @@ theorem compression_3_3_4_3_2_survivor26_infeasible
     (h15.trans h10.symm) (h10.trans h15.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #27** (4+3+2): c₀ = {3, 9, 15, 21}, c₁ = {12, 24, 27}, c₂ = {6, 18}. Mono (12, 4, 8) at c1. -/
+/-- ** Survivor #27** (4+3+2): c₀ = {3, 9, 15, 21}, c₁ = {12, 24, 27}, c₂ = {6, 18}. Mono (12, 4, 8) at c1. -/
 theorem compression_3_3_4_3_2_survivor27_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -15693,7 +15690,7 @@ theorem compression_3_3_4_3_2_survivor27_infeasible
     (h12.trans h4.symm) (h4.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #28** (4+3+2): c₀ = {3, 9, 15, 24}, c₁ = {6, 18, 21}, c₂ = {12, 27}. Mono (12, 4, 8) at c2. -/
+/-- ** Survivor #28** (4+3+2): c₀ = {3, 9, 15, 24}, c₁ = {6, 18, 21}, c₂ = {12, 27}. Mono (12, 4, 8) at c2. -/
 theorem compression_3_3_4_3_2_survivor28_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -15801,7 +15798,7 @@ theorem compression_3_3_4_3_2_survivor28_infeasible
     (h12.trans h4.symm) (h4.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #29** (4+3+2): c₀ = {3, 9, 15, 27}, c₁ = {6, 18, 21}, c₂ = {12, 24}. Mono (12, 4, 8) at c2. -/
+/-- ** Survivor #29** (4+3+2): c₀ = {3, 9, 15, 27}, c₁ = {6, 18, 21}, c₂ = {12, 24}. Mono (12, 4, 8) at c2. -/
 theorem compression_3_3_4_3_2_survivor29_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -15900,7 +15897,7 @@ theorem compression_3_3_4_3_2_survivor29_infeasible
     (h12.trans h4.symm) (h4.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #30** (4+3+2): c₀ = {3, 9, 15, 27}, c₁ = {12, 21, 24}, c₂ = {6, 18}. Mono (12, 4, 8) at c1. -/
+/-- ** Survivor #30** (4+3+2): c₀ = {3, 9, 15, 27}, c₁ = {12, 21, 24}, c₂ = {6, 18}. Mono (12, 4, 8) at c1. -/
 theorem compression_3_3_4_3_2_survivor30_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -15991,7 +15988,7 @@ theorem compression_3_3_4_3_2_survivor30_infeasible
     (h12.trans h4.symm) (h4.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #31** (4+3+2): c₀ = {3, 9, 21, 27}, c₁ = {6, 15, 18}, c₂ = {12, 24}. Mono (12, 4, 8) at c2. -/
+/-- ** Survivor #31** (4+3+2): c₀ = {3, 9, 21, 27}, c₁ = {6, 15, 18}, c₂ = {12, 24}. Mono (12, 4, 8) at c2. -/
 theorem compression_3_3_4_3_2_survivor31_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -16090,7 +16087,7 @@ theorem compression_3_3_4_3_2_survivor31_infeasible
     (h12.trans h4.symm) (h4.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #32** (4+3+2): c₀ = {3, 9, 21, 27}, c₁ = {12, 15, 24}, c₂ = {6, 18}. Mono (12, 4, 8) at c1. -/
+/-- ** Survivor #32** (4+3+2): c₀ = {3, 9, 21, 27}, c₁ = {12, 15, 24}, c₂ = {6, 18}. Mono (12, 4, 8) at c1. -/
 theorem compression_3_3_4_3_2_survivor32_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -16181,7 +16178,7 @@ theorem compression_3_3_4_3_2_survivor32_infeasible
     (h12.trans h4.symm) (h4.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #33** (4+3+2): c₀ = {12, 15, 21, 24}, c₁ = {3, 9, 27}, c₂ = {6, 18}. Mono (12, 4, 8) at c0. -/
+/-- ** Survivor #33** (4+3+2): c₀ = {12, 15, 21, 24}, c₁ = {3, 9, 27}, c₂ = {6, 18}. Mono (12, 4, 8) at c0. -/
 theorem compression_3_3_4_3_2_survivor33_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -16259,7 +16256,7 @@ theorem compression_3_3_4_3_2_survivor33_infeasible
     (h12.trans h4.symm) (h4.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #34** (4+3+2): c₀ = {3, 12, 15, 24}, c₁ = {6, 18, 21}, c₂ = {9, 27}. Mono (12, 15, 19) at c0. -/
+/-- ** Survivor #34** (4+3+2): c₀ = {3, 12, 15, 24}, c₁ = {6, 18, 21}, c₂ = {9, 27}. Mono (12, 15, 19) at c0. -/
 theorem compression_3_3_4_3_2_survivor34_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -16419,7 +16416,7 @@ theorem compression_3_3_4_3_2_survivor34_infeasible
     (h12.trans h15.symm) (h15.trans h19.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #35** (4+3+2): c₀ = {3, 12, 15, 24}, c₁ = {9, 21, 27}, c₂ = {6, 18}. Mono (18, 7, 13) at c2. -/
+/-- ** Survivor #35** (4+3+2): c₀ = {3, 12, 15, 24}, c₁ = {9, 21, 27}, c₂ = {6, 18}. Mono (18, 7, 13) at c2. -/
 theorem compression_3_3_4_3_2_survivor35_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -16583,7 +16580,7 @@ theorem compression_3_3_4_3_2_survivor35_infeasible
     (h18.trans h7.symm) (h7.trans h13.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #36** (4+3+2): c₀ = {3, 12, 15, 21}, c₁ = {6, 24, 27}, c₂ = {9, 18}. Mono (12, 21, 25) at c0. -/
+/-- ** Survivor #36** (4+3+2): c₀ = {3, 12, 15, 21}, c₁ = {6, 24, 27}, c₂ = {9, 18}. Mono (12, 21, 25) at c0. -/
 theorem compression_3_3_4_3_2_survivor36_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -16729,7 +16726,7 @@ theorem compression_3_3_4_3_2_survivor36_infeasible
     (h12.trans h21.symm) (h21.trans h25.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #37** (4+3+2): c₀ = {3, 12, 15, 24}, c₁ = {6, 21, 27}, c₂ = {9, 18}. Mono (18, 19, 25) at c2. -/
+/-- ** Survivor #37** (4+3+2): c₀ = {3, 12, 15, 24}, c₁ = {6, 21, 27}, c₂ = {9, 18}. Mono (18, 19, 25) at c2. -/
 theorem compression_3_3_4_3_2_survivor37_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -16937,7 +16934,7 @@ theorem compression_3_3_4_3_2_survivor37_infeasible
     (h18.trans h19.symm) (h19.trans h25.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #38** (4+3+2): c₀ = {6, 21, 24, 27}, c₁ = {3, 12, 15}, c₂ = {9, 18}. Mono (21, 6, 13) at c0. -/
+/-- ** Survivor #38** (4+3+2): c₀ = {6, 21, 24, 27}, c₁ = {3, 12, 15}, c₂ = {9, 18}. Mono (21, 6, 13) at c0. -/
 theorem compression_3_3_4_3_2_survivor38_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -17118,7 +17115,7 @@ theorem compression_3_3_4_3_2_survivor38_infeasible
     (h21.trans h6.symm) (h6.trans h13.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #39** (4+3+2): c₀ = {3, 12, 21, 24}, c₁ = {6, 15, 18}, c₂ = {9, 27}. Mono (12, 12, 16) at c0. -/
+/-- ** Survivor #39** (4+3+2): c₀ = {3, 12, 21, 24}, c₁ = {6, 15, 18}, c₂ = {9, 27}. Mono (12, 12, 16) at c0. -/
 theorem compression_3_3_4_3_2_survivor39_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -17278,7 +17275,7 @@ theorem compression_3_3_4_3_2_survivor39_infeasible
     rfl (h12.trans h16.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #40** (4+3+2): c₀ = {3, 12, 21, 24}, c₁ = {9, 15, 27}, c₂ = {6, 18}. Mono (15, 4, 9) at c1. -/
+/-- ** Survivor #40** (4+3+2): c₀ = {3, 12, 21, 24}, c₁ = {9, 15, 27}, c₂ = {6, 18}. Mono (15, 4, 9) at c1. -/
 theorem compression_3_3_4_3_2_survivor40_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -17425,7 +17422,7 @@ theorem compression_3_3_4_3_2_survivor40_infeasible
     (h15.trans h4.symm) (h4.trans h9.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #41** (4+3+2): c₀ = {9, 15, 21, 27}, c₁ = {3, 12, 24}, c₂ = {6, 18}. Mono (15, 4, 9) at c0. -/
+/-- ** Survivor #41** (4+3+2): c₀ = {9, 15, 21, 27}, c₁ = {3, 12, 24}, c₂ = {6, 18}. Mono (15, 4, 9) at c0. -/
 theorem compression_3_3_4_3_2_survivor41_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -17546,7 +17543,7 @@ theorem compression_3_3_4_3_2_survivor41_infeasible
     (h15.trans h4.symm) (h4.trans h9.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #42** (4+3+2): c₀ = {6, 12, 21, 24}, c₁ = {3, 15, 18}, c₂ = {9, 27}. Mono (12, 12, 16) at c0. -/
+/-- ** Survivor #42** (4+3+2): c₀ = {6, 12, 21, 24}, c₁ = {3, 15, 18}, c₂ = {9, 27}. Mono (12, 12, 16) at c0. -/
 theorem compression_3_3_4_3_2_survivor42_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -17697,7 +17694,7 @@ theorem compression_3_3_4_3_2_survivor42_infeasible
     rfl (h12.trans h16.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #43** (4+3+2): c₀ = {6, 12, 24, 27}, c₁ = {3, 15, 18}, c₂ = {9, 21}. Mono (21, 2, 9) at c2. -/
+/-- ** Survivor #43** (4+3+2): c₀ = {6, 12, 24, 27}, c₁ = {3, 15, 18}, c₂ = {9, 21}. Mono (21, 2, 9) at c2. -/
 theorem compression_3_3_4_3_2_survivor43_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -17887,7 +17884,7 @@ theorem compression_3_3_4_3_2_survivor43_infeasible
     (h21.trans h2.symm) (h2.trans h9.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #44** (4+3+2): c₀ = {3, 15, 21, 24}, c₁ = {6, 12, 27}, c₂ = {9, 18}. Mono (18, 2, 8) at c2. -/
+/-- ** Survivor #44** (4+3+2): c₀ = {3, 15, 21, 24}, c₁ = {6, 12, 27}, c₂ = {9, 18}. Mono (18, 2, 8) at c2. -/
 theorem compression_3_3_4_3_2_survivor44_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -18073,7 +18070,7 @@ theorem compression_3_3_4_3_2_survivor44_infeasible
     (h18.trans h2.symm) (h2.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #45** (4+3+2): c₀ = {3, 15, 21, 27}, c₁ = {6, 12, 24}, c₂ = {9, 18}. Mono (18, 2, 8) at c2. -/
+/-- ** Survivor #45** (4+3+2): c₀ = {3, 15, 21, 27}, c₁ = {6, 12, 24}, c₂ = {9, 18}. Mono (18, 2, 8) at c2. -/
 theorem compression_3_3_4_3_2_survivor45_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -18250,7 +18247,7 @@ theorem compression_3_3_4_3_2_survivor45_infeasible
     (h18.trans h2.symm) (h2.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #46** (4+3+2): c₀ = {6, 12, 24, 27}, c₁ = {3, 15, 21}, c₂ = {9, 18}. Mono (18, 2, 8) at c2. -/
+/-- ** Survivor #46** (4+3+2): c₀ = {6, 12, 24, 27}, c₁ = {3, 15, 21}, c₂ = {9, 18}. Mono (18, 2, 8) at c2. -/
 theorem compression_3_3_4_3_2_survivor46_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -18436,7 +18433,7 @@ theorem compression_3_3_4_3_2_survivor46_infeasible
     (h18.trans h2.symm) (h2.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #47** (4+3+2): c₀ = {6, 12, 21, 24}, c₁ = {3, 15, 27}, c₂ = {9, 18}. Mono (18, 2, 8) at c2. -/
+/-- ** Survivor #47** (4+3+2): c₀ = {6, 12, 21, 24}, c₁ = {3, 15, 27}, c₂ = {9, 18}. Mono (18, 2, 8) at c2. -/
 theorem compression_3_3_4_3_2_survivor47_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -18631,7 +18628,7 @@ theorem compression_3_3_4_3_2_survivor47_infeasible
     (h18.trans h2.symm) (h2.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #48** (4+3+2): c₀ = {6, 12, 15, 24}, c₁ = {3, 18, 21}, c₂ = {9, 27}. Mono (12, 15, 19) at c0. -/
+/-- ** Survivor #48** (4+3+2): c₀ = {6, 12, 15, 24}, c₁ = {3, 18, 21}, c₂ = {9, 27}. Mono (12, 15, 19) at c0. -/
 theorem compression_3_3_4_3_2_survivor48_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -18790,7 +18787,7 @@ theorem compression_3_3_4_3_2_survivor48_infeasible
     (h12.trans h15.symm) (h15.trans h19.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #49** (4+3+2): c₀ = {6, 12, 15, 24}, c₁ = {9, 21, 27}, c₂ = {3, 18}. Mono (18, 1, 7) at c2. -/
+/-- ** Survivor #49** (4+3+2): c₀ = {6, 12, 15, 24}, c₁ = {9, 21, 27}, c₂ = {3, 18}. Mono (18, 1, 7) at c2. -/
 theorem compression_3_3_4_3_2_survivor49_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -18954,7 +18951,7 @@ theorem compression_3_3_4_3_2_survivor49_infeasible
     (h18.trans h1.symm) (h1.trans h7.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #50** (4+3+2): c₀ = {3, 21, 24, 27}, c₁ = {6, 12, 15}, c₂ = {9, 18}. Mono (21, 1, 8) at c0. -/
+/-- ** Survivor #50** (4+3+2): c₀ = {3, 21, 24, 27}, c₁ = {6, 12, 15}, c₂ = {9, 18}. Mono (21, 1, 8) at c0. -/
 theorem compression_3_3_4_3_2_survivor50_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -19135,7 +19132,7 @@ theorem compression_3_3_4_3_2_survivor50_infeasible
     (h21.trans h1.symm) (h1.trans h8.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #51** (4+3+2): c₀ = {6, 12, 15, 24}, c₁ = {3, 21, 27}, c₂ = {9, 18}. Mono (18, 20, 26) at c2. -/
+/-- ** Survivor #51** (4+3+2): c₀ = {6, 12, 15, 24}, c₁ = {3, 21, 27}, c₂ = {9, 18}. Mono (18, 20, 26) at c2. -/
 theorem compression_3_3_4_3_2_survivor51_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -19343,7 +19340,7 @@ theorem compression_3_3_4_3_2_survivor51_infeasible
     (h18.trans h20.symm) (h20.trans h26.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #52** (4+3+2): c₀ = {6, 12, 15, 21}, c₁ = {3, 24, 27}, c₂ = {9, 18}. Mono (15, 21, 26) at c0. -/
+/-- ** Survivor #52** (4+3+2): c₀ = {6, 12, 15, 21}, c₁ = {3, 24, 27}, c₂ = {9, 18}. Mono (15, 21, 26) at c0. -/
 theorem compression_3_3_4_3_2_survivor52_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -19515,7 +19512,7 @@ theorem compression_3_3_4_3_2_survivor52_infeasible
     (h15.trans h21.symm) (h21.trans h26.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #53** (4+3+2): c₀ = {6, 12, 24, 27}, c₁ = {3, 18, 21}, c₂ = {9, 15}. Mono (15, 4, 9) at c2. -/
+/-- ** Survivor #53** (4+3+2): c₀ = {6, 12, 24, 27}, c₁ = {3, 18, 21}, c₂ = {9, 15}. Mono (15, 4, 9) at c2. -/
 theorem compression_3_3_4_3_2_survivor53_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -19661,7 +19658,7 @@ theorem compression_3_3_4_3_2_survivor53_infeasible
     (h15.trans h4.symm) (h4.trans h9.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #54** (4+3+2): c₀ = {6, 12, 21, 24}, c₁ = {9, 15, 27}, c₂ = {3, 18}. Mono (15, 4, 9) at c1. -/
+/-- ** Survivor #54** (4+3+2): c₀ = {6, 12, 21, 24}, c₁ = {9, 15, 27}, c₂ = {3, 18}. Mono (15, 4, 9) at c1. -/
 theorem compression_3_3_4_3_2_survivor54_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -19807,7 +19804,7 @@ theorem compression_3_3_4_3_2_survivor54_infeasible
     (h15.trans h4.symm) (h4.trans h9.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #55** (4+3+2): c₀ = {6, 12, 24, 27}, c₁ = {9, 15, 21}, c₂ = {3, 18}. Mono (15, 4, 9) at c1. -/
+/-- ** Survivor #55** (4+3+2): c₀ = {6, 12, 24, 27}, c₁ = {9, 15, 21}, c₂ = {3, 18}. Mono (15, 4, 9) at c1. -/
 theorem compression_3_3_4_3_2_survivor55_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -19917,7 +19914,7 @@ theorem compression_3_3_4_3_2_survivor55_infeasible
     (h15.trans h4.symm) (h4.trans h9.symm)
 
 set_option maxHeartbeats 16000000 in
-/-- **R433 Survivor #56** (4+3+2): c₀ = {9, 15, 21, 27}, c₁ = {6, 12, 24}, c₂ = {3, 18}. Mono (15, 4, 9) at c0. -/
+/-- ** Survivor #56** (4+3+2): c₀ = {9, 15, 21, 27}, c₁ = {6, 12, 24}, c₂ = {3, 18}. Mono (15, 4, 9) at c0. -/
 theorem compression_3_3_4_3_2_survivor56_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -20022,17 +20019,17 @@ theorem compression_3_3_4_3_2_survivor56_infeasible
 -- R433_4_3_2_SURVIVORS_END
 
 -- R434_4_3_2_DISPATCHER_BEGIN
-/-! ### Round 134 (R434, 2026-05-21) — 4+3+2 survivor dispatcher.
+/-! ### 4+3+2 survivor dispatcher.
 
-  Single 56-way disjunction dispatcher built from R432's canonical
-  survivor list.  Consumes the `hSurvivor` disjunction and forwards
+  Single 56-way disjunction dispatcher built from 's canonical
+  survivor list. Consumes the `hSurvivor` disjunction and forwards
   to the matching `compression_3_3_4_3_2_survivor<idx>_infeasible`
-  (R433).  Generated by `src/R434_emit_dispatcher.py`. -/
+  (). Generated by `src/R434_emit_dispatcher.py`. -/
 
 set_option maxHeartbeats 4000000 in
-/-- **R434 — 4+3+2 survivor dispatcher**: 56-way disjunction over
-    R432's canonical survivor patterns + dispatch to the matching
-    R433 per-survivor theorem.  Generated by
+/-- ** — 4+3+2 survivor dispatcher**: 56-way disjunction over
+    's canonical survivor patterns + dispatch to the matching
+     per-survivor theorem. Generated by
     `src/R434_emit_dispatcher.py`. -/
 theorem compression_3_3_4_3_2_survivors_infeasible
     (χ : ℕ → ℕ)
@@ -20269,22 +20266,22 @@ theorem compression_3_3_4_3_2_survivors_infeasible
       h9 h15 h21 h27 h6 h12 h24 h3 h18 hc01 hc02 hc12
 -- R434_4_3_2_DISPATCHER_END
 -- R435_4_3_2_CARD_MASTER_BEGIN
-/-! ### Round 135 (R435, 2026-05-21) — 4+3+2 cardinality master.
+/-! ### 4+3+2 cardinality master.
 
   Cardinality-level closure of the 4+3+2 partition shape:
   layer-3 partition with |c0|=4, |c1|=3, |c2|=2 is infeasible.
 
   Strategy: trichotomy on χ(18) → 3 chi18-branch helpers, each
   enumerates the cell's (c0,c1,c2) partitions via nested case-splits,
-  dispatching survivors to R434 dispatcher and killing non-survivors
+  dispatching survivors to dispatcher and killing non-survivors
   inline via `mono_3` Rado triples or forbidden-edge self-loops.
 
   Generated by `src/R435_emit_card_master.py`.
 -/
 
 set_option maxHeartbeats 32000000 in
-/-- **R435 — 4+3+2 χ(18) = c0 branch**: enumerates the {
-    (c0,c1,c2) partitions in this cell.  Survivors → R434 dispatch;
+/-- ** — 4+3+2 χ(18) = c0 branch**: enumerates the {
+    (c0,c1,c2) partitions in this cell. Survivors → dispatch;
     non-survivors → inline `mono_3` Rado mono/self-loop kill. -/
 theorem compression_3_3_4_3_2_chi18_eq_c0_pattern_dispatch
     (χ : ℕ → ℕ)
@@ -21924,8 +21921,8 @@ theorem compression_3_3_4_3_2_chi18_eq_c0_pattern_dispatch
           (h9.trans h3.symm) (h3.trans h6.symm)
 
 set_option maxHeartbeats 32000000 in
-/-- **R435 — 4+3+2 χ(18) = c1 branch**: enumerates the {
-    (c0,c1,c2) partitions in this cell.  Survivors → R434 dispatch;
+/-- ** — 4+3+2 χ(18) = c1 branch**: enumerates the {
+    (c0,c1,c2) partitions in this cell. Survivors → dispatch;
     non-survivors → inline `mono_3` Rado mono/self-loop kill. -/
 theorem compression_3_3_4_3_2_chi18_eq_c1_pattern_dispatch
     (χ : ℕ → ℕ)
@@ -23891,8 +23888,8 @@ theorem compression_3_3_4_3_2_chi18_eq_c1_pattern_dispatch
           (h9.trans h3.symm) (h3.trans h6.symm)
 
 set_option maxHeartbeats 32000000 in
-/-- **R435 — 4+3+2 χ(18) = c2 branch**: enumerates the {
-    (c0,c1,c2) partitions in this cell.  Survivors → R434 dispatch;
+/-- ** — 4+3+2 χ(18) = c2 branch**: enumerates the {
+    (c0,c1,c2) partitions in this cell. Survivors → dispatch;
     non-survivors → inline `mono_3` Rado mono/self-loop kill. -/
 theorem compression_3_3_4_3_2_chi18_eq_c2_pattern_dispatch
     (χ : ℕ → ℕ)
@@ -26181,7 +26178,7 @@ theorem compression_3_3_4_3_2_chi18_eq_c2_pattern_dispatch
       have ne_c2 := layer3_card2_classify χ hCard2 L18 L3 (by norm_num) h18 h3
       exact absurd h6 (ne_c2 6 L6 (by norm_num) (by norm_num))
 
-/-- **R435 — 4+3+2 cardinality master**: layer-3 partition with
+/-- ** — 4+3+2 cardinality master**: layer-3 partition with
     $|c_0| = 4$, $|c_1| = 3$, $|c_2| = 2$ is infeasible.
 
     Dispatches via χ(18) trichotomy into 3 chi18-branch helpers. -/
@@ -26215,43 +26212,43 @@ theorem compression_3_3_4_3_2_card_distribution_infeasible
       hc01 hc02 hc12 hCard0 hCard1 hCard2 h18
 -- R435_4_3_2_CARD_MASTER_END
 
-/-! ### Round 136 (R436, 2026-05-21) — Unified layer3 partition closure.
+/-! ### Unified layer3 partition closure.
 
   Integrates the 7 layer3 cardinality master theorems closed in
-  R424-R435 into a single kernel-pure compression theorem
-  `compression_3_3_layer3_infeasible`.  Together with the existing
+  - into a single kernel-pure compression theorem
+  `compression_3_3_layer3_infeasible`. Together with the existing
   `bAdicEquation_3_no_mono_free_at_27` (Branch I-V/I-W kernel-pure
   derivation, BasicResults.lean §86), this provides an independent
   kernel-pure route to $R_3(3) \le 27$ via layer3 partition shape
   exhaustion.
 
   Closed shape masters (all kernel-pure):
-  * `compression_3_3_7_1_1_card7_infeasible` (R409)
-  * `compression_3_3_6_2_1_card6_infeasible` (R413)
-  * `compression_3_3_5_3_1_card_distribution_infeasible` (R422)
-  * `compression_3_3_4_4_1_card_distribution_infeasible` (R423)
-  * `compression_3_3_5_2_2_card_distribution_infeasible` (R427)
-  * `compression_3_3_3_3_3_card_distribution_infeasible` (R431)
-  * `compression_3_3_4_3_2_card_distribution_infeasible` (R435)
+  * `compression_3_3_7_1_1_card7_infeasible` ()
+  * `compression_3_3_6_2_1_card6_infeasible` ()
+  * `compression_3_3_5_3_1_card_distribution_infeasible` ()
+  * `compression_3_3_4_4_1_card_distribution_infeasible` ()
+  * `compression_3_3_5_2_2_card_distribution_infeasible` ()
+  * `compression_3_3_3_3_3_card_distribution_infeasible` ()
+  * `compression_3_3_4_3_2_card_distribution_infeasible` ()
 
-  R436 components:
+   components:
   * **Target A** — `layer3_count_vector_ordered_classify`: arithmetic
     classifier mapping (a, b, c) with a + b + c = 9, a ≥ b ≥ c, c ≥ 1
-    to one of the 7 canonical ordered triples.  Pure `omega`.
+    to one of the 7 canonical ordered triples. Pure `omega`.
   * **Target B** — `layer3_count_sum_of_three_colors`: shows the sum
-    of layerCount over 3 distinct colors (all < 3) equals 9.  Uses a
+    of layerCount over 3 distinct colors (all < 3) equals 9. Uses a
     private inductive helper `list_filter_three_colors_length_sum`.
   * **Target C** — `compression_3_3_layer3_infeasible`: integrates
     Targets A and B plus the 7 shape masters into a single unified
-    closure.  Requires positivity of each layerCount (i.e., layer3 is
+    closure. Requires positivity of each layerCount (i.e., layer3 is
     properly 3-colored by {c0, c1, c2}).
 
-  This R436 work does NOT introduce new axioms or `sorry`/`admit`,
+  This work does NOT introduce new axioms or `sorry`/`admit`,
   does NOT use SAT axioms (`lem_compress3_general` etc.) or
   `decide`/`native_decide` proofs, and uses ONLY kernel-pure
-  infrastructure built in R409-R435. -/
+  infrastructure built in -. -/
 
-/-- **R436 Target B helper**: For any list of nats and function `f`,
+/-- ** Target B helper**: For any list of nats and function `f`,
     if 3 distinct values $c_0, c_1, c_2$ cover all `f`-images of list
     elements, then the lengths of the three filters sum to the list
     length.
@@ -26308,11 +26305,11 @@ private lemma list_filter_three_colors_length_sum
                  List.length_cons]
       omega
 
-/-- **R436 Target B**: Sum of layer3 layer counts over any 3 distinct
+/-- ** Target B**: Sum of layer3 layer counts over any 3 distinct
     colors all $< 3$ equals 9.
 
     The three colors must be the three values $\{0, 1, 2\}$ in some
-    order, and every layer3 position has $\chi < 3$ by validity.  So
+    order, and every layer3 position has $\chi < 3$ by validity. So
     every layer3 position contributes to exactly one of the three
     filters, and the lengths sum to `layer3.length = 9`. -/
 theorem layer3_count_sum_of_three_colors
@@ -26336,7 +26333,7 @@ theorem layer3_count_sum_of_three_colors
   -- `χ m = ci` form used by `layerCount`.
   omega
 
-/-- **R436 Target A**: Count-vector classifier (ordered version).
+/-- ** Target A**: Count-vector classifier (ordered version).
 
     For positive triples $(a, b, c)$ with $a + b + c = 9$ and $c \le b
     \le a$, the triple is one of the 7 canonical layer-3 partition
@@ -26362,7 +26359,7 @@ lemma layer3_count_vector_ordered_classify
   three distinct colors $c_0, c_1, c_2 \in \{0, 1, 2\}$ with all three
   layer-3 counts positive, classifies the count-vector by sorting it
   into one of the 7 canonical shapes, and dispatches to the
-  appropriate R424-R435 master with permuted color labels.
+  appropriate - master with permuted color labels.
 
   The dispatch involves $3! = 6$ orderings × 7 shapes = up to 42
   leaves, but many collapse (e.g., 3+3+3 needs only 1; 4+4+1 needs 3;
@@ -26373,25 +26370,25 @@ lemma layer3_count_vector_ordered_classify
   shape-master invocation with relabeled $(c_0, c_1, c_2)$.
 
   Permutation note: each shape master expects $c_0$ to be the LARGEST
-  class, $c_1$ middle, $c_2$ smallest.  For shapes with equal sizes
+  class, $c_1$ middle, $c_2$ smallest. For shapes with equal sizes
   (4+4+1, 5+2+2, 3+3+3), the corresponding labels are
   interchangeable. -/
 
 set_option maxHeartbeats 2000000 in
-/-- **R436 Target C — UNIFIED LAYER3 COMPRESSION THEOREM**.
+/-- ** Target C — UNIFIED LAYER3 COMPRESSION THEOREM**.
 
     For any mono-free valid 3-coloring of $\{1, \ldots, 27\}$ and any
     3 pairwise-distinct colors $c_0, c_1, c_2$ all $< 3$ with every
     layer-3 count positive, contradiction.
 
     This is the kernel-pure unified closure of all 7 layer-3
-    partition shapes (R424-R435).  Together with
+    partition shapes (-). Together with
     `bAdicEquation_3_no_mono_free_at_27` (BasicResults.lean §86,
-    R245 Branch I-V/I-W route), it provides an independent
+     Branch I-V/I-W route), it provides an independent
     kernel-pure derivation of $R_3(3) \le 27$ on the layer-3 path.
 
-    **No SAT axioms.**  **No `decide`/`native_decide` on coloring
-    data.**  Pure kernel via the 7 shape master infrastructure. -/
+    **No SAT axioms.** **No `decide`/`native_decide` on coloring
+    data.** Pure kernel via the 7 shape master infrastructure. -/
 theorem compression_3_3_layer3_infeasible
     (χ : ℕ → ℕ)
     (hValid : IsValidColoring 27 3 χ)
@@ -26412,9 +26409,9 @@ theorem compression_3_3_layer3_infeasible
   set n0 := layerCount χ c0 with hn0_def
   set n1 := layerCount χ c1 with hn1_def
   set n2 := layerCount χ c2 with hn2_def
-  -- Now (n0, n1, n2) is a 3-positive partition of 9.  Sort via S_3 case split.
+  -- Now (n0, n1, n2) is a 3-positive partition of 9. Sort via S_3 case split.
   -- Six orderings; for each, the multiset {n0, n1, n2} = (a, b, c) with a ≥ b ≥ c,
-  -- a + b + c = 9, c ≥ 1 ⇒ one of 7 shapes.  We dispatch per ordering separately.
+  -- a + b + c = 9, c ≥ 1 ⇒ one of 7 shapes. We dispatch per ordering separately.
   --
   -- Dispatcher: 6 orderings × shape classifier × shape master invocations.
   -- The key economy: each ordering picks (largest, middle, smallest) = (cA, cB, cC),
@@ -26551,7 +26548,7 @@ theorem compression_3_3_layer3_infeasible
       · exact compression_3_3_3_3_3_card_distribution_infeasible χ hValid hAvoid
           (c0 := c1) (c1 := c0) (c2 := c2)
           (Ne.symm h01) h12 h02 e0 e1 e2
-    · -- n0 < n2.  Now both n0 < n1 and n0 < n2.  n0 is smallest.
+    · -- n0 < n2. Now both n0 < n1 and n0 < n2. n0 is smallest.
       have hO2' : n0 ≤ n2 := Nat.le_of_lt (Nat.lt_of_not_le hO2)
       by_cases hO3 : n2 ≤ n1
       · -- n1 ≥ n2 ≥ n0: relabel (c1, c2, c0)
@@ -26610,7 +26607,7 @@ theorem compression_3_3_layer3_infeasible
 -- R436_LAYER3_UNIFIED_END
 
 
-/-! ### Round 92 (2026-05-15) — UNIVERSAL STRUCTURAL CONSTRAINTS.
+/-! ### UNIVERSAL STRUCTURAL CONSTRAINTS.
 
   Fundamental new mathematics direction: rather than enumerate
   more sub-cases, identify the UNIVERSAL constraints implied by
@@ -26626,11 +26623,11 @@ theorem compression_3_3_layer3_infeasible
   * etc.
 
   These are UNIVERSAL (no extra hypotheses needed beyond $n$ large
-  enough).  They drive most of the chain-of-deductions in Rounds
+  enough). They drive most of the chain-of-deductions in Rounds
   82-91. -/
 
 /--
-  **Round 92 Lemma A — universal $\chi(9) \ne \chi(6)$.**
+  **Lemma A — universal $\chi(9) \ne \chi(6)$.**
 
   For any valid mono-free 3-coloring of $\{1, \ldots, n\}$ with
   $n \ge 9$: $\chi(9) \ne \chi(6)$.
@@ -26648,7 +26645,7 @@ theorem rado_self_loop_chi_9_ne_chi_6 {n : ℕ} (hn : 9 ≤ n)
   self_loop_b3_eq_left (m := 3) (by omega) (by omega) χ hAvoid
 
 /--
-  **Round 92 Lemma B — universal $\chi(18) \ne \chi(12)$.**
+  **Lemma B — universal $\chi(18) \ne \chi(12)$.**
 
   Self-loop $(18, 12, 18)$: $18 + 36 = 54 = 3 \cdot 18$.
 -/
@@ -26658,7 +26655,7 @@ theorem rado_self_loop_chi_18_ne_chi_12 {n : ℕ} (hn : 18 ≤ n)
   self_loop_b3_eq_left (m := 6) (by omega) (by omega) χ hAvoid
 
 /--
-  **Round 92 Lemma C — universal $\chi(15) \ne \chi(10)$.**  Delegates to
+  **Lemma C — universal $\chi(15) \ne \chi(10)$.** Delegates to
   Foundational.lean's `self_loop_b3_eq_left` at $m = 5$.
 -/
 theorem rado_self_loop_chi_15_ne_chi_10 {n : ℕ} (hn : 15 ≤ n)
@@ -26667,7 +26664,7 @@ theorem rado_self_loop_chi_15_ne_chi_10 {n : ℕ} (hn : 15 ≤ n)
   self_loop_b3_eq_left (m := 5) (by omega) (by omega) χ hAvoid
 
 /--
-  **Round 92 Lemma D — universal $\chi(12) \ne \chi(8)$.**  Delegates to
+  **Lemma D — universal $\chi(12) \ne \chi(8)$.** Delegates to
   Foundational.lean's `self_loop_b3_eq_left` at $m = 4$.
 -/
 theorem rado_self_loop_chi_12_ne_chi_8 {n : ℕ} (hn : 12 ≤ n)
@@ -26676,7 +26673,7 @@ theorem rado_self_loop_chi_12_ne_chi_8 {n : ℕ} (hn : 12 ≤ n)
   self_loop_b3_eq_left (m := 4) (by omega) (by omega) χ hAvoid
 
 /--
-  **Round 92 Lemma E — universal $\chi(21) \ne \chi(14)$.**  Delegates to
+  **Lemma E — universal $\chi(21) \ne \chi(14)$.** Delegates to
   Foundational.lean's `self_loop_b3_eq_left` at $m = 7$.
 -/
 theorem rado_self_loop_chi_21_ne_chi_14 {n : ℕ} (hn : 21 ≤ n)
@@ -26685,7 +26682,7 @@ theorem rado_self_loop_chi_21_ne_chi_14 {n : ℕ} (hn : 21 ≤ n)
   self_loop_b3_eq_left (m := 7) (by omega) (by omega) χ hAvoid
 
 /--
-  **Round 92 Lemma F — universal $\chi(24) \ne \chi(16)$.**  Delegates to
+  **Lemma F — universal $\chi(24) \ne \chi(16)$.** Delegates to
   Foundational.lean's `self_loop_b3_eq_left` at $m = 8$.
 -/
 theorem rado_self_loop_chi_24_ne_chi_16 {n : ℕ} (hn : 24 ≤ n)
@@ -26693,7 +26690,7 @@ theorem rado_self_loop_chi_24_ne_chi_16 {n : ℕ} (hn : 24 ≤ n)
     χ 24 ≠ χ 16 :=
   self_loop_b3_eq_left (m := 8) (by omega) (by omega) χ hAvoid
 
-/-! ### Round 93 (2026-05-15) — GENERIC universal self-loop lemma.
+/-! ### GENERIC universal self-loop lemma.
 
   All Round 92 lemmas are INSTANCES of a single generic lemma:
   for any $k \ge 1$ with $3k \le n$, $\chi(3k) \ne \chi(2k)$.
@@ -26705,13 +26702,13 @@ theorem rado_self_loop_chi_24_ne_chi_16 {n : ℕ} (hn : 24 ≤ n)
   universal lemma subsuming infinitely many concrete instances. -/
 
 /--
-  **Round 93 Theorem (generic self-loop universal lemma).**
+  **Theorem (generic self-loop universal lemma).**
 
   For any $k \ge 1$ with $3k \le n$ and any valid mono-free
   3-coloring $\chi$ of $\{1, \ldots, n\}$: $\chi(3k) \ne \chi(2k)$.
 
   This single lemma subsumes Round 92's six instances and infinitely
-  more.  It is THE fundamental local constraint on Rado-mono-free
+  more. It is THE fundamental local constraint on Rado-mono-free
   3-colorings.
 -/
 theorem rado_self_loop_universal {n k : ℕ} (hk : 1 ≤ k) (hn : 3 * k ≤ n)
@@ -26719,7 +26716,7 @@ theorem rado_self_loop_universal {n k : ℕ} (hk : 1 ≤ k) (hn : 3 * k ≤ n)
     χ (3 * k) ≠ χ (2 * k) :=
   self_loop_b3_eq_left (m := k) hk hn χ hAvoid
 
-/-! ### Round 94 (2026-05-15) — COMPLEMENTARY universal self-loop
+/-! ### COMPLEMENTARY universal self-loop
     lemma: $\chi(4k) \ne \chi(3k)$.
 
   Round 93 gives χ(3k) ≠ χ(2k) via Rado triple $(3k, 2k, 3k)$
@@ -26731,7 +26728,7 @@ theorem rado_self_loop_universal {n k : ℕ} (hk : 1 ≤ k) (hn : 3 * k ≤ n)
 
   Together, Rounds 93 and 94 give a UNIVERSAL chain:
   $\chi(2k), \chi(3k), \chi(4k)$ are PAIRWISE DISTINCT (when all
-  in domain).  For $b = 3$ with only 3 colors total, this means
+  in domain). For $b = 3$ with only 3 colors total, this means
   $\{\chi(2k), \chi(3k), \chi(4k)\} = \{0, 1, 2\}$ — EVERY color
   used exactly once.
 
@@ -26739,7 +26736,7 @@ theorem rado_self_loop_universal {n k : ℕ} (hk : 1 ≤ k) (hn : 3 * k ≤ n)
   coloring. -/
 
 /--
-  **Round 94 Theorem (complementary universal self-loop).**
+  **Theorem (complementary universal self-loop).**
 
   For any $k \ge 1$ with $4k \le n$: $\chi(4k) \ne \chi(3k)$.
 -/
@@ -26749,7 +26746,7 @@ theorem rado_self_loop_complementary {n k : ℕ} (hk : 1 ≤ k) (hn : 4 * k ≤ 
   self_loop_b3_eq_right (m := k) hk hn χ hAvoid
 
 /--
-  **Round 94 Corollary — triple distinct colors (requires $6k \le n$).**
+  **Corollary — triple distinct colors (requires $6k \le n$).**
 
   For any $k \ge 1$ with $6k \le n$: in a valid mono-free 3-coloring,
   $\chi(2k), \chi(3k), \chi(4k)$ are pairwise distinct.
@@ -26768,14 +26765,14 @@ theorem rado_triple_distinct_colors {n k : ℕ} (hk : 1 ≤ k) (hn : 6 * k ≤ n
   refine ⟨?_, ?_, ?_⟩
   · exact (rado_self_loop_universal hk (by omega) χ hAvoid).symm
   · exact (rado_self_loop_complementary hk (by omega) χ hAvoid).symm
-  · -- Triple (6k, 2k, 4k): 6k + 3·2k = 12k = 3·4k.  Mono iff χ(6k) = χ(2k) ∧ χ(2k) = χ(4k).
+  · -- Triple (6k, 2k, 4k): 6k + 3·2k = 12k = 3·4k. Mono iff χ(6k) = χ(2k) ∧ χ(2k) = χ(4k).
     intro h62 h24
     apply hAvoid
     refine ⟨6 * k, 2 * k, 4 * k, hn, by omega, by omega, ?_, h62, h24⟩
     refine ⟨by omega, by omega, by omega, ?_⟩
     ring
 
-/-! ### Round 95 (2026-05-15) — chained universal triple distinctness.
+/-! ### chained universal triple distinctness.
 
   Strengthening Round 94's corollary: with $9k \le n$, ALL of
   $\chi(2k), \chi(3k), \chi(4k), \chi(6k), \chi(9k)$ are constrained
@@ -26791,7 +26788,7 @@ theorem rado_triple_distinct_colors {n k : ℕ} (hk : 1 ≤ k) (hn : 6 * k ≤ n
   \ne \chi(9k)$ universally for $9k \le n$. -/
 
 /--
-  **Round 95 Theorem — universal chain $(6k, 9k)$.**
+  **Theorem — universal chain $(6k, 9k)$.**
 
   For any $k \ge 1$ with $9k \le n$: $\chi(9k) \ne \chi(6k)$.
 
@@ -26810,7 +26807,7 @@ theorem rado_self_loop_chain_6k_9k {n k : ℕ} (hk : 1 ≤ k) (hn : 9 * k ≤ n)
   convert this using 2 <;> ring
 
 /--
-  **Round 95 Theorem — universal chain $(8k, 12k)$.**
+  **Theorem — universal chain $(8k, 12k)$.**
 
   For any $k \ge 1$ with $12k \le n$: $\chi(12k) \ne \chi(8k)$.
 
@@ -26825,11 +26822,11 @@ theorem rado_self_loop_chain_8k_12k {n k : ℕ} (hk : 1 ≤ k) (hn : 12 * k ≤ 
   have := rado_self_loop_universal hk' hn' χ hAvoid
   convert this using 2 <;> ring
 
-/-! ### Round 96 (2026-05-15) — applied universal constraints for
+/-! ### applied universal constraints for
     CompressionHyp 3 3 domain.
 
   Direct corollaries of Round 94's `rado_triple_distinct_colors`
-  applied at $k = 1, 2, 3, 4$.  For $n = 27$ (CompressionHyp 3 3
+  applied at $k = 1, 2, 3, 4$. For $n = 27$ (CompressionHyp 3 3
   domain), each of the following triples is constrained to be
   pairwise distinct (under additional condition on χ at 6k):
 
@@ -26841,7 +26838,7 @@ theorem rado_self_loop_chain_8k_12k {n k : ℕ} (hk : 1 ≤ k) (hn : 12 * k ≤ 
   These constraints propagate via positional overlaps, providing
   structural foundation for CompressionHyp 3 3 analysis. -/
 
-/-- **Round 96 Theorem — pairwise constraint at $k = 3$ for $n \ge 18$.**
+/-- **Theorem — pairwise constraint at $k = 3$ for $n \ge 18$.**
 
     Direct universal constraint useful for CompressionHyp 3 3:
     $\chi(6) \ne \chi(9) \land \chi(9) \ne \chi(12)$. -/
@@ -26862,7 +26859,7 @@ theorem rado_k3_chain_universal {n : ℕ} (hn : 12 ≤ n)
     show χ 12 = χ 9
     exact hcon.symm
 
-/-- **Round 96 Theorem — pairwise constraint at $k = 4$ for $n \ge 16$.**
+/-- **Theorem — pairwise constraint at $k = 4$ for $n \ge 16$.**
 
     $\chi(8) \ne \chi(12) \land \chi(12) \ne \chi(16)$. -/
 theorem rado_k4_chain_universal {n : ℕ} (hn : 16 ≤ n)
@@ -26880,13 +26877,13 @@ theorem rado_k4_chain_universal {n : ℕ} (hn : 16 ≤ n)
     show χ 16 = χ 12
     exact hcon.symm
 
-/-! ### Round 29 (2026-05-15) — the induction capstone: the DPL
+/-! ### the induction capstone: the DPL
     cascade.
 
   Rounds 21–28 built every piece of the DPL recursion:
-  * `dpl_property_k2` (Round 21) — base case `DistancePairProperty
+  * `dpl_property_k2` — base case `DistancePairProperty
     b 2`, ANALYTICALLY PROVEN.
-  * `dpl_recursion_conditional` (Round 27, `DPLStructure.lean`) —
+  * `dpl_recursion_conditional` (`DPLStructure.lean`) —
     the inductive step, `DistancePairProperty b (k-1)` $\to$
     `DistancePairProperty b k` under the two named hypotheses
     `CompressionHyp` / `OmittedPairHyp`.
@@ -26901,12 +26898,12 @@ theorem rado_k4_chain_universal {n : ℕ} (hn : 16 ≤ n)
   (`DistancePairProperty` $\Rightarrow$ `RadoNumberAtMost` via
   `dpl_implies_rado_upper`) is now reduced — with zero project
   axioms in the derivation — to: `CompressionHyp b j` and
-  `OmittedPairHyp b j` for $2 \le j \le k$.  Both fail at
+  `OmittedPairHyp b j` for $2 \le j \le k$. Both fail at
   $k > 2(b-1)$ (consistent with the conjecture); the open problem
   is proving they hold *up to* the threshold. -/
 
 /--
-  **Round 29 Theorem (DPL cascade).**
+  **Theorem (DPL cascade).**
 
   For $b \ge 3$ and any $k \ge 2$: if `CompressionHyp b j` and
   `OmittedPairHyp b j` hold for every level $j \in [2, k]$, then
@@ -26946,13 +26943,13 @@ theorem dpl_cascade (b : ℕ) (hb : 3 ≤ b) :
     exact dpl_recursion_conditional b (k + 1) (by omega) (by omega)
       hDPL_prev hComp hOmit
 
-/-! ### Round 30 (2026-05-15) — the conditional threshold capstone.
+/-! ### the conditional threshold capstone.
 
   Composing the full chain:
   * `thm_lower` — the lower bound $R_k(b) \ge b^k$ (kernel-pure);
-  * `dpl_cascade` (Round 29) — `DistancePairProperty b k` from the
+  * `dpl_cascade` — `DistancePairProperty b k` from the
     hypothesis families;
-  * `dpl_implies_rado_upper` (Round 10) — `DistancePairProperty`
+  * `dpl_implies_rado_upper` — `DistancePairProperty`
     $\Rightarrow$ the upper bound $R_k(b) \le b^k$.
 
   The result `thm_threshold_conditional` is the cleanest possible
@@ -26964,7 +26961,7 @@ theorem dpl_cascade (b : ℕ) (hb : 3 ≤ b) :
   derivation. -/
 
 /--
-  **Round 30 Theorem (conditional threshold — matching direction).**
+  **Theorem (conditional threshold — matching direction).**
 
   For $b \ge 3$ and any $k \ge 2$: if `CompressionHyp b j` and
   `OmittedPairHyp b j` hold for every level $j \in [2, k]$, then
@@ -26975,11 +26972,11 @@ theorem dpl_cascade (b : ℕ) (hb : 3 ≤ b) :
   `dpl_implies_rado_upper` turns that into the upper bound.
 
   **Significance**: this is the matching direction of the threshold
-  conjecture, reduced to its irreducible core.  Everything in the
+  conjecture, reduced to its irreducible core. Everything in the
   derivation is kernel-pure; the only inputs are the two
-  hypothesis families.  The conjecture's content is now exactly:
+  hypothesis families. The conjecture's content is now exactly:
   *`CompressionHyp b j` and `OmittedPairHyp b j` hold for
-  $2 \le j \le 2(b-1)$*.  Both are known to FAIL beyond the
+  $2 \le j \le 2(b-1)$*. Both are known to FAIL beyond the
   threshold $k = 2(b-1)$ — `CompressionHyp` at the boundary
   itself, `OmittedPairHyp` just past it — which is precisely the
   conjectured boundary, and is consistent with $R_5(3) > 3^5$.
@@ -26992,27 +26989,26 @@ theorem thm_threshold_conditional (b : ℕ) (hb : 3 ≤ b) (k : ℕ) (hk : 2 ≤
   exact dpl_implies_rado_upper b k (by linarith) (by linarith)
     (dpl_cascade b hb k hk hHyps)
 
-/-! ### Round 31 (2026-05-15) — discharging the base-level
+/-! ### discharging the base-level
     hypotheses; architecture validated end-to-end at $k = 2$.
 
   `dpl_cascade` and `thm_threshold_conditional` are conditional on
-  the `CompressionHyp` / `OmittedPairHyp` families.  Round 31
+  the `CompressionHyp` / `OmittedPairHyp` families. Round 31
   proves both families hold at the base level $k = 2$ — drawing on
-  `lem_compress2` (kernel-pure since Round 14) and `dpl_property_k2`
-  (Round 21) — and composes them through `thm_threshold_conditional`
+  `lem_compress2` (kernel-pure) and `dpl_property_k2` — and composes them through `thm_threshold_conditional`
   to re-derive $R_2(b) = b^2$ UNCONDITIONALLY.
 
   This is the end-to-end validation: the entire Round 23–30
   architecture, run at $k = 2$ with its hypotheses discharged,
-  reproduces a known kernel-pure theorem.  It also confirms the
+  reproduces a known kernel-pure theorem. It also confirms the
   hypothesis families are genuinely inhabited, not vacuous. -/
 
 /--
-  **Round 31 Lemma — `CompressionHyp b 2` holds.**
+  **Lemma — `CompressionHyp b 2` holds.**
 
   For $b \ge 3$: in any valid mono-free 2-coloring of
   $\{1, \ldots, b^2 - 1\}$, the multiples sub-coloring omits a
-  color.  Proof: `lem_compress2` forces every multiple to color
+  color. Proof: `lem_compress2` forces every multiple to color
   $\chi(b)$; the other color $1 - \chi(b)$ is therefore omitted.
 -/
 theorem compression_hyp_k2 (b : ℕ) (hb : 3 ≤ b) : CompressionHyp b 2 := by
@@ -27031,11 +27027,11 @@ theorem compression_hyp_k2 (b : ℕ) (hb : 3 ≤ b) : CompressionHyp b 2 := by
   omega
 
 /--
-  **Round 31 Lemma — `OmittedPairHyp b 2` holds.**
+  **Lemma — `OmittedPairHyp b 2` holds.**
 
   For $b \ge 3$: the omitted color in a valid mono-free 2-coloring
-  of $\{1, \ldots, b^2 - 1\}$ has a distance-$b$ pair.  Proof:
-  immediate from `dpl_property_k2` (Round 21), which already gives
+  of $\{1, \ldots, b^2 - 1\}$ has a distance-$b$ pair. Proof:
+  immediate from `dpl_property_k2`, which already gives
   a distance-$b$ pair for EVERY color — the omission hypothesis is
   not even needed.
 -/
@@ -27044,11 +27040,11 @@ theorem omitted_pair_hyp_k2 (b : ℕ) (hb : 3 ≤ b) : OmittedPairHyp b 2 := by
   exact dpl_property_k2 b hb χ hValid hAvoid c₀ hc₀
 
 /--
-  **Round 31 Theorem — `thm_k2_via_cascade`: $R_2(b) = b^2$ through
+  **Theorem — `thm_k2_via_cascade`: $R_2(b) = b^2$ through
   the DPL cascade, unconditionally.**
 
   Composes `compression_hyp_k2` and `omitted_pair_hyp_k2` through
-  `thm_threshold_conditional` at $k = 2$.  A third independent
+  `thm_threshold_conditional` at $k = 2$. A third independent
   kernel-pure proof of the $R_2(b) = b^2$ result (alongside the
   direct `thm_k2` and the DPL-route `thm_k2_via_dpl`), this one
   exercising the full Round 23–30 cascade architecture with its
@@ -27061,13 +27057,13 @@ theorem thm_k2_via_cascade (b : ℕ) (hb : 3 ≤ b) : IsRadoNumber b 2 (b ^ 2) :
   subst hj_eq
   exact ⟨compression_hyp_k2 b hb, omitted_pair_hyp_k2 b hb⟩
 
-/-! ### Round 35 (2026-05-15) — the color of $b$ avoids consecutive
+/-! ### the color of $b$ avoids consecutive
     integers.
 
   The simplest concrete consequence of the canonical Rado triple
-  form.  Taking $m = 1$ in $(bm, y, m+y)$ gives the triple
+  form. Taking $m = 1$ in $(bm, y, m+y)$ gives the triple
   $(b, y, y+1)$: a monochromatic solution is exactly $\chi(b) =
-  \chi(y) = \chi(y+1)$.  So in any mono-free coloring, **no two
+  \chi(y) = \chi(y+1)$. So in any mono-free coloring, **no two
   consecutive integers both carry the color $\chi(b)$** — the
   color class $C_{\chi(b)}$ is an independent set in the path on
   $\{1, \ldots, n\}$.
@@ -27077,7 +27073,7 @@ theorem thm_k2_via_cascade (b : ℕ) (hb : 3 ≤ b) : IsRadoNumber b 2 (b ^ 2) :
   constraint on the color of the first multiple. -/
 
 /--
-  **Round 35 Theorem (color of $b$ has no consecutive pair).**
+  **Theorem (color of $b$ has no consecutive pair).**
 
   For $b \ge 2$, a valid mono-free coloring of $\{1, \ldots, n\}$
   with $b \le n$: if $y, y+1 \in [1, n]$ are both colored
@@ -27103,10 +27099,10 @@ theorem color_b_avoids_consecutive {b n : ℕ} (hb : 2 ≤ b) (hbn : b ≤ n)
   · rw [Nat.mul_one]; exact h1.symm
   · exact h1.trans h2.symm
 
-/-! ### Round 36 (2026-05-15) — the color-of-$b$ size bound.
+/-! ### the color-of-$b$ size bound.
 
   `color_b_avoids_consecutive` says $C_{\chi(b)}$ is an independent
-  set in the path on $\{1, \ldots, n\}$.  An independent set in a
+  set in the path on $\{1, \ldots, n\}$. An independent set in a
   path of $n$ vertices has at most $\lceil n/2 \rceil$ vertices —
   so $|C_{\chi(b)} \cap [1, n]| \le \lceil n/2 \rceil = (n+1)/2$.
 
@@ -27116,19 +27112,19 @@ theorem color_b_avoids_consecutive {b n : ℕ} (hb : 2 ≤ b) (hbn : b ≤ n)
   the class, hence injective, and lands in $[1, (n+1)/2]$. -/
 
 /--
-  **Round 36 Theorem (color-of-$b$ size bound).**
+  **Theorem (color-of-$b$ size bound).**
 
   For $b \ge 2$, a valid mono-free coloring of $\{1, \ldots, n\}$
   with $b \le n$: the color class $C_{\chi(b)}$ has at most
   $(n+1)/2$ elements in $\{1, \ldots, n\}$.
 
   Proof: by `color_b_avoids_consecutive`, distinct elements of
-  $C_{\chi(b)}$ differ by at least $2$.  Hence $m \mapsto (m+1)/2$
+  $C_{\chi(b)}$ differ by at least $2$. Hence $m \mapsto (m+1)/2$
   is injective on $C_{\chi(b)}$ and maps into $[1, (n+1)/2]$;
   `Finset.card_le_card_of_injOn` gives the bound.
 
   **Significance**: the first genuine *counting* bound on a color
-  class — a hard upper bound of $\approx n/2$.  This is the kind
+  class — a hard upper bound of $\approx n/2$. This is the kind
   of per-color quantitative control the omitted-color counting
   argument (`dpl_omitted_pair_of_count`) ultimately needs;
   Round 36 establishes it for the canonical multiple-color
@@ -27163,22 +27159,22 @@ theorem color_b_card_bound {b n : ℕ} (hb : 2 ≤ b) (hbn : b ≤ n)
             omega
     _ = (n + 1) / 2 := by rw [Nat.card_Icc]; omega
 
-/-! ### Round 37 (2026-05-15) — neighbor lemmas at every multiple.
+/-! ### neighbor lemmas at every multiple.
 
   Lemmas 1.2–1.3 (`chi_succ_b_ne`, `chi_pred_b_ne`) established
   $\chi(b \pm 1) \ne \chi(b)$ — the colors flanking the *first*
-  multiple.  Round 37 is their universal abstraction: for **every**
+  multiple. Round 37 is their universal abstraction: for **every**
   multiple $bm$, the immediate scaled neighbors $(b-1)m$ and
   $(b+1)m$ avoid the color $\chi(bm)$.
 
   Both follow from `color_avoids_distance_of_multiple` at the
   multiple $bm$, distance $m$: since $C_{\chi(bm)}$ avoids
   distance $m$ and contains $bm$, neither $bm - m = (b-1)m$ nor
-  $bm + m = (b+1)m$ can carry the color $\chi(bm)$.  (The $m = 1$
+  $bm + m = (b+1)m$ can carry the color $\chi(bm)$. (The $m = 1$
   case recovers Lemmas 1.2–1.3.) -/
 
 /--
-  **Round 37 Theorem (predecessor multiple).**  For $b \ge 2$,
+  **Theorem (predecessor multiple).** For $b \ge 2$,
   $m \ge 1$, a valid mono-free coloring of $\{1, \ldots, n\}$ with
   $bm \le n$: $\chi((b-1)m) \ne \chi(bm)$.
 
@@ -27206,7 +27202,7 @@ theorem chi_pred_multiple_ne {b n : ℕ} (hb : 2 ≤ b) (χ : ℕ → ℕ)
   · rw [hpm]; exact hcon
 
 /--
-  **Round 37 Theorem (successor multiple).**  For $b \ge 2$,
+  **Theorem (successor multiple).** For $b \ge 2$,
   $m \ge 1$, a valid mono-free coloring of $\{1, \ldots, n\}$ with
   $(b+1)m \le n$: $\chi((b+1)m) \ne \chi(bm)$.
 
@@ -27230,11 +27226,11 @@ theorem chi_succ_multiple_ne {b n : ℕ} (hb : 2 ≤ b) (χ : ℕ → ℕ)
   · rfl
   · rw [hsm_eq]; exact hcon.symm
 
-/-! ### Round 39 (2026-05-15) — discharging `CascadeCompressionHyp`
+/-! ### discharging `CascadeCompressionHyp`
     at the base levels.
 
-  `thm_cascade_matching` / `thm_threshold_via_cascade` (Round 38)
-  are conditional on the `CascadeCompressionHyp` family.  Round 39
+  `thm_cascade_matching` / `thm_threshold_via_cascade`
+  are conditional on the `CascadeCompressionHyp` family. Round 39
   discharges it at $k = 2$ and $k = 3$:
 
   * $k = 2$: vacuously — `thm_k2` proves every valid 2-coloring of
@@ -27250,7 +27246,7 @@ theorem chi_succ_multiple_ne {b n : ℕ} (hb : 2 ≤ b) (χ : ℕ → ℕ)
   parallel to Round 31's `thm_k2_via_cascade`. -/
 
 /--
-  **Round 39 Lemma — `CascadeCompressionHyp b 2` holds (vacuously).**
+  **Lemma — `CascadeCompressionHyp b 2` holds (vacuously).**
 
   For $b \ge 2$: every valid 2-coloring of $\{1, \ldots, b^2\}$ has
   a monochromatic solution (`thm_k2`), so the `AvoidsMonoSolution`
@@ -27262,7 +27258,7 @@ theorem cascade_compression_hyp_k2 (b : ℕ) (hb : 2 ≤ b) :
   exact absurd ((thm_k2 b hb).2 χ hValid) hAvoid
 
 /--
-  **Round 39 Lemma — `CascadeCompressionHyp b 3` holds** for
+  **Lemma — `CascadeCompressionHyp b 3` holds** for
   $3 \le b \le 10$.
 
   Identical statement to the SAT-verified atom
@@ -27274,13 +27270,13 @@ theorem cascade_compression_hyp_k3 (b : ℕ) (hb : 3 ≤ b) (hb10 : b ≤ 10) :
   lem_compress3_general b hb hb10
 
 /--
-  **Round 39 Theorem — `thm_k3_via_cascade_matching`: $R_3(b) = b^3$
+  **Theorem — `thm_k3_via_cascade_matching`: $R_3(b) = b^3$
   through the general iterated capstone.**
 
   For $3 \le b \le 10$, composes `cascade_compression_hyp_k2` and
   `cascade_compression_hyp_k3` through `thm_threshold_via_cascade`
-  at $k = 3$.  End-to-end validation of `thm_cascade_matching` at
-  $k = 3$, parallel to `thm_k2_via_cascade` (Round 31).
+  at $k = 3$. End-to-end validation of `thm_cascade_matching` at
+  $k = 3$, parallel to `thm_k2_via_cascade`.
 -/
 theorem thm_k3_via_cascade_matching (b : ℕ) (hb : 3 ≤ b) (hb10 : b ≤ 10) :
     IsRadoNumber b 3 (b ^ 3) := by
