@@ -26,11 +26,23 @@ This repository contains the SAT-based computational pipeline for computing mult
 │   ├── verify_R4_crosscheck.py   # Cross-check R_4 values
 │   ├── verify_R5.py        # Verify R_5(3) > 243
 │   └── verify_R5_witness.py     # Verify witness coloring
-└── data/
-    ├── known_values/       # Reference values from literature
-    ├── results/            # Computed results and witness colorings
-    └── *.cnf               # DIMACS CNF encodings
+├── data/
+│   ├── known_values/       # Reference values from literature
+│   ├── results/            # Computed results and witness colorings
+│   └── *.cnf               # DIMACS CNF encodings
+└── lean4/                  # Lean 4 + Mathlib formalization
 ```
+
+## Lean 4 formalization
+
+The [`lean4/`](lean4/) directory contains a Lean 4 + Mathlib
+formalization of the multicolor Rado numbers R_k(b) for x + by = bz:
+the lower bound, the upper-bound theorems, the independent-verification
+theorem, the b^k pattern breakdown, and the statement of the threshold
+conjecture. The analytic core is kernel-pure; the SAT-verified results
+rest on 5 explicitly declared, SAT-verified axioms. See
+[`lean4/README.md`](lean4/README.md) for build instructions and the
+axiom audit.
 
 ## Quick Start
 
