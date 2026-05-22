@@ -25,7 +25,9 @@ This repository contains the SAT-based computational pipeline for computing mult
 │   ├── verify_R3_compression.py  # Verify R_3 via compression
 │   ├── verify_R4_crosscheck.py   # Cross-check R_4 values
 │   ├── verify_R5.py        # Verify R_5(3) > 243
-│   └── verify_R5_witness.py     # Verify witness coloring
+│   ├── verify_R5_witness.py     # Verify witness coloring
+│   ├── verify_gstar_tree.py     # Combined-G*-Tree Lemma SAT verification (R_4(3)=81)
+│   └── extract_gstar_mus.py     # Unsatisfiable-core / MUS extraction
 ├── data/
 │   ├── known_values/       # Reference values from literature
 │   ├── results/            # Computed results and witness colorings
@@ -42,7 +44,10 @@ theorem, the b^k pattern breakdown, and the statement of the threshold
 conjecture. The analytic core is kernel-pure; the SAT-verified results
 rest on 5 explicitly declared, SAT-verified axioms. See
 [`lean4/README.md`](lean4/README.md) for build instructions and the
-axiom audit.
+axiom audit. The formalization is also the subject of a companion
+paper, *A Kernel-Pure Lean 4 Formalization of the Distance Pair
+Characterization for the Rado Equation x + by = bz*
+([DOI 10.5281/zenodo.20346817](https://doi.org/10.5281/zenodo.20346817)).
 
 ## Quick Start
 
@@ -76,8 +81,8 @@ python src/verify.py
   title        = {On Rado Numbers for $x + by = bz$: The $b^k$ Pattern
                   and a Threshold Conjecture},
   year         = {2026},
-  doi          = {10.5281/zenodo.18957994},
-  publisher    = {Zenodo}
+  note         = {Preprint, SSRN abstract 6814341},
+  howpublished = {\url{https://ssrn.com/abstract=6814341}}
 }
 ```
 
