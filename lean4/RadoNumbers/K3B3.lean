@@ -1,13 +1,14 @@
 /-
   RadoNumbers/K3B3.lean
 
+
   Lemma `lem:k3b3pair` and Theorem `thm:k3b3` ($R_3(3) = 27$).
   Companion to Li 2026 "On Rado Numbers for $x + by = bz$".
 
   The upper bound is hybrid analytic-SAT: the paper's Lemma
   `lem:k3b3pair` (forcing $\chi(3) = \chi(6)$ in any valid
   3-coloring of $\{1, …, 18\}$) is analytic for Steps 1–2 and
-  uses SAT for Step 3. The full upper bound $R_3(3) \le 27$ is
+  uses SAT for Step 3.  The full upper bound $R_3(3) \le 27$ is
   established by SAT (Table `table:sat`, row $b = 3, k = 3$,
   CaDiCaL 1.5.3 in $< 0.01$s).
 
@@ -15,9 +16,10 @@
 
   * `lem_compress3_b3` — Cat 2 SAT-verified atom: the compression
     hypothesis for $b = 3, k = 3$ (multiples sub-coloring omits a
-    color). STRICTLY SMALLER than the former monolithic
+    color).  STRICTLY SMALLER than the former monolithic
     `thm_k3b3_upper_sat`.
-  * `thm_k3b3_upper_sat` — now a DERIVED theorem: `cascade_step` at $b = 3, k = 3$ with $R_2(3) \le 9$ (`thm_k2`,
+  * `thm_k3b3_upper_sat` — now a DERIVED theorem: `cascade_step`
+    (Round 12) at $b = 3, k = 3$ with $R_2(3) \le 9$ (`thm_k2`,
     kernel-pure) and `lem_compress3_b3`.
   * `thm_k3b3` — derived theorem combining `thm_lower` (lower
     bound) with `thm_k3b3_upper_sat` (cascade-derived upper bound).
@@ -31,8 +33,8 @@ import RadoNumbers.LowerBound
 import RadoNumbers.K2
 import RadoNumbers.DPLStructure
 import RadoNumbers.K3General
--- : import the General bridge for the kernel-pure `thm_k3b3_kernel_pure`.
--- The Bridge.lean → K3B3.lean cycle was broken in (Bridge no longer imports K3B3).
+-- R246: import the General bridge for the kernel-pure `thm_k3b3_kernel_pure`.
+-- The Bridge.lean → K3B3.lean cycle was broken in R246 (Bridge no longer imports K3B3).
 import RadoNumbers.General.Bridge
 import Mathlib.Tactic
 
@@ -46,16 +48,16 @@ namespace RadoNumbers
   Rounds 2–3 Lean-derived its analytic Steps 1–2
   (`lem_k3b3pair_step1`, `lem_k3b3pair_step2` in `K3General.lean`).
   Since no Lean theorem consumes the monolithic axiom (Pattern 7
-  phantom downstream user), it was REMOVED Round 18.
+  phantom downstream user), it was REMOVED Round 18 (2026-05-15).
   The analytic Step-1/2 theorems remain; Step 3 (element 18
   uncolorability) is documented as the remaining gap for a full
   in-Lean derivation of `lem:k3b3pair`. -/
 
 /-! ### Derived theorem `thm:k3b3`.
 
-  ** refactor:** `thm:k3b3` is now KERNEL-PURE.
+  **R246 refactor (2026-05-19):** `thm:k3b3` is now KERNEL-PURE.
   It points directly to `RadoNumbers.General.thm_k3b3_kernel_pure`
-  (Bridge.lean §40.5), which derives $R_3(3) = 27$ from -
+  (Bridge.lean §40.5), which derives $R_3(3) = 27$ from R238-R245
   Branch I-V + Branch I-W closure, using ONLY Lean kernel axioms.
 
   This eliminates the `lem_compress3_general` SAT axiom from
@@ -69,18 +71,18 @@ namespace RadoNumbers
 -/
 
 /--
-  **Theorem `thm:k3b3`.** $R_3(3) = 27$. **KERNEL-PURE** since.
+  **Theorem `thm:k3b3`.**  $R_3(3) = 27$. **KERNEL-PURE** since R246.
 
   Direct alias to `RadoNumbers.General.thm_k3b3_kernel_pure`, which
-  uses Branch I-V (-) + Branch I-W (-) + vacuous
-  compression () to derive the result from Lean kernel axioms only.
+  uses Branch I-V (R238-R240) + Branch I-W (R241-R244) + vacuous
+  compression (R245) to derive the result from Lean kernel axioms only.
 -/
 theorem thm_k3b3 : IsRadoNumber 3 3 27 :=
   RadoNumbers.General.thm_k3b3_kernel_pure
 
 /-- **Theorem `thm:k3b3` upper bound** (kept for naming
     compatibility): $R_3(3) \le 27$, the upper-bound half of
-    `thm_k3b3`. **KERNEL-PURE** since. -/
+    `thm_k3b3`. **KERNEL-PURE** since R246. -/
 theorem thm_k3b3_upper_sat : RadoNumberAtMost 3 3 27 := thm_k3b3.2
 
 /-- **Legacy proof** of `thm:k3b3` via the axiom-dependent

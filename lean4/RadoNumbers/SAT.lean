@@ -1,13 +1,14 @@
 /-
   RadoNumbers/SAT.lean
 
+
   Lemma `lem:keypair` (Distance Pair Lemma; SAT-verified) and
   Theorem `thm:sat` (independent verification of $R_3(b) = b^3$ for
   $b \in \{3, \ldots, 10\}$ and $R_4(b) = b^4$ for $b \in \{3, 4, 5\}$).
   Companion to Li 2026 "On Rado Numbers for $x + by = bz$".
 
   The Distance Pair Lemma is the paper's identified structural
-  mechanism for the $b^k$ pattern when $k \le 4$. Each color class
+  mechanism for the $b^k$ pattern when $k \le 4$.  Each color class
   must contain a pair at distance $b^{k-1}$; combined with the
   element $b^k$ (which is $b \cdot b^{k-1}$, so $\chi(b^k) = c$
   forbids distance $b^{k-1}$ in color $c$), this produces a Rado
@@ -52,7 +53,7 @@ namespace RadoNumbers
   instead a kernel-pure theorem `lem_keypair_at_k2`).
 
   *Justification:* SAT verification (Li 2026, Lemma `lem:keypair`
-  and Table `table:sat`). Separate SAT check for each color
+  and Table `table:sat`).  Separate SAT check for each color
   $c \in \{0, \ldots, k-1\}$, all UNSAT under CaDiCaL 1.5.3.
   The largest instance ($b = 5, k = 4, n = 624$) involves
   $2496$ variables; the smallest verified ($b = 3, k = 3, n = 26$)
@@ -81,9 +82,9 @@ axiom lem_keypair_sat (b k : ℕ)
   * $k = 3$, $b \in \{3, 4, 5, 6, 7, 8, 9, 10\}$;
   * $k = 4$, $b \in \{3, 4, 5\}$ —
 
-  $R_k(b) = b^k$. The hypothesis `hbk` encodes exactly this set.
+  $R_k(b) = b^k$.  The hypothesis `hbk` encodes exactly this set.
 
-  Lower bound: `thm_lower`. Upper bound: every valid $k$-coloring
+  Lower bound: `thm_lower`.  Upper bound: every valid $k$-coloring
   $\chi$ of $\{1, \ldots, b^k\}$ either (a) already produces a
   monochromatic solution on $\{1, \ldots, b^k - 1\}$, or (b)
   avoids one there; in case (b), `lem_keypair_sat` applied to
@@ -149,11 +150,11 @@ theorem thm_sat (b k : ℕ)
       · exact le_trans hyn (Nat.sub_le _ _)
       · exact le_trans hzn (Nat.sub_le _ _)
 
-/-! ### connecting the DPL architecture to
+/-! ### Round 41 (2026-05-15) — connecting the DPL architecture to
     the paper's SAT axiom.
 
   `lem_keypair_sat` is essentially `DistancePairProperty` (the
-  paper's `lem:keypair` as a SAT-verified atom). The conclusions
+  paper's `lem:keypair` as a SAT-verified atom).  The conclusions
   are identical *except* for the upper bound on $j$:
 
   * `lem_keypair_sat`: $j \le b^{k-1}$.
@@ -168,7 +169,7 @@ theorem thm_sat (b k : ℕ)
     `lem_keypair_sat` to `DistancePairProperty b k` for the
     SAT-verified range.
   * `thm_sat_via_dpl_route`: re-derives `thm_sat` through
-    `dpl_implies_rado_upper`, confirming that my DPL
+    `dpl_implies_rado_upper` (Round 10), confirming that my DPL
     abstraction is exactly the paper's mechanism.
 
   This validates the DPL architecture end-to-end against the
@@ -176,7 +177,7 @@ theorem thm_sat (b k : ℕ)
   composes with the paper's stated mechanism. -/
 
 /--
-  **Lemma — `DistancePairProperty` from
+  **Round 41 Lemma — `DistancePairProperty` from
   `lem_keypair_sat`.**
 
   For the $(b, k)$ pairs SAT-verified by `lem_keypair_sat`
@@ -211,13 +212,13 @@ theorem dpl_property_from_keypair_sat (b k : ℕ)
   omega
 
 /--
-  **Theorem — `thm_sat_via_dpl_route`: $R_k(b) = b^k$ via
+  **Round 41 Theorem — `thm_sat_via_dpl_route`: $R_k(b) = b^k$ via
   the DPL architecture.**
 
   For the SAT-verified set ($k = 3$, $b \in \{3, \ldots, 10\}$;
   $k = 4$, $b \in \{3, 4, 5\}$ — encoded by `hbk`), re-derives
   `thm_sat` by composing `dpl_property_from_keypair_sat` with
-  `dpl_implies_rado_upper`. Same axiom dependency as
+  `dpl_implies_rado_upper` (Round 10).  Same axiom dependency as
   the direct `thm_sat` (only `lem_keypair_sat`), different proof
   routing — confirms that my Round-10 DPL abstraction is exactly
   the paper's mechanism.

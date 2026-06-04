@@ -1,76 +1,54 @@
 # Rado Numbers for x + by = bz
 
-Code and data for: **"On Rado Numbers for x + by = bz: The b^k Pattern and a Threshold Conjecture"**
+Public artifacts for:
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18957994.svg)](https://doi.org/10.5281/zenodo.18957994)
+**On Rado Numbers for x + by = bz: The b^k Pattern and a Threshold Conjecture**
 
-## Overview
+- SSRN abstract: <https://ssrn.com/abstract=6814341>
+- Zenodo concept DOI: <https://doi.org/10.5281/zenodo.18957993>
+- Latest Zenodo record checked here: <https://doi.org/10.5281/zenodo.20343697>
 
-This repository contains the SAT-based computational pipeline for computing multicolor Rado numbers R_k(b) for the equation x + by = bz. The code reproduces all computational results in the paper, including the witness coloring proving R_5(3) > 243.
+## Contents
 
-## Repository Structure
+- SAT encoder for k-color instances of x + by = bz.
+- R_4(3) = 81 Combined-G*-Tree SAT verification artifacts.
+- Distance Pair Lemma slab: k=3, b=3..10 and k=4, b=3..5.
+- Explicit R_5(3) > 243 witness and verifier.
+- Incremental SAT evidence and CNF instances for R_5(3) > 296.
+- G* core and core-shrink artifacts.
+- Lean 4 + Mathlib formalization and axiom audit.
 
-```
-├── README.md
-├── LICENSE
-├── requirements.txt
-├── configs/                # Solver configuration
-├── src/
-│   ├── encoder.py          # SAT encoder for k-color Rado instances
-│   ├── solver.py           # Incremental SAT solver (PySAT + CaDiCaL)
-│   ├── sweep.py            # Parameter sweep across equation families
-│   ├── find_R5_incremental.py  # Incremental search for R_5(3)
-│   ├── compression_test.py # Color Compression Lemma verification
-│   ├── verify.py           # Verify against known Rado numbers
-│   ├── verify_R3_compression.py  # Verify R_3 via compression
-│   ├── verify_R4_crosscheck.py   # Cross-check R_4 values
-│   ├── verify_R5.py        # Verify R_5(3) > 243
-│   ├── verify_R5_witness.py     # Verify witness coloring
-│   ├── verify_gstar_tree.py     # Combined-G*-Tree Lemma SAT verification (R_4(3)=81)
-│   └── extract_gstar_mus.py     # Unsatisfiable-core / MUS extraction
-├── data/
-│   ├── known_values/       # Reference values from literature
-│   ├── results/            # Computed results and witness colorings
-│   └── *.cnf               # DIMACS CNF encodings
-└── lean4/                  # Lean 4 + Mathlib formalization
-```
-
-## Lean 4 formalization
-
-The [`lean4/`](lean4/) directory contains a Lean 4 + Mathlib
-formalization of the multicolor Rado numbers R_k(b) for x + by = bz:
-the lower bound, the upper-bound theorems, the independent-verification
-theorem, the b^k pattern breakdown, and the statement of the threshold
-conjecture. The analytic core is kernel-pure; the SAT-verified results
-rest on 5 explicitly declared, SAT-verified axioms. See
-[`lean4/README.md`](lean4/README.md) for build instructions and the
-axiom audit. The formalization is also the subject of a companion
-paper, *A Kernel-Pure Lean 4 Formalization of the Distance Pair
-Characterization for the Rado Equation x + by = bz*
-([DOI 10.5281/zenodo.20346817](https://doi.org/10.5281/zenodo.20346817)).
-
-## Quick Start
+## Reproduce
 
 ```bash
 pip install -r requirements.txt
-```
 
-### Verify the witness coloring for R_5(3) > 243
-
-```bash
 python src/verify_R5_witness.py
+python src/verify_gstar_tree.py
+python src/verify_dpl_paper_slab.py
+
+cd lean4
+lake env lean RadoNumbers/AxiomAudit.lean
 ```
 
-### Reproduce the main results table
+The DPL slab includes the largest checked case b=5, k=4 and can take
+substantial CPU time. The checked manifest is included at
+`data/results/dpl_paper_slab_verification.json`.
 
-```bash
-python src/sweep.py
-```
+## Key Files
 
-### Verify against known values
-
-```bash
-python src/verify.py
+```text
+src/encoder.py
+src/verify_gstar_tree.py
+src/verify_dpl_paper_slab.py
+src/verify_R5_witness.py
+src/find_R5_incremental.py
+data/results/main_results.json
+data/results/R5_witness_243.json
+data/results/dpl_paper_slab_verification.json
+data/R5_n296.cnf
+data/R5_n297.cnf
+lean4/RadoNumbers/AxiomAudit.lean
 ```
 
 ## Citation
@@ -82,7 +60,8 @@ python src/verify.py
                   and a Threshold Conjecture},
   year         = {2026},
   note         = {Preprint, SSRN abstract 6814341},
-  howpublished = {\url{https://ssrn.com/abstract=6814341}}
+  howpublished = {\url{https://ssrn.com/abstract=6814341}},
+  doi          = {10.5281/zenodo.18957993}
 }
 ```
 

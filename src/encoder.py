@@ -3,6 +3,7 @@
 Encodes the question: does there exist a k-coloring of {1,...,n}
 with no monochromatic solution to a given linear equation?
 
+
 Reference: Ahmed, Zaman, Bright (2025) "Symbolic Sets for Proving
 Bounds on Rado Numbers", arxiv:2505.12085.
 """

@@ -5,21 +5,21 @@
   colorings of the equation $x + b \cdot y = b \cdot z$.
 
   These lemmas are universal — independent of any specific
-  distribution profile or coloring choice. They are derived
+  distribution profile or coloring choice.  They are derived
   directly from the definition of `AvoidsMonoSolution` via
   carefully chosen Rado triples.
 
   All lemmas in this file are STRICTLY KERNEL-PURE: their axiom
   dependencies are `[propext, Quot.sound]` only (no
-  `Classical.choice`, no Cat 2 or Cat 3 axioms). They form the
+  `Classical.choice`, no Cat 2 or Cat 3 axioms).  They form the
   foundational layer of any analytic proof of the threshold
   conjecture.
 
   Organization:
-    §1 Self-loop lemmas: $\chi(x) \ne \chi(y)$ from triples
+    §1  Self-loop lemmas: $\chi(x) \ne \chi(y)$ from triples
         $(x, y, x)$ or $(x, x, z)$ for arbitrary $b \ge 2$.
-    §2 Distance-pair lemmas (applied form).
-    §3 Triple-distinct-color theorems.
+    §2  Distance-pair lemmas (applied form).
+    §3  Triple-distinct-color theorems.
 -/
 
 import RadoNumbers.Basic
@@ -33,13 +33,13 @@ namespace RadoNumbers
   The Rado equation $x + b y = b z$ admits two kinds of self-loops:
 
   * Type $x = z$: triple $(x, y, x)$ with $y = (b-1) x / b$.
-    Requires $x$ divisible by $b$. Writing $x = b m$: triple
-    $(b m, (b-1) m, b m)$. Verification: $b m + b \cdot (b - 1) m
+    Requires $x$ divisible by $b$.  Writing $x = b m$: triple
+    $(b m, (b-1) m, b m)$.  Verification: $b m + b \cdot (b - 1) m
     = b m \cdot b = b \cdot b m$ ✓.
 
   * Type $x = y$: triple $(x, x, z)$ with $z = (b+1) x / b$.
-    Requires $x$ divisible by $b$. Writing $x = b m$: triple
-    $(b m, b m, (b+1) m)$. Verification: $b m + b \cdot b m = b m
+    Requires $x$ divisible by $b$.  Writing $x = b m$: triple
+    $(b m, b m, (b+1) m)$.  Verification: $b m + b \cdot b m = b m
     \cdot (b + 1) = b \cdot (b+1) m$ ✓.
 
   These yield UNIVERSAL pairwise inequalities:
@@ -56,7 +56,7 @@ namespace RadoNumbers
 
   Proof: the self-loop Rado triple $(b m, (b-1) m, b m)$ satisfies
   $b m + b \cdot (b-1) m = b \cdot b m$ (so it is a valid Rado
-  triple). Monochromaticity would require $\chi(b m) = \chi((b-1)
+  triple).  Monochromaticity would require $\chi(b m) = \chi((b-1)
   m) = \chi(b m)$, i.e., $\chi(b m) = \chi((b-1) m)$.
 
   Strictly kernel-pure: $[propext, Quot.sound]$.
@@ -88,7 +88,7 @@ theorem self_loop_eq_left {b : ℕ} (hb : 2 ≤ b) {n m : ℕ}
   $\chi((b+1) m) \ne \chi(b m)$.
 
   Proof: the self-loop Rado triple $(b m, b m, (b+1) m)$ satisfies
-  $b m + b \cdot b m = b \cdot (b+1) m$. Monochromaticity would
+  $b m + b \cdot b m = b \cdot (b+1) m$.  Monochromaticity would
   require $\chi(b m) = \chi(b m) = \chi((b+1) m)$, i.e., $\chi((b+1)
   m) = \chi(b m)$.
 
@@ -137,7 +137,7 @@ theorem self_loop_eq_right {b : ℕ} (hb : 2 ≤ b) {n m : ℕ}
   $\chi((b-1) m) \ne \chi(b m) \land \chi(b m) \ne \chi((b+1) m)$.
 
   This says that the three positions $(b-1) m, b m, (b+1) m$
-  have CONSECUTIVE PAIRS with distinct colors. The middle
+  have CONSECUTIVE PAIRS with distinct colors.  The middle
   position $b m$ differs from both flankers.
 -/
 theorem self_loop_pair_constraint {b : ℕ} (hb : 2 ≤ b) {n m : ℕ}
@@ -187,7 +187,7 @@ theorem self_loop_b3_eq_right {n m : ℕ} (hm : 1 ≤ m) (hn : 4 * m ≤ n)
   \le n$, NOT both $\chi(y) = c$ and $\chi(y + d) = c$.
 
   This is the general "distance pair forbidden by multiple" lemma —
-  the workhorse of all chain-of-deductions arguments. Particular
+  the workhorse of all chain-of-deductions arguments.  Particular
   instances are scattered throughout the Rado literature; this
   states it once, cleanly, parameterized.
 -/
@@ -205,7 +205,7 @@ theorem self_loop_b3_eq_right {n m : ℕ} (hm : 1 ≤ m) (hn : 4 * m ≤ n)
   sharing color $\chi(b d)$.
 
   Proof: the triple $(b d, y, y + d)$ satisfies $b d + b y = b (y
-  + d)$. Monochromaticity yields contradiction with
+  + d)$.  Monochromaticity yields contradiction with
   `AvoidsMonoSolution`.
 
   Strictly kernel-pure.
@@ -259,7 +259,7 @@ theorem b3_triple_pair_distinct {n m : ℕ} (hm : 1 ≤ m) (hn : 4 * m ≤ n)
 
   Every Rado triple $(x, y, z)$ satisfying $x + b y = b z$ (with
   all positive) decomposes uniquely as $(b d, y, y + d)$ for some
-  $d \ge 1$. This canonical form makes downstream arguments clean.
+  $d \ge 1$.  This canonical form makes downstream arguments clean.
 -/
 
 /--
@@ -316,7 +316,7 @@ theorem rado_triple_not_all_eq {b : ℕ} (hb : 2 ≤ b) {n d : ℕ}
 /-! ## §8. Bundled $b = 3$ universal constraints.
 
   Convenience theorem packaging all six $b = 3$ self-loop
-  inequalities under the single hypothesis $n \ge 24$. Useful
+  inequalities under the single hypothesis $n \ge 24$.  Useful
   as a starting point for any analytic argument on CompressionHyp
   3 3 (which has $n \ge 27$).
 -/
@@ -327,12 +327,12 @@ theorem rado_triple_not_all_eq {b : ℕ} (hb : 2 ≤ b) {n d : ℕ}
   For any valid Rado-mono-free 3-coloring of $\{1, \ldots, n\}$
   with $n \ge 24$:
 
-  * $\chi(9) \ne \chi(6)$ (from $(9, 6, 9)$)
-  * $\chi(18) \ne \chi(12)$ (from $(18, 12, 18)$)
-  * $\chi(15) \ne \chi(10)$ (from $(15, 10, 15)$)
-  * $\chi(12) \ne \chi(8)$ (from $(12, 8, 12)$)
-  * $\chi(21) \ne \chi(14)$ (from $(21, 14, 21)$)
-  * $\chi(24) \ne \chi(16)$ (from $(24, 16, 24)$)
+  * $\chi(9) \ne \chi(6)$  (from $(9, 6, 9)$)
+  * $\chi(18) \ne \chi(12)$  (from $(18, 12, 18)$)
+  * $\chi(15) \ne \chi(10)$  (from $(15, 10, 15)$)
+  * $\chi(12) \ne \chi(8)$  (from $(12, 8, 12)$)
+  * $\chi(21) \ne \chi(14)$  (from $(21, 14, 21)$)
+  * $\chi(24) \ne \chi(16)$  (from $(24, 16, 24)$)
 
   Each inequality is an instance of `self_loop_b3_eq_left` at the
   appropriate $m$.
@@ -410,7 +410,7 @@ theorem color_class_rado_free {b : ℕ} (hb : 2 ≤ b) {n : ℕ}
 /-! ## §10. Color forcing — chain-of-deductions building block.
 
   In any valid Rado-mono-free $b$-coloring, knowing two of the three
-  colors in a Rado triple FORCES the third to differ. This is the
+  colors in a Rado triple FORCES the third to differ.  This is the
   atomic step of all chain-of-deductions arguments.
 -/
 
@@ -420,7 +420,7 @@ theorem color_class_rado_free {b : ℕ} (hb : 2 ≤ b) {n : ℕ}
   If $\chi(b d) = c$ and $\chi(y) = c$, then $\chi(y + d) \ne c$.
 
   This is the "right-end forcing" pattern used throughout
-  chain-of-deductions arguments. Atomic building block.
+  chain-of-deductions arguments.  Atomic building block.
 -/
 theorem color_forced_right {b : ℕ} (hb : 2 ≤ b) {n d : ℕ}
     (hd : 1 ≤ d) (hbd : b * d ≤ n) {χ : ℕ → ℕ}
@@ -495,11 +495,11 @@ theorem color_forced_multiple {b : ℕ} (hb : 2 ≤ b) {n d : ℕ}
 
   For any $b \ge 2$ and $k \ge 2$, the valuation coloring $\chi_k(n)
   = v_b(n) \mod k$ has a monochromatic Rado triple in $\{1, \ldots,
-  b^k\}$. Specifically, the triple $(b^k, 1, 1 + b^{k-1})$ is
+  b^k\}$.  Specifically, the triple $(b^k, 1, 1 + b^{k-1})$ is
   monochromatic at color 0.
 
   This is the EXPLICIT WITNESS that the valuation coloring cannot
-  extend to length $b^k$. It is a foundational fact about the
+  extend to length $b^k$.  It is a foundational fact about the
   Rado equation and the valuation coloring.
 -/
 theorem valuation_coloring_saturates {b k : ℕ} (hb : 2 ≤ b) (hk : 2 ≤ k) :
@@ -609,7 +609,7 @@ theorem rado_triple_2bm_constraint {b : ℕ} (hb : 2 ≤ b) {n m : ℕ}
 
   Putting it together: for any $b \ge 2$ and $k \ge 2$, the
   valuation coloring achieves the lower bound and saturates
-  exactly at $b^k$. This is the STRONGEST UNIVERSAL FACT we have
+  exactly at $b^k$.  This is the STRONGEST UNIVERSAL FACT we have
   for the threshold conjecture's matching direction.
 -/
 
@@ -626,7 +626,7 @@ theorem rado_triple_2bm_constraint {b : ℕ} (hb : 2 ≤ b) {n m : ℕ}
   EXACTLY $R_k(b) = b^k$ for $\chi_k$ itself.
 
   Note: this does NOT prove $R_k(b) \le b^k$ (would require ALL
-  colorings to fail at $b^k$, not just valuation). But it shows
+  colorings to fail at $b^k$, not just valuation).  But it shows
   the valuation is precisely the "boundary witness" for the
   conjecture.
 -/
@@ -648,14 +648,14 @@ theorem valuation_witnesses_boundary {b k : ℕ} (hb : 2 ≤ b) (hk : 2 ≤ k) :
   smaller domains.
 
   Formally: define $\chi'(m) = \chi(b \cdot m)$ on $\{1, \ldots,
-  \lfloor n/b \rfloor\}$. Then $\chi'$ is mono-free for $x + by
+  \lfloor n/b \rfloor\}$.  Then $\chi'$ is mono-free for $x + by
   = bz$.
 
   Proof: any Rado triple $(x', y', z')$ in $\chi'$ corresponds to
   a Rado triple $(bx', by', bz')$ in the original $\chi$ via the
-  scaling map. Verification: $bx' + b \cdot by' = b \cdot bz'$
+  scaling map.  Verification: $bx' + b \cdot by' = b \cdot bz'$
   iff $x' + by' = bz'$, hence the triple is Rado iff the scaled
-  triple is. Mono-freeness preserved.
+  triple is.  Mono-freeness preserved.
 
   This is the FOUNDATIONAL THEOREM for the cascade. -/
 
@@ -749,11 +749,12 @@ theorem iterated_subcoloring_mono_free {b : ℕ} (hb : 2 ≤ b) {n : ℕ}
   $$\chi(m) = c_0 \text{ if } 3 \nmid m, \quad \chi(m) = c_1 \text{ if } 3 \mid m,$$
   for two distinct colors $c_0, c_1 \in \{0, 1\}$.
 
-  This UNIQUENESS THEOREM combined with the valuation saturation gives $R_2(3) = 9$ — exactly the threshold conjecture
+  This UNIQUENESS THEOREM combined with the valuation saturation
+  (Round 101) gives $R_2(3) = 9$ — exactly the threshold conjecture
   at $(b, k) = (3, 2)$.
 
   Conjecture for general $(b, k)$ with $k \le 2(b-1)$: similar
-  uniqueness holds. If proven, immediately closes the threshold
+  uniqueness holds.  If proven, immediately closes the threshold
   conjecture's matching direction.
 
   This is the FUNDAMENTAL NEW MATHEMATICS DIRECTION. -/
@@ -814,22 +815,22 @@ theorem b3_k2_uniqueness {n : ℕ} (hn : 8 ≤ n) (χ : ℕ → ℕ)
   have h63 : χ 6 = χ 3 := by omega
   -- χ(8) = χ(2): χ(8) ≠ χ(6) = χ(3), so χ(8) = χ(2).
   have h82 : χ 8 = χ 2 := by omega
-  -- χ(1) = χ(2): triple (6, 1, 3) is mono iff χ(6) = χ(1) = χ(3). χ(6) = χ(3), so χ(1) = χ(3) → mono.
-  -- h : χ 1 = χ 3. heq1: χ(6) = χ(1) = h63.trans h.symm. heq2: χ(1) = χ(3) = h.
+  -- χ(1) = χ(2): triple (6, 1, 3) is mono iff χ(6) = χ(1) = χ(3).  χ(6) = χ(3), so χ(1) = χ(3) → mono.
+  -- h : χ 1 = χ 3.  heq1: χ(6) = χ(1) = h63.trans h.symm.  heq2: χ(1) = χ(3) = h.
   have h13_ne : χ 1 ≠ χ 3 := fun h =>
     mono_3 6 1 3 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
       (h63.trans h.symm) h
   have h12 : χ 1 = χ 2 := by omega
-  -- χ(5) = χ(2): triple (3, 5, 6) is mono iff χ(3) = χ(5) = χ(6). χ(3) = χ(6), so χ(5) = χ(3) → mono.
-  -- h : χ 5 = χ 3. heq1: χ(3) = χ(5) = h.symm. heq2: χ(5) = χ(6) = h.trans h63.symm.
+  -- χ(5) = χ(2): triple (3, 5, 6) is mono iff χ(3) = χ(5) = χ(6).  χ(3) = χ(6), so χ(5) = χ(3) → mono.
+  -- h : χ 5 = χ 3.  heq1: χ(3) = χ(5) = h.symm.  heq2: χ(5) = χ(6) = h.trans h63.symm.
   have h53_ne : χ 5 ≠ χ 3 := fun h =>
     mono_3 3 5 6 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
       h.symm (h.trans h63.symm)
   have h54 : χ 5 = χ 4 := by omega
-  -- χ(7) = χ(2): triple (3, 6, 7) is mono iff χ(3) = χ(6) = χ(7). χ(3) = χ(6), so χ(7) = χ(3) → mono.
-  -- h : χ 7 = χ 3. heq1: χ(3) = χ(6) = h63.symm. heq2: χ(6) = χ(7) = h63.trans h.symm.
+  -- χ(7) = χ(2): triple (3, 6, 7) is mono iff χ(3) = χ(6) = χ(7).  χ(3) = χ(6), so χ(7) = χ(3) → mono.
+  -- h : χ 7 = χ 3.  heq1: χ(3) = χ(6) = h63.symm.  heq2: χ(6) = χ(7) = h63.trans h.symm.
   have h73_ne : χ 7 ≠ χ 3 := fun h =>
     mono_3 3 6 7 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
@@ -843,14 +844,14 @@ theorem b3_k2_uniqueness {n : ℕ} (hn : 8 ≤ n) (χ : ℕ → ℕ)
 
 /-! ## §17. UNIQUENESS at $b = 4, k = 2$.
 
-  Extending Round 109's uniqueness to $b = 4$. For any valid
+  Extending Round 109's uniqueness to $b = 4$.  For any valid
   mono-free 2-coloring of $\{1, \ldots, n\}$ for $n \ge 15$ and
   Rado equation $x + 4 y = 4 z$:
   * All non-multiples of 4 have same color.
   * All multiples of 4 have the same (other) color.
 
   This is the SECOND instance of valuation uniqueness — extending
-  Round 109 from $b = 3$ to $b = 4$. The pattern is the same:
+  Round 109 from $b = 3$ to $b = 4$.  The pattern is the same:
   use self-loops + cross-triples to force structural rigidity.
 -/
 
@@ -897,15 +898,15 @@ theorem b4_k2_multiples_agree {n : ℕ} (hn : 15 ≤ n) (χ : ℕ → ℕ)
       (by omega) (by omega) (by omega) (by norm_num) h h.symm
   -- Now: χ(3) = χ(5) (both ≠ χ(4) in 2-coloring).
   have h35 : χ 3 = χ 5 := by omega
-  -- Triple (8, 3, 5): 8 + 12 = 20 = 4·5. Mono iff χ(8) = χ(3) = χ(5).
-  -- χ(3) = χ(5). So mono iff χ(8) = χ(3). Hence χ(8) ≠ χ(3).
+  -- Triple (8, 3, 5): 8 + 12 = 20 = 4·5.  Mono iff χ(8) = χ(3) = χ(5).
+  -- χ(3) = χ(5).  So mono iff χ(8) = χ(3).  Hence χ(8) ≠ χ(3).
   have h83 : χ 8 ≠ χ 3 := fun h =>
     mono_4 8 3 5 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
       h h35
   -- So χ(8) = χ(4) (both ≠ χ(3) in 2-coloring).
   have h84 : χ 8 = χ 4 := by omega
-  -- Triple (12, 3, 6): 12 + 12 = 24 = 4·6. Mono iff χ(12) = χ(3) = χ(6).
+  -- Triple (12, 3, 6): 12 + 12 = 24 = 4·6.  Mono iff χ(12) = χ(3) = χ(6).
   -- χ(6) ≠ χ(8) = χ(4), so χ(6) = χ(3) in 2-coloring.
   have h63 : χ 6 = χ 3 := by omega
   -- Now χ(12) ≠ χ(3) via (12, 3, 6).
@@ -921,11 +922,11 @@ theorem b4_k2_multiples_agree {n : ℕ} (hn : 15 ≤ n) (χ : ℕ → ℕ)
 
 /-! ## §18. UNIQUENESS at $b = 5, k = 2$.
 
-  Third instance: $b = 5, k = 2, n \ge 24$. Multiples of 5
+  Third instance: $b = 5, k = 2, n \ge 24$.  Multiples of 5
   ($\chi(5), \chi(10), \chi(15), \chi(20)$) all agree; distinct
   from $\chi(4)$.
 
-  Extends Rounds 109 (b=3) and 110 (b=4). The Valuation Uniqueness
+  Extends Rounds 109 (b=3) and 110 (b=4).  The Valuation Uniqueness
   Conjecture is now confirmed at $b = 3, 4, 5$ for $k = 2$.
 -/
 
@@ -989,7 +990,7 @@ theorem b5_k2_multiples_agree {n : ℕ} (hn : 24 ≤ n) (χ : ℕ → ℕ)
 
 /-! ## §19. THRESHOLD CONJECTURE CLOSURE at $b = 3, k = 2$.
 
-  Combining uniqueness and saturation at
+  Combining uniqueness (Round 109) and saturation (Round 101) at
   $b = 3, k = 2$: there exists NO valid mono-free 2-coloring of
   $\{1, \ldots, 9\}$ for $b = 3$.
 
@@ -1002,7 +1003,7 @@ theorem b5_k2_multiples_agree {n : ℕ} (hn : 24 ≤ n) (χ : ℕ → ℕ)
   4. Combined with $\chi(6) = \chi(3)$ from uniqueness, $\chi(9)$
      must equal $\chi(1) = \chi(4)$ (the non-3-multiple color).
   5. Then triple $(9, 1, 4)$: all three positions colored same.
-     But this is a Rado triple! Mono. Contradiction.
+     But this is a Rado triple!  Mono.  Contradiction.
 
   Combined with $R_2(3) \ge 9$ (Round 51 valuation lower bound),
   this gives $R_2(3) = 9$ via **uniqueness + saturation**.
@@ -1016,12 +1017,12 @@ theorem b5_k2_multiples_agree {n : ℕ} (hn : 24 ≤ n) (χ : ℕ → ℕ)
   **THE UPPER BOUND $R_2(3) \le 9$ via uniqueness + saturation.**
 
   No valid mono-free 2-coloring of $\{1, \ldots, 9\}$ exists for
-  $b = 3$. Proved using Round 109 uniqueness + saturation logic.
+  $b = 3$.  Proved using Round 109 uniqueness + saturation logic.
 -/
 theorem R2_3_upper_via_uniqueness :
     ∀ χ : ℕ → ℕ, IsValidColoring 9 2 χ → AvoidsMonoSolution 3 9 χ → False := by
   intro χ hValid hAvoid
-  -- Step 1: Apply Round 109 uniqueness to {1,..., 9} (n ≥ 8).
+  -- Step 1: Apply Round 109 uniqueness to {1, ..., 9} (n ≥ 8).
   obtain ⟨h12, h24, h45, h57, h78, h36, h13_ne⟩ :=
     b3_k2_uniqueness (n := 9) (by omega) χ hValid hAvoid
   -- Step 2: χ(9) ≠ χ(6) from self-loop (9, 6, 9).
@@ -1049,7 +1050,7 @@ theorem R2_3_upper_via_uniqueness :
   **$R_2(3) = 9$ — analytic proof via uniqueness + saturation.**
 
   Combines `thm_lower 3 2` (lower bound) with `R2_3_upper_via_uniqueness`
-  (upper bound). Alternative proof of `thm_k2 3`, validating the
+  (upper bound).  Alternative proof of `thm_k2 3`, validating the
   uniqueness-saturation route to threshold conjecture closure.
 -/
 theorem R2_3_eq_9 : IsRadoNumber 3 2 9 := by
@@ -1064,11 +1065,11 @@ theorem R2_3_eq_9 : IsRadoNumber 3 2 9 := by
 /-! ## §20. THRESHOLD CONJECTURE CLOSURE at $b = 4, k = 2$.
 
   Apply the **uniqueness + saturation blueprint** to $(b, k) =
-  (4, 2)$. Need to extend Round 110's multiples-agree to full
+  (4, 2)$.  Need to extend Round 110's multiples-agree to full
   uniqueness at $b = 4$, then combine with saturation at $n = 16$.
 
-  Triple $(16, 1, 5)$: $16 + 4 = 20 = 4 \cdot 5$. In valuation
-  coloring: $\chi_2(16) = 0 = \chi_2(1) = \chi_2(5)$. Mono.
+  Triple $(16, 1, 5)$: $16 + 4 = 20 = 4 \cdot 5$.  In valuation
+  coloring: $\chi_2(16) = 0 = \chi_2(1) = \chi_2(5)$.  Mono.
   By uniqueness extension: chi(16), chi(1), chi(5) all equal
   in any valid mono-free 2-coloring → contradiction.
 -/
@@ -1102,8 +1103,8 @@ theorem R2_4_upper_via_uniqueness :
   have h54_ne : χ 5 ≠ χ 4 := fun h =>
     mono_4 4 4 5 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num) rfl h.symm
-  -- Triple (12, 1, 4): 12 + 4 = 16 = 4·4. Mono iff χ(12) = χ(1) AND χ(1) = χ(4).
-  -- χ(12) = χ(4). So mono iff χ(1) = χ(4). Hence χ(1) ≠ χ(4).
+  -- Triple (12, 1, 4): 12 + 4 = 16 = 4·4.  Mono iff χ(12) = χ(1) AND χ(1) = χ(4).
+  -- χ(12) = χ(4).  So mono iff χ(1) = χ(4).  Hence χ(1) ≠ χ(4).
   have h14_ne : χ 1 ≠ χ 4 := fun h =>
     mono_4 12 1 4 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
@@ -1116,7 +1117,7 @@ theorem R2_4_upper_via_uniqueness :
   -- In 2-coloring: chi(1), chi(5), chi(16) all ≠ chi(4), so all equal.
   have h16_eq_1 : χ 16 = χ 1 := by omega
   have h1_eq_5 : χ 1 = χ 5 := by omega
-  -- Triple (16, 1, 5): 16 + 4 = 20 = 4·5. Mono.
+  -- Triple (16, 1, 5): 16 + 4 = 20 = 4·5.  Mono.
   apply hAvoid
   refine ⟨16, 1, 5, by omega, by omega, by omega, ?_, h16_eq_1, h1_eq_5⟩
   refine ⟨by omega, by omega, by omega, ?_⟩
@@ -1133,20 +1134,20 @@ theorem R2_4_eq_16 : IsRadoNumber 4 2 16 := by
     exact R2_4_upper_via_uniqueness χ hValid hNot
 
 /-
-  ### §20. Round 114 — third blueprint instance ($R_2(5) = 25$).
+  ### §20.  Round 114 — third blueprint instance ($R_2(5) = 25$).
 
   Even cleaner than Round 113: by Round 111 we have $\chi(5) = \chi(10)
-  = \chi(15) = \chi(20)$ and $\chi(5) \ne \chi(4)$. Then in any valid
+  = \chi(15) = \chi(20)$ and $\chi(5) \ne \chi(4)$.  Then in any valid
   mono-free 2-coloring of $\{1, \ldots, 25\}$:
 
-    * Self-loop $(25, 20, 25)$: $\chi(25) \ne \chi(20) = \chi(5)$.
-    * Triple $(20, 1, 5)$: $20 + 5 = 25 = 5 \cdot 5$. Since
-      $\chi(20) = \chi(5)$, mono iff $\chi(1) = \chi(5)$. Hence
+    * Self-loop $(25, 20, 25)$:  $\chi(25) \ne \chi(20) = \chi(5)$.
+    * Triple $(20, 1, 5)$:  $20 + 5 = 25 = 5 \cdot 5$.  Since
+      $\chi(20) = \chi(5)$, mono iff $\chi(1) = \chi(5)$.  Hence
       $\chi(1) \ne \chi(5)$.
-    * Self-loop $(5, 5, 6)$: $\chi(6) \ne \chi(5)$.
+    * Self-loop $(5, 5, 6)$:  $\chi(6) \ne \chi(5)$.
 
   In a $2$-coloring, $\chi(1), \chi(6), \chi(25)$ are all the
-  $\chi(4)$-color, so equal to each other. Triple $(25, 1, 6)$:
+  $\chi(4)$-color, so equal to each other.  Triple $(25, 1, 6)$:
   $25 + 5 = 30 = 5 \cdot 6$, is then monochromatic — contradiction.
 -/
 
@@ -1182,8 +1183,8 @@ theorem R2_5_upper_via_uniqueness :
   have h25_20_ne : χ 25 ≠ χ 20 := fun h =>
     mono_5 25 20 25 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num) h h.symm
-  -- Triple (20, 1, 5): 20 + 5 = 25 = 5·5. Mono iff χ(20) = χ(1) AND
-  -- χ(1) = χ(5). Since χ(20) = χ(5), mono iff χ(1) = χ(5).
+  -- Triple (20, 1, 5): 20 + 5 = 25 = 5·5.  Mono iff χ(20) = χ(1) AND
+  -- χ(1) = χ(5).  Since χ(20) = χ(5), mono iff χ(1) = χ(5).
   -- Hence χ(1) ≠ χ(5).
   have h1_5_ne : χ 1 ≠ χ 5 := fun h =>
     mono_5 20 1 5 (by norm_num) (by norm_num) (by norm_num)
@@ -1192,7 +1193,7 @@ theorem R2_5_upper_via_uniqueness :
   -- In 2-coloring: χ(1), χ(6), χ(25) all ≠ χ(5), so all equal.
   have h25_eq_1 : χ 25 = χ 1 := by omega
   have h1_eq_6 : χ 1 = χ 6 := by omega
-  -- Triple (25, 1, 6): 25 + 5 = 30 = 5·6. Mono.
+  -- Triple (25, 1, 6): 25 + 5 = 30 = 5·6.  Mono.
   apply hAvoid
   refine ⟨25, 1, 6, by omega, by omega, by omega, ?_, h25_eq_1, h1_eq_6⟩
   refine ⟨by omega, by omega, by omega, ?_⟩
@@ -1213,7 +1214,7 @@ theorem R2_5_eq_25 : IsRadoNumber 5 2 25 := by
 
 /-! ## §21. Round 115 — UNIVERSAL $\chi(2b) = \chi(b)$ for $k = 2$.
 
-  The first GENUINELY UNIVERSAL multiples-agree statement. Generalises
+  The first GENUINELY UNIVERSAL multiples-agree statement.  Generalises
   the case analysis of Rounds 109/110/111: at any $b \ge 2$, in any
   valid mono-free 2-coloring on $\{1, \ldots, n\}$ with $2b \le n$, we
   have $\chi(2b) = \chi(b)$.
@@ -1228,7 +1229,7 @@ theorem R2_5_eq_25 : IsRadoNumber 5 2 25 := by
   cross-triple gives $\chi(2b) \ne \chi(b-1)$, hence $\chi(2b) = \chi(b)$.
 
   This single lemma replaces the per-$b$ Round 109/110/111 case
-  analyses. Strictly kernel-pure.
+  analyses.  Strictly kernel-pure.
 -/
 
 /--
@@ -1263,7 +1264,7 @@ theorem k2_chi_2b_eq_chi_b {b n : ℕ} (hb : 2 ≤ b) (hn : 2 * b ≤ n)
   simp only [mul_one] at h_b_ne_bm1 h_bp1_ne_b
   -- In 2-coloring: χ(b-1) = χ(b+1).
   have h_bm1_eq_bp1 : χ (b - 1) = χ (b + 1) := by omega
-  -- Cross-triple (2b, b-1, b+1): 2b + b(b-1) = b(b+1).
+  -- Cross-triple (2b, b-1, b+1):  2b + b(b-1) = b(b+1).
   have h_2b_ne_bm1 : χ (2 * b) ≠ χ (b - 1) := by
     intro h
     apply hAvoid
@@ -1280,18 +1281,18 @@ theorem k2_chi_2b_eq_chi_b {b n : ℕ} (hb : 2 ≤ b) (hn : 2 * b ≤ n)
 
 /-! ## §22. Round 116 — UNIVERSAL $\chi((b-1)b) = \chi(b)$ for $k = 2$.
 
-  Builds on Round 115 (universal $\chi(2b) = \chi(b)$). The crucial
+  Builds on Round 115 (universal $\chi(2b) = \chi(b)$).  The crucial
   Rado triple this time is $((b-1)b, b-1, 2(b-1))$:
   $$(b-1)b + b(b-1) = 2b(b-1) = b \cdot 2(b-1).$$
 
   In a 2-coloring, both $\chi(b-1)$ and $\chi(2(b-1))$ are "off-color"
   from $\chi(b)$ (the latter via self-loop scaled by $m = 2$ at $2b$,
-  combined with $\chi(2b) = \chi(b)$ from Round 115). Hence
+  combined with $\chi(2b) = \chi(b)$ from Round 115).  Hence
   $\chi(b-1) = \chi(2(b-1))$ in the 2-coloring, so the cross-triple
   forces $\chi((b-1)b) \ne \chi(b-1)$, giving $\chi((b-1)b) = \chi(b)$.
 
   This is the SECOND universal multiples-agree statement and the
-  KEY enabler of the universal $R_2(b) = b^2$ blueprint.
+  KEY enabler of the universal $R_2(b) = b^2$ blueprint (Round 117).
 -/
 
 /--
@@ -1364,7 +1365,7 @@ theorem k2_chi_bm1_b_eq_chi_b {b n : ℕ} (hb : 3 ≤ b) (hn : (b - 1) * b ≤ n
 /-! ## §23. Round 117 — UNIVERSAL $R_2(b) = b^2$ via the blueprint.
 
   CONSOLIDATES Rounds 115/116 into a single universal closure of the
-  threshold conjecture at $k = 2$. Provides an INDEPENDENT proof
+  threshold conjecture at $k = 2$.  Provides an INDEPENDENT proof
   of `thm_k2`'s upper-bound for $b \ge 3$, going through the
   uniqueness + saturation route rather than `lem_compress2` + DPL.
 
@@ -1380,7 +1381,7 @@ theorem k2_chi_bm1_b_eq_chi_b {b n : ℕ} (hb : 3 ≤ b) (hn : (b - 1) * b ≤ n
     (5) In 2-coloring, $\chi(b^2) = \chi(1) = \chi(b+1)$ (all
         $\ne \chi(b)$).
     (6) Final mono triple $(b^2, 1, b+1)$: $b^2 + b = b(b+1)$ ✓ Rado.
-        $\chi(b^2) = \chi(1) = \chi(b+1)$ from (5) — MONO. ⊥
+        $\chi(b^2) = \chi(1) = \chi(b+1)$ from (5) — MONO.  ⊥
 -/
 
 /--
@@ -1436,7 +1437,7 @@ theorem R2_b_upper_via_uniqueness {b : ℕ} (hb : 3 ≤ b)
   -- (3) Triple ((b-1)b, 1, b): (b-1)b + b = b · b.
   have h_1_ne_b : χ 1 ≠ χ b := by
     intro h
-    -- We need χ((b-1)b) = χ(1) and χ(1) = χ(b). By h_bm1b_eq_b and h.
+    -- We need χ((b-1)b) = χ(1) and χ(1) = χ(b).  By h_bm1b_eq_b and h.
     have h_bm1b_eq_1 : χ ((b - 1) * b) = χ 1 := h_bm1b_eq_b.trans h.symm
     apply mono ((b - 1) * b) 1 b hbm1b_pos (by norm_num) hb_pos hbm1b_le h1_le hb_le
     · -- (b-1)b + b * 1 = b * b.
@@ -1453,7 +1454,7 @@ theorem R2_b_upper_via_uniqueness {b : ℕ} (hb : 3 ≤ b)
   -- (5) 2-coloring: χ(1) = χ(b+1) = χ(b*b) (all ≠ χ(b)).
   have h_1_eq_bb : χ 1 = χ (b * b) := by omega
   have h_1_eq_bp1 : χ 1 = χ (b + 1) := by omega
-  -- (6) Final mono triple (b^2, 1, b+1): b^2 + b = b(b+1).
+  -- (6) Final mono triple (b^2, 1, b+1):  b^2 + b = b(b+1).
   apply mono (b * b) 1 (b + 1) hbb_pos (by norm_num) hbp1_pos hbb_le h1_le hbp1_le
   · -- b * b + b * 1 = b * (b + 1).
     ring
@@ -1464,7 +1465,7 @@ theorem R2_b_upper_via_uniqueness {b : ℕ} (hb : 3 ≤ b)
   **Universal $R_2(b) = b^2$ for $b \ge 3$ via blueprint.**
 
   Independent analytic proof through the uniqueness + saturation
-  route. Complements `thm_k2` (DPL + Color Compression) with a
+  route.  Complements `thm_k2` (DPL + Color Compression) with a
   fundamentally different proof technique.
 -/
 theorem R2_b_eq_b_sq {b : ℕ} (hb : 3 ≤ b) : IsRadoNumber b 2 (b ^ 2) := by
@@ -1477,7 +1478,7 @@ theorem R2_b_eq_b_sq {b : ℕ} (hb : 3 ≤ b) : IsRadoNumber b 2 (b ^ 2) := by
 /-! ## §24. Round 118 — extend Round 117 to $b = 2$ (full universality).
 
   For $b = 2$: $(b-1)b = 2 = b$ trivially, so Round 116's nontrivial
-  multiples-agree reduces to identity. Round 115's $\chi(2b) = \chi(b)$
+  multiples-agree reduces to identity.  Round 115's $\chi(2b) = \chi(b)$
   combined with self-loops $\chi(b) \ne \chi(b-1)$, $\chi(b+1) \ne
   \chi(b)$, $\chi(b^2) \ne \chi(b)$ and the final triple $(b^2, 1, b+1)
   = (4, 1, 3)$ — $4 + 2 = 6 = 2 \cdot 3$ — gives mono.
@@ -1535,7 +1536,7 @@ theorem R2_b_eq_b_sq_all {b : ℕ} (hb : 2 ≤ b) : IsRadoNumber b 2 (b ^ 2) := 
 /-! ## §25. Round 119 — BREAKDOWN DIRECTION at $(b, k) = (2, 3)$.
 
   Threshold conjecture's other direction: $R_k(b) > b^k$ whenever
-  $k > 2(b-1)$. At $(b, k) = (2, 3)$, threshold predicts $R_3(2) > 8$.
+  $k > 2(b-1)$.  At $(b, k) = (2, 3)$, threshold predicts $R_3(2) > 8$.
 
   An EXPLICIT mono-free 3-coloring witness $\chi : \{1, \ldots, 8\}
   \to \{0, 1, 2\}$:
@@ -1543,12 +1544,12 @@ theorem R2_b_eq_b_sq_all {b : ℕ} (hb : 2 ≤ b) : IsRadoNumber b 2 (b ^ 2) := 
   $$\chi(5) = 2,\ \chi(6) = 1,\ \chi(7) = 0,\ \chi(8) = 2.$$
 
   All 22 Rado triples on $\{1, \ldots, 8\}$ with $b = 2$ checked by
-  case analysis. Establishes $R_3(2) \ge 9 > 2^3 = 8$ analytically
+  case analysis.  Establishes $R_3(2) \ge 9 > 2^3 = 8$ analytically
   (no SAT/computational axiom), complementing the paper's
   $R_5(3) > 243$ result for $b = 3$.
 
   This is the FIRST analytic-witness proof of the breakdown
-  direction. Strictly kernel-pure.
+  direction.  Strictly kernel-pure.
 -/
 
 /-- Explicit 3-coloring witness for $b = 2, k = 3$, $n = 8$. -/
@@ -1581,7 +1582,7 @@ theorem r3_2_witness_avoids :
   **Round 119: $R_3(2) > 8$ — breakdown at $(b, k) = (2, 3)$.**
 
   $R_3(2) \ge 9$, since $\{1, \ldots, 8\}$ admits a mono-free
-  3-coloring (`r3_2_witness`). Threshold conjecture's breakdown
+  3-coloring (`r3_2_witness`).  Threshold conjecture's breakdown
   direction at $k = 3 > 2(b-1) = 2$ for $b = 2$, established
   analytically.
 
@@ -1608,7 +1609,7 @@ theorem thm_r3_2_breakdown : RadoNumberAtLeast 2 3 9 := by
   $$0, 1, 2, 0, 2, 1, 0, 2, 3, 3, 3, 3, 0, 1, 2, 0.$$
 
   All $\sim 92$ Rado triples on $\{1, \ldots, 16\}$ for $b = 2$ verified
-  by case analysis (kernel-pure). First analytic breakdown witness at
+  by case analysis (kernel-pure).  First analytic breakdown witness at
   $k = 4$.
 -/
 
@@ -1650,7 +1651,7 @@ theorem r4_2_witness_avoids :
   **Round 120: $R_4(2) > 16$ — breakdown at $(b, k) = (2, 4)$.**
 
   $R_4(2) \ge 17$, since $\{1, \ldots, 16\}$ admits a mono-free
-  4-coloring (`r4_2_witness`). Second analytic-witness breakdown
+  4-coloring (`r4_2_witness`).  Second analytic-witness breakdown
   instance, extending Round 119 to $k = 4$.
 -/
 theorem thm_r4_2_breakdown : RadoNumberAtLeast 2 4 17 := by
@@ -1665,7 +1666,7 @@ theorem thm_r4_2_breakdown : RadoNumberAtLeast 2 4 17 := by
 /-! ## §27. Round 121 — BREAKDOWN at $(b, k) = (2, 5)$: $R_5(2) > 32$.
 
   Extends Rounds 119/120 to the next breakdown instance via the
-  block-and-echo construction iterated once more. Threshold predicts
+  block-and-echo construction iterated once more.  Threshold predicts
   $R_5(2) > 32 = 2^5$.
 
   Key optimization for the avoidance proof: since $x = 2(z - y)$ for
@@ -1752,8 +1753,8 @@ theorem thm_r5_2_breakdown : RadoNumberAtLeast 2 5 33 := by
 
 /-! ## §28. Round 122 — BREAKDOWN at $(b, k) = (2, 6)$: $R_6(2) > 64$.
 
-  Extends the block-and-echo pattern to a fourth instance. Threshold
-  predicts $R_6(2) > 64 = 2^6$. Uses $x = 2d, z = y + d$
+  Extends the block-and-echo pattern to a fourth instance.  Threshold
+  predicts $R_6(2) > 64 = 2^6$.  Uses $x = 2d, z = y + d$
   substitution: $32 \cdot 64 = 2048$ cases (vs $64^3 \approx 262{,}144$).
 
   Witness construction:
@@ -1839,7 +1840,7 @@ set_option maxHeartbeats 4000000 in
 /-- Witness avoids monochromatic $b = 2$ Rado triples on $\{1, \ldots, 64\}$.
 
     Uses the $x = 2d, z = y + d$ substitution: $32 \cdot 64 = 2048$
-    case enumeration. Increased `maxHeartbeats` accommodates the
+    case enumeration.  Increased `maxHeartbeats` accommodates the
     larger enumeration. -/
 theorem r6_2_witness_avoids :
     AvoidsMonoSolution 2 64 r6_2_witness := by
@@ -1870,7 +1871,7 @@ theorem thm_r6_2_breakdown : RadoNumberAtLeast 2 6 65 := by
 
 /-! ## §29. Round 123 — BREAKDOWN at $(b, k) = (2, 7)$: $R_7(2) > 128$.
 
-  Fifth iteration of the block-and-echo pattern. Threshold predicts
+  Fifth iteration of the block-and-echo pattern.  Threshold predicts
   $R_7(2) > 128 = 2^7$.
 
   Witness construction:
@@ -1924,7 +1925,7 @@ theorem thm_r7_2_breakdown : RadoNumberAtLeast 2 7 129 := by
 
 /-! ## §30. Round 124 — BREAKDOWN at $(b, k) = (2, 8)$: $R_8(2) > 256$.
 
-  Sixth iteration of the block-and-echo pattern. Threshold predicts
+  Sixth iteration of the block-and-echo pattern.  Threshold predicts
   $R_8(2) > 256 = 2^8$.
 
   Witness construction:
@@ -1949,7 +1950,7 @@ set_option maxHeartbeats 64000000 in
 /-- Witness avoids monochromatic $b = 2$ Rado triples on $\{1, \ldots, 256\}$.
 
     Case enumeration: $128 \cdot 256 = 32{,}768$ cases with the $x = 2d$
-    substitution. Requires substantial `maxHeartbeats` budget. -/
+    substitution.  Requires substantial `maxHeartbeats` budget. -/
 theorem r8_2_witness_avoids :
     AvoidsMonoSolution 2 256 r8_2_witness := by
   intro ⟨x, y, z, hxn, hyn, hzn, hRT, hxy, hyz⟩
@@ -1988,7 +1989,7 @@ theorem thm_r8_2_breakdown : RadoNumberAtLeast 2 8 257 := by
 
   Construction insight: this coloring has the property that
   $\chi(2), \chi(4), \chi(6)$ are PAIRWISE DISTINCT (using all
-  3 colors), which Round 119's witness does not. Demonstrates
+  3 colors), which Round 119's witness does not.  Demonstrates
   that the threshold conjecture's breakdown direction has slack
   beyond the $2^k$ valuation lower bound: $R_3(2) \ge 10$, not
   just $R_3(2) \ge 9$.
@@ -2047,9 +2048,9 @@ theorem thm_r3_2_breakdown_strong : RadoNumberAtLeast 2 3 10 := by
   The function satisfies:
     * `blockEchoWitness 3 = r3_2_witness` (Round 119 base).
     * `blockEchoWitness (k+1) m =
-         blockEchoWitness k m` if $m ≤ 2^k$,
-         $k$ if $2^k < m ≤ 2^k + 2^{k-1}$,
-         `blockEchoWitness k (m - 2^k - 2^{k-1})` if $2^k + 2^{k-1} < m ≤ 2^{k+1}$,
+         blockEchoWitness k m`              if $m ≤ 2^k$,
+         $k$                                if $2^k < m ≤ 2^k + 2^{k-1}$,
+         `blockEchoWitness k (m - 2^k - 2^{k-1})`  if $2^k + 2^{k-1} < m ≤ 2^{k+1}$,
          0 otherwise.
 
   Properties to prove (open, requires the "shifted Rado mono-freeness"
@@ -2067,7 +2068,7 @@ theorem thm_r3_2_breakdown_strong : RadoNumberAtLeast 2 3 10 := by
 def blockEchoWitness : ℕ → ℕ → ℕ
   | 0, _ => 0
   | 1, _ => 0
-  | 2, _ => 0 -- (2, 2) is a closure case, no breakdown witness needed
+  | 2, _ => 0  -- (2, 2) is a closure case, no breakdown witness needed
   | 3, m => r3_2_witness m
   | (k+4), m =>
     let prevLevel := k + 3
@@ -2149,7 +2150,7 @@ theorem valuationColoring_has_shift_one {b k n : ℕ} (hb : 2 ≤ b) (hk : 2 ≤
   **Multiplicative-shift $c = 0$ exclusion** at $k = 2$ for small $b$.
   Any valid mono-free 2-coloring of $\{1, \ldots, n\}$ with $n$
   sufficiently large CANNOT satisfy $\chi(b \cdot m) = \chi(m)$
-  universally. The technique uses self-loops at $b, b^2, 2b, \ldots$
+  universally.  The technique uses self-loops at $b, b^2, 2b, \ldots$
   to derive three pairwise-distinct colors in a 2-color budget.
 
   See `c_zero_excluded_b3_k2` below for the concrete $b = 3$ instance. -/
@@ -2223,8 +2224,8 @@ theorem c_zero_excluded_b3_k2 :
     mono 6 4 6 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num) h h.symm
   -- From h_3_1, h_6_2, h_9_3:
-  -- χ(2) = χ(6) (via h_6_2.symm).
-  -- χ(3) = χ(1) (via h_3_1).
+  --   χ(2) = χ(6) (via h_6_2.symm).
+  --   χ(3) = χ(1) (via h_3_1).
   -- From h_3_ne_2: χ(3) ≠ χ(2), so χ(1) ≠ χ(6) (using h_3_1, h_6_2).
   -- From h_6_ne_4: χ(2) ≠ χ(4).
   -- From h_3_ne_4: χ(1) ≠ χ(4).
@@ -2261,14 +2262,14 @@ theorem c_zero_excluded_b3_k2 :
   * $\chi(b^2) \ne \chi(b(b-1))$: self-loop $(b^2, b(b-1), b^2)$.
 
   Under $c = 0$: $\chi(b) = \chi(1)$, $\chi(b^2) = \chi(b) = \chi(1)$,
-  $\chi(b(b-1)) = \chi(b-1)$. So $\chi(1) \ne \chi(b-1)$.
+  $\chi(b(b-1)) = \chi(b-1)$.  So $\chi(1) \ne \chi(b-1)$.
 
   Cross-triple $(b^2, b - 1, 2b - 1)$: $b^2 + b(b-1) = 2b^2 - b = b(2b-1)$.
-  Mono iff $\chi(b^2) = \chi(b-1) = \chi(2b-1)$. Since $\chi(b^2)
+  Mono iff $\chi(b^2) = \chi(b-1) = \chi(2b-1)$.  Since $\chi(b^2)
   = \chi(1) \ne \chi(b-1)$, not mono.
 
   For full universal exclusion, we use position $b^2$ and $b(b+1)$
-  combined. Detailed combinatorial proof follows in `c_zero_excluded_k2`.
+  combined.  Detailed combinatorial proof follows in `c_zero_excluded_k2`.
 -/
 
 /--
@@ -2334,7 +2335,7 @@ theorem c_zero_excluded_b4_k2 :
     rw [h_4_1, hχ1] at h_4_ne_5
     omega
   -- Cross-triple (8, 3, 5): 8 + 12 = 20 = 4·5. ✓ Rado.
-  -- Mono iff χ(8) = χ(3) = χ(5) = 1. With c=0: χ(8) = χ(2).
+  -- Mono iff χ(8) = χ(3) = χ(5) = 1.  With c=0: χ(8) = χ(2).
   -- To avoid: χ(2) ≠ 1, i.e., χ(2) = 0.
   have h_2_eq_0 : χ 2 = 0 := by
     by_contra hne
@@ -2344,7 +2345,7 @@ theorem c_zero_excluded_b4_k2 :
     · rw [h_8_2, h2v, h_3_eq_1]
     · rw [h_3_eq_1, h_5_eq_1]
   -- Mono triple (8, 2, 4): 8 + 8 = 16 = 4·4.
-  -- χ(8) = χ(2) = 0. χ(4) = χ(1) = 0. All 0. MONO.
+  -- χ(8) = χ(2) = 0.  χ(4) = χ(1) = 0.  All 0.  MONO.
   exact mono 8 2 4 (by norm_num) (by norm_num) (by norm_num)
     (by omega) (by omega) (by omega) (by norm_num)
     (by rw [h_8_2, h_2_eq_0])
@@ -2356,7 +2357,7 @@ theorem c_zero_excluded_b4_k2 :
 
   **The Universal Mono Triple**: $(3b, b - 1, b + 2)$.
 
-  Verification: $3b + b(b-1) = 3b + b^2 - b = b^2 + 2b = b(b+2)$. ✓
+  Verification: $3b + b(b-1) = 3b + b^2 - b = b^2 + 2b = b(b+2)$.  ✓
 
   Under $c = 0$ + $\chi(1) = 0$ + self-loops:
   * $\chi(b - 1) = 1$ (self-loop $(b, b - 1, b)$).
@@ -2366,7 +2367,7 @@ theorem c_zero_excluded_b4_k2 :
     \chi(2) = 0$ + mono-free forces $\chi(b + 2) \ne 0$).
 
   Hence the Rado triple $(3b, b-1, b+2)$ has all three positions
-  in color 1 — MONO. Contradiction!
+  in color 1 — MONO.  Contradiction!
 
   This is the FIRST universal $c = 0$ exclusion (b ≥ 4, k = 2).
   Combined with `c_zero_excluded_b3_k2` for $b = 3$, completes
@@ -2455,7 +2456,7 @@ theorem c_zero_excluded_k2_universal {b : ℕ} (hb : 4 ≤ b) :
     rwa [Nat.mul_one] at h
   have h_bb_b : χ (b * b) = χ b := shift_to_eq b hb_pos hbb_le hv_b
   have h_bb_1 : χ (b * b) = χ 1 := h_bb_b.trans h_b_1
-  -- χ(b·2) = χ(2). But b*2 = 2*b, so need bridge.
+  -- χ(b·2) = χ(2).  But b*2 = 2*b, so need bridge.
   have h_b2_le_n : b * 2 ≤ b ^ 2 := by rw [show b * 2 = 2 * b from by ring]; exact h2b_le
   have h_2b_2 : χ (b * 2) = χ 2 := shift_to_eq 2 h2_pos h_b2_le_n hv2
   have h_2b_2' : χ (2 * b) = χ 2 := by
@@ -2482,7 +2483,7 @@ theorem c_zero_excluded_k2_universal {b : ℕ} (hb : 4 ≤ b) :
   have h_bp1_eq_1 : χ (b + 1) = 1 := by
     rw [h_b_1, hχ1] at h_b_ne_bp1; omega
   -- Cross-triple (2b, b-1, b+1): 2b + b(b-1) = b(b+1).
-  -- Mono iff χ(2b) = χ(b-1) = χ(b+1) = 1. χ(2b) = χ(2).
+  -- Mono iff χ(2b) = χ(b-1) = χ(b+1) = 1.  χ(2b) = χ(2).
   -- To avoid: χ(2) ≠ 1, so χ(2) = 0.
   have h_2_eq_0 : χ 2 = 0 := by
     by_contra hne
@@ -2496,7 +2497,7 @@ theorem c_zero_excluded_k2_universal {b : ℕ} (hb : 4 ≤ b) :
     · rw [h_2b_2', h2v, h_bm1_eq_1]
     · rw [h_bm1_eq_1, h_bp1_eq_1]
   -- Triple (2b, 1, 3): 2b + b = 3b = b·3.
-  -- Mono iff χ(2b) = χ(1) = χ(3) = 0=0=χ(3). So χ(3) ≠ 0, χ(3) = 1.
+  -- Mono iff χ(2b) = χ(1) = χ(3) = 0=0=χ(3).  So χ(3) ≠ 0, χ(3) = 1.
   have h_3_eq_1 : χ 3 = 1 := by
     by_contra hne
     have h3v : χ 3 = 0 := by omega
@@ -2505,7 +2506,7 @@ theorem c_zero_excluded_k2_universal {b : ℕ} (hb : 4 ≤ b) :
     · rw [h_2b_2', h_2_eq_0, hχ1]
     · rw [hχ1, h3v]
   -- Triple (b², 2, b+2): b² + 2b = b(b+2).
-  -- Mono iff χ(b²) = χ(2) = χ(b+2) = 0=0=χ(b+2). So χ(b+2) ≠ 0, χ(b+2) = 1.
+  -- Mono iff χ(b²) = χ(2) = χ(b+2) = 0=0=χ(b+2).  So χ(b+2) ≠ 0, χ(b+2) = 1.
   have h_bp2_eq_1 : χ (b + 2) = 1 := by
     by_contra hne
     have hbp2v : χ (b + 2) = 0 := by omega
@@ -2514,7 +2515,7 @@ theorem c_zero_excluded_k2_universal {b : ℕ} (hb : 4 ≤ b) :
     · rw [h_bb_1, hχ1, h_2_eq_0]
     · rw [h_2_eq_0, hbp2v]
   -- Final mono triple (3b, b-1, b+2): 3b + b(b-1) = b(b+2).
-  -- χ(3b) = χ(3) = 1. χ(b-1) = 1. χ(b+2) = 1. MONO!
+  -- χ(3b) = χ(3) = 1.  χ(b-1) = 1.  χ(b+2) = 1.  MONO!
   apply mono (3 * b) (b - 1) (b + 2) h3b_pos hbm1_pos hbp2_pos h3b_le hbm1_le hbp2_le
   · have hk : (b - 1) + 2 = b + 1 := by omega
     have hk2 : (b - 1) + 1 = b := by omega
@@ -2617,14 +2618,14 @@ theorem c_zero_excluded_k2_b_ge_3 {b : ℕ} (hb : 3 ≤ b) :
   $(\chi(2), \chi(4))$:
 
   * **Case A** ($\chi(2) = \chi(4)$): cross-triple $(6, 2, 4)$ gives
-    $\chi(6) = \chi(2) = \chi(2) = \chi(4)$ — MONO. Excluded.
+    $\chi(6) = \chi(2) = \chi(2) = \chi(4)$ — MONO.  Excluded.
 
   * **Case B** ($\chi(2) \ne \chi(4)$): WLOG $\chi(2) = 1, \chi(4) = 2$.
     Continues with $\chi(8) = 0$, $\chi(7) \ne 0$, eventually
-    deriving contradiction via combinatorial cascade. Multi-step,
+    deriving contradiction via combinatorial cascade.  Multi-step,
     deferred to follow-up rounds.
 
-  This round handles **Case A** cleanly. Case B development is the
+  This round handles **Case A** cleanly.  Case B development is the
   open analytic compress3 problem.
 -/
 
@@ -2652,7 +2653,7 @@ theorem c_zero_excluded_b3_k3_caseA :
   have hv2 : χ 2 < 3 := hValid 2 (by norm_num) (by omega)
   have hv4 : χ 4 < 3 := hValid 4 (by norm_num) (by omega)
   have hv6 : χ 6 < 3 := hValid 6 (by norm_num) (by omega)
-  -- c=0: χ(3 · m) = χ(m) (mod 3). Apply at m=2: χ(6) = χ(2) (mod 3).
+  -- c=0: χ(3 · m) = χ(m) (mod 3).  Apply at m=2: χ(6) = χ(2) (mod 3).
   -- Since χ(2) < 3, χ(2) % 3 = χ(2), so χ(6) = χ(2).
   have h_6_2 : χ 6 = χ 2 := by
     have hsh := hShift 2 (by norm_num) (by norm_num)
@@ -2661,7 +2662,7 @@ theorem c_zero_excluded_b3_k3_caseA :
     rw [hmod] at hsh
     simpa using hsh
   -- Cross-triple (6, 2, 4): 6 + 6 = 12 = 3·4. ✓
-  -- χ(6) = χ(2), χ(2) = χ(4) (assumption), so χ(6) = χ(2) = χ(4). MONO.
+  -- χ(6) = χ(2), χ(2) = χ(4) (assumption), so χ(6) = χ(2) = χ(4).  MONO.
   exact mono 6 2 4 (by norm_num) (by norm_num) (by norm_num)
     (by omega) (by omega) (by omega) (by norm_num) h_6_2 hχ2_eq_χ4
 
@@ -2671,13 +2672,13 @@ theorem c_zero_excluded_b3_k3_caseA :
   derive contradiction through the forced color cascade.
 
   Sub-case B1 ($\chi(5) = 1$): forces $\chi(7) = 2$, $\chi(8) = 0$,
-  $\chi(10) = 2$. Then $\chi(11)$ must avoid $\{0, 1, 2\}$ from
+  $\chi(10) = 2$.  Then $\chi(11)$ must avoid $\{0, 1, 2\}$ from
   three different cross-triples — IMPOSSIBLE in 3-coloring.
 
   Sub-case B2 ($\chi(5) = 2$): forces $\chi(7) = 1$, $\chi(8) = 0$,
-  $\chi(10) = 1$, $\chi(11) = 1$, $\chi(13) = 1$. Then triple
+  $\chi(10) = 1$, $\chi(11) = 1$, $\chi(13) = 1$.  Then triple
   $(21, 6, 13)$ — $21 + 18 = 39 = 3 \cdot 13$ — is monochromatic
-  in color 1. MONO.
+  in color 1.  MONO.
 -/
 
 /--
@@ -2767,7 +2768,7 @@ theorem c_zero_excluded_b3_k3_caseB_12 :
     · rw [h, h_12_4]
   -- So χ(8) = 0.
   have h_8_eq_0 : χ 8 = 0 := by omega
-  -- (9, 5, 8): 9 + 15 = 24 = 3·8. χ(9)=0, χ(8)=0. Mono iff χ(5)=0. So χ(5) ≠ 0.
+  -- (9, 5, 8): 9 + 15 = 24 = 3·8. χ(9)=0, χ(8)=0. Mono iff χ(5)=0.  So χ(5) ≠ 0.
   have h_5_ne_0 : χ 5 ≠ 0 := by
     intro h
     apply mono 9 5 8 (by norm_num) (by norm_num) (by norm_num)
@@ -2778,14 +2779,14 @@ theorem c_zero_excluded_b3_k3_caseB_12 :
   have hχ5_val : χ 5 = 1 ∨ χ 5 = 2 := by omega
   rcases hχ5_val with h5_1 | h5_2
   · -- Sub-case B1: χ(5) = 1.
-    -- (6, 5, 7): χ(6)=1, χ(5)=1. Mono iff χ(7) = 1. So χ(7) ≠ 1.
+    -- (6, 5, 7): χ(6)=1, χ(5)=1. Mono iff χ(7) = 1.  So χ(7) ≠ 1.
     have h_7_ne_1 : χ 7 ≠ 1 := by
       intro h
       apply mono 6 5 7 (by norm_num) (by norm_num) (by norm_num)
         (by omega) (by omega) (by omega) (by norm_num)
       · rw [h_6_2, h5_1]
       · rw [h5_1, h]
-    -- (3, 7, 8): χ(3)=0, χ(8)=0. Mono iff χ(7) = 0. So χ(7) ≠ 0.
+    -- (3, 7, 8): χ(3)=0, χ(8)=0. Mono iff χ(7) = 0.  So χ(7) ≠ 0.
     have h_7_ne_0 : χ 7 ≠ 0 := by
       intro h
       apply mono 3 7 8 (by norm_num) (by norm_num) (by norm_num)
@@ -2817,11 +2818,11 @@ theorem c_zero_excluded_b3_k3_caseB_12 :
         (by omega) (by omega) (by omega) (by norm_num)
       · rw [h_15_eq_1, h_6_2]
       · rw [h_6_2, h]
-    -- χ(11) ∉ {0, 1, 2}. But χ(11) < 3. CONTRADICTION.
+    -- χ(11) ∉ {0, 1, 2}.  But χ(11) < 3.  CONTRADICTION.
     omega
   · -- Sub-case B2: χ(5) = 2.
     have h_15_eq_2 : χ 15 = 2 := h_15_5.trans h5_2
-    -- (21, 5, 12): 21 + 15 = 36 = 3·12. χ(5)=2, χ(12)=2. Mono iff χ(21) = 2.
+    -- (21, 5, 12): 21 + 15 = 36 = 3·12. χ(5)=2, χ(12)=2.  Mono iff χ(21) = 2.
     -- So χ(21) ≠ 2, i.e., χ(7) ≠ 2.
     have h_7_ne_2 : χ 7 ≠ 2 := by
       intro h
@@ -2830,7 +2831,7 @@ theorem c_zero_excluded_b3_k3_caseB_12 :
         (by omega) (by omega) (by omega) (by norm_num)
       · rw [h21_2, h5_2]
       · rw [h5_2, h_12_4]
-    -- (3, 7, 8): χ(3)=0, χ(8)=0. Mono iff χ(7) = 0. So χ(7) ≠ 0.
+    -- (3, 7, 8): χ(3)=0, χ(8)=0. Mono iff χ(7) = 0.  So χ(7) ≠ 0.
     have h_7_ne_0 : χ 7 ≠ 0 := by
       intro h
       apply mono 3 7 8 (by norm_num) (by norm_num) (by norm_num)
@@ -2840,14 +2841,14 @@ theorem c_zero_excluded_b3_k3_caseB_12 :
     have h_7_eq_1 : χ 7 = 1 := by omega
     have h_21_eq_1 : χ 21 = 1 := h_21_7.trans h_7_eq_1
     -- Now derive χ(10) = 1.
-    -- (15, 5, 10): 15 + 15 = 30 = 3·10. χ(15)=2, χ(5)=2. So χ(10) ≠ 2.
+    -- (15, 5, 10): 15 + 15 = 30 = 3·10. χ(15)=2, χ(5)=2.  So χ(10) ≠ 2.
     have h_10_ne_2 : χ 10 ≠ 2 := by
       intro h
       apply mono 15 5 10 (by norm_num) (by norm_num) (by norm_num)
         (by omega) (by omega) (by omega) (by norm_num)
       · rw [h_15_eq_2, h5_2]
       · rw [h5_2, h]
-    -- (27, 1, 10): 27 + 3 = 30 = 3·10. χ(27)=0, χ(1)=0. So χ(10) ≠ 0.
+    -- (27, 1, 10): 27 + 3 = 30 = 3·10. χ(27)=0, χ(1)=0.  So χ(10) ≠ 0.
     have h_10_ne_0 : χ 10 ≠ 0 := by
       intro h
       apply mono 27 1 10 (by norm_num) (by norm_num) (by norm_num)
@@ -2856,14 +2857,14 @@ theorem c_zero_excluded_b3_k3_caseB_12 :
       · rw [hχ1, h]
     have h_10_eq_1 : χ 10 = 1 := by omega
     -- χ(11): (12, 7, 11): χ(12)=2, χ(7)=1. No constraint.
-    -- (9, 8, 11): χ(9)=0, χ(8)=0. Mono iff χ(11) = 0. χ(11) ≠ 0.
+    -- (9, 8, 11): χ(9)=0, χ(8)=0.  Mono iff χ(11) = 0.  χ(11) ≠ 0.
     have h_11_ne_0 : χ 11 ≠ 0 := by
       intro h
       apply mono 9 8 11 (by norm_num) (by norm_num) (by norm_num)
         (by omega) (by omega) (by omega) (by norm_num)
       · rw [h_9_3, h_8_eq_0]
       · rw [h_8_eq_0, h]
-    -- (12, 11, 15): 12 + 33 = 45 = 3·15. χ(12)=2, χ(15)=2. Mono iff χ(11) = 2.
+    -- (12, 11, 15): 12 + 33 = 45 = 3·15. χ(12)=2, χ(15)=2.  Mono iff χ(11) = 2.
     have h_11_ne_2 : χ 11 ≠ 2 := by
       intro h
       apply mono 12 11 15 (by norm_num) (by norm_num) (by norm_num)
@@ -2871,52 +2872,52 @@ theorem c_zero_excluded_b3_k3_caseB_12 :
       · rw [h_12_4, h]
       · rw [h, h_15_eq_2]
     have h_11_eq_1 : χ 11 = 1 := by omega
-    -- χ(13): (6, 11, 13): 6 + 33 = 39 = 3·13. χ(6)=1, χ(11)=1. Mono iff χ(13) = 1.
+    -- χ(13): (6, 11, 13): 6 + 33 = 39 = 3·13. χ(6)=1, χ(11)=1.  Mono iff χ(13) = 1.
     -- So χ(13) ≠ 1.
-    -- Wait, this gives chi(13) ≠ 1, but I claimed chi(13) = 1. Let me reverify.
+    -- Wait, this gives chi(13) ≠ 1, but I claimed chi(13) = 1.  Let me reverify.
     -- Actually (6, 11, 13) mono iff chi(6) = chi(11) = chi(13).
-    -- 1 = 1 = chi(13). So mono iff chi(13) = 1. Hence chi(13) ≠ 1 for mono-free.
+    -- 1 = 1 = chi(13).  So mono iff chi(13) = 1. Hence chi(13) ≠ 1 for mono-free.
     have h_13_ne_1 : χ 13 ≠ 1 := by
       intro h
       apply mono 6 11 13 (by norm_num) (by norm_num) (by norm_num)
         (by omega) (by omega) (by omega) (by norm_num)
       · rw [h_6_2, h_11_eq_1]
       · rw [h_11_eq_1, h]
-    -- (3, 12, 13): chi(3)=0, chi(12)=2. Mono iff 0=2. No.
-    -- (9, 10, 13): chi(9)=0, chi(10)=1. No.
-    -- (15, 8, 13): 15 + 24 = 39 = 3·13. chi(15)=2, chi(8)=0. No.
-    -- (18, 7, 13): chi(18)=1, chi(7)=1, chi(13). Mono iff 1=1=chi(13). chi(13) ≠ 1. Same.
-    -- (21, 6, 13): chi(21)=1, chi(6)=1. Mono iff 1=1=chi(13). chi(13) ≠ 1. Same.
-    -- (24, 5, 13): chi(24)=chi(8)=0, chi(5)=2. No.
-    -- (27, 4, 13): chi(27)=0, chi(4)=2. No.
+    -- (3, 12, 13): chi(3)=0, chi(12)=2.  Mono iff 0=2. No.
+    -- (9, 10, 13): chi(9)=0, chi(10)=1.  No.
+    -- (15, 8, 13): 15 + 24 = 39 = 3·13. chi(15)=2, chi(8)=0.  No.
+    -- (18, 7, 13): chi(18)=1, chi(7)=1, chi(13).  Mono iff 1=1=chi(13).  chi(13) ≠ 1. Same.
+    -- (21, 6, 13): chi(21)=1, chi(6)=1.  Mono iff 1=1=chi(13).  chi(13) ≠ 1. Same.
+    -- (24, 5, 13): chi(24)=chi(8)=0, chi(5)=2.  No.
+    -- (27, 4, 13): chi(27)=0, chi(4)=2.  No.
     -- So chi(13) ∈ {0, 2}.
     -- Need a constraint forcing chi(13) ∈ {1} to get contradiction.
-    -- (12, 11, 15): chi(12)=2, chi(11)=1. No mono since chi(11)≠chi(12). Skip.
+    -- (12, 11, 15): chi(12)=2, chi(11)=1.  No mono since chi(11)≠chi(12).  Skip.
     -- Hmm. Need (?, ?, ?) involving chi(13) more.
     -- Let me look at TRIPLES STARTING WITH x = 21 (chi(21)=1):
-    -- (21, y, z): 21 + 3y = 3z, y + 7 = z. So (21, 1, 8), (21, 2, 9),..., (21, 6, 13).
-    -- (21, 6, 13) already checked. Continue to chi(14):
-    -- Triples ending at 14: x + 3y = 42, x = 3(14-y). y ∈ {1..13}.
-    -- (21, 7, 14): chi(21)=1, chi(7)=1, chi(14). Mono iff 1=1=chi(14). chi(14) ≠ 1.
-    -- (24, 6, 14): chi(24)=0, chi(6)=1. No.
-    -- (27, 5, 14): chi(27)=0, chi(5)=2. No.
-    -- (3, 13, 14): chi(3)=0, chi(13)∈{0,2}, chi(14). Mono iff 0=chi(13)=chi(14). chi(13)=0 forces chi(14) ≠ 0.
-    -- (6, 12, 14): chi(6)=1, chi(12)=2. No.
-    -- (9, 11, 14): chi(9)=0, chi(11)=1. No.
-    -- (12, 10, 14): chi(12)=2, chi(10)=1. No.
-    -- (15, 9, 14): chi(15)=2, chi(9)=0. No.
-    -- (18, 8, 14): chi(18)=1, chi(8)=0. No.
-    -- Hmm chi(14) just has chi(14) ≠ 1. chi(14) ∈ {0, 2}.
+    -- (21, y, z): 21 + 3y = 3z, y + 7 = z. So (21, 1, 8), (21, 2, 9), ..., (21, 6, 13).
+    -- (21, 6, 13) already checked.  Continue to chi(14):
+    -- Triples ending at 14: x + 3y = 42, x = 3(14-y).  y ∈ {1..13}.
+    -- (21, 7, 14): chi(21)=1, chi(7)=1, chi(14).  Mono iff 1=1=chi(14).  chi(14) ≠ 1.
+    -- (24, 6, 14): chi(24)=0, chi(6)=1.  No.
+    -- (27, 5, 14): chi(27)=0, chi(5)=2.  No.
+    -- (3, 13, 14): chi(3)=0, chi(13)∈{0,2}, chi(14).  Mono iff 0=chi(13)=chi(14).  chi(13)=0 forces chi(14) ≠ 0.
+    -- (6, 12, 14): chi(6)=1, chi(12)=2.  No.
+    -- (9, 11, 14): chi(9)=0, chi(11)=1.  No.
+    -- (12, 10, 14): chi(12)=2, chi(10)=1.  No.
+    -- (15, 9, 14): chi(15)=2, chi(9)=0.  No.
+    -- (18, 8, 14): chi(18)=1, chi(8)=0.  No.
+    -- Hmm chi(14) just has chi(14) ≠ 1.  chi(14) ∈ {0, 2}.
     -- And if chi(13) = 0, chi(14) ≠ 0.
-    -- This is getting too long. Let me try a DIFFERENT route.
-    -- Look at chi(16): (15, 11, 16) — 15 + 33 = 48 = 3·16. chi(15)=2, chi(11)=1. No.
-    -- (21, 9, 16) — chi(21)=1, chi(9)=0. No.
-    -- (24, 8, 16) — chi(24)=0, chi(8)=0, chi(16). Mono iff 0=0=chi(16). chi(16) ≠ 0.
-    -- (27, 7, 16) — chi(27)=0, chi(7)=1. No.
-    -- (3, 15, 16) — chi(3)=0, chi(15)=2. No.
-    -- (6, 14, 16) — chi(6)=1, chi(14), chi(16). Mono iff 1=chi(14)=chi(16). If chi(14)=1 and chi(16)=1. But chi(14) ≠ 1. So no constraint.
-    -- (12, 12, 16) — chi(12)=2. Mono iff 2=2=chi(16). chi(16) ≠ 2.
-    -- So chi(16) ∉ {0, 2}. chi(16) = 1.
+    -- This is getting too long.  Let me try a DIFFERENT route.
+    -- Look at chi(16): (15, 11, 16) — 15 + 33 = 48 = 3·16. chi(15)=2, chi(11)=1.  No.
+    -- (21, 9, 16) — chi(21)=1, chi(9)=0.  No.
+    -- (24, 8, 16) — chi(24)=0, chi(8)=0, chi(16).  Mono iff 0=0=chi(16).  chi(16) ≠ 0.
+    -- (27, 7, 16) — chi(27)=0, chi(7)=1.  No.
+    -- (3, 15, 16) — chi(3)=0, chi(15)=2.  No.
+    -- (6, 14, 16) — chi(6)=1, chi(14), chi(16).  Mono iff 1=chi(14)=chi(16).  If chi(14)=1 and chi(16)=1.  But chi(14) ≠ 1.  So no constraint.
+    -- (12, 12, 16) — chi(12)=2.  Mono iff 2=2=chi(16).  chi(16) ≠ 2.
+    -- So chi(16) ∉ {0, 2}.  chi(16) = 1.
     have h_16_ne_0 : χ 16 ≠ 0 := by
       intro h
       apply mono 24 8 16 (by norm_num) (by norm_num) (by norm_num)
@@ -2932,9 +2933,9 @@ theorem c_zero_excluded_b3_k3_caseB_12 :
       · rw [h_12_4, h]
     have h_16_eq_1 : χ 16 = 1 := by omega
     -- Triple (6, 11, 13): chi(6)=chi(11)=1, chi(13)≠1.
-    -- Triple (15, 11, 16): chi(15)=2, chi(11)=1, chi(16)=1. Mono iff 2=1. No.
-    -- Triple (21, 11, 18): 21 + 33 = 54 = 3·18. chi(21)=1, chi(11)=1, chi(18)=1.
-    -- Mono iff 1=1=1. MONO!
+    -- Triple (15, 11, 16): chi(15)=2, chi(11)=1, chi(16)=1.  Mono iff 2=1.  No.
+    -- Triple (21, 11, 18): 21 + 33 = 54 = 3·18.  chi(21)=1, chi(11)=1, chi(18)=1.
+    --   Mono iff 1=1=1.  MONO!
     apply mono 21 11 18 (by norm_num) (by norm_num) (by norm_num)
       (by omega) (by omega) (by omega) (by norm_num)
     · rw [h_21_eq_1, h_11_eq_1]
@@ -2943,12 +2944,12 @@ theorem c_zero_excluded_b3_k3_caseB_12 :
 /-! ### §33.9. Round 134 — Case B symmetric: $\chi(2) = 2, \chi(4) = 1$.
 
   By color permutation $1 \leftrightarrow 2$, this case mirrors
-  Round 133. Sub-cases derive contradiction via similar cascade.
+  Round 133.  Sub-cases derive contradiction via similar cascade.
 
   Sub-case ($\chi(5) = 1$): $\chi(7) = 2$, $\chi(11) \notin
   \{0, 1, 2\}$ — CONTRADICTION.
 
-  Sub-case ($\chi(5) = 2$): $\chi(7) = 1$ or $2$. If $\chi(7) = 1$:
+  Sub-case ($\chi(5) = 2$): $\chi(7) = 1$ or $2$.  If $\chi(7) = 1$:
   $\chi(11) = 0$ forbidden, $\chi(11) \ne 1$ (from triple at $11$),
   $\chi(11) \ne 2$ — CONTRADICTION.
 -/
@@ -3048,7 +3049,7 @@ theorem c_zero_excluded_b3_k3_caseB_21 :
   rcases hχ5_val with h5_1 | h5_2
   · -- Sub-case χ(5) = 1.
     have h_15_eq_1 : χ 15 = 1 := h_15_5.trans h5_1
-    -- (21, 5, 12): chi(21), chi(5)=1, chi(12)=1. Mono iff chi(21) = 1.
+    -- (21, 5, 12): chi(21), chi(5)=1, chi(12)=1.  Mono iff chi(21) = 1.
     have h_7_ne_1 : χ 7 ≠ 1 := by
       intro h
       have h21 : χ 21 = 1 := h_21_7.trans h
@@ -3074,8 +3075,8 @@ theorem c_zero_excluded_b3_k3_caseB_21 :
       · rw [h_8_eq_0, h]
     -- (15, 6, 11): chi(15)=1, chi(6)=2. No constraint.
     -- (21, 4, 11)? 21 + 12 = 33 = 3·11. chi(21)=2, chi(4)=1. No.
-    -- (3, 11, 12): chi(3)=0, chi(11), chi(12)=1. Mono iff 0=chi(11)=1. chi(11) = 0 OR ≠ 1.
-    -- chi(11) ≠ 0 known. So no constraint from this.
+    -- (3, 11, 12): chi(3)=0, chi(11), chi(12)=1.  Mono iff 0=chi(11)=1.  chi(11) = 0 OR ≠ 1.
+    --   chi(11) ≠ 0 known.  So no constraint from this.
     -- Need chi(11) ≠ 1: (12, 7, 11)? chi(12)=1, chi(7)=2. No.
     -- (?, ?, 11) more: x=18, y=5: (18, 5, 11). chi(18)=2, chi(5)=1. No.
     -- x=24, y=3: (24, 3, 11). chi(24)=0, chi(3)=0. chi(11) ≠ 0. Same.
@@ -3090,40 +3091,40 @@ theorem c_zero_excluded_b3_k3_caseB_21 :
     -- (x, y) = (?, 18): out of range.
     -- (x, y) = (?, 21): out of range.
     -- What about (3·c, ?, 11) where chi(3c) = 2?
-    -- Need chi(3c) = 2. chi(3)=0, chi(6)=2, chi(9)=0, chi(12)=1, chi(15)=1, chi(18)=2, chi(21)=2, chi(24)=0, chi(27)=0.
+    -- Need chi(3c) = 2.  chi(3)=0, chi(6)=2, chi(9)=0, chi(12)=1, chi(15)=1, chi(18)=2, chi(21)=2, chi(24)=0, chi(27)=0.
     -- So chi(3c) = 2 for c ∈ {2, 6, 7} (since chi(6)=chi(18)=chi(21)=2).
     -- (6, 9, 11): chi(6)=2, chi(9)=0. No.
     -- (18, 5, 11): chi(18)=2, chi(5)=1. No.
     -- (21, 4, 11): chi(21)=2, chi(4)=1. No.
-    -- (?, ?, 11) where both = 2. Need chi(y) = 2 and y matches.
+    -- (?, ?, 11) where both = 2.  Need chi(y) = 2 and y matches.
     -- Looking: chi(2)=2, chi(6)=2.
     -- (x, 2, 11): x = 33 - 6 = 27. (27, 2, 11). chi(27)=0. No.
     -- (x, 6, 11): x = 33 - 18 = 15. (15, 6, 11). chi(15)=1. No.
     -- (x, 18, 11): y > z, not Rado.
     -- Hmm, no triple ending at 11 with both endpoints color 2.
     -- chi(11) = 2 doesn't directly mono with current values.
-    -- chi(11) ∈ {1, 2}. Both possible without immediate contradiction.
+    -- chi(11) ∈ {1, 2}.  Both possible without immediate contradiction.
     -- Need a chi(11) ≠ 1 constraint.
     -- (?, ?, ?) with x = 6, y = 11, z = ?: 6 + 33 = 39 = 3·13. (6, 11, 13).
-    -- chi(6)=2, chi(11), chi(13). Mono iff 2=chi(11)=chi(13).
-    -- If chi(11) = 2, mono iff chi(13) = 2.
-    -- chi(13)? Let me check (?, ?, 13): x + 3y = 39.
-    -- (3, 12, 13): chi(3)=0, chi(12)=1. No.
-    -- (6, 11, 13): see above.
-    -- (9, 10, 13): chi(9)=0, chi(10)?
-    -- (12, 9, 13): chi(12)=1, chi(9)=0. No.
-    -- (15, 8, 13): chi(15)=1, chi(8)=0. No.
-    -- (18, 7, 13): chi(18)=2, chi(7)=2, chi(13). chi(13) ≠ 2.
-    -- (21, 6, 13): chi(21)=2, chi(6)=2, chi(13). chi(13) ≠ 2. Same.
-    -- (24, 5, 13): chi(24)=0, chi(5)=1. No.
-    -- (27, 4, 13): chi(27)=0, chi(4)=1. No.
+    --   chi(6)=2, chi(11), chi(13).  Mono iff 2=chi(11)=chi(13).
+    --   If chi(11) = 2, mono iff chi(13) = 2.
+    -- chi(13)?  Let me check (?, ?, 13): x + 3y = 39.
+    --   (3, 12, 13): chi(3)=0, chi(12)=1. No.
+    --   (6, 11, 13): see above.
+    --   (9, 10, 13): chi(9)=0, chi(10)?
+    --   (12, 9, 13): chi(12)=1, chi(9)=0. No.
+    --   (15, 8, 13): chi(15)=1, chi(8)=0. No.
+    --   (18, 7, 13): chi(18)=2, chi(7)=2, chi(13). chi(13) ≠ 2.
+    --   (21, 6, 13): chi(21)=2, chi(6)=2, chi(13). chi(13) ≠ 2. Same.
+    --   (24, 5, 13): chi(24)=0, chi(5)=1. No.
+    --   (27, 4, 13): chi(27)=0, chi(4)=1. No.
     -- So chi(13) ≠ 2.
     -- If chi(11) = 2, then (6, 11, 13) mono iff chi(13) = 2. But chi(13) ≠ 2. Not mono.
-    -- Need chi(10): self-loop (15, 10, 15): chi(15)=1 ≠ chi(10). chi(10) ≠ 1.
-    -- (?, ?, 10): (15, 5, 10): chi(15)=1=chi(5)=1, mono iff chi(10)=1. chi(10) ≠ 1.
-    -- (27, 1, 10): chi(27)=0, chi(1)=0. chi(10) ≠ 0.
-    -- (3, 9, 10): chi(3)=0=chi(9)=0. chi(10) ≠ 0.
-    -- So chi(10) ∈ {2}.
+    -- Need chi(10): self-loop (15, 10, 15): chi(15)=1 ≠ chi(10).  chi(10) ≠ 1.
+    --   (?, ?, 10): (15, 5, 10): chi(15)=1=chi(5)=1, mono iff chi(10)=1. chi(10) ≠ 1.
+    --   (27, 1, 10): chi(27)=0, chi(1)=0. chi(10) ≠ 0.
+    --   (3, 9, 10): chi(3)=0=chi(9)=0. chi(10) ≠ 0.
+    --   So chi(10) ∈ {2}.
     have h_15_eq_1' : χ 15 = 1 := h_15_eq_1
     have hv10 : χ 10 < 3 := hv 10 (by norm_num) (by omega)
     have h_10_ne_0 : χ 10 ≠ 0 := by
@@ -3142,7 +3143,7 @@ theorem c_zero_excluded_b3_k3_caseB_21 :
     -- chi(16): (24, 8, 16): chi(24)=0=chi(8)=0, chi(16) ≠ 0.
     -- (12, 12, 16): chi(12)=1, chi(16) ≠ 1.
     -- (18, 10, 16): chi(18)=2, chi(10)=2, chi(16) ≠ 2.
-    -- chi(16) ∉ {0,1,2}. CONTRADICTION.
+    -- chi(16) ∉ {0,1,2}.  CONTRADICTION.
     have hv16 : χ 16 < 3 := hv 16 (by norm_num) (by omega)
     have h_16_ne_0 : χ 16 ≠ 0 := by
       intro h
@@ -3166,7 +3167,7 @@ theorem c_zero_excluded_b3_k3_caseB_21 :
   · -- Sub-case χ(5) = 2.
     have h_15_eq_2 : χ 15 = 2 := h_15_5.trans h5_2
     -- Mirror of Round 133 Sub-case B2: (21, 5, 12) gives chi(7) constraint.
-    -- chi(5)=2, chi(12)=1. Mono in (21,5,12) iff chi(21)=2=1. Impossible. Not mono regardless.
+    -- chi(5)=2, chi(12)=1.  Mono in (21,5,12) iff chi(21)=2=1.  Impossible.  Not mono regardless.
     -- (3, 7, 8): chi(7) ≠ 0.
     have h_7_ne_0 : χ 7 ≠ 0 := by
       intro h
@@ -3197,7 +3198,7 @@ theorem c_zero_excluded_b3_k3_caseB_21 :
       -- chi(11): (9, 8, 11) chi(11) ≠ 0.
       -- (12, 7, 11): chi(12)=1, chi(7)=1, chi(11) ≠ 1.
       -- (15, 6, 11): chi(15)=2, chi(6)=2, chi(11) ≠ 2.
-      -- chi(11) ∉ {0, 1, 2}. CONTRADICTION.
+      -- chi(11) ∉ {0, 1, 2}.  CONTRADICTION.
       have h_11_ne_0 : χ 11 ≠ 0 := by
         intro h
         apply mono 9 8 11 (by norm_num) (by norm_num) (by norm_num)
@@ -3257,8 +3258,8 @@ theorem c_zero_excluded_b3_k3_caseB_21 :
       have h_11_eq_1 : χ 11 = 1 := by omega
       -- Triple (21, 11, 18)? 21 + 33 = 54 = 3·18. chi(21)=2, chi(11)=1, chi(18)=2.
       -- Mono iff 2=1=2. No. Not mono.
-      -- Need different triple. How about (12, 11, 15)? 12 + 33 = 45 = 3·15.
-      -- chi(12)=1, chi(11)=1, chi(15)=2. Mono iff 1=1=2. No.
+      -- Need different triple.  How about (12, 11, 15)? 12 + 33 = 45 = 3·15.
+      --   chi(12)=1, chi(11)=1, chi(15)=2. Mono iff 1=1=2. No.
       -- (6, 11, 13): chi(6)=2, chi(11)=1. No.
       -- (24, 11, 19)? 24 + 33 = 57 = 3·19. chi(24)=0, chi(11)=1. No.
       -- (27, 11, 20)? chi(27)=0, chi(11)=1. No.
@@ -3300,7 +3301,7 @@ theorem c_zero_excluded_b3_k3_caseB_21 :
         · rw [h_12_4, h]
       have h_16_eq_2 : χ 16 = 2 := by omega
       -- Triple (6, 16, ?)? 6 + 48 = 54 = 3·18. (6, 16, 18). chi(6)=2, chi(16)=2, chi(18)=2.
-      -- All 2. MONO!
+      -- All 2.  MONO!
       apply mono 6 16 18 (by norm_num) (by norm_num) (by norm_num)
         (by omega) (by omega) (by omega) (by norm_num)
       · rw [h_6_2, h_16_eq_2]
@@ -3315,7 +3316,7 @@ theorem c_zero_excluded_b3_k3_caseB_21 :
   **Round 135 — FULL $c = 0$ exclusion at $(b, k) = (3, 3)$.**
 
   No mono-free 3-coloring of $\{1, \ldots, 27\}$ for $b = 3$ with
-  $\chi(1) = 0$ has multiplicative shift $c = 0$. Case-split on
+  $\chi(1) = 0$ has multiplicative shift $c = 0$.  Case-split on
   $(\chi(2), \chi(4)) \in \{(1,1), (1,2), (2,1), (2,2)\}$.
 -/
 theorem c_zero_excluded_b3_k3 :
@@ -3364,11 +3365,11 @@ theorem c_zero_excluded_b3_k3 :
     · -- (1, 1): Case A.
       exact c_zero_excluded_b3_k3_caseA
         ⟨χ, hValid, hAvoid, hShift, hχ1, by rw [h2_1, h4_1]⟩
-    · -- (1, 2): Case B.
+    · -- (1, 2): Case B (Round 133).
       exact c_zero_excluded_b3_k3_caseB_12
         ⟨χ, hValid, hAvoid, hShift, hχ1, h2_1, h4_2⟩
   · rcases h4_val with h4_1 | h4_2
-    · -- (2, 1): Case B.
+    · -- (2, 1): Case B (Round 134).
       exact c_zero_excluded_b3_k3_caseB_21
         ⟨χ, hValid, hAvoid, hShift, hχ1, h2_2, h4_1⟩
     · -- (2, 2): Case A.
@@ -3379,24 +3380,24 @@ theorem c_zero_excluded_b3_k3 :
 
   **Theorem (Conditional Closure)**: under $\chi(1) = 0$ + HasMultShift
   $c = 1$ at $(b, k) = (3, 3)$ + $\chi(10) = 0$, mono triple $(27, 1, 10)$
-  fires. Specifically:
+  fires.  Specifically:
 
   $\chi(27) = (\chi(9) + 1) \% 3 = ((\chi(3)+1)+1) \% 3
   = (((\chi(1)+1)+1)+1) \% 3 = \chi(1) = 0$ (the "valuation
   saturation" identity).
 
-  So under HasMultShift $c = 1$: $\chi(27) = \chi(1)$. Triple $(27, 1, 10)$
+  So under HasMultShift $c = 1$: $\chi(27) = \chi(1)$.  Triple $(27, 1, 10)$
   mono iff $\chi(10) = \chi(27) = \chi(1) = 0$.
 
   This codifies the "saturation closure" step in the analytic schema
-  toward $R_3(3) = 27$. The HasMultShift hypothesis is the deep
+  toward $R_3(3) = 27$.  The HasMultShift hypothesis is the deep
   structural step — equivalent to the compression hypothesis at $(3,3)$.
 
   Full closure path:
-  1. $c = 0$ excluded.
+  1. (Round 135) $c = 0$ excluded.
   2. (Conjectured uniqueness) every mono-free χ has HasMultShift
      $c \in \{1, 2\}$.
-  3. under c=1 + $\chi(10) = 0$ (also conjectured forced),
+  3. (Round 136) under c=1 + $\chi(10) = 0$ (also conjectured forced),
      mono triple $(27, 1, 10)$ excludes χ.
   4. By color permutation: c=2 case symmetric.
   5. Combined → $R_3(3) \le 27$.
@@ -3492,7 +3493,7 @@ theorem shift_c_two_saturates_at_27 (χ : ℕ → ℕ)
   - HasMultShift c for some c ∈ {0, 1, 2}.
   - χ(10) = 0 when χ(1) = 0 (forced by mono-free).
 
-  We derive R_3(3) ≤ 27. This codifies the analytic schema in Lean.
+  We derive R_3(3) ≤ 27.  This codifies the analytic schema in Lean.
 
   The TWO remaining open structural hypotheses are pillars 3 and 4
   of the closure (see Round 136's documentation).
@@ -3536,7 +3537,7 @@ theorem R_3_3_le_27_conditional :
 
   Proof structure: cascade $\chi(2) = 2 \Rightarrow \chi(6) = 0,
   \chi(4) = 2, \chi(5) = 1, \chi(7) = 2, \chi(10) = 1, \chi(8) \in
-  \{1, 2\}$. Each sub-case (chi(8) = 1 and chi(8) = 2) gives a
+  \{1, 2\}$.  Each sub-case (chi(8) = 1 and chi(8) = 2) gives a
   $\chi$-value that's forced out of $\{0, 1, 2\}$ — contradiction.
 -/
 
@@ -3805,7 +3806,7 @@ theorem shift_c_one_forces_chi_2_zero :
 
 /-! ### §33.15. Round 140 — χ(4)=0 forced under HasMultShift c=1 + χ(1)=χ(2)=0.
 
-  Continues the structural uniqueness cascade. Given Round 139's
+  Continues the structural uniqueness cascade.  Given Round 139's
   χ(2) = 0, prove χ(4) = 0 forced (since χ(4) ≠ 1 from self-loop
   (3, 3, 4), and χ(4) = 2 leads to contradiction via cascade
   similar to Round 139).
@@ -3861,7 +3862,7 @@ theorem shift_c_one_forces_chi_4_zero :
   have h_27 : χ 27 = 0 := by
     have h := shift1 9 (by norm_num) (by norm_num)
     rw [show 3 * 9 = 27 from rfl, h_9] at h; omega
-  -- χ(5) ≠ 0 from (12, 1, 5), χ(5) ≠ 2 from... wait let me check.
+  -- χ(5) ≠ 0 from (12, 1, 5), χ(5) ≠ 2 from ... wait let me check.
   -- (12, 1, 5): chi(12)=0, chi(1)=0. chi(5) ≠ 0.
   have h_5_ne_0 : χ 5 ≠ 0 := by
     intro h
@@ -4028,7 +4029,7 @@ theorem shift_c_one_forces_chi_4_zero :
 
 /-! ### §33.16. Round 141 — χ(5)=0 forced under HasMultShift c=1 + χ(1)=χ(2)=χ(4)=0.
 
-  Continues cascade. Self-loop $(6, 3, 5)$ excludes χ(5) = 1.
+  Continues cascade.  Self-loop $(6, 3, 5)$ excludes χ(5) = 1.
   Sub-cases χ(5) = 2 traverse χ(8), χ(13), χ(16) constraints to
   derive contradiction.
 -/
@@ -4334,7 +4335,7 @@ theorem shift_c_one_forces_chi_8_zero :
   **Round 144 — R_3(3) ≤ 27 under HasMultShift c=1 + χ(1)=0.**
 
   No mono-free 3-coloring χ of {1,...,27} for b=3 with HasMultShift
-  c=1 + χ(1)=0 exists. Combines the structural-uniqueness cascade
+  c=1 + χ(1)=0 exists.  Combines the structural-uniqueness cascade
   Rounds 139-143 with χ(10) value-impossibility.
 -/
 theorem R_3_3_le_27_under_shift_c_one (χ : ℕ → ℕ)
@@ -4537,7 +4538,7 @@ theorem R_3_3_le_27_under_shift_c_one (χ : ℕ → ℕ)
 /-! ### §33.20. Round 145 — c=2 case via COLOR PERMUTATION 1 ↔ 2.
 
   Defines swap, proves it preserves mono-freeness and converts
-  HasMultShift c=2 → c=1. Then delegates to Round 144.
+  HasMultShift c=2 → c=1.  Then delegates to Round 144.
 -/
 
 /-- Color permutation swapping 1 ↔ 2 (fixes 0). -/
@@ -4628,7 +4629,7 @@ theorem R_3_3_le_27_under_shift_c_two (χ : ℕ → ℕ)
   Combines Round 135 (c=0 excluded) + Round 144 (c=1 case) +
   Round 145 (c=2 case) via case-split.
 
-  This is the FINAL theorem before Pillar 3. Once Pillar 3
+  This is the FINAL theorem before Pillar 3.  Once Pillar 3
   (structural existence of HasMultShift) closes, R_3(3) ≤ 27 is
   proven unconditionally analytic.
 -/

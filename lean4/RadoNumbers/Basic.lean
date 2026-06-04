@@ -16,12 +16,12 @@
 
   Paper symbol → Lean identifier:
 
-      paper → Lean
+      paper  →  Lean
       ─────────────
-      v_b → bAdicVal
-      χ → chi (or χ kept as Greek; Lean parser accepts)
-      C_c → ColorClass
-      R_k(b) → RadoNumberAtLeast / RadoNumberAtMost
+      v_b    →  bAdicVal
+      χ      →  chi  (or χ kept as Greek; Lean parser accepts)
+      C_c    →  ColorClass
+      R_k(b) →  RadoNumberAtLeast / RadoNumberAtMost
 -/
 
 import Mathlib.Data.Nat.Basic
@@ -41,7 +41,7 @@ namespace RadoNumbers
   at zero, so finiteness is preserved without semantic change).
 
   Recursive definition: if `b ∣ n`, then `v_b(n) = 1 + v_b(n / b)`;
-  otherwise `v_b(n) = 0`. Termination follows from `n / b < n`
+  otherwise `v_b(n) = 0`.  Termination follows from `n / b < n`
   whenever `b ≥ 2` and `n > 0`.
 -/
 def bAdicVal (b n : ℕ) : ℕ :=
@@ -59,7 +59,7 @@ def bAdicVal (b n : ℕ) : ℕ :=
 
   Under the substitution `d := z - y`, this reduces to `x = b·d`
   with `d ≥ 1`, i.e., the paper's distance form (Remark
-  `rmk:distance`). We use the additive form here for direct
+  `rmk:distance`).  We use the additive form here for direct
   alignment with the paper's `x + by = bz` and to keep solver
   computations symbolic.
 -/
@@ -68,7 +68,7 @@ def IsRadoTriple (b x y z : ℕ) : Prop :=
 
 /--
   A `k`-coloring of `{1, …, n}` is a function `χ : ℕ → ℕ` whose values
-  on the domain `{1, …, n}` lie in `{0, …, k-1}`. Values outside the
+  on the domain `{1, …, n}` lie in `{0, …, k-1}`.  Values outside the
   domain are unconstrained.
 -/
 def IsValidColoring (n k : ℕ) (χ : ℕ → ℕ) : Prop :=
@@ -85,7 +85,7 @@ def HasMonoSolution (b n : ℕ) (χ : ℕ → ℕ) : Prop :=
 
 /--
   Coloring `χ` *avoids* a monochromatic solution to `x + b·y = b·z`
-  on `{1, …, n}`. Negation of `HasMonoSolution`.
+  on `{1, …, n}`.  Negation of `HasMonoSolution`.
 -/
 def AvoidsMonoSolution (b n : ℕ) (χ : ℕ → ℕ) : Prop :=
   ¬ HasMonoSolution b n χ
@@ -93,7 +93,7 @@ def AvoidsMonoSolution (b n : ℕ) (χ : ℕ → ℕ) : Prop :=
 /-! ### Rado number bounds. -/
 
 /--
-  *Lower-bound predicate.* `RadoNumberAtLeast b k N` says the Rado
+  *Lower-bound predicate.*  `RadoNumberAtLeast b k N` says the Rado
   number `R_k(b)` is at least `N`: there exists a valid `k`-coloring
   of `{1, …, N - 1}` avoiding all monochromatic solutions to
   `x + b·y = b·z`.
@@ -105,7 +105,7 @@ def RadoNumberAtLeast (b k N : ℕ) : Prop :=
     AvoidsMonoSolution b (N - 1) χ
 
 /--
-  *Upper-bound predicate.* `RadoNumberAtMost b k N` says the Rado
+  *Upper-bound predicate.*  `RadoNumberAtMost b k N` says the Rado
   number `R_k(b)` is at most `N`: every valid `k`-coloring of
   `{1, …, N}` contains a monochromatic solution to `x + b·y = b·z`.
 
@@ -116,7 +116,7 @@ def RadoNumberAtMost (b k N : ℕ) : Prop :=
   ∀ χ : ℕ → ℕ, IsValidColoring N k χ → HasMonoSolution b N χ
 
 /--
-  *Exact-value predicate.* `IsRadoNumber b k N` says `R_k(b) = N`:
+  *Exact-value predicate.*  `IsRadoNumber b k N` says `R_k(b) = N`:
   both lower bound `R_k(b) ≥ N` and upper bound `R_k(b) ≤ N` hold.
 
   Paper: `R_2(b) = b^2`, `R_3(3) = 27`, `R_4(3) = 81`, etc.
@@ -128,7 +128,7 @@ def IsRadoNumber (b k N : ℕ) : Prop :=
 
   Remark `rmk:distance` of the paper rephrases monochromatic
   solutions in distance form: if `χ(b·d) = c`, then the color class
-  `C_c = χ^{-1}(c)` must avoid pairs at distance `d`. We carry this
+  `C_c = χ^{-1}(c)` must avoid pairs at distance `d`.  We carry this
   rephrasing as a paper-level definition.
 -/
 

@@ -1,14 +1,15 @@
 /-
   RadoNumbers/K2.lean
 
+
   Lemma `lem:compress2` (Color Compression Lemma; paper-novel
   analytic claim) and Theorem `thm:k2` ($R_2(b) = b^2$ for all
-  $b \ge 2$). Companion to Li 2026 "On Rado Numbers for
+  $b \ge 2$).  Companion to Li 2026 "On Rado Numbers for
   $x + by = bz$".
 
   The Color Compression Lemma is a paper-novel structural claim:
   any valid 2-coloring of $\{1, …, b^2 - 1\}$ avoiding monochromatic
-  solutions assigns ALL multiples of $b$ the same color. We encode
+  solutions assigns ALL multiples of $b$ the same color.  We encode
   it here as a Cat 3 paper-novel working assumption (status
   `gapOpen`) pending direct in-Lean derivation; the analytic proof
   appears in the paper's Lemma `lem:compress2`.
@@ -31,24 +32,25 @@ import Mathlib.Tactic
 
 namespace RadoNumbers
 
-/-! ### Color Compression Lemma `lem:compress2` — ANALYTIC PROOF.
+/-! ### Color Compression Lemma `lem:compress2` — ANALYTIC PROOF
+    (Round 14, 2026-05-15).
 
   Previously a Cat 3 `gapOpen` working assumption; Round 14
   Lean-derives the paper's minimal-deviation argument, converting
   it to a `gapClosed` theorem.
 
   **Paper proof structure** (Li 2026, §4 Lemma `lem:compress2`):
-  strong induction on $i$. Base $i = 1$ trivial. For $i \ge 2$,
+  strong induction on $i$.  Base $i = 1$ trivial.  For $i \ge 2$,
   with $\chi(b \cdot j) = \chi(b) =: c_0$ for all $j < i$ (IH):
   suppose $\chi(b \cdot i) \ne c_0$.
 
   * For each $j \in [1, i-1]$, the triple $(b \cdot j, b, b + j)$
     forces $\chi(b + j) \ne c_0$ (since $\chi(b \cdot j) = c_0 =
-    \chi(b)$). In particular $\chi(b + (i-1)) \ne c_0$.
+    \chi(b)$).  In particular $\chi(b + (i-1)) \ne c_0$.
   * The triple $(b, b-1, b)$ (satisfying $b + b(b-1) = b^2$) forces
     $\chi(b-1) \ne c_0$.
   * With 2 colors, $\chi(b-1) = \chi(b+(i-1)) = \chi(b \cdot i) =
-    1 - c_0$. The triple $(b \cdot i, b-1, b+(i-1))$ (satisfying
+    1 - c_0$.  The triple $(b \cdot i, b-1, b+(i-1))$ (satisfying
     $b i + b(b-1) = b(b + i - 1)$) is then monochromatic —
     contradiction.
 -/
@@ -140,14 +142,14 @@ theorem lem_compress2 (b : ℕ) (hb : 3 ≤ b) (χ : ℕ → ℕ)
       · -- χ(b-1) = χ(b+(i-1)): both ≠ c0, both < 2 ⟹ both = 1 - c0.
         omega
 
-/-! ### Small finite case $b = 2$ — ANALYTIC PROOF. -/
+/-! ### Small finite case $b = 2$ — ANALYTIC PROOF (Round 15). -/
 
 /--
-  **Theorem `thm_k2_b2`.** $R_2(2) \le 4$: every valid 2-coloring
+  **Theorem `thm_k2_b2`.**  $R_2(2) \le 4$: every valid 2-coloring
   of $\{1, 2, 3, 4\}$ contains a monochromatic solution to
   $x + 2y = 2z$.
 
-  Previously a Cat 2 `gapOpen` axiom; Round 15
+  Previously a Cat 2 `gapOpen` axiom; Round 15 (2026-05-15)
   Lean-derives it by explicit case analysis, converting to a
   `gapClosed` theorem.
 
@@ -155,7 +157,7 @@ theorem lem_compress2 (b : ℕ) (hb : 3 ≤ b) (χ : ℕ → ℕ)
   are $(2,1,2), (2,2,3), (2,3,4), (4,1,3), (4,2,4)$ with mono
   conditions $\chi_1 = \chi_2$, $\chi_2 = \chi_3$,
   $\chi_2 = \chi_3 = \chi_4$, $\chi_4 = \chi_1 = \chi_3$,
-  $\chi_2 = \chi_4$. If $T_1$ ($\chi_1 = \chi_2$), $T_2$
+  $\chi_2 = \chi_4$.  If $T_1$ ($\chi_1 = \chi_2$), $T_2$
   ($\chi_2 = \chi_3$), $T_5$ ($\chi_2 = \chi_4$) all fail, then
   over $\{0,1\}$ we get $\chi_1 = \chi_3 = \chi_4 = 1 - \chi_2$,
   so $T_4$ ($\chi_4 = \chi_1 = \chi_3$) holds.
@@ -179,7 +181,7 @@ theorem thm_k2_b2 : RadoNumberAtMost 2 2 4 := by
         exact ⟨4, 2, 4, by norm_num, by norm_num, by norm_num,
                ⟨by norm_num, by norm_num, by norm_num, by norm_num⟩,
                hT5.symm, hT5⟩
-      · -- ¬T1, ¬T2, ¬T5: over {0,1}, χ1 = χ3 = χ4 = 1 - χ2. Triple (4,1,3).
+      · -- ¬T1, ¬T2, ¬T5: over {0,1}, χ1 = χ3 = χ4 = 1 - χ2.  Triple (4,1,3).
         exact ⟨4, 1, 3, by norm_num, by norm_num, by norm_num,
                ⟨by norm_num, by norm_num, by norm_num, by norm_num⟩,
                by omega, by omega⟩
@@ -296,7 +298,7 @@ theorem thm_k2_upper_ge_3 (b : ℕ) (hb : 3 ≤ b) :
 /-! ### Main theorem `thm:k2`. -/
 
 /--
-  **Theorem `thm:k2`.** For all $b \ge 2$, $R_2(b) = b^2$.
+  **Theorem `thm:k2`.**  For all $b \ge 2$, $R_2(b) = b^2$.
 -/
 theorem thm_k2 (b : ℕ) (hb : 2 ≤ b) :
     IsRadoNumber b 2 (b ^ 2) := by

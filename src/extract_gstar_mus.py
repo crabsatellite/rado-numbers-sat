@@ -256,7 +256,7 @@ def run_core_for_color(c, k, n, seed_chi_54=None):
     print(f"    Unsat core   : {len(core_soft_indices_zero_based)} soft clauses")
     print(f"    -> triple clauses : {len(core_triples)}")
     print(f"    -> edge clauses   : {len(core_edges)}")
-    print(f"    -> unique triples : {len(unique_triples)}  (paper MUS bound: >= 947)")
+    print(f"    -> unique triples : {len(unique_triples)}  (paper core-shrink record: 947)")
     print(f"    -> unique G* edges: {len(unique_edges)}    (of {len(edges)})")
 
     solver.delete()

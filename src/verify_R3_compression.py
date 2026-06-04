@@ -1,5 +1,6 @@
 """Verify proof claims for R_3(x+3y=3z) = 27.
 
+
 The equation is x + 3y = 3z, i.e. a=1, b=3, c=3.
 k=3 colors, and the claim is R_3 = 3^3 = 27.
 
@@ -10,8 +11,7 @@ This script verifies the compression proof steps:
 """
 
 import sys
-import os
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, "e:/Dev/OpenExecution/research/projects/rado-numbers-sat/src")
 
 from encoder import var, encode_rado_instance
 from pysat.solvers import Cadical153

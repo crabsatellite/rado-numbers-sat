@@ -1,19 +1,20 @@
 /-
   RadoNumbers/General/RadoLift.lean
 
+
   **The Rado Lift Lemma** (backward-direction mechanism, A6).
 
   If `g` is a `k`-color mono-free coloring on `{1, …, M}` for the
   equation `x + b·y = b·z`, then the lifted coloring
 
-      χ(n) = if b ∣ n then g(n / b) else k (fresh color)
+      χ(n) = if b ∣ n then g(n / b) else k   (fresh color)
 
   is a `(k+1)`-color mono-free coloring on `{1, …, b·M}`.
 
-  Proof core. From `x + b·y = b·z` one gets `x = b·(z − y)`, so
-  `b ∣ x`; hence `χ(x)` is always an *old* color (`< k`). A
+  Proof core.  From `x + b·y = b·z` one gets `x = b·(z − y)`, so
+  `b ∣ x`; hence `χ(x)` is always an *old* color (`< k`).  A
   monochromatic triple therefore cannot have `y` or `z` painted the
-  fresh color `k`, so `b ∣ y` and `b ∣ z` too. Dividing the equation
+  fresh color `k`, so `b ∣ y` and `b ∣ z` too.  Dividing the equation
   by `b` yields `x' + b·y' = b·z'` with `x' = x/b`, etc. — a
   monochromatic triple for `g` on `{1, …, M}`, contradicting mono-
   freeness of `g`.
@@ -23,8 +24,8 @@
   (`k → k+1`) at once, and is fully general in `b`.
 
   All theorems in this file are KERNEL-PURE
-  (`[propext, Classical.choice, Quot.sound]`). They do NOT depend on
-  any SAT atom. The b=3 corollary `exists_monoFreeColoring_b3_k6_729`
+  (`[propext, Classical.choice, Quot.sound]`).  They do NOT depend on
+  any SAT atom.  The b=3 corollary `exists_monoFreeColoring_b3_k6_729`
   is the ONLY declaration here that inherits the base-case atom
   `r5_witness_valid_sat` (via `thm_r5_243`); the lift machinery itself
   is atom-free.
@@ -64,7 +65,7 @@ theorem radoLiftColoring_not_dvd (b k : ℕ) (g : ℕ → ℕ) {n : ℕ} (h : ¬
 /-! ### Local Nat helpers (kept explicit; no `omega`-only divisibility). -/
 
 /--
-  **Domain helper.** A multiple of `b` in `[1, b·M]` divides down into
+  **Domain helper.**  A multiple of `b` in `[1, b·M]` divides down into
   `[1, M]` (for `1 ≤ b`).
 -/
 theorem lift_domain {b M n : ℕ} (hb : 1 ≤ b)
@@ -74,11 +75,11 @@ theorem lift_domain {b M n : ℕ} (hb : 1 ≤ b)
   · -- n / b ≥ 1 since b ∣ n and n ≥ 1 (so b ≤ n).
     have hble : b ≤ n := Nat.le_of_dvd (by omega) hdvd
     exact Nat.one_le_div_iff (by omega) |>.mpr hble
-  · -- n / b ≤ M from n ≤ b * M (Nat.div_le_of_le_mul : m ≤ k*n → m/k ≤ n).
+  · -- n / b ≤ M from n ≤ b * M  (Nat.div_le_of_le_mul : m ≤ k*n → m/k ≤ n).
     exact Nat.div_le_of_le_mul hn_ub
 
 /--
-  **Divisibility of `x`.** From a Rado triple `x + b·y = b·z` we get
+  **Divisibility of `x`.**  From a Rado triple `x + b·y = b·z` we get
   `b ∣ x`, because `x = b·z − b·y` and both terms are multiples of `b`.
 -/
 theorem lift_dvd_x {b x y z : ℕ} (heq : x + b * y = b * z) : b ∣ x := by
@@ -129,13 +130,13 @@ theorem radoLiftColoring_valid
 /--
   **The lift of a mono-free coloring is mono-free.**
 
-  Key backward-direction theorem. If `g` avoids monochromatic
+  Key backward-direction theorem.  If `g` avoids monochromatic
   solutions to `x + b·y = b·z` on `{1, …, M}`, then its lift avoids
   them on `{1, …, b·M}`.
 
-  Proof. Suppose a monochromatic triple `(x, y, z)` exists in
-  `[1, b·M]`. Then `b ∣ x` (Rado equation ⇒ `x = b·(z−y)`), so
-  `χ(x) = g(x/b) < k`, i.e. `χ(x) ≠ k`. Since `χ(y) = χ(x) ≠ k`, the
+  Proof.  Suppose a monochromatic triple `(x, y, z)` exists in
+  `[1, b·M]`.  Then `b ∣ x` (Rado equation ⇒ `x = b·(z−y)`), so
+  `χ(x) = g(x/b) < k`, i.e. `χ(x) ≠ k`.  Since `χ(y) = χ(x) ≠ k`, the
   point `y` is not painted fresh, so `b ∣ y`; likewise `b ∣ z`.
   Writing `x = b·x'`, `y = b·y'`, `z = b·z'` and cancelling `b` gives
   `x' + b·y' = b·z'`, a monochromatic triple for `g` in `[1, M]` —
@@ -149,7 +150,7 @@ theorem radoLiftColoring_avoids
     AvoidsMonoSolution b (b * M) (radoLiftColoring b k g) := by
   -- Unfold to a contradiction from an assumed mono triple.
   rintro ⟨x, y, z, hxn, hyn, hzn, ⟨hxpos, hypos, hzpos, heq⟩, hxy, hyz⟩
-  -- Step 1: b ∣ x (from the Rado equation).
+  -- Step 1: b ∣ x  (from the Rado equation).
   have hdvd_x : b ∣ x := lift_dvd_x heq
   -- Step 2: x divides into [1, M]; χ x = g(x/b) < k, so χ x ≠ k.
   obtain ⟨hx'_lb, hx'_ub⟩ := lift_domain hb hxpos hxn hdvd_x
@@ -157,18 +158,18 @@ theorem radoLiftColoring_avoids
     radoLiftColoring_dvd b k g hdvd_x
   have hχx_lt : radoLiftColoring b k g x < k := by
     rw [hχx_old]; exact hg_valid (x / b) hx'_lb hx'_ub
-  -- Step 3: y is not fresh, so b ∣ y (else χ y = k ≥ k > χ x = χ y).
+  -- Step 3: y is not fresh, so b ∣ y  (else χ y = k ≥ k > χ x = χ y).
   have hdvd_y : b ∣ y := by
     by_contra hndvd
     have hyk : radoLiftColoring b k g y = k := radoLiftColoring_not_dvd b k g hndvd
-    -- χ x = χ y = k ⇒ k < k, contradiction.
+    -- χ x = χ y = k  ⇒  k < k, contradiction.
     have : radoLiftColoring b k g x = k := hxy.trans hyk
     omega
   -- Step 4: z is not fresh either, so b ∣ z.
   have hdvd_z : b ∣ z := by
     by_contra hndvd
     have hzk : radoLiftColoring b k g z = k := radoLiftColoring_not_dvd b k g hndvd
-    -- χ x = χ y = χ z = k ⇒ k < k, contradiction.
+    -- χ x = χ y = χ z = k  ⇒  k < k, contradiction.
     have : radoLiftColoring b k g x = k := (hxy.trans hyz).trans hzk
     omega
   -- Step 5: divided coordinates land in [1, M].
@@ -187,7 +188,7 @@ theorem radoLiftColoring_avoids
     rw [← hx_eq, ← hy_eq, ← hz_eq]; exact heq
   -- Step 8: the divided triple is monochromatic for g.
   -- (Reconstruct divisibility from the witnessing equations, since the
-  -- original `hdvd_*` were consumed by the `obtain`s above.)
+  --  original `hdvd_*` were consumed by the `obtain`s above.)
   have h1 : radoLiftColoring b k g x = g x' := by rw [hχx_old, hxd]
   have h2 : radoLiftColoring b k g y = g y' := by
     rw [radoLiftColoring_dvd b k g (⟨y', hy_eq⟩ : b ∣ y), hyd]
@@ -210,7 +211,7 @@ theorem radoLiftColoring_avoids
 
   If `{1, …, M}` admits a mono-free valid `k`-coloring for
   `x + b·y = b·z`, then `{1, …, b·M}` admits a mono-free valid
-  `(k+1)`-coloring. Combines `radoLiftColoring_valid` and
+  `(k+1)`-coloring.  Combines `radoLiftColoring_valid` and
   `radoLiftColoring_avoids`.
 -/
 theorem rado_lift_exists
@@ -228,11 +229,11 @@ theorem rado_lift_exists
 
   In the project's convention `RadoNumberAtLeast b k N` means
   `R_k(b) ≥ N`, i.e. there is a mono-free valid `k`-coloring of
-  `{1, …, N − 1}`. The lift sends a witness on `{1, …, M}`
+  `{1, …, N − 1}`.  The lift sends a witness on `{1, …, M}`
   (`RadoNumberAtLeast b k (M+1)`) to a witness on `{1, …, b·M}`
   (`RadoNumberAtLeast b (k+1) (b·M + 1)`), i.e.
 
-      R_k(b) > M ⟹ R_{k+1}(b) > b·M.
+      R_k(b) > M   ⟹   R_{k+1}(b) > b·M.
 -/
 theorem rado_lower_bound_lift
     (b k M : ℕ) (hb : 1 ≤ b)
@@ -258,12 +259,12 @@ theorem rado_lower_bound_lift
 
   AXIOM DEPENDENCY (honest): the LIFT machinery is kernel-pure, but
   this corollary inherits the base-case atom `r5_witness_valid_sat`
-  through `thm_r5_243`. Discharging that atom is 's job; the lift
+  through `thm_r5_243`.  Discharging that atom is R446's job; the lift
   itself adds no new axiom.
 -/
 theorem exists_monoFreeColoring_b3_k6_729 :
     ∃ χ, IsValidColoring 729 6 χ ∧ AvoidsMonoSolution 3 729 χ := by
-  -- thm_r5_243 : RadoNumberAtLeast 3 5 244 = ∃ χ, valid 243 5 ∧ avoids 3 243.
+  -- thm_r5_243 : RadoNumberAtLeast 3 5 244  =  ∃ χ, valid 243 5 ∧ avoids 3 243.
   have hbase : ∃ g, IsValidColoring 243 5 g ∧ AvoidsMonoSolution 3 243 g := by
     obtain ⟨g, hv, ha⟩ := thm_r5_243
     exact ⟨g, hv, ha⟩
@@ -273,35 +274,35 @@ theorem exists_monoFreeColoring_b3_k6_729 :
   norm_num at hlift
   exact hlift
 
-/-! ### Phase F — the FULL b = 3 backward tower ().
+/-! ### Phase F — the FULL b = 3 backward tower (R446).
 
   Iterating the lift `R_k(3) > 3^k ⟹ R_{k+1}(3) > 3·3^k = 3^{k+1}`
   from the base `R_5(3) > 243 = 3^5` (`thm_r5_243`) gives the entire
   backward direction of the threshold conjecture for `b = 3`:
 
-      ∀ k ≥ 5, R_k(3) > 3^k.
+      ∀ k ≥ 5,   R_k(3) > 3^k.
 
-  This is ONE kernel-pure induction. The lift machinery
+  This is ONE kernel-pure induction.  The lift machinery
   (`rado_lower_bound_lift`) is atom-free, so the tower inherits
   EXACTLY the single base-case atom `r5_witness_valid_sat` (via
   `thm_r5_243`) — the induction adds NO new axiom.
 -/
 
 /--
-  **Power-step helper.** `3 · 3^k = 3^(k+1)` in `ℕ`.
+  **Power-step helper.**  `3 · 3^k = 3^(k+1)` in `ℕ`.
 
   The lift produces the bound `3 · 3^k`; `pow_succ` gives
-  `3^(k+1) = 3^k · 3`, so we commute the product. Kept as a small
+  `3^(k+1) = 3^k · 3`, so we commute the product.  Kept as a small
   local lemma so the tower step is a clean rewrite.
 -/
 theorem three_mul_pow (k : ℕ) : 3 * 3 ^ k = 3 ^ (k + 1) := by
   rw [pow_succ]; ring
 
 /--
-  **General power-step helper** (). `b · b^k = b^(k+1)` in `ℕ`.
+  **General power-step helper** (R448).  `b · b^k = b^(k+1)` in `ℕ`.
 
   The general lift produces the bound `b · b^k`; `pow_succ` gives
-  `b^(k+1) = b^k · b`, so we commute the product. This is the
+  `b^(k+1) = b^k · b`, so we commute the product.  This is the
   arbitrary-`b` generalization of `three_mul_pow`; the b=3 backward
   tower used `three_mul_pow`, the general tower uses this.
 -/
@@ -309,7 +310,7 @@ theorem mul_pow_succ_base (b k : ℕ) : b * b ^ k = b ^ (k + 1) := by
   rw [pow_succ]; ring
 
 /--
-  **The full b = 3 backward tower.** `R_k(3) > 3^k` for every
+  **The full b = 3 backward tower.**  `R_k(3) > 3^k` for every
   `k ≥ 5`, in the project's `RadoNumberAtLeast` convention
   (`RadoNumberAtLeast 3 k (3^k + 1)` means `R_k(3) ≥ 3^k + 1`, i.e.
   `R_k(3) > 3^k`).
@@ -343,7 +344,7 @@ theorem rado_b3_backward_tower (k : ℕ) (hk : 5 ≤ k) :
     rwa [three_mul_pow k] at hstep
 
 /--
-  **`R_6(3) > 729 = 3^6` via the tower interface.** Specialization
+  **`R_6(3) > 729 = 3^6` via the tower interface.**  Specialization
   of `rado_b3_backward_tower` at `k = 6` (`3^6 = 729`), confirming the
   former one-off corollary `exists_monoFreeColoring_b3_k6_729` is now
   a single instance of the general tower.
@@ -353,15 +354,15 @@ theorem rado_b3_k6_via_tower : RadoNumberAtLeast 3 6 (729 + 1) := by
   have h729 : (3 : ℕ) ^ 6 = 729 := by norm_num
   rwa [h729] at h
 
-/-! ### Phase G — threshold-backward wrapper ().
+/-! ### Phase G — threshold-backward wrapper (R446).
 
-  INTERFACE NOTE. The project carries no `RadoNumber : ℕ → ℕ → ℕ`
+  INTERFACE NOTE.  The project carries no `RadoNumber : ℕ → ℕ → ℕ`
   *function*; the Rado number is encoded only via the predicates
   `RadoNumberAtLeast` / `RadoNumberAtMost` / `IsRadoNumber`
-  (`Basic.lean`). The breakdown side of the threshold conjecture
+  (`Basic.lean`).  The breakdown side of the threshold conjecture
   (`RadoThresholdConjecture`, `ThresholdDichotomy`) is therefore the
   *failure* of `R_k(3) = 3^k`, whose lower-bound half is exactly
-  `RadoNumberAtLeast 3 k (3^k + 1)`. Hence the canonical
+  `RadoNumberAtLeast 3 k (3^k + 1)`.  Hence the canonical
   "`R_k(3) > 3^k`" statement in this convention is the tower itself;
   the wrapper below just rephrases it under the threshold hypothesis
   `4 < k` (equivalently `2·(3−1) < k`, the breakdown regime for
@@ -369,13 +370,13 @@ theorem rado_b3_k6_via_tower : RadoNumberAtLeast 3 6 (729 + 1) := by
 -/
 
 /--
-  **Threshold-backward direction for `b = 3`.** For every `k` strictly
+  **Threshold-backward direction for `b = 3`.**  For every `k` strictly
   past the boundary `2(b−1) = 4`, the Rado number exceeds `3^k`:
 
-      4 < k ⟹ R_k(3) > 3^k (i.e. `RadoNumberAtLeast 3 k (3^k + 1)`).
+      4 < k   ⟹   R_k(3) > 3^k          (i.e. `RadoNumberAtLeast 3 k (3^k + 1)`).
 
   Since over `ℕ` we have `4 < k ↔ 5 ≤ k`, this is `rado_b3_backward_tower`
-  stated in the breakdown-regime form. This is the lower-bound (witness)
+  stated in the breakdown-regime form.  This is the lower-bound (witness)
   half of the breakdown side `¬ IsRadoNumber 3 k (3^k)` of
   `RadoThresholdConjecture` for `b = 3`.
 -/
@@ -383,30 +384,30 @@ theorem threshold_backward_b3 (k : ℕ) (hk : 4 < k) :
     RadoNumberAtLeast 3 k (3 ^ k + 1) :=
   rado_b3_backward_tower k hk
 
-/-! ### Phase H — the GENERAL backward tower ().
+/-! ### Phase H — the GENERAL backward tower (R448).
 
-  The b=3 tower is one specialization of a single arbitrary-`b`
-  structural theorem. The lift `R_k(b) > M ⟹ R_{k+1}(b) > b·M`
-  (`rado_lower_bound_lift`, ) is FULLY GENERAL in `b`, so iterating
+  The R446 b=3 tower is one specialization of a single arbitrary-`b`
+  structural theorem.  The lift `R_k(b) > M ⟹ R_{k+1}(b) > b·M`
+  (`rado_lower_bound_lift`, R445) is FULLY GENERAL in `b`, so iterating
   it from the *first-breakdown* base case `R_{2b-1}(b) > b^{2b-1}`
   (taken as a HYPOTHESIS, not discharged here) produces
 
-      ∀ k ≥ 2b-1, R_k(b) > b^k (`b ≥ 2`).
+      ∀ k ≥ 2b-1,   R_k(b) > b^k                 (`b ≥ 2`).
 
   This is the COMPLETE structural reduction of the threshold
   conjecture's backward direction: for every `b`, the entire
   `k > 2(b-1)` region collapses onto the single base case.
 
-  KERNEL PURITY. Because the base case enters as the hypothesis
+  KERNEL PURITY.  Because the base case enters as the hypothesis
   `hbase`, the general theorem carries NO SAT atom: it is kernel-pure
-  `[propext, Classical.choice, Quot.sound]`. The lift machinery and
-  the `Nat.le_induction` add nothing. (The b=3 *instantiation* below
+  `[propext, Classical.choice, Quot.sound]`.  The lift machinery and
+  the `Nat.le_induction` add nothing.  (The b=3 *instantiation* below
   re-supplies `thm_r5_243` for `hbase`, and only THEN inherits
   `r5_witness_valid_sat`.)
 -/
 
 /--
-  **The general backward tower** (, PRIMARY). For every base
+  **The general backward tower** (R448, PRIMARY).  For every base
   `b ≥ 2`, given the first-breakdown witness
   `R_{2b-1}(b) > b^{2b-1}` (`hbase`), the bound `R_k(b) > b^k` holds
   for every `k ≥ 2b-1`.
@@ -417,7 +418,7 @@ theorem threshold_backward_b3 (k : ℕ) (hk : 4 < k) :
   * **Step** `k → k+1` (`2b-1 ≤ k`): apply `rado_lower_bound_lift`
     with `M = b^k` to the inductive witness `R_k(b) > b^k`, obtaining
     `R_{k+1}(b) > b·b^k`; rewrite `b·b^k = b^(k+1)`
-    (`mul_pow_succ_base`). The lift's `1 ≤ b` hypothesis is derived
+    (`mul_pow_succ_base`).  The lift's `1 ≤ b` hypothesis is derived
     from `hb : 2 ≤ b` by `omega`.
 
   KERNEL-PURE: the base case is a hypothesis, so no SAT atom is
@@ -440,14 +441,14 @@ theorem rado_backward_tower_general
     rwa [mul_pow_succ_base b k] at hstep
 
 /--
-  **Threshold-backward wrapper (general)** (, Phase C). Restates
+  **Threshold-backward wrapper (general)** (R448, Phase C).  Restates
   the general tower in the threshold-regime form: for `b ≥ 2`, every
   `k` strictly past the boundary `2(b-1)` satisfies `R_k(b) > b^k`,
   given the first-breakdown base case `hbase`.
 
   Over `ℕ` (with `b ≥ 1`) we have `2(b-1) = 2b-2`, so
   `2(b-1) < k ↔ 2b-1 ≤ k`; `omega` discharges the index arithmetic
-  (Nat subtraction handled via the `hb` bound). We isolate the index
+  (Nat subtraction handled via the `hb` bound).  We isolate the index
   fact `2b-1 ≤ k` into a pure `have` first, so `omega` only sees
   linear facts and never the `b^k` / `^` terms it cannot reason about.
 
@@ -463,7 +464,7 @@ theorem threshold_backward_from_first_breakdown
   exact rado_backward_tower_general b k hb hbase hk'
 
 /--
-  **b=3 instantiation of the general tower** (, Phase D). Confirms
+  **b=3 instantiation of the general tower** (R448, Phase D).  Confirms
   the general theorem composes: re-deriving `R_k(3) > 3^k` for `k ≥ 5`
   by supplying the SAT base `thm_r5_243` for the general `hbase`.
 
@@ -471,7 +472,7 @@ theorem threshold_backward_from_first_breakdown
   general first-breakdown hypothesis is exactly `thm_r5_243`
   (after a `norm_num` numeral reduction of the index/power).
 
-  This does NOT replace the direct `rado_b3_backward_tower`; it
+  This does NOT replace the direct R446 `rado_b3_backward_tower`; it
   is a confirmation that the general structural theorem specializes.
 
   AXIOM DEPENDENCY: inherits ONLY `r5_witness_valid_sat` (via the base

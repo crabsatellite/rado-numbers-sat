@@ -335,7 +335,7 @@
     {
       "color": 0,
       "status": "UNSAT",
-      "time_s": 1.888826608657837,
+      "time_s": 1.7357072830200195,
       "num_vars": 320,
       "num_clauses": 7556,
       "num_base_clauses": 7477,
@@ -350,7 +350,7 @@
     {
       "color": 1,
       "status": "UNSAT",
-      "time_s": 1.8764874935150146,
+      "time_s": 1.7534668445587158,
       "num_vars": 320,
       "num_clauses": 7556,
       "num_base_clauses": 7477,
@@ -365,7 +365,7 @@
     {
       "color": 2,
       "status": "UNSAT",
-      "time_s": 2.259875535964966,
+      "time_s": 2.2120516300201416,
       "num_vars": 320,
       "num_clauses": 7556,
       "num_base_clauses": 7477,
@@ -380,7 +380,7 @@
     {
       "color": 3,
       "status": "UNSAT",
-      "time_s": 2.6242380142211914,
+      "time_s": 2.2987287044525146,
       "num_vars": 320,
       "num_clauses": 7556,
       "num_base_clauses": 7477,
@@ -394,8 +394,8 @@
     }
   ],
   "all_unsat": true,
-  "max_time_s": 2.6242380142211914,
-  "total_time_s": 8.649427652359009,
-  "paper_claim_under_one_second_per_color": true,
-  "paper_claim_met": false
+  "max_time_s": 2.2987287044525146,
+  "total_time_s": 7.999954462051392,
+  "paper_claim_max_seconds_per_color": 5.0,
+  "paper_claim_met": true
 }

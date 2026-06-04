@@ -1,5 +1,6 @@
 """Find R_5(x+3y=3z) using incremental SAT solving.
 
+
 Start from n=243 (known SAT) and increment until UNSAT.
 This is much faster than building from scratch for each n.
 """

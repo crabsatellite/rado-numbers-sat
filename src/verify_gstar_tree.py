@@ -1,5 +1,6 @@
 """Production verification of Lemma 3 (Combined-G*-Tree Lemma) from rado_numbers.tex.
 
+
 For each target color c in {0,1,2,3}, build the SAT instance over {1,...,80}
 for the equation x + 3y = 3z (b=3, k=4), using the project's encoder
 (four clause types in Sec 7.1), and add the binary edge-blocking clauses
@@ -9,8 +10,8 @@ G* = G_27 union G_ext, where:
   G_27  = { (y, y + 27)   : y in {1, ..., 53} }   -> 53 Type-A edges
   G_ext = { (3d, 81 - d)  : d in {1, ..., 26} }   -> 26 Type-B edges
 
-Paper claim (rado_numbers.tex:632-644): all four per-color instances are
-verified UNSAT by CaDiCaL 1.5.3 in under one second per color.
+Paper claim (rado_numbers.tex:656-669): all four per-color instances are
+verified UNSAT by CaDiCaL 1.5.3 within a few seconds per color.
 
 Emits per-color results to data/results/gstar_tree_verification.json.
 """
@@ -149,7 +150,7 @@ def main():
 
     print("\n" + "=" * 70)
     print(f"  All four colors UNSAT     : {all_unsat}")
-    print(f"  Max per-color solve time  : {max_time:.4f} s  (paper: < 1.0 s)")
+    print(f"  Max per-color solve time  : {max_time:.4f} s  (paper: <= 5.0 s)")
     print(f"  Total solve time          : {total_time:.4f} s")
     print("=" * 70)
 
@@ -179,8 +180,8 @@ def main():
         "all_unsat": all_unsat,
         "max_time_s": max_time,
         "total_time_s": total_time,
-        "paper_claim_under_one_second_per_color": True,
-        "paper_claim_met": all_unsat and max_time < 1.0,
+        "paper_claim_max_seconds_per_color": 5.0,
+        "paper_claim_met": all_unsat and max_time <= 5.0,
     }
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2)

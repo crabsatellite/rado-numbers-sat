@@ -2,18 +2,18 @@
   RadoNumbers/DPLStructure.lean
 
   Real-math attack on threshold conjecture's Distance Pair Lemma
-  (DPL) structural mechanism. Rounds 9+.
+  (DPL) structural mechanism.  Rounds 9+ (2026-05-15).
 
   **Strategic pivot**: rounds 1-8 attacked compression
-  (`lem_compress3`). Paper §"Failure of Compression for b=3, k=4"
+  (`lem_compress3`).  Paper §"Failure of Compression for b=3, k=4"
   explicitly shows compression FAILS at boundary $k = 2(b-1)$, yet
-  $R_k(b) = b^k$ still holds via DPL. So DPL — NOT compression —
+  $R_k(b) = b^k$ still holds via DPL.  So DPL — NOT compression —
   is the sharp structural characterization.
 
   **Key reformulation**: in a valid k-coloring $\chi : \{1, \ldots,
   n\} \to [k]$ avoiding mono Rado solutions to $x + by = bz$, the
   property "$\chi(b^k) = c$" forces $C_c$ to avoid distance
-  $b^{k-1}$. Equivalently, the "DPL window structure":
+  $b^{k-1}$.  Equivalently, the "DPL window structure":
   partition $\{1, \ldots, 2b^{k-1}\}$ into $b^{k-1}$ windows
   $W_r = \{r, r + b^{k-1}\}$ ($r \in [1, b^{k-1}]$), and $C_c$
   avoiding distance $b^{k-1}$ means $C_c$ has at most 1 element
@@ -22,7 +22,7 @@
   **Round 9 deliverable (DPL pigeonhole)**: quantitative bound
   giving when $|C_c|$ is too large to avoid distance $b^{k-1}$.
 
-  This is structural math — not case analysis. Forms the entry
+  This is structural math — not case analysis.  Forms the entry
   point for the DPL closure attack (Rounds 10+).
 -/
 
@@ -38,7 +38,7 @@ namespace RadoNumbers
 
 /--
   The **window partition of $[1, 2D]$ at gap $D$**: for $r \in
-  [1, D]$, the window $W_r := \{r, r + D\}$. These pairwise
+  [1, D]$, the window $W_r := \{r, r + D\}$.  These pairwise
   disjoint windows partition $[1, 2D]$ into $D$ size-2 cells.
 -/
 def DPWindow (D r : ℕ) : Finset ℕ := {r, r + D}
@@ -46,7 +46,7 @@ def DPWindow (D r : ℕ) : Finset ℕ := {r, r + D}
 /--
   An integer $n \in [1, 2D]$ lies in window $W_r$ for $r =$
   $((n - 1) \bmod D) + 1$ if $n \le D$, else $((n - 1 - D) \bmod D)
-  + 1 = n - D$. We expose only the window-membership predicate;
+  + 1 = n - D$.  We expose only the window-membership predicate;
   the explicit index map is not needed.
 -/
 def DPWindowOf (D n : ℕ) : ℕ :=
@@ -55,9 +55,9 @@ def DPWindowOf (D n : ℕ) : ℕ :=
 /-! ### Lemma 9.1 — DPL pigeonhole bound. -/
 
 /--
-  **Lemma 9.1 (DPL Pigeonhole).**
+  **Round 9 Lemma 9.1 (DPL Pigeonhole).**
 
-  Let $D \ge 1$, $S \subseteq [1, 2D]$ a Finset. If
+  Let $D \ge 1$, $S \subseteq [1, 2D]$ a Finset.  If
   $|S| \ge D + 1$, then $S$ contains a pair at distance $D$ —
   i.e., $\exists r \in [1, D], \{r, r + D\} \subseteq S$.
 
@@ -67,7 +67,7 @@ def DPWindowOf (D n : ℕ) : ℕ :=
 
   **Significance**: provides quantitative bound for the cascade.
   If $\chi(b^k) = c$, then $C_c \cap [1, 2b^{k-1}]$ has
-  $\le b^{k-1}$ elements. Combined with $\sum_c |C_c| = $
+  $\le b^{k-1}$ elements.  Combined with $\sum_c |C_c| = $
   whole domain, gives constraints across colors.
 -/
 theorem dpl_pigeonhole (D : ℕ) (hD : 1 ≤ D) (S : Finset ℕ)
@@ -150,10 +150,10 @@ theorem dpl_pigeonhole (D : ℕ) (hD : 1 ≤ D) (S : Finset ℕ)
   refine ⟨r, hr1, hr_low.2, hr_low.1, ?_⟩
   rw [hrD_eq_n]; exact hn_in.1
 
-/-! ### Lemma 9.2 — applied to a color class. -/
+/-! ### Round 9 Lemma 9.2 — applied to a color class. -/
 
 /--
-  **Lemma 9.2 (DPL bound on color class).**
+  **Round 9 Lemma 9.2 (DPL bound on color class).**
 
   In a valid $k$-coloring $\chi$ of $\{1, \ldots, n\}$ avoiding
   mono Rado solutions to $x + by = bz$, if $\chi(b \cdot D) = c$
@@ -164,7 +164,7 @@ theorem dpl_pigeonhole (D : ℕ) (hD : 1 ≤ D) (S : Finset ℕ)
   \ge D + 1$ is impossible.
 
   This is a cascade-applicable constraint: it bounds class sizes
-  given multiple colorings. Concrete corollary for DPL: at
+  given multiple colorings.  Concrete corollary for DPL: at
   $D = b^{k-1}$, if $\chi(b^k) = c$ (forces $C_c$ avoids dist
   $b^{k-1}$) and $C_c \cap [1, 2b^{k-1}]$ is large, contradiction.
 -/
@@ -195,7 +195,7 @@ theorem dpl_class_bound {b n D : ℕ} (hb : 2 ≤ b) (hD : 1 ≤ D)
   · rw [hχbD, hχr]
   · rw [hχr, hχrD]
 
-/-! ### abstract DPL ⟹ upper bound.
+/-! ### Round 10 (2026-05-15) — abstract DPL ⟹ upper bound.
 
   The **Distance Pair Property** `DistancePairProperty b k` is the
   paper's Lemma `lem:keypair` stated as a clean predicate: every
@@ -205,13 +205,13 @@ theorem dpl_class_bound {b n D : ℕ} (hb : 2 ≤ b) (hD : 1 ≤ D)
   Round 10 proves the abstract implication
   `DistancePairProperty b k → RadoNumberAtMost b k (b^k)`, cleanly
   separating the HARD structural part (proving DPL holds for
-  `k ≤ 2(b-1)`) from the EASY derivation. After Round 10, the
+  `k ≤ 2(b-1)`) from the EASY derivation.  After Round 10, the
   matching direction reduces to: prove `DistancePairProperty b k`
   for `k ≤ 2(b-1)`. -/
 
 /--
   **Distance Pair Property** (paper Lemma `lem:keypair` as a
-  predicate). For every valid k-coloring `χ` of `{1, …, b^k - 1}`
+  predicate).  For every valid k-coloring `χ` of `{1, …, b^k - 1}`
   avoiding monochromatic solutions to `x + by = bz`, every color
   `c < k` has a pair `(j, j + b^{k-1})` both colored `c`, within
   range.
@@ -224,20 +224,20 @@ def DistancePairProperty (b k : ℕ) : Prop :=
            χ j = c ∧ χ (j + b ^ (k - 1)) = c
 
 /--
-  **Theorem (DPL ⟹ upper bound).**
+  **Round 10 Theorem (DPL ⟹ upper bound).**
 
   If the Distance Pair Property holds for `(b, k)` with `b ≥ 2,
   k ≥ 1`, then `R_k(b) ≤ b^k`.
 
   Proof: given a valid k-coloring `χ` of `{1, …, b^k}`, restrict to
-  `{1, …, b^k - 1}`. Either `χ` already has a mono there (lift it),
+  `{1, …, b^k - 1}`.  Either `χ` already has a mono there (lift it),
   or it avoids one — then `DistancePairProperty` applied to color
   `χ(b^k)` yields `j` with `χ(j) = χ(j + b^{k-1}) = χ(b^k)`, and the
   triple `(b^k, j, j + b^{k-1})` satisfies `b^k + b·j =
   b·(j + b^{k-1})`, monochromatic.
 
   **Significance**: reduces the matching direction of the threshold
-  conjecture to a single clean structural statement. The open
+  conjecture to a single clean structural statement.  The open
   problem is now precisely: `DistancePairProperty b k` for
   `k ≤ 2(b-1)`.
 -/
@@ -283,7 +283,7 @@ theorem dpl_implies_rado_upper (b k : ℕ) (hb : 2 ≤ b) (hk : 1 ≤ k)
            hRT, hxy, hyz⟩
 
 /--
-  **Corollary.** Combined with `thm_lower`, the Distance
+  **Round 10 Corollary.**  Combined with `thm_lower`, the Distance
   Pair Property gives the full `IsRadoNumber b k (b^k)`.
 -/
 theorem dpl_implies_isRadoNumber (b k : ℕ) (hb : 2 ≤ b) (hk : 1 ≤ k)
@@ -292,16 +292,16 @@ theorem dpl_implies_isRadoNumber (b k : ℕ) (hb : 2 ≤ b) (hk : 1 ≤ k)
     IsRadoNumber b k (b ^ k) :=
   ⟨hLower, dpl_implies_rado_upper b k hb hk hDPL⟩
 
-/-! ### the recursion (cascade) lemma.
+/-! ### Round 11 (2026-05-15) — the recursion (cascade) lemma.
 
   The fundamental structural fact underlying the cascade: the
   "multiples sub-coloring" $\chi'(d) := \chi(b \cdot d)$ of a valid
   $k$-coloring is itself a valid $k$-coloring on the scaled-down
-  domain. This is the engine of the inductive descent
+  domain.  This is the engine of the inductive descent
   $R_k(b) \leftarrow R_{k-1}(b) \leftarrow \cdots$. -/
 
 /--
-  **Theorem (Recursion / Cascade Lemma).**
+  **Round 11 Theorem (Recursion / Cascade Lemma).**
 
   If $\chi$ is a valid $k$-coloring of $\{1, \ldots, n\}$ avoiding
   monochromatic solutions to $x + by = bz$, then the multiples
@@ -317,9 +317,9 @@ theorem dpl_implies_isRadoNumber (b k : ℕ) (hb : 2 ≤ b) (hk : 1 ≤ k)
     ($bx' + b(by') = b(bz')$ from $x' + by' = bz'$) and
     monochromatic — contradicting validity of $\chi$.
 
-  **Significance**: this is the cascade engine. Combined with a
+  **Significance**: this is the cascade engine.  Combined with a
   compression step ("multiples use $\le k-1$ colors"), it yields
-  $R_k(b) \le b \cdot R_{k-1}(b)$. It also underlies the structure
+  $R_k(b) \le b \cdot R_{k-1}(b)$.  It also underlies the structure
   of `DistancePairProperty`: the window sub-coloring inherits Rado
   structure recursively.
 -/
@@ -362,15 +362,15 @@ theorem multiples_subcoloring_valid {b n k : ℕ} (hb : 2 ≤ b)
       exact hxy
     · exact hyz
 
-/-! ### the cascade theorem.
+/-! ### Round 12 (2026-05-15) — the cascade theorem.
 
   Combines the recursion lemma with a compression step to get the
-  inductive descent $R_k(b) \le b \cdot R_{k-1}(b)$. Needs a
+  inductive descent $R_k(b) \le b \cdot R_{k-1}(b)$.  Needs a
   color-relabeling helper: when the multiples sub-coloring omits a
   color, relabel to a genuine $(k-1)$-coloring. -/
 
 /-- Color relabeling that "skips" color `c₀`: shifts colors above
-    `c₀` down by one. Bijective from `[0,k-1] \ {c₀}` to `[0,k-2]`. -/
+    `c₀` down by one.  Bijective from `[0,k-1] \ {c₀}` to `[0,k-2]`. -/
 def skipColor (c₀ c : ℕ) : ℕ := if c < c₀ then c else c - 1
 
 /-- `skipColor c₀` is injective on `ℕ \ {c₀}`. -/
@@ -419,7 +419,7 @@ theorem relabel_omitted_color {n k c₀ : ℕ} (hc₀ : c₀ < k)
     exact hAvoid ⟨x, y, z, hxn, hyn, hzn, hRT, hxy', hyz'⟩
 
 /--
-  **Theorem (Cascade Step).**
+  **Round 12 Theorem (Cascade Step).**
 
   Suppose $b \ge 2$, $k \ge 2$, and:
   * **(Induction hypothesis)** $R_{k-1}(b) \le b^{k-1}$;
@@ -432,18 +432,18 @@ theorem relabel_omitted_color {n k c₀ : ℕ} (hc₀ : c₀ < k)
   Then $R_k(b) \le b^k$.
 
   Proof: given valid $\chi$ on $\{1, \ldots, b^k\}$, suppose it
-  avoids mono. By the recursion lemma `multiples_subcoloring_valid`,
+  avoids mono.  By the recursion lemma `multiples_subcoloring_valid`,
   $\chi'(d) := \chi(bd)$ is a valid mono-free $k$-coloring of
-  $\{1, \ldots, b^{k-1}\}$. By compression, $\chi'$ omits some
-  color $c_0$. By `relabel_omitted_color`, $\text{skipColor } c_0
+  $\{1, \ldots, b^{k-1}\}$.  By compression, $\chi'$ omits some
+  color $c_0$.  By `relabel_omitted_color`, $\text{skipColor } c_0
   \circ \chi'$ is a valid mono-free $(k-1)$-coloring of
   $\{1, \ldots, b^{k-1}\}$ — contradicting the induction hypothesis
   $R_{k-1}(b) \le b^{k-1}$.
 
   **Significance**: this is the rigorous form of the paper §6
-  thm:k3b3 reduction, generalised. The matching direction of the
+  thm:k3b3 reduction, generalised.  The matching direction of the
   threshold conjecture for non-boundary $k$ reduces to proving the
-  Compression hypothesis. (At the boundary $k = 2(b-1)$,
+  Compression hypothesis.  (At the boundary $k = 2(b-1)$,
   compression fails — see paper §"Failure of Compression for
   b=3,k=4" — and one routes through `dpl_implies_rado_upper`
   instead.)
@@ -483,17 +483,17 @@ theorem cascade_step (b k : ℕ) (hb : 2 ≤ b) (hk : 2 ≤ k)
   -- Contradiction with hχ''_avoid.
   exact hχ''_avoid hχ''_mono
 
-/-! ### base case $R_1(b) = b$.
+/-! ### Round 13 (2026-05-15) — base case $R_1(b) = b$.
 
-  The base case of the cascade induction. A `1`-coloring forces
+  The base case of the cascade induction.  A `1`-coloring forces
   every element to color `0`; the triple $(b, 1, 2)$ is then
   monochromatic. -/
 
 /--
-  **Theorem (`thm_k1`).** For all $b \ge 2$,
+  **Round 13 Theorem (`thm_k1`).**  For all $b \ge 2$,
   $R_1(b) = b$.
 
-  Lower bound: `thm_lower` at $k = 1$. Upper bound: a valid
+  Lower bound: `thm_lower` at $k = 1$.  Upper bound: a valid
   `1`-coloring of $\{1, \ldots, b\}$ has every value `< 1`, i.e.,
   all `0`; the Rado triple $(b, 1, 2)$ (satisfying
   $b + b \cdot 1 = b \cdot 2$) is then monochromatic.
@@ -519,11 +519,11 @@ theorem thm_k1 (b : ℕ) (hb : 2 ≤ b) : IsRadoNumber b 1 b := by
     · rw [hb0, h1]
     · rw [h1, h2]
 
-/-! ### the DPL recursion lift step.
+/-! ### Round 23 (2026-05-15) — the DPL recursion lift step.
 
-  The cascade engine `multiples_subcoloring_valid` pushes
+  The cascade engine `multiples_subcoloring_valid` (Round 11) pushes
   Rado structure DOWN to the multiples sub-coloring $\chi'(d) :=
-  \chi(b \cdot d)$. The **lift step** is the dual direction: a
+  \chi(b \cdot d)$.  The **lift step** is the dual direction: a
   distance-$d$ pair *found* in $\chi'$ pulls back UP to a
   distance-$(b \cdot d)$ pair in $\chi$.
 
@@ -536,14 +536,14 @@ theorem thm_k1 (b : ℕ) (hb : 2 ≤ b) : IsRadoNumber b 1 b := by
   `DistancePairProperty b (k-1)` applied to $\chi'$, it produces
   distance-$b^{k-1}$ pairs in $\chi$ for every color that $\chi'$
   uses — exactly the `DistancePairProperty b k` conclusion for the
-  non-omitted colors. (The omitted color $c_0$ needs the separate
+  non-omitted colors.  (The omitted color $c_0$ needs the separate
   compression argument; see `dpl_property_k2` for the $k = 2$
   instance where $c_0$ is handled by the $(b, 2b)$ multiple pair.) -/
 
 /--
-  **Theorem (DPL recursion lift step).**
+  **Round 23 Theorem (DPL recursion lift step).**
 
-  Let $b \ge 2$ and $\chi : \mathbb{N} \to \mathbb{N}$. If the
+  Let $b \ge 2$ and $\chi : \mathbb{N} \to \mathbb{N}$.  If the
   multiples sub-coloring agrees at $j$ and $j + d$ — i.e.,
   $\chi(b j) = \chi(b(j + d)) = c$ — then $\chi$ has a
   distance-$(b d)$ pair at color $c$: namely
@@ -557,7 +557,7 @@ theorem thm_k1 (b : ℕ) (hb : 2 ≤ b) : IsRadoNumber b 1 b := by
   **Significance**: this is the "lift" half of the DPL recursion.
   Where `multiples_subcoloring_valid` pushes Rado structure DOWN to
   $\chi'$, this lemma pulls a distance pair UP from $\chi'$ to
-  $\chi$, scaling the gap by $b$. Iterating: a distance-$1$ pair at
+  $\chi$, scaling the gap by $b$.  Iterating: a distance-$1$ pair at
   the recursion base lifts to distance-$b$, then $b^2$, …,
   $b^{k-1}$ — the gap appearing in `DistancePairProperty b k`.
 -/
@@ -578,7 +578,7 @@ theorem dpl_lift_distance_pair {b : ℕ} (hb : 2 ≤ b) (χ : ℕ → ℕ)
   · -- χ (b * j + b * d) = c
     rw [hkey]; exact hχjd
 
-/-! ### domain arithmetic for the recursion.
+/-! ### Round 24 (2026-05-15) — domain arithmetic for the recursion.
 
   `DistancePairProperty b k` lives on $\{1, \ldots, b^k - 1\}$;
   the multiples sub-coloring $\chi'$ then lives on
@@ -591,12 +591,12 @@ theorem dpl_lift_distance_pair {b : ℕ} (hb : 2 ≤ b) (χ : ℕ → ℕ)
   + (b - 1)$ with remainder $b - 1 < b$. -/
 
 /--
-  **Lemma (recursion domain identity).**
+  **Round 24 Lemma (recursion domain identity).**
 
-  For $b \ge 2$, $k \ge 1$: $(b^k - 1) / b = b^{k-1} - 1$.
+  For $b \ge 2$, $k \ge 1$:  $(b^k - 1) / b = b^{k-1} - 1$.
 
   Proof: $b^k = b \cdot b^{k-1}$, and with $P := b^{k-1} \ge 1$,
-  $b^k - 1 = (b - 1) + b \cdot (P - 1)$. Integer division by $b$
+  $b^k - 1 = (b - 1) + b \cdot (P - 1)$.  Integer division by $b$
   drops the remainder $b - 1$ (`Nat.add_mul_div_left`,
   $(b-1)/b = 0$), leaving $P - 1 = b^{k-1} - 1$.
 
@@ -631,17 +631,17 @@ theorem pow_sub_one_div {b k : ℕ} (hb : 2 ≤ b) (hk : 1 ≤ k) :
   have hrem : (b - 1) / b = 0 := Nat.div_eq_of_lt (by omega)
   omega
 
-/-! ### recursion lemma at the DPL domain.
+/-! ### Round 25 (2026-05-15) — recursion lemma at the DPL domain.
 
-  `multiples_subcoloring_valid` states the recursion on a
+  `multiples_subcoloring_valid` (Round 11) states the recursion on a
   generic domain $\{1, \ldots, n\}$ with $\chi'$ landing on
-  $\{1, \ldots, n/b\}$. For the DPL recursion we instantiate at
-  $n = b^k - 1$ and apply `pow_sub_one_div` to rewrite
+  $\{1, \ldots, n/b\}$.  For the DPL recursion we instantiate at
+  $n = b^k - 1$ and apply `pow_sub_one_div` (Round 24) to rewrite
   $n/b = (b^k - 1)/b$ as $b^{k-1} - 1$ — the exact domain on which
   `DistancePairProperty b (k-1)` is stated. -/
 
 /--
-  **Corollary (recursion at the DPL domain).**
+  **Round 25 Corollary (recursion at the DPL domain).**
 
   For $b \ge 2$, $k \ge 1$: if $\chi$ is a valid $k$-coloring of
   $\{1, \ldots, b^k - 1\}$ avoiding monochromatic solutions, then
@@ -667,7 +667,7 @@ theorem multiples_subcoloring_valid_at_pow {b k : ℕ} (hb : 2 ≤ b)
   have h := multiples_subcoloring_valid hb χ hValid hAvoid
   rwa [pow_sub_one_div hb hk] at h
 
-/-! ### non-omitted-color half of the DPL
+/-! ### Round 26 (2026-05-15) — non-omitted-color half of the DPL
     recursion.
 
   This is the assembly that turns `DistancePairProperty b (k-1)`
@@ -676,9 +676,9 @@ theorem multiples_subcoloring_valid_at_pow {b k : ℕ} (hb : 2 ≤ b)
   than the one compression omits.
 
   Pipeline (all pieces now in hand):
-  * `multiples_subcoloring_valid_at_pow`: $\chi'(d) :=
+  * `multiples_subcoloring_valid_at_pow` (Round 25): $\chi'(d) :=
     \chi(bd)$ is valid mono-free on $\{1, \ldots, b^{k-1}-1\}$.
-  * `relabel_omitted_color`: since $\chi'$ omits $c_0$,
+  * `relabel_omitted_color` (Round 12): since $\chi'$ omits $c_0$,
     $\chi'' := \text{skipColor}\,c_0 \circ \chi'$ is a valid
     mono-free $(k-1)$-coloring on the same domain.
   * `DistancePairProperty b (k-1)` applied to $\chi''$ gives, for
@@ -687,20 +687,20 @@ theorem multiples_subcoloring_valid_at_pow {b k : ℕ} (hb : 2 ≤ b)
   * `skipColor_inj` un-relabels it to a distance-$b^{k-2}$ pair in
     $\chi'$ at the original color $c$ (using that $\chi'$ omits
     $c_0$, so both endpoints are $\ne c_0$).
-  * `dpl_lift_distance_pair` lifts it to a
+  * `dpl_lift_distance_pair` (Round 23) lifts it to a
     distance-$b^{k-1}$ pair in $\chi$ at color $c$.
 
   The OMITTED color $c_0$ is **not** handled here — it needs a
   separate argument from non-multiples (compare `dpl_property_k2`,
   where the omitted color is served by the $(1, b+1)$ non-multiple
-  pair). Isolating the non-omitted half is the point: it is the
+  pair).  Isolating the non-omitted half is the point: it is the
   part that recurses cleanly, with zero new axioms. -/
 
 /--
-  **Theorem (DPL recursion — non-omitted colors).**
+  **Round 26 Theorem (DPL recursion — non-omitted colors).**
 
   Let $b \ge 2$, $k \ge 2$, and suppose `DistancePairProperty
-  b (k-1)` holds. Let $\chi$ be a valid mono-free $k$-coloring of
+  b (k-1)` holds.  Let $\chi$ be a valid mono-free $k$-coloring of
   $\{1, \ldots, b^k - 1\}$ whose multiples sub-coloring omits color
   $c_0 < k$ (i.e. $\chi(bd) \ne c_0$ for all $d \in
   [1, b^{k-1}-1]$).
@@ -715,10 +715,10 @@ theorem multiples_subcoloring_valid_at_pow {b k : ℕ} (hb : 2 ≤ b)
   lift via `dpl_lift_distance_pair`.
 
   **Significance**: this is the structural core of the DPL
-  recursion. With this in hand, proving `DistancePairProperty b k`
+  recursion.  With this in hand, proving `DistancePairProperty b k`
   reduces to exactly two remaining obligations: (i) the compression
   hypothesis (multiples omit a color), and (ii) the omitted color
-  $c_0$ gets its own distance-$b^{k-1}$ pair. Both are isolated,
+  $c_0$ gets its own distance-$b^{k-1}$ pair.  Both are isolated,
   named, and axiom-free-derivable-or-explicitly-open — no longer
   buried inside a monolithic SAT atom.
 -/
@@ -781,7 +781,7 @@ theorem dpl_recursion_nonomitted (b k : ℕ) (hb : 2 ≤ b) (hk : 2 ≤ k)
       hj_lb hj_dist_ub hχ'j_eq hχ'jd_eq
   -- b · b^(k-1-1) = b^(k-1).
   have hbbe : b * b ^ (k - 1 - 1) = b ^ (k - 1) := by rw [hbe]; ring
-  -- b · (b^(k-1) - 1) + b = b^k ⟹ b·(b^(k-1)-1) ≤ b^k - 1.
+  -- b · (b^(k-1) - 1) + b = b^k  ⟹  b·(b^(k-1)-1) ≤ b^k - 1.
   have hbm_eq : b * (b ^ (k - 1) - 1) + b = b ^ k := by
     have h1 : b ^ (k - 1) - 1 + 1 = b ^ (k - 1) := by omega
     calc b * (b ^ (k - 1) - 1) + b
@@ -802,21 +802,21 @@ theorem dpl_recursion_nonomitted (b k : ℕ) (hb : 2 ≤ b) (hk : 2 ≤ k)
     rw [← hbbe]
     exact hlift_jd
 
-/-! ### the full conditional DPL recursion.
+/-! ### Round 27 (2026-05-15) — the full conditional DPL recursion.
 
-  `dpl_recursion_nonomitted` handles every color except
-  the one compression omits. Round 27 composes it with the two
+  `dpl_recursion_nonomitted` (Round 26) handles every color except
+  the one compression omits.  Round 27 composes it with the two
   remaining obligations, stated as explicit hypotheses, to derive
   the full `DistancePairProperty b k` from
   `DistancePairProperty b (k-1)`:
 
   * **Compression** — every valid mono-free $k$-coloring's multiples
-    sub-coloring omits some color $c_0$. (Analytic for $k = 2$ via
+    sub-coloring omits some color $c_0$.  (Analytic for $k = 2$ via
     `lem_compress2`; SAT-verified for $k = 3$ via
     `lem_compress3_general`; open in general.)
   * **Omitted-color pair** — that omitted color $c_0$ nonetheless
     has a distance-$b^{k-1}$ pair in $\chi$, necessarily among
-    non-multiples. (Analytic for $k = 2$ inside `dpl_property_k2`,
+    non-multiples.  (Analytic for $k = 2$ inside `dpl_property_k2`,
     where the 2-coloring pins $\chi(1) = \chi(b+1) = 1 - c_0$;
     open in general — this is the genuinely hard half the paper
     SAT-verifies.)
@@ -824,12 +824,12 @@ theorem dpl_recursion_nonomitted (b k : ℕ) (hb : 2 ≤ b) (hk : 2 ≤ k)
   The value of this theorem is **isolation**: the threshold
   conjecture's matching direction, at the recursion step, is now
   exactly these two named hypotheses — no monolithic SAT atom, no
-  hidden case analysis. Each can be attacked independently. -/
+  hidden case analysis.  Each can be attacked independently. -/
 
 /--
-  **Theorem (conditional DPL recursion step).**
+  **Round 27 Theorem (conditional DPL recursion step).**
 
-  Let $b \ge 2$, $k \ge 2$. Given:
+  Let $b \ge 2$, $k \ge 2$.  Given:
   * `DistancePairProperty b (k-1)` (the recursion input);
   * **Compression** `hCompress`: every valid mono-free $k$-coloring
     of $\{1, \ldots, b^k-1\}$ has its multiples sub-coloring omit
@@ -841,15 +841,15 @@ theorem dpl_recursion_nonomitted (b k : ℕ) (hb : 2 ≤ b) (hk : 2 ≤ k)
   then `DistancePairProperty b k` holds.
 
   Proof: given a valid mono-free $k$-coloring $\chi$ and target
-  color $c$, `hCompress` produces the omitted $c_0$. If $c = c_0$,
+  color $c$, `hCompress` produces the omitted $c_0$.  If $c = c_0$,
   `hOmittedPair` supplies the pair directly; otherwise
   `dpl_recursion_nonomitted` does.
 
   **Significance**: the clean inductive step of the DPL cascade.
-  Combined with the base case `dpl_property_k2`, an
+  Combined with the base case `dpl_property_k2` (Round 21), an
   induction on $k$ would yield `DistancePairProperty b k` for all
   $k$ in the threshold range — conditional only on `hCompress` and
-  `hOmittedPair` holding at each level. Those two are the entire
+  `hOmittedPair` holding at each level.  Those two are the entire
   remaining mathematical content of the matching direction.
 -/
 theorem dpl_recursion_conditional (b k : ℕ) (hb : 2 ≤ b) (hk : 2 ≤ k)
@@ -874,36 +874,36 @@ theorem dpl_recursion_conditional (b k : ℕ) (hb : 2 ≤ b) (hk : 2 ≤ k)
     exact dpl_recursion_nonomitted b k hb hk hDPL_prev χ hValid hAvoid
       c₀ hc₀ hOmit c hc hcc
 
-/-! ### the omitted color: counting, not
+/-! ### Round 28 (2026-05-15) — the omitted color: counting, not
     avoidance.
 
   A structural observation sharpens the omitted-color obligation.
   Every Rado triple $(x, y, z)$ for $x + by = bz$ has $x = b(z-y)$
-  — its **first element is always a multiple of $b$**. So in any
+  — its **first element is always a multiple of $b$**.  So in any
   monochromatic triple, the shared color is the color of a
-  multiple of $b$. A color $c_0$ omitted by *every* multiple
+  multiple of $b$.  A color $c_0$ omitted by *every* multiple
   therefore can never be a monochromatic-triple color: the class
   $C_{c_0}$ carries **no Rado constraint at all**.
 
   Consequently the omitted color's distance pair cannot come from
-  an avoidance argument (there is nothing to avoid). It must come
+  an avoidance argument (there is nothing to avoid).  It must come
   from **counting**: $C_{c_0}$ is whatever the constrained colors
   leave behind, and if that residue is large enough in the window
-  $[1, 2b^{k-1}]$, `dpl_pigeonhole` forces a
+  $[1, 2b^{k-1}]$, `dpl_pigeonhole` (Round 9) forces a
   distance-$b^{k-1}$ pair.
 
   This is exactly why the Distance Pair Lemma is SAT-verified in
   the paper for $k \le 4$ and **fails at $k = 5$** (a valid
   5-coloring of $\{1, \ldots, 242\}$ has color 0 avoiding all
-  distance-81 pairs): the counting margin runs out. Round 28
+  distance-81 pairs): the counting margin runs out.  Round 28
   records the reduction `omitted-color pair` $\Leftarrow$ `count
   bound`, isolating the genuine content as a pure counting
   statement. -/
 
 /--
-  **Theorem (omitted-color pair from a count bound).**
+  **Round 28 Theorem (omitted-color pair from a count bound).**
 
-  Let $b \ge 2$. If the color-$c_0$ elements of the window
+  Let $b \ge 2$.  If the color-$c_0$ elements of the window
   $[1, 2b^{k-1}]$ number at least $b^{k-1} + 1$ — captured by a
   Finset $S$ with the stated membership characterization and
   cardinality bound — and the window fits in the domain
@@ -916,9 +916,9 @@ theorem dpl_recursion_conditional (b k : ℕ) (hb : 2 ≤ b) (hk : 2 ≤ k)
   elements force two into one window.
 
   **Significance**: this is the bridge from `dpl_pigeonhole` to the
-  `hOmittedPair` slot of `dpl_recursion_conditional`.
+  `hOmittedPair` slot of `dpl_recursion_conditional` (Round 27).
   No mono-avoidance hypothesis is used — fitting the observation
-  that $C_{c_0}$ is Rado-unconstrained. After Round 28, closing
+  that $C_{c_0}$ is Rado-unconstrained.  After Round 28, closing
   `hOmittedPair` reduces entirely to proving the count bound
   $|C_{c_0} \cap [1, 2b^{k-1}]| \ge b^{k-1} + 1$ — a counting
   statement about the constrained colors' residue, the genuine
@@ -940,10 +940,10 @@ theorem dpl_omitted_pair_of_count {b k : ℕ} (hb : 2 ≤ b)
   have hrD_props := (hS_def (r + b ^ (k - 1))).mp hrD_in
   exact ⟨r, hr1, by omega, hr_props.2.2, hrD_props.2.2⟩
 
-/-! ### per-level hypothesis predicates.
+/-! ### Round 29 (2026-05-15) — per-level hypothesis predicates.
 
-  The two obligations of `dpl_recursion_conditional`,
-  packaged as predicate families indexed by level $(b, k)$. These
+  The two obligations of `dpl_recursion_conditional` (Round 27),
+  packaged as predicate families indexed by level $(b, k)$.  These
   are the inputs the DPL cascade induction consumes; the cascade
   theorem `dpl_cascade` itself is assembled in `K3General.lean`,
   where the base case `dpl_property_k2` is available. -/
@@ -969,8 +969,8 @@ def CompressionHyp (b k : ℕ) : Prop :=
   color $c_0$, that $c_0$ nonetheless has a distance-$b^{k-1}$
   pair in $\chi$.
 
-  By `dpl_omitted_pair_of_count` this reduces to a pure
-  counting bound. SAT-verified for $k \le 4$; FALSE at $k = 5$,
+  By `dpl_omitted_pair_of_count` (Round 28) this reduces to a pure
+  counting bound.  SAT-verified for $k \le 4$; FALSE at $k = 5$,
   $b = 3$ (paper §"Breakdown").
 -/
 def OmittedPairHyp (b k : ℕ) : Prop :=
@@ -981,23 +981,23 @@ def OmittedPairHyp (b k : ℕ) : Prop :=
       ∃ j, 1 ≤ j ∧ j + b ^ (k - 1) ≤ b ^ k - 1 ∧
            χ j = c₀ ∧ χ (j + b ^ (k - 1)) = c₀
 
-/-! ### the multiple-of-$b$ structural
+/-! ### Round 32 (2026-05-15) — the multiple-of-$b$ structural
     lemma.
 
   The single fact underlying the omitted color's special
   behaviour, promoted from a Round-28 docstring remark to a named
-  theorem. For the equation $x + by = bz$, the first coordinate
+  theorem.  For the equation $x + by = bz$, the first coordinate
   of every Rado triple satisfies $x = b(z - y)$ — it is **always a
   positive multiple of $b$**.
 
   Corollary `rado_triple_fst_not_omitted`: a color $c_0$ that no
   multiple of $b$ uses can never be the color of a Rado triple's
-  first element. Combined with monochromaticity, this is why a
+  first element.  Combined with monochromaticity, this is why a
   color omitted by all multiples carries no Rado obstruction (cf.
   Round 28). -/
 
 /--
-  **Theorem (Rado triple's first element is a multiple).**
+  **Round 32 Theorem (Rado triple's first element is a multiple).**
 
   Every Rado triple $(x, y, z)$ for $x + by = bz$ has
   $x = b \cdot m$ for some $m \ge 1$.
@@ -1007,7 +1007,7 @@ def OmittedPairHyp (b k : ℕ) : Prop :=
   gives $x = b(w + 1)$.
 
   **Significance**: the structural root of the threshold
-  phenomenon. Because $x$ is always a multiple of $b$, the
+  phenomenon.  Because $x$ is always a multiple of $b$, the
   monochromatic color of any Rado triple is the color of *some
   multiple of $b$* — so a color the multiples omit is
   Rado-unconstrained, and its distance pair (if any) is a pure
@@ -1028,7 +1028,7 @@ theorem rado_triple_fst_multiple {b x y z : ℕ} (h : IsRadoTriple b x y z) :
   omega
 
 /--
-  **Corollary (omitted color is never a triple's first
+  **Round 32 Corollary (omitted color is never a triple's first
   color).**
 
   If color $c_0$ is used by no multiple of $b$ within $[1, n]$,
@@ -1052,13 +1052,13 @@ theorem rado_triple_fst_not_omitted {b n c₀ : ℕ} (χ : ℕ → ℕ)
   rw [hm_eq]
   exact hOmit m hm_pos (by rw [← hm_eq]; exact hxn)
 
-/-! ### the economical matching-direction
+/-! ### Round 38 (2026-05-15) — the economical matching-direction
     capstone: iterating `cascade_step`.
 
   The DPL route (Rounds 23-31) reduces the matching direction to
   TWO hypothesis families — `CompressionHyp` and `OmittedPairHyp`
   — because it routes through the paper's SAT-verified Distance
-  Pair Lemma. But `cascade_step`, already proven and
+  Pair Lemma.  But `cascade_step` (Round 12), already proven and
   kernel-pure, gives the recursion DIRECTLY:
   `RadoNumberAtMost b (k-1) (b^{k-1})` $+$ compression
   $\Rightarrow$ `RadoNumberAtMost b k (b^k)` — no DPL, no
@@ -1066,18 +1066,18 @@ theorem rado_triple_fst_not_omitted {b n c₀ : ℕ} (χ : ℕ → ℕ)
 
   Round 38 iterates it: from base case `thm_k1` ($R_1(b) = b$)
   and the compression family alone, the matching direction holds
-  for ALL $k \ge 1$. This is the strictly more economical
+  for ALL $k \ge 1$.  This is the strictly more economical
   capstone — ONE hypothesis family, and valid for $b \ge 2$,
   $k \ge 1$ (versus the DPL route's $b \ge 3$, $k \ge 2$).
 
   The DPL route remains valuable: it formalizes the paper's
-  *stated* mechanism (`lem:keypair`). But for the matching
+  *stated* mechanism (`lem:keypair`).  But for the matching
   direction *as an implication*, the cascade route is the lean
   one. -/
 
 /--
   **Cascade compression hypothesis** at level $(b, k)$ — the
-  hypothesis `cascade_step` consumes. In every valid mono-free
+  hypothesis `cascade_step` consumes.  In every valid mono-free
   $k$-coloring of $\{1, \ldots, b^k\}$, the multiples sub-coloring
   omits a color on $\{1, \ldots, b^{k-1}\}$.
 
@@ -1092,20 +1092,20 @@ def CascadeCompressionHyp (b k : ℕ) : Prop :=
     ∃ c₀, c₀ < k ∧ ∀ d, 1 ≤ d → d ≤ b ^ (k - 1) → χ (b * d) ≠ c₀
 
 /--
-  **Theorem (iterated cascade — matching direction).**
+  **Round 38 Theorem (iterated cascade — matching direction).**
 
   For $b \ge 2$ and any $k \ge 1$: if `CascadeCompressionHyp b j`
   holds for every level $j \in [2, k]$, then
   `RadoNumberAtMost b k (b^k)`.
 
   Proof: induction from base $k = 1$ (`thm_k1`, unconditional)
-  with inductive step `cascade_step`.
+  with inductive step `cascade_step` (Round 12).
 
   **Significance**: the matching direction reduced to a SINGLE
   hypothesis family — `CascadeCompressionHyp` — with no DPL and no
-  omitted-color pair. Strictly more economical than the DPL route
+  omitted-color pair.  Strictly more economical than the DPL route
   (`dpl_cascade` + `thm_threshold_conditional`), which needs two
-  families. Valid for all $b \ge 2$, $k \ge 1$.
+  families.  Valid for all $b \ge 2$, $k \ge 1$.
 -/
 theorem thm_cascade_matching (b : ℕ) (hb : 2 ≤ b) :
     ∀ k, 1 ≤ k →
@@ -1127,7 +1127,7 @@ theorem thm_cascade_matching (b : ℕ) (hb : 2 ≤ b) :
       (hHyps (k + 1) (by omega) (le_refl _))
 
 /--
-  **Theorem (economical conditional threshold capstone).**
+  **Round 38 Theorem (economical conditional threshold capstone).**
 
   For $b \ge 2$ and any $k \ge 1$: if `CascadeCompressionHyp b j`
   holds for every level $j \in [2, k]$, then $R_k(b) = b^k$.
@@ -1138,7 +1138,7 @@ theorem thm_cascade_matching (b : ℕ) (hb : 2 ≤ b) :
   **Significance**: the cleanest possible conditional statement of
   the threshold conjecture's matching direction — $R_k(b) = b^k$
   conditional on a SINGLE per-level family, `CascadeCompressionHyp`,
-  with zero project axioms in the derivation. The compression
+  with zero project axioms in the derivation.  The compression
   family is analytic at $k = 2$ (`lem_compress2`-derivable),
   SAT-verified at $k = 3$ (`lem_compress3_general`), and FALSE at
   the boundary $k = 2(b-1)$ — precisely the conjectured threshold.
@@ -1148,14 +1148,14 @@ theorem thm_threshold_via_cascade (b : ℕ) (hb : 2 ≤ b) (k : ℕ) (hk : 1 ≤
     IsRadoNumber b k (b ^ k) :=
   ⟨thm_lower b k hb hk, thm_cascade_matching b hb k hk hHyps⟩
 
-/-! ### the cascade compression hypothesis
+/-! ### Round 42 (2026-05-15) — the cascade compression hypothesis
     is *equivalent* to the matching conclusion at each level.
 
   A structural discovery clarifying the cascade route's analytic
-  content. `CascadeCompressionHyp b k` is stated on the domain
+  content.  `CascadeCompressionHyp b k` is stated on the domain
   $\{1, \ldots, b^k\}$ — but `R_k(b) \le b^k` says **no** valid
   mono-free $k$-coloring of $\{1, \ldots, b^k\}$ exists, so the
-  hypothesis's universal premise is **unsatisfiable**. Hence the
+  hypothesis's universal premise is **unsatisfiable**.  Hence the
   hypothesis is vacuously true precisely when the conclusion
   holds.
 
@@ -1168,7 +1168,7 @@ theorem thm_threshold_via_cascade (b : ℕ) (hb : 2 ≤ b) (k : ℕ) (hk : 1 ≤
 
   **Methodological consequence**: the cascade route at level $k$
   does **not** carry independent analytic content beyond the prior
-  level. The compression hypothesis is logically the same
+  level.  The compression hypothesis is logically the same
   statement as the conclusion at each level — so proving
   `CascadeCompressionHyp b k` requires the same SAT-equivalent
   work as proving the matching direction directly.
@@ -1186,14 +1186,14 @@ theorem thm_threshold_via_cascade (b : ℕ) (hb : 2 ≤ b) (k : ℕ) (hk : 1 ≤
   carries real content. -/
 
 /--
-  **Theorem (cascade compression equivalence).**
+  **Round 42 Theorem (cascade compression equivalence).**
 
   For $b \ge 2$, $k \ge 2$, given the induction hypothesis
-  $R_{k-1}(b) \le b^{k-1}$: `CascadeCompressionHyp b k`
+  $R_{k-1}(b) \le b^{k-1}$:  `CascadeCompressionHyp b k`
   $\iff$ `RadoNumberAtMost b k (b^k)`.
 
   Proof:
-  * **→**: `cascade_step`.
+  * **→**: `cascade_step` (Round 12).
   * **←**: vacuously — `RadoNumberAtMost b k (b^k)` makes every
     valid $k$-coloring of $\{1, \ldots, b^k\}$ have a mono, so the
     `AvoidsMonoSolution` premise of `CascadeCompressionHyp b k`
@@ -1216,7 +1216,7 @@ theorem cascade_compression_iff_upper_bound (b k : ℕ) (hb : 2 ≤ b) (hk : 2 �
     exact absurd (hUpper χ hValid) hAvoid
 
 /--
-  **Theorem (universal abstraction of breakdown).**
+  **Round 46 Theorem (universal abstraction of breakdown).**
 
   For $b \ge 2$, $k \ge 2$, with the induction hypothesis
   $R_{k-1}(b) \le b^{k-1}$: any breakdown witness — a valid
@@ -1228,7 +1228,7 @@ theorem cascade_compression_iff_upper_bound (b k : ℕ) (hb : 2 ≤ b) (hk : 2 �
   breakdown witness's `AvoidsMonoSolution`.
 
   **Significance**: the universal abstraction of Round 45 (which
-  was the $b = 3, k = 5$ instance). Says: ANY witnessed breakdown
+  was the $b = 3, k = 5$ instance).  Says: ANY witnessed breakdown
   at level $k$ falsifies the cascade hypothesis at that level.
   The architecture's hypothesis is in EXACT correspondence with
   the conjecture's threshold mechanism — the hypothesis fails
@@ -1244,28 +1244,28 @@ theorem cascade_compression_fails_of_breakdown (b k : ℕ) (hb : 2 ≤ b) (hk : 
     (cascade_compression_iff_upper_bound b k hb hk hInd).mp hHyp
   exact hAvoid (hUpper χ hValid)
 
-/-! ### the canonical Rado triple form.
+/-! ### Round 33 (2026-05-15) — the canonical Rado triple form.
 
-  Round 32 showed $x = bm$. Substituting into $x + by = bz$ gives
-  $bm + by = bz$, hence (cancelling $b$) $z = m + y$. So **every
+  Round 32 showed $x = bm$.  Substituting into $x + by = bz$ gives
+  $bm + by = bz$, hence (cancelling $b$) $z = m + y$.  So **every
   Rado triple is $(bm,\; y,\; m + y)$** for some $m \ge 1$,
   $y \ge 1$ — a complete two-parameter parametrization.
 
   This collapses the Rado structure to its essence: a
   monochromatic solution is exactly a choice of $m, y$ with
-  $\chi(bm) = \chi(y) = \chi(m + y)$. The reformulation
+  $\chi(bm) = \chi(y) = \chi(m + y)$.  The reformulation
   `mono_solution_characterization` restates `HasMonoSolution` in
   these terms — the form a SAT encoder or a counting argument
   actually consumes. -/
 
 /--
-  **Theorem (canonical Rado triple characterization).**
+  **Round 33 Theorem (canonical Rado triple characterization).**
 
   For $b \ge 1$: $(x, y, z)$ is a Rado triple for $x + by = bz$
   **iff** $y \ge 1$ and $x = bm$, $z = m + y$ for some $m \ge 1$.
 
   Proof: forward — `rado_triple_fst_multiple` gives $x = bm$, then
-  $bm + by = bz$ cancels to $z = m + y$. Backward — $(bm, y,
+  $bm + by = bz$ cancels to $z = m + y$.  Backward — $(bm, y,
   m+y)$ satisfies $bm + by = b(m+y)$ by `ring`, with positivity
   from $b, m, y \ge 1$.
 
@@ -1297,7 +1297,7 @@ theorem rado_triple_characterization {b : ℕ} (hb : 1 ≤ b) {x y z : ℕ} :
     · rw [hm_eq, hz_eq]; ring
 
 /--
-  **Corollary (monochromatic solution characterization).**
+  **Round 33 Corollary (monochromatic solution characterization).**
 
   For $b \ge 1$: $\chi$ has a monochromatic Rado solution in
   $\{1, \ldots, n\}$ **iff** there exist $m, y \ge 1$ with

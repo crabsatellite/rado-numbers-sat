@@ -1,0 +1,626 @@
+{
+  "lemma": "Distance Pair Lemma (paper slab)",
+  "solver": "CaDiCaL 1.5.3 via pysat.solvers.Cadical153",
+  "equation_family": "x + by = bz",
+  "symmetry_breaking": "chi(1)=0, with every target color checked; any counterexample can be color-relabelled into this slice",
+  "cases": [
+    {
+      "case": "b=3,k=4",
+      "b": 3,
+      "k": 4,
+      "n": 80,
+      "distance": 27,
+      "num_vars": 320,
+      "num_base_clauses": 7477,
+      "num_rado_triples_in_domain": 1729,
+      "base_build_time_s": 0.003779172897338867,
+      "per_color_results": [
+        {
+          "color": 0,
+          "status": "UNSAT",
+          "time_s": 1.7738213539123535,
+          "num_pair_blocking_clauses": 27,
+          "solver_stats": {
+            "restarts": 3558,
+            "conflicts": 113686,
+            "decisions": 133930,
+            "propagations": 4345867
+          }
+        },
+        {
+          "color": 1,
+          "status": "UNSAT",
+          "time_s": 2.0094122886657715,
+          "num_pair_blocking_clauses": 27,
+          "solver_stats": {
+            "restarts": 4015,
+            "conflicts": 130585,
+            "decisions": 155566,
+            "propagations": 5025470
+          }
+        },
+        {
+          "color": 2,
+          "status": "UNSAT",
+          "time_s": 2.1290528774261475,
+          "num_pair_blocking_clauses": 27,
+          "solver_stats": {
+            "restarts": 4456,
+            "conflicts": 132225,
+            "decisions": 158281,
+            "propagations": 5119654
+          }
+        },
+        {
+          "color": 3,
+          "status": "UNSAT",
+          "time_s": 2.177600383758545,
+          "num_pair_blocking_clauses": 27,
+          "solver_stats": {
+            "restarts": 4712,
+            "conflicts": 140411,
+            "decisions": 168166,
+            "propagations": 5337228
+          }
+        }
+      ],
+      "all_checked_colors_unsat": true,
+      "complete_for_all_colors": true
+    },
+    {
+      "case": "b=3,k=3",
+      "b": 3,
+      "k": 3,
+      "n": 26,
+      "distance": 9,
+      "num_vars": 78,
+      "num_base_clauses": 621,
+      "num_rado_triples_in_domain": 172,
+      "base_build_time_s": 0.00032067298889160156,
+      "per_color_results": [
+        {
+          "color": 0,
+          "status": "UNSAT",
+          "time_s": 0.00018787384033203125,
+          "num_pair_blocking_clauses": 9,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 47,
+            "decisions": 47,
+            "propagations": 911
+          }
+        },
+        {
+          "color": 1,
+          "status": "UNSAT",
+          "time_s": 0.0002262592315673828,
+          "num_pair_blocking_clauses": 9,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 50,
+            "decisions": 53,
+            "propagations": 1135
+          }
+        },
+        {
+          "color": 2,
+          "status": "UNSAT",
+          "time_s": 0.00028443336486816406,
+          "num_pair_blocking_clauses": 9,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 69,
+            "decisions": 70,
+            "propagations": 1547
+          }
+        }
+      ],
+      "all_checked_colors_unsat": true,
+      "complete_for_all_colors": true
+    },
+    {
+      "case": "b=4,k=3",
+      "b": 4,
+      "k": 3,
+      "n": 63,
+      "distance": 16,
+      "num_vars": 189,
+      "num_base_clauses": 2728,
+      "num_rado_triples_in_domain": 825,
+      "base_build_time_s": 0.001386404037475586,
+      "per_color_results": [
+        {
+          "color": 0,
+          "status": "UNSAT",
+          "time_s": 0.0005664825439453125,
+          "num_pair_blocking_clauses": 16,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 102,
+            "decisions": 105,
+            "propagations": 3245
+          }
+        },
+        {
+          "color": 1,
+          "status": "UNSAT",
+          "time_s": 0.0004749298095703125,
+          "num_pair_blocking_clauses": 16,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 87,
+            "decisions": 94,
+            "propagations": 2726
+          }
+        },
+        {
+          "color": 2,
+          "status": "UNSAT",
+          "time_s": 0.0008380413055419922,
+          "num_pair_blocking_clauses": 16,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 158,
+            "decisions": 164,
+            "propagations": 5441
+          }
+        }
+      ],
+      "all_checked_colors_unsat": true,
+      "complete_for_all_colors": true
+    },
+    {
+      "case": "b=5,k=3",
+      "b": 5,
+      "k": 3,
+      "n": 124,
+      "distance": 25,
+      "num_vars": 372,
+      "num_base_clauses": 8525,
+      "num_rado_triples_in_domain": 2676,
+      "base_build_time_s": 0.005954265594482422,
+      "per_color_results": [
+        {
+          "color": 0,
+          "status": "UNSAT",
+          "time_s": 0.0013155937194824219,
+          "num_pair_blocking_clauses": 25,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 171,
+            "decisions": 179,
+            "propagations": 6474
+          }
+        },
+        {
+          "color": 1,
+          "status": "UNSAT",
+          "time_s": 0.0010976791381835938,
+          "num_pair_blocking_clauses": 25,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 149,
+            "decisions": 162,
+            "propagations": 5848
+          }
+        },
+        {
+          "color": 2,
+          "status": "UNSAT",
+          "time_s": 0.0011417865753173828,
+          "num_pair_blocking_clauses": 25,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 160,
+            "decisions": 166,
+            "propagations": 6266
+          }
+        }
+      ],
+      "all_checked_colors_unsat": true,
+      "complete_for_all_colors": true
+    },
+    {
+      "case": "b=6,k=3",
+      "b": 6,
+      "k": 3,
+      "n": 215,
+      "distance": 36,
+      "num_vars": 645,
+      "num_base_clauses": 21546,
+      "num_rado_triples_in_domain": 6895,
+      "base_build_time_s": 0.015259981155395508,
+      "per_color_results": [
+        {
+          "color": 0,
+          "status": "UNSAT",
+          "time_s": 0.0035805702209472656,
+          "num_pair_blocking_clauses": 36,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 303,
+            "decisions": 329,
+            "propagations": 15237
+          }
+        },
+        {
+          "color": 1,
+          "status": "UNSAT",
+          "time_s": 0.0024137496948242188,
+          "num_pair_blocking_clauses": 36,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 249,
+            "decisions": 277,
+            "propagations": 11898
+          }
+        },
+        {
+          "color": 2,
+          "status": "UNSAT",
+          "time_s": 0.002346515655517578,
+          "num_pair_blocking_clauses": 36,
+          "solver_stats": {
+            "restarts": 2,
+            "conflicts": 190,
+            "decisions": 226,
+            "propagations": 10200
+          }
+        }
+      ],
+      "all_checked_colors_unsat": true,
+      "complete_for_all_colors": true
+    },
+    {
+      "case": "b=7,k=3",
+      "b": 7,
+      "k": 3,
+      "n": 342,
+      "distance": 49,
+      "num_vars": 1026,
+      "num_base_clauses": 47089,
+      "num_rado_triples_in_domain": 15240,
+      "base_build_time_s": 0.03047466278076172,
+      "per_color_results": [
+        {
+          "color": 0,
+          "status": "UNSAT",
+          "time_s": 0.0030422210693359375,
+          "num_pair_blocking_clauses": 49,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 270,
+            "decisions": 310,
+            "propagations": 12994
+          }
+        },
+        {
+          "color": 1,
+          "status": "UNSAT",
+          "time_s": 0.0028982162475585938,
+          "num_pair_blocking_clauses": 49,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 271,
+            "decisions": 313,
+            "propagations": 14343
+          }
+        },
+        {
+          "color": 2,
+          "status": "UNSAT",
+          "time_s": 0.0054473876953125,
+          "num_pair_blocking_clauses": 49,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 366,
+            "decisions": 407,
+            "propagations": 18636
+          }
+        }
+      ],
+      "all_checked_colors_unsat": true,
+      "complete_for_all_colors": true
+    },
+    {
+      "case": "b=8,k=3",
+      "b": 8,
+      "k": 3,
+      "n": 511,
+      "distance": 64,
+      "num_vars": 1533,
+      "num_base_clauses": 92576,
+      "num_rado_triples_in_domain": 30177,
+      "base_build_time_s": 0.06987190246582031,
+      "per_color_results": [
+        {
+          "color": 0,
+          "status": "UNSAT",
+          "time_s": 0.003435373306274414,
+          "num_pair_blocking_clauses": 64,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 238,
+            "decisions": 293,
+            "propagations": 13029
+          }
+        },
+        {
+          "color": 1,
+          "status": "UNSAT",
+          "time_s": 0.007019519805908203,
+          "num_pair_blocking_clauses": 64,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 307,
+            "decisions": 360,
+            "propagations": 16142
+          }
+        },
+        {
+          "color": 2,
+          "status": "UNSAT",
+          "time_s": 0.006640434265136719,
+          "num_pair_blocking_clauses": 64,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 317,
+            "decisions": 361,
+            "propagations": 17114
+          }
+        }
+      ],
+      "all_checked_colors_unsat": true,
+      "complete_for_all_colors": true
+    },
+    {
+      "case": "b=9,k=3",
+      "b": 9,
+      "k": 3,
+      "n": 728,
+      "distance": 81,
+      "num_vars": 2184,
+      "num_base_clauses": 167913,
+      "num_rado_triples_in_domain": 55000,
+      "base_build_time_s": 0.12539076805114746,
+      "per_color_results": [
+        {
+          "color": 0,
+          "status": "UNSAT",
+          "time_s": 0.006129264831542969,
+          "num_pair_blocking_clauses": 81,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 291,
+            "decisions": 357,
+            "propagations": 15141
+          }
+        },
+        {
+          "color": 1,
+          "status": "UNSAT",
+          "time_s": 0.0050656795501708984,
+          "num_pair_blocking_clauses": 81,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 294,
+            "decisions": 366,
+            "propagations": 15174
+          }
+        },
+        {
+          "color": 2,
+          "status": "UNSAT",
+          "time_s": 0.01633453369140625,
+          "num_pair_blocking_clauses": 81,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 351,
+            "decisions": 413,
+            "propagations": 19509
+          }
+        }
+      ],
+      "all_checked_colors_unsat": true,
+      "complete_for_all_colors": true
+    },
+    {
+      "case": "b=10,k=3",
+      "b": 10,
+      "k": 3,
+      "n": 999,
+      "distance": 100,
+      "num_vars": 2997,
+      "num_base_clauses": 285850,
+      "num_rado_triples_in_domain": 93951,
+      "base_build_time_s": 0.24517202377319336,
+      "per_color_results": [
+        {
+          "color": 0,
+          "status": "UNSAT",
+          "time_s": 0.007516145706176758,
+          "num_pair_blocking_clauses": 100,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 288,
+            "decisions": 368,
+            "propagations": 16687
+          }
+        },
+        {
+          "color": 1,
+          "status": "UNSAT",
+          "time_s": 0.0070307254791259766,
+          "num_pair_blocking_clauses": 100,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 248,
+            "decisions": 328,
+            "propagations": 14177
+          }
+        },
+        {
+          "color": 2,
+          "status": "UNSAT",
+          "time_s": 0.021442174911499023,
+          "num_pair_blocking_clauses": 100,
+          "solver_stats": {
+            "restarts": 0,
+            "conflicts": 407,
+            "decisions": 489,
+            "propagations": 22463
+          }
+        }
+      ],
+      "all_checked_colors_unsat": true,
+      "complete_for_all_colors": true
+    },
+    {
+      "case": "b=4,k=4",
+      "b": 4,
+      "k": 4,
+      "n": 255,
+      "distance": 64,
+      "num_vars": 1020,
+      "num_base_clauses": 57982,
+      "num_rado_triples_in_domain": 14049,
+      "base_build_time_s": 0.03272604942321777,
+      "per_color_results": [
+        {
+          "color": 0,
+          "status": "UNSAT",
+          "time_s": 24.866265058517456,
+          "num_pair_blocking_clauses": 64,
+          "solver_stats": {
+            "restarts": 19879,
+            "conflicts": 832396,
+            "decisions": 1042038,
+            "propagations": 58605521
+          }
+        },
+        {
+          "color": 1,
+          "status": "UNSAT",
+          "time_s": 20.41310214996338,
+          "num_pair_blocking_clauses": 64,
+          "solver_stats": {
+            "restarts": 21870,
+            "conflicts": 731071,
+            "decisions": 941465,
+            "propagations": 49736060
+          }
+        },
+        {
+          "color": 2,
+          "status": "UNSAT",
+          "time_s": 28.73303771018982,
+          "num_pair_blocking_clauses": 64,
+          "solver_stats": {
+            "restarts": 21779,
+            "conflicts": 966117,
+            "decisions": 1209775,
+            "propagations": 68768745
+          }
+        },
+        {
+          "color": 3,
+          "status": "UNSAT",
+          "time_s": 25.689602851867676,
+          "num_pair_blocking_clauses": 64,
+          "solver_stats": {
+            "restarts": 22025,
+            "conflicts": 874576,
+            "decisions": 1106346,
+            "propagations": 61433824
+          }
+        }
+      ],
+      "all_checked_colors_unsat": true,
+      "complete_for_all_colors": true
+    },
+    {
+      "case": "b=5,k=4",
+      "b": 5,
+      "k": 4,
+      "n": 624,
+      "distance": 125,
+      "num_vars": 2496,
+      "num_base_clauses": 282873,
+      "num_rado_triples_in_domain": 69626,
+      "base_build_time_s": 0.1910252571105957,
+      "per_color_results": [
+        {
+          "color": 0,
+          "status": "UNSAT",
+          "time_s": 296.6116626262665,
+          "num_pair_blocking_clauses": 125,
+          "solver_stats": {
+            "restarts": 129323,
+            "conflicts": 4772822,
+            "decisions": 6395101,
+            "propagations": 536353483
+          }
+        },
+        {
+          "color": 1,
+          "status": "UNSAT",
+          "time_s": 476.9863178730011,
+          "num_pair_blocking_clauses": 125,
+          "solver_stats": {
+            "restarts": 262336,
+            "conflicts": 6508948,
+            "decisions": 9420410,
+            "propagations": 785990275
+          }
+        },
+        {
+          "color": 2,
+          "status": "UNSAT",
+          "time_s": 297.23530626296997,
+          "num_pair_blocking_clauses": 125,
+          "solver_stats": {
+            "restarts": 123493,
+            "conflicts": 4738826,
+            "decisions": 6303874,
+            "propagations": 533014915
+          }
+        },
+        {
+          "color": 3,
+          "status": "UNSAT",
+          "time_s": 342.3601620197296,
+          "num_pair_blocking_clauses": 125,
+          "solver_stats": {
+            "restarts": 138574,
+            "conflicts": 4911665,
+            "decisions": 6621234,
+            "propagations": 559958707
+          }
+        }
+      ],
+      "all_checked_colors_unsat": true,
+      "complete_for_all_colors": true
+    }
+  ],
+  "paper_cases_expected": [
+    "b=3,k=3",
+    "b=4,k=3",
+    "b=5,k=3",
+    "b=6,k=3",
+    "b=7,k=3",
+    "b=8,k=3",
+    "b=9,k=3",
+    "b=10,k=3",
+    "b=3,k=4",
+    "b=4,k=4",
+    "b=5,k=4"
+  ],
+  "run_started_at_unix": 1780534096.3563375,
+  "num_cases": 11,
+  "complete": true,
+  "all_cases_unsat": true,
+  "max_per_color_time_s": 476.9863178730011,
+  "total_solver_time_s": 1521.0918190479279,
+  "updated_at_unix": 1780535619.3597474,
+  "run_finished_at_unix": 1780535619.3597488
+}
