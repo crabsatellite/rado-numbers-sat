@@ -13,12 +13,12 @@
       "num_vars": 320,
       "num_base_clauses": 7477,
       "num_rado_triples_in_domain": 1729,
-      "base_build_time_s": 0.003779172897338867,
+      "base_build_time_s": 0.003425121307373047,
       "per_color_results": [
         {
           "color": 0,
           "status": "UNSAT",
-          "time_s": 1.7738213539123535,
+          "time_s": 1.8961834907531738,
           "num_pair_blocking_clauses": 27,
           "solver_stats": {
             "restarts": 3558,
@@ -30,7 +30,7 @@
         {
           "color": 1,
           "status": "UNSAT",
-          "time_s": 2.0094122886657715,
+          "time_s": 2.437507152557373,
           "num_pair_blocking_clauses": 27,
           "solver_stats": {
             "restarts": 4015,
@@ -42,7 +42,7 @@
         {
           "color": 2,
           "status": "UNSAT",
-          "time_s": 2.1290528774261475,
+          "time_s": 2.5709877014160156,
           "num_pair_blocking_clauses": 27,
           "solver_stats": {
             "restarts": 4456,
@@ -54,7 +54,7 @@
         {
           "color": 3,
           "status": "UNSAT",
-          "time_s": 2.177600383758545,
+          "time_s": 2.592334032058716,
           "num_pair_blocking_clauses": 27,
           "solver_stats": {
             "restarts": 4712,
@@ -76,12 +76,12 @@
       "num_vars": 78,
       "num_base_clauses": 621,
       "num_rado_triples_in_domain": 172,
-      "base_build_time_s": 0.00032067298889160156,
+      "base_build_time_s": 0.0003917217254638672,
       "per_color_results": [
         {
           "color": 0,
           "status": "UNSAT",
-          "time_s": 0.00018787384033203125,
+          "time_s": 0.0001971721649169922,
           "num_pair_blocking_clauses": 9,
           "solver_stats": {
             "restarts": 0,
@@ -93,7 +93,7 @@
         {
           "color": 1,
           "status": "UNSAT",
-          "time_s": 0.0002262592315673828,
+          "time_s": 0.00022077560424804688,
           "num_pair_blocking_clauses": 9,
           "solver_stats": {
             "restarts": 0,
@@ -127,12 +127,12 @@
       "num_vars": 189,
       "num_base_clauses": 2728,
       "num_rado_triples_in_domain": 825,
-      "base_build_time_s": 0.001386404037475586,
+      "base_build_time_s": 0.0017817020416259766,
       "per_color_results": [
         {
           "color": 0,
           "status": "UNSAT",
-          "time_s": 0.0005664825439453125,
+          "time_s": 0.0007314682006835938,
           "num_pair_blocking_clauses": 16,
           "solver_stats": {
             "restarts": 0,
@@ -144,7 +144,7 @@
         {
           "color": 1,
           "status": "UNSAT",
-          "time_s": 0.0004749298095703125,
+          "time_s": 0.0005404949188232422,
           "num_pair_blocking_clauses": 16,
           "solver_stats": {
             "restarts": 0,
@@ -156,7 +156,7 @@
         {
           "color": 2,
           "status": "UNSAT",
-          "time_s": 0.0008380413055419922,
+          "time_s": 0.0008568763732910156,
           "num_pair_blocking_clauses": 16,
           "solver_stats": {
             "restarts": 0,
@@ -178,12 +178,12 @@
       "num_vars": 372,
       "num_base_clauses": 8525,
       "num_rado_triples_in_domain": 2676,
-      "base_build_time_s": 0.005954265594482422,
+      "base_build_time_s": 0.0067598819732666016,
       "per_color_results": [
         {
           "color": 0,
           "status": "UNSAT",
-          "time_s": 0.0013155937194824219,
+          "time_s": 0.0013990402221679688,
           "num_pair_blocking_clauses": 25,
           "solver_stats": {
             "restarts": 0,
@@ -195,7 +195,7 @@
         {
           "color": 1,
           "status": "UNSAT",
-          "time_s": 0.0010976791381835938,
+          "time_s": 0.0011639595031738281,
           "num_pair_blocking_clauses": 25,
           "solver_stats": {
             "restarts": 0,
@@ -207,7 +207,7 @@
         {
           "color": 2,
           "status": "UNSAT",
-          "time_s": 0.0011417865753173828,
+          "time_s": 0.0012443065643310547,
           "num_pair_blocking_clauses": 25,
           "solver_stats": {
             "restarts": 0,
@@ -229,12 +229,12 @@
       "num_vars": 645,
       "num_base_clauses": 21546,
       "num_rado_triples_in_domain": 6895,
-      "base_build_time_s": 0.015259981155395508,
+      "base_build_time_s": 0.016480684280395508,
       "per_color_results": [
         {
           "color": 0,
           "status": "UNSAT",
-          "time_s": 0.0035805702209472656,
+          "time_s": 0.0041942596435546875,
           "num_pair_blocking_clauses": 36,
           "solver_stats": {
             "restarts": 0,
@@ -246,7 +246,7 @@
         {
           "color": 1,
           "status": "UNSAT",
-          "time_s": 0.0024137496948242188,
+          "time_s": 0.003222942352294922,
           "num_pair_blocking_clauses": 36,
           "solver_stats": {
             "restarts": 0,
@@ -258,7 +258,7 @@
         {
           "color": 2,
           "status": "UNSAT",
-          "time_s": 0.002346515655517578,
+          "time_s": 0.001975536346435547,
           "num_pair_blocking_clauses": 36,
           "solver_stats": {
             "restarts": 2,
@@ -280,12 +280,12 @@
       "num_vars": 1026,
       "num_base_clauses": 47089,
       "num_rado_triples_in_domain": 15240,
-      "base_build_time_s": 0.03047466278076172,
+      "base_build_time_s": 0.031517744064331055,
       "per_color_results": [
         {
           "color": 0,
           "status": "UNSAT",
-          "time_s": 0.0030422210693359375,
+          "time_s": 0.003106355667114258,
           "num_pair_blocking_clauses": 49,
           "solver_stats": {
             "restarts": 0,
@@ -297,7 +297,7 @@
         {
           "color": 1,
           "status": "UNSAT",
-          "time_s": 0.0028982162475585938,
+          "time_s": 0.0035071372985839844,
           "num_pair_blocking_clauses": 49,
           "solver_stats": {
             "restarts": 0,
@@ -309,7 +309,7 @@
         {
           "color": 2,
           "status": "UNSAT",
-          "time_s": 0.0054473876953125,
+          "time_s": 0.006486415863037109,
           "num_pair_blocking_clauses": 49,
           "solver_stats": {
             "restarts": 0,
@@ -331,12 +331,12 @@
       "num_vars": 1533,
       "num_base_clauses": 92576,
       "num_rado_triples_in_domain": 30177,
-      "base_build_time_s": 0.06987190246582031,
+      "base_build_time_s": 0.07410740852355957,
       "per_color_results": [
         {
           "color": 0,
           "status": "UNSAT",
-          "time_s": 0.003435373306274414,
+          "time_s": 0.0033655166625976562,
           "num_pair_blocking_clauses": 64,
           "solver_stats": {
             "restarts": 0,
@@ -348,7 +348,7 @@
         {
           "color": 1,
           "status": "UNSAT",
-          "time_s": 0.007019519805908203,
+          "time_s": 0.009048223495483398,
           "num_pair_blocking_clauses": 64,
           "solver_stats": {
             "restarts": 0,
@@ -360,7 +360,7 @@
         {
           "color": 2,
           "status": "UNSAT",
-          "time_s": 0.006640434265136719,
+          "time_s": 0.00788426399230957,
           "num_pair_blocking_clauses": 64,
           "solver_stats": {
             "restarts": 0,
@@ -382,12 +382,12 @@
       "num_vars": 2184,
       "num_base_clauses": 167913,
       "num_rado_triples_in_domain": 55000,
-      "base_build_time_s": 0.12539076805114746,
+      "base_build_time_s": 0.14986467361450195,
       "per_color_results": [
         {
           "color": 0,
           "status": "UNSAT",
-          "time_s": 0.006129264831542969,
+          "time_s": 0.005940914154052734,
           "num_pair_blocking_clauses": 81,
           "solver_stats": {
             "restarts": 0,
@@ -399,7 +399,7 @@
         {
           "color": 1,
           "status": "UNSAT",
-          "time_s": 0.0050656795501708984,
+          "time_s": 0.005221128463745117,
           "num_pair_blocking_clauses": 81,
           "solver_stats": {
             "restarts": 0,
@@ -411,7 +411,7 @@
         {
           "color": 2,
           "status": "UNSAT",
-          "time_s": 0.01633453369140625,
+          "time_s": 0.01343226432800293,
           "num_pair_blocking_clauses": 81,
           "solver_stats": {
             "restarts": 0,
@@ -433,12 +433,12 @@
       "num_vars": 2997,
       "num_base_clauses": 285850,
       "num_rado_triples_in_domain": 93951,
-      "base_build_time_s": 0.24517202377319336,
+      "base_build_time_s": 0.2459113597869873,
       "per_color_results": [
         {
           "color": 0,
           "status": "UNSAT",
-          "time_s": 0.007516145706176758,
+          "time_s": 0.009203910827636719,
           "num_pair_blocking_clauses": 100,
           "solver_stats": {
             "restarts": 0,
@@ -450,7 +450,7 @@
         {
           "color": 1,
           "status": "UNSAT",
-          "time_s": 0.0070307254791259766,
+          "time_s": 0.006986856460571289,
           "num_pair_blocking_clauses": 100,
           "solver_stats": {
             "restarts": 0,
@@ -462,7 +462,7 @@
         {
           "color": 2,
           "status": "UNSAT",
-          "time_s": 0.021442174911499023,
+          "time_s": 0.021024227142333984,
           "num_pair_blocking_clauses": 100,
           "solver_stats": {
             "restarts": 0,
@@ -484,12 +484,12 @@
       "num_vars": 1020,
       "num_base_clauses": 57982,
       "num_rado_triples_in_domain": 14049,
-      "base_build_time_s": 0.03272604942321777,
+      "base_build_time_s": 0.04197120666503906,
       "per_color_results": [
         {
           "color": 0,
           "status": "UNSAT",
-          "time_s": 24.866265058517456,
+          "time_s": 30.788557052612305,
           "num_pair_blocking_clauses": 64,
           "solver_stats": {
             "restarts": 19879,
@@ -501,7 +501,7 @@
         {
           "color": 1,
           "status": "UNSAT",
-          "time_s": 20.41310214996338,
+          "time_s": 25.99230694770813,
           "num_pair_blocking_clauses": 64,
           "solver_stats": {
             "restarts": 21870,
@@ -513,7 +513,7 @@
         {
           "color": 2,
           "status": "UNSAT",
-          "time_s": 28.73303771018982,
+          "time_s": 37.76607632637024,
           "num_pair_blocking_clauses": 64,
           "solver_stats": {
             "restarts": 21779,
@@ -525,7 +525,7 @@
         {
           "color": 3,
           "status": "UNSAT",
-          "time_s": 25.689602851867676,
+          "time_s": 32.79652714729309,
           "num_pair_blocking_clauses": 64,
           "solver_stats": {
             "restarts": 22025,
@@ -547,12 +547,12 @@
       "num_vars": 2496,
       "num_base_clauses": 282873,
       "num_rado_triples_in_domain": 69626,
-      "base_build_time_s": 0.1910252571105957,
+      "base_build_time_s": 0.28487253189086914,
       "per_color_results": [
         {
           "color": 0,
           "status": "UNSAT",
-          "time_s": 296.6116626262665,
+          "time_s": 365.711941242218,
           "num_pair_blocking_clauses": 125,
           "solver_stats": {
             "restarts": 129323,
@@ -564,7 +564,7 @@
         {
           "color": 1,
           "status": "UNSAT",
-          "time_s": 476.9863178730011,
+          "time_s": 505.99594593048096,
           "num_pair_blocking_clauses": 125,
           "solver_stats": {
             "restarts": 262336,
@@ -576,7 +576,7 @@
         {
           "color": 2,
           "status": "UNSAT",
-          "time_s": 297.23530626296997,
+          "time_s": 308.9440824985504,
           "num_pair_blocking_clauses": 125,
           "solver_stats": {
             "restarts": 123493,
@@ -588,7 +588,7 @@
         {
           "color": 3,
           "status": "UNSAT",
-          "time_s": 342.3601620197296,
+          "time_s": 321.8474032878876,
           "num_pair_blocking_clauses": 125,
           "solver_stats": {
             "restarts": 138574,
@@ -615,12 +615,12 @@
     "b=4,k=4",
     "b=5,k=4"
   ],
-  "run_started_at_unix": 1780534096.3563375,
+  "run_started_at_unix": 1780579662.3193371,
   "num_cases": 11,
   "complete": true,
   "all_cases_unsat": true,
-  "max_per_color_time_s": 476.9863178730011,
-  "total_solver_time_s": 1521.0918190479279,
-  "updated_at_unix": 1780535619.3597474,
-  "run_finished_at_unix": 1780535619.3597488
+  "max_per_color_time_s": 505.99594593048096,
+  "total_solver_time_s": 1639.4510912895203,
+  "updated_at_unix": 1780581303.937119,
+  "run_finished_at_unix": 1780581303.9371202
 }
