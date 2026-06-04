@@ -31,7 +31,6 @@ paper-level split is:
 | `thm_k4b3` | SAT atom `lem_gstartree` |
 | `thm_sat` | SAT atom `lem_keypair_sat` |
 | `thm_r5_243` | SAT atom `r5_witness_valid_sat` |
-| `thm_r5_296` | SAT atom `r5_296_sat` |
 | `rado_b3_backward_tower` | inherits the R_5(3) witness base case |
 | `rado_backward_tower_general` | kernel-pure conditional reduction |
 
@@ -47,7 +46,7 @@ The threshold conjecture is a `def : Prop`, not an asserted theorem.
 | `RadoNumbers/K3B3.lean` | Kernel-checked `R_3(3) = 27` route |
 | `RadoNumbers/K4B3.lean` | G* structure, SAT atom, and `R_4(3) = 81` |
 | `RadoNumbers/SAT.lean` | Distance Pair Lemma SAT atom and verified slab theorem |
-| `RadoNumbers/Breakdown.lean` | `R_5(3) > 243` witness and `R_5(3) > 296` SAT bound |
+| `RadoNumbers/Breakdown.lean` | `R_5(3) > 243` witness; auxiliary `r5_296_sat` audit atom |
 | `RadoNumbers/General/RadoLift.lean` | Lift lemma and backward tower reduction |
 | `RadoNumbers/Threshold.lean` | Threshold conjecture statement |
 | `RadoNumbers/AxiomAudit.lean` | Per-theorem axiom audit |

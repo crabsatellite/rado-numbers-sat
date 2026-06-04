@@ -858,10 +858,11 @@ theorem not_isKPartitionRegularAt_bAdicEquation_three_five_at_243 :
   simpa using h
 
 /--
-  **Stronger breakdown at (b, k) = (3, 5)**: R_5(3) > 296 in general framework.
+  **Auxiliary lower bound at (b, k) = (3, 5)**: R_5(3) > 296 in general framework.
 
   Bridges project's `RadoNumbers.thm_r5_296` (depends on `r5_296_sat`,
-  incremental SAT). Sharpens the basic 243 breakdown.
+  incremental SAT). This is kept as an audit-layer strengthening rather
+  than as the paper's stated breakdown theorem.
 -/
 theorem not_isKPartitionRegularAt_bAdicEquation_three_five_at_296 :
     ¬ IsKPartitionRegularAt (bAdicEquation 3) 5 296 := by

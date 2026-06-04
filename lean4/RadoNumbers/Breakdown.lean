@@ -1,14 +1,13 @@
 /-
   RadoNumbers/Breakdown.lean
 
-
-  Theorem `thm:r5` ($R_5(3) > 243$, and incrementally $R_5(3) > 296$).
+  Theorem `thm:r5` ($R_5(3) > 243$).
   Companion to Li 2026 "On Rado Numbers for $x + by = bz$".
 
   Establishes that the $b^k$ pattern breaks at the verified case
   $b = 3$, $k = 5$.  Encoded via the paper's explicit 5-coloring witness
   (Appendix A) on $\{1, \ldots, 243\}$ plus a Cat 2 SAT-verified
-  atom for the stronger bound $R_5(3) > 296$.
+  auxiliary SAT atom for the stronger lower bound $R_5(3) > 296$.
 
   Encoding:
 
@@ -98,7 +97,7 @@ axiom r5_296_sat : RadoNumberAtLeast 3 5 297
 /-! ### Derived theorems. -/
 
 /--
-  **Theorem `thm:r5` (first half).**  $R_5(3) > 243 = 3^5$.
+  **Theorem `thm:r5`.**  $R_5(3) > 243 = 3^5$.
 
   In particular, the $b^k$ pattern breaks for $b = 3, k = 5$.
 -/
@@ -125,10 +124,8 @@ theorem thm_r5_296 : RadoNumberAtLeast 3 5 297 := r5_296_sat
 
 /-! ### Conjectured value of $R_5(3)$.
 
-  The paper notes a sharp phase transition at $n = 297$: SAT
-  reaches $n = 296$ in $< 1$s/step but $n = 297$ exceeds $12$h on
-  desktop hardware.  This suggests the conjecture $R_5(3) = 297$,
-  which is recorded in `RadoNumbers.Threshold` as a conditional
-  (not asserted as a theorem). -/
+  Auxiliary computational note: the SAT atom above records a stronger
+  lower-bound target, but the paper's stated breakdown theorem uses the
+  explicit 243-point witness.  The exact value remains open. -/
 
 end RadoNumbers

@@ -14,7 +14,6 @@ Public artifacts for:
 - R_4(3) = 81 Combined-G*-Tree SAT verification artifacts.
 - Distance Pair Lemma slab: k=3, b=3..10 and k=4, b=3..5.
 - Explicit R_5(3) > 243 witness and verifier.
-- Incremental SAT evidence and CNF instances for R_5(3) > 296.
 - G* core and core-shrink artifacts.
 - Lean 4 + Mathlib formalization and axiom audit.
 
@@ -42,12 +41,9 @@ src/encoder.py
 src/verify_gstar_tree.py
 src/verify_dpl_paper_slab.py
 src/verify_R5_witness.py
-src/find_R5_incremental.py
 data/results/main_results.json
 data/results/R5_witness_243.json
 data/results/dpl_paper_slab_verification.json
-data/R5_n296.cnf
-data/R5_n297.cnf
 lean4/RadoNumbers/AxiomAudit.lean
 ```
 

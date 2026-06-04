@@ -56,7 +56,7 @@ theorem threshold_b3_k4_boundary : IsRadoNumber 3 4 81 := thm_k4b3
     ($k = 5 > 2(b - 1) = 4$).  Result: $R_5(3) > 243 = 3^5$. -/
 theorem threshold_b3_k5_breaks : RadoNumberAtLeast 3 5 244 := thm_r5_243
 
-/-- Verified instance for $b = 3, k = 5$ stronger: $R_5(3) > 296$. -/
+/-- Auxiliary verified instance for $b = 3, k = 5$: $R_5(3) > 296$. -/
 theorem threshold_b3_k5_breaks_strong : RadoNumberAtLeast 3 5 297 := thm_r5_296
 
 /-- General $b \ge 2, k = 2$ instance: $R_2(b) = b^2$.  Always
