@@ -253,7 +253,7 @@
         "R_lower": 297,
         "b^k": 243,
         "match": false,
-        "note": "DISPROVED: R_5 > 243 (witness). n=296 SAT (<0.2s), n=297 needs cluster (7 solvers 12h+ all stuck). DIMACS: data/R5_n297.cnf",
+        "note": "VERIFIED LOWER BOUND: R_5(3) > 296 via public witness data/results/R5_witness_296.json; exact value not claimed. DIMACS for n=297 is included as an open follow-up instance.",
         "NEW": true
       }
     }
@@ -262,7 +262,7 @@
     "R5_n297.cnf": {
       "vars": 1485,
       "clauses": 125534,
-      "description": "R_5(x+3y=3z): n=297 UNSAT expected"
+      "description": "R_5(x+3y=3z): n=297 open SAT/UNSAT instance; no exact-value claim"
     },
     "R4_b6_n1296.cnf": {
       "status": "pending export"

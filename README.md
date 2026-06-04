@@ -1,19 +1,18 @@
 # Rado Numbers for x + by = bz
 
-Public artifacts for:
+Public artifacts for **On Rado Numbers for x + by = bz: The b^k Pattern
+and a Threshold Conjecture**.
 
-**On Rado Numbers for x + by = bz: The b^k Pattern and a Threshold Conjecture**
-
-- SSRN abstract: <https://ssrn.com/abstract=6814341>
+- SSRN: <https://ssrn.com/abstract=6814341>
 - Zenodo concept DOI: <https://doi.org/10.5281/zenodo.18957993>
-- Latest Zenodo record checked here: <https://doi.org/10.5281/zenodo.20343697>
+- Current Zenodo record: <https://doi.org/10.5281/zenodo.20343697>
 
 ## Contents
 
 - SAT encoder for k-color instances of x + by = bz.
 - R_4(3) = 81 Combined-G*-Tree SAT verification artifacts.
 - Distance Pair Lemma slab: k=3, b=3..10 and k=4, b=3..5.
-- Explicit R_5(3) > 243 witness and verifier.
+- Explicit R_5(3) > 296 witness and verifier. The exact value is not claimed.
 - G* core and core-shrink artifacts.
 - Lean 4 + Mathlib formalization and axiom audit.
 
@@ -22,7 +21,7 @@ Public artifacts for:
 ```bash
 pip install -r requirements.txt
 
-python src/verify_R5_witness.py
+python src/verify_R5_witness.py data/results/R5_witness_296.json
 python src/verify_gstar_tree.py
 python src/verify_dpl_paper_slab.py
 
@@ -42,6 +41,7 @@ src/verify_gstar_tree.py
 src/verify_dpl_paper_slab.py
 src/verify_R5_witness.py
 data/results/main_results.json
+data/results/R5_witness_296.json
 data/results/R5_witness_243.json
 data/results/dpl_paper_slab_verification.json
 lean4/RadoNumbers/AxiomAudit.lean

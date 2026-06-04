@@ -78,7 +78,7 @@ Requires constructive mono-free $k$-coloring of $\{1, \ldots, b^k\}$.
 | **A1** | Color Compression analytic for k=3, general b | §7 | `K3General.lean` |
 | **A2** | Distance Pair Lemma analytic for general (b, k≤2(b-1)) | §7 master | `SAT.lean`, `DPLStructure.lean` |
 | **A3** | R₃(b) = b³ for all b ≥ 3 (kernel-pure) | §5 | `K3General.lean` |
-| **A4** | Sharp R₅(3) = 297 | §6 | `Breakdown.lean` |
+| **A4** | Determine exact R₅(3) beyond the public lower bound R₅(3)>296 | §6 | `Breakdown.lean` |
 | **A5** | Threshold forward direction unified theorem | NEW § | new file |
 | **A6** | Constructive witness for k > 2(b-1) general | §6, new § | new file |
 

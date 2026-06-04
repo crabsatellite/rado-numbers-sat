@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_PATH = ROOT / "data" / "results" / "R5_witness_243.json"
+DEFAULT_PATH = ROOT / "data" / "results" / "R5_witness_296.json"
 
 
 def load_witness(path: Path) -> dict:

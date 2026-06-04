@@ -103,7 +103,7 @@ def find_R5():
     solver.delete()
 
     if not sat:
-        print(f"  R_5 = 243 (confirmed)")
+        print(f"  Unexpected UNSAT at n=243; check against R5_witness_243.json")
         return 243
 
     # n=243 is SAT. Binary search for R_5.
