@@ -10,13 +10,11 @@
   is FORCED.
 
   This is the analytic seed at the safe-zone boundary $n = 2 b^2$ for
-  $b = 4$ (paper §"Color Compression Thresholds"; chain-extraction
-  data in `src/R440_chain_extraction.py`).  R440's prediction was that
+  $b = 4$ (paper §"Color Compression Thresholds").  R440's prediction was that
   $n_{\text{eff}} = 32$ is exactly the smallest domain forcing
   $\chi(8) = \chi(12)$; R441 Phase A confirms.
 
-  **R441 Phase A (`src/R441_b4_n32_pair_agreement_search.py`).**
-  Diagnostic SAT enumeration on $\{1, \ldots, 32\}$ with the
+  **R441 Phase A.**  Diagnostic SAT enumeration on $\{1, \ldots, 32\}$ with the
   additional constraint $\chi(8) \ne \chi(12)$.
 
     * **Domain triple count**: 220 Rado triples in $\{1, \ldots, 32\}$
@@ -27,8 +25,7 @@
       $\{1, \ldots, 32\}$.  Smaller-domain probe: at $n_{\text{eff}}
       \le 28$ the pair-disagree instance is SAT (not forced); at
       $n_{\text{eff}} = 32$ it flips to UNSAT.
-    * **Sub-domain family-removal probes**
-      (`src/R441_b4_n32_followups.py`):
+    * **Sub-domain family-removal probes**:
       - F1+F2+T-A_y_mult+T-A_z_mult alone (97 triples): SAT — does
         NOT force the agreement.
       - F1+F2 alone (19 multiples-internal triples): SAT.
@@ -36,8 +33,7 @@
       The T-A_cross family is essential, as is at least one of
       T-A_y_mult / T-A_z_mult.
 
-  **R441 Phase A — MUS analysis (`src/R441_b4_n32_mus_minimize.py`,
-  `src/R441_b4_n32_smaller_mus.py`).**
+  **R441 Phase A — MUS analysis.**
 
     * **Best MUS over deterministic ordering strategies**: 76 distinct
       Rado triples (irreducible under greedy single-deletion).

@@ -10,9 +10,8 @@
   sub-coloring on $\{4, 8, 12, \ldots, 60\}$ (15 positions) has SOME
   color appearing at least 6 times.
 
-  **Diagnostic outcome (R440 Phase 1, `src/R440_b4_balanced_search.py`,
-  `src/R440_partition_enum.py`, `src/R440_structural_probe.py`).**
-  SAT verification on $\{1, \ldots, 63\}$ with $b = 4$ shows:
+  **Diagnostic outcome (R440 Phase 1).**  SAT verification and
+  structural probes on $\{1, \ldots, 63\}$ with $b = 4$ show:
 
     * The 5+5+5 balanced partition is UNSAT (Candidate I' holds).
     * Strictly more: the ONLY valid multiples-partition (up to color
@@ -264,8 +263,7 @@ theorem b4_six_forced_disagreements {n : ℕ} (hn : 60 ≤ n) (χ : ℕ → ℕ)
      mathematics (paper §11.1 valuation-pattern conjecture, no
      analytic derivation in the literature).
 
-  The structural diagnostic in `src/R440_b4_balanced_search.py` and
-  related scripts confirms:
+  The structural diagnostic confirms:
 
   * Candidate I' (≥ 6 in some color) is TRUE at $b = 4$.
   * The strictly stronger fact "$(12, 3, 0)$ is the only multiples
@@ -285,7 +283,7 @@ theorem b4_six_forced_disagreements {n : ℕ} (hn : 60 ≤ n) (χ : ℕ → ℕ)
   (b) Candidate III (First-Two-Multiples-Agree at $(b-1) b^2 = 48$),
       which paper §5 proves for $b = 3$ via the analytic
       `lem:k3b3pair` Step 1/2 + SAT Step 3, and which R440's chain
-      extraction (`src/R440_chain_extraction.py`) shows is forced at
+      extraction shows is forced at
       $b = 4$ only at $n_{\text{eff}} \ge 48$ — a domain match with
       Candidate III's natural domain.
 -/
