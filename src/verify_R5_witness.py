@@ -19,6 +19,42 @@ def load_witness(path: Path) -> dict:
         return json.load(f)
 
 
+def monochromatic_triples_on_domain(
+    chi: dict[int, int], b: int, domain_n: int
+) -> list[tuple[int, int, int]]:
+    mono_triples: list[tuple[int, int, int]] = []
+    for d in range(1, domain_n // b + 1):
+        x = b * d
+        for y in range(1, domain_n - d + 1):
+            z = y + d
+            if chi[x] == chi[y] == chi[z]:
+                mono_triples.append((x, y, z))
+    return mono_triples
+
+
+def print_distance_pair_diagnostic(chi: dict[int, int], b: int, k: int, n: int) -> None:
+    if b != 3 or k != 5 or n < 242:
+        return
+
+    diagnostic_n = 242
+    distance = 81
+    color = 0
+    mono_triples = monochromatic_triples_on_domain(chi, b, diagnostic_n)
+    distance_pairs = [
+        (j, j + distance)
+        for j in range(1, diagnostic_n - distance + 1)
+        if chi[j] == color and chi[j + distance] == color
+    ]
+
+    print("\n[Check 5] Distance Pair Lemma diagnostic on the 242-point restriction")
+    print(f"  Restriction {{1,...,{diagnostic_n}}} mono-free: {not mono_triples}")
+    print(f"  Color {color} pairs at distance {distance}: {len(distance_pairs)}")
+    if distance_pairs:
+        print(f"  First pairs: {distance_pairs[:10]}")
+    else:
+        print("  Diagnostic: color 0 avoids all distance-81 pairs on {1,...,242}")
+
+
 def verify_witness(path: Path) -> bool:
     data = load_witness(path)
 
@@ -81,6 +117,8 @@ def verify_witness(path: Path) -> bool:
             )
     else:
         print("\n  *** VERIFICATION PASSED: no monochromatic triples ***")
+
+    print_distance_pair_diagnostic(chi, b, k, n)
 
     degenerate = sum(1 for x, y, z in triples if x == y or y == z or x == z)
     print(f"\n  Degenerate triples (some equal): {degenerate}")
