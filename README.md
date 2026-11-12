@@ -32,11 +32,25 @@ older NEW flags were synchronized with that attribution. Unresolved cells
 are not labelled as new exact values. Numerical witnesses, solver artifacts,
 and Lean source are unchanged by this metadata correction.
 
+### Independent corroboration of pattern failure
+
+The [axeyum report, Section C1](https://github.com/mjbommar/axeyum/blob/650b3bac4f7bcecf673f0fe1f54ef31fbe62b1be/docs/campaign-2026-08-13/agent-c-rado-akb2/RESULT.md)
+records an independently found and checked five-colouring of `[243]` for
+the equivalent equation `3(x-y) = z`. It therefore independently
+corroborates the failure of the `b^k` value at `b=3, k=5`.
+
+The report explicitly attributes this repository's stronger `R_5(3) > 296`
+witness and treats its own `> 243` result as a weaker reproduction.
+This corroboration concerns the pattern failure; it does not independently
+verify the stronger 296-point bound, every artifact here, or the full
+threshold conjecture.
+
 ### Acknowledgement
 
 I thank the [axeyum project](https://github.com/mjbommar/axeyum/blob/650b3bac4f7bcecf673f0fe1f54ef31fbe62b1be/docs/campaign-2026-08-13/agent-c-rado-akb2/RESULT.md)
 for identifying the stale novelty flags and explaining their correspondence
-with the earlier table.
+with the earlier table, and for documenting its independent corroboration
+of the pattern failure while preserving the earlier attribution.
 
 ## Reproduce
 
