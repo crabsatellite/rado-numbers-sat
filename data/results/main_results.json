@@ -212,7 +212,9 @@
         "match": true,
         "time_s": 3.2,
         "key_lemma": true,
-        "NEW": true
+        "NEW": false,
+        "value_source": "Chang, De Loera and Wesley (2022), Table 10, row b=1, column a=3",
+        "verification_scope": "Independent verification of a previously published numerical value; not a new value."
       },
       "b=4": {
         "R": 256,
@@ -220,7 +222,9 @@
         "match": true,
         "time_s": 31.7,
         "key_lemma": true,
-        "NEW": true
+        "NEW": false,
+        "value_source": "Chang, De Loera and Wesley (2022), Table 10, row b=1, column a=4",
+        "verification_scope": "Independent verification of a previously published numerical value; not a new value."
       },
       "b=5": {
         "R": 625,
@@ -228,19 +232,21 @@
         "match": true,
         "time_s": 523.4,
         "key_lemma": true,
-        "NEW": true
+        "NEW": false,
+        "value_source": "Chang, De Loera and Wesley (2022), Table 10, row b=1, column a=5",
+        "verification_scope": "Independent verification of a previously published numerical value; not a new value."
       },
       "b=6": {
         "R": null,
         "b^k": 1296,
         "status": "n=1295 SAT confirmed, n=1296 UNSAT needs cluster",
-        "NEW": true
+        "novelty_status": "unresolved: no exact value established here"
       },
       "b=7": {
         "R": null,
         "b^k": 2401,
         "status": "too large for desktop",
-        "NEW": true
+        "novelty_status": "unresolved: no exact value established here"
       }
     },
     "k=5": {
@@ -268,14 +274,21 @@
       "status": "pending export"
     }
   },
-  "other_new_R4_values": [
+  "references": [
+    "Landman & Robertson, Ramsey Theory on the Integers, AMS 2014 (R_2 = b^2 for a < b)",
+    "Chang, De Loera, Wesley, Rado Numbers and SAT Computations, ISSAC 2022",
+    "Ahmed, Zaman, Bright, Symbolic Sets for Proving Bounds on Rado Numbers, 2025 (Table 1 has k=3 data)"
+  ],
+  "other_R4_verifications": [
     {
       "equation": "2x+y=z",
       "a": 2,
       "b": 1,
       "c": 1,
       "R4": 171,
-      "time_s": 116.86
+      "time_s": 116.86,
+      "NEW": false,
+      "value_source": "Chang, De Loera and Wesley (2022), Table 10; equivalence by permuting variables."
     },
     {
       "equation": "2x+3y=3z",
@@ -283,12 +296,12 @@
       "b": 3,
       "c": 3,
       "R4": 103,
-      "time_s": 14.96
+      "time_s": 14.96,
+      "NEW": false,
+      "value_source": "Chang, De Loera and Wesley (2022), Table 10; equivalence by permuting variables."
     }
   ],
-  "references": [
-    "Landman & Robertson, Ramsey Theory on the Integers, AMS 2014 (R_2 = b^2 for a < b)",
-    "Chang, De Loera, Wesley, Rado Numbers and SAT Computations, ISSAC 2022",
-    "Ahmed, Zaman, Bright, Symbolic Sets for Proving Bounds on Rado Numbers, 2025 (Table 1 has k=3 data)"
-  ]
+  "_metadata_corrected_on": "2026-11-12",
+  "_attribution_note": "Known numerical values are distinguished from independent proofs and verifications, in agreement with the September 2026 v2.1 manuscript (Zenodo 22654788).",
+  "_attribution_feedback": "axeyum, docs/campaign-2026-08-13/agent-c-rado-akb2/RESULT.md, commit 650b3bac4f7bcecf673f0fe1f54ef31fbe62b1be."
 }
